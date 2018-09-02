@@ -1,0 +1,229 @@
+    <div id="page_content">
+        <div id="page_content_inner">
+            <div class="uk-grid" data-uk-grid-margin data-uk-grid-match id="user_profile">
+                <div class="uk-width-large-10-10">
+                    <div class="md-card">
+                        <div class="user_heading">
+                            <div class="user_heading_menu" data-uk-dropdown="{pos:'bottom-right'}">
+                                <i class="md-icon material-icons md-icon-light">&#xE5D4;</i>
+                               <!--  <div class="uk-dropdown uk-dropdown-small">
+                                    <ul class="uk-nav">
+                                        <li><a href="#">Action 1</a></li>
+                                        <li><a href="#">Action 2</a></li>
+                                    </ul>
+                                </div> -->
+                            </div>
+                            
+                            <div class="user_heading_content">
+                                <h2 class="heading_b uk-margin-bottom">
+                                    <span class="uk-text-truncate">{{org_data.lpName}}</span>
+                                    <span class="sub-heading">{{org_data.lpReg}}</span>
+                                </h2>                               
+                            </div>
+                            <a class="md-fab md-fab-small md-fab-accent" ui-sref="restricted.pages.user_edit">
+                                <i class="material-icons">&#xE150;</i>
+                            </a>
+                        </div>
+                        <div class="user_content">
+                        	  <div class="uk-grid uk-margin-medium-top uk-margin-large-bottom" data-uk-grid-margin>
+                        	  	  <div class="uk-width-large-1-2">
+                                      <h4 class="heading_c uk-margin-small-bottom">Ерөнхий мэдээлэл</h4>
+                                      <ul class="md-list md-list-addon">
+                                          <li>
+                                              <div class="md-list-addon-element">
+                                                  <i class="md-list-addon-icon material-icons">&#xE87C;</i>
+                                              </div>
+                                              <div class="md-list-content">
+                                                  <span class="md-list-heading">{{org_data.famName}}</span>
+                                                  <span class="uk-text-small uk-text-muted">Овог</span>
+                                              </div>
+                                          </li>
+                                          <li>
+                                              <div class="md-list-addon-element">
+                                                  <i class="md-list-addon-icon material-icons">&#xE7FD;</i>
+                                              </div>
+                                              <div class="md-list-content">
+                                                  <span class="md-list-heading">{{org_data.givName}}</span>
+                                                  <span class="uk-text-small uk-text-muted">Нэр</span>
+                                              </div>
+                                          </li>
+                                         <li>
+                                              <div class="md-list-addon-element">
+                                                  <i class="md-list-addon-icon material-icons">&#xE0BE;</i>
+                                              </div>
+                                              <div class="md-list-content">
+                                                  <span class="md-list-heading">{{org_data.email}}</span>
+                                                  <span class="uk-text-small uk-text-muted">Цахим шуудан</span>
+                                              </div>
+                                          </li>
+                                        
+                                          <li>
+                                              <div class="md-list-addon-element">
+                                                  <i class="md-list-addon-icon material-icons">&#xE7FD;</i>
+                                              </div>
+                                              <div class="md-list-content">
+                                                  <span class="md-list-heading">{{org_data.personName}}</span>
+                                                  <span class="uk-text-small uk-text-muted">Тайлан илгээх хүн</span>
+                                              </div>
+                                          </li>
+                                          <li>
+                                              <div class="md-list-addon-element">
+                                                  <i class="md-list-addon-icon material-icons">&#xE0AF;</i>
+                                              </div>
+                                              <div class="md-list-content">
+                                                  <span class="md-list-heading">{{org_data.city}}</span>
+                                                  <span class="uk-text-small uk-text-muted">Хот</span>
+                                              </div>
+                                          </li>
+                                          <li>
+                                              <div class="md-list-addon-element">
+                                                  <i class="md-list-addon-icon material-icons">&#xE7F1;</i>            
+                                              </div>
+                                              <div class="md-list-content">
+                                                  <span class="md-list-heading">{{org_data.disctrict}}</span>
+                                                  <span class="uk-text-small uk-text-muted">Дүүрэг</span>
+                                              </div>
+                                          </li>
+                                          <li>
+                                              <div class="md-list-addon-element">
+                                                  <i class="md-list-addon-icon material-icons">&#xE84F;</i>                                                      
+                                              </div>
+                                              <div class="md-list-content">
+                                                  <span class="md-list-heading">{{org_data.khoroo}}</span>
+                                                  <span class="uk-text-small uk-text-muted">Хороо</span>
+                                              </div>
+                                          </li>
+                                           <li>
+                                              <div class="md-list-addon-element">
+                                                   <i class="md-list-addon-icon material-icons">&#xE566;</i>
+                                              </div>
+                                              <div class="md-list-content">
+                                                  <span class="md-list-heading">{{org_data.street}}</span>
+                                                  <span class="uk-text-small uk-text-muted">Гудамж</span>
+                                              </div>
+                                          </li>
+                                      </ul>
+                                  </div>
+                                  <div class="uk-width-large-1-2">
+                                      <h4 class="heading_c uk-margin-small-bottom">&nbsp;</h4>
+                                      <ul class="md-list md-list-addon">
+                                           <li>
+                                              <div class="md-list-addon-element">
+                                                  <i class="md-list-addon-icon material-icons">&#xE87C;</i>
+                                              </div>
+                                              <div class="md-list-content">
+                                                  <span class="md-list-heading">{{org_data.famNameL1}}</span>
+                                                  <span class="uk-text-small uk-text-muted">Surname</span>
+                                              </div>
+                                          </li>
+                                          <li>
+                                              <div class="md-list-addon-element">
+                                                  <i class="md-list-addon-icon material-icons">&#xE7FD;</i>
+                                              </div>
+                                              <div class="md-list-content">
+                                                  <span class="md-list-heading">{{org_data.givNameL1}}</span>
+                                                  <span class="uk-text-small uk-text-muted">Name</span>
+                                              </div>
+                                          </li>
+                                          <li>
+                                              <div class="md-list-addon-element">
+                                                  <i class="md-list-addon-icon material-icons">&#xE0D1;</i>
+                                              </div>
+                                              <div class="md-list-content">
+                                                  <span class="md-list-heading">{{org_data.phone}}</span>
+                                                  <span class="uk-text-small uk-text-muted">Утас</span>
+                                              </div>
+                                          </li>
+                                          <li>
+                                              <div class="md-list-addon-element">
+                                                  <i class="md-list-addon-icon material-icons">&#xE0CD;</i>
+                                              </div>
+                                              <div class="md-list-content">
+                                                  <span class="md-list-heading">{{org_data.mobile}}</span>
+                                                  <span class="uk-text-small uk-text-muted">Гар утас</span>
+                                              </div>
+                                          </li>
+                                     
+                                          
+                                           <li>
+                                              <div class="md-list-addon-element">
+                                                  <i class="md-list-addon-icon material-icons">&#xE0AF;</i>
+                                              </div>
+                                              <div class="md-list-content">
+                                                  <span class="md-list-heading">{{org_data.cityL1}}</span>
+                                                  <span class="uk-text-small uk-text-muted">City</span>
+                                              </div>
+                                          </li>
+                                          <li>
+                                              <div class="md-list-addon-element">
+                                                  <i class="md-list-addon-icon material-icons">&#xE7F1;</i>                                                               
+                                              </div>
+                                              <div class="md-list-content">
+                                                  <span class="md-list-heading">{{org_data.disctrictL1}}</span>
+                                                  <span class="uk-text-small uk-text-muted">District</span>
+                                              </div>
+                                          </li>
+                                          <li>
+                                              <div class="md-list-addon-element">
+                                                  <i class="md-list-addon-icon material-icons">&#xE84F;</i>                                                              
+                                              </div>
+                                              <div class="md-list-content">
+                                                  <span class="md-list-heading">{{org_data.khorooL1}}</span>
+                                                  <span class="uk-text-small uk-text-muted">Khoroo</span>
+                                              </div>
+                                          </li>
+                                          <li>
+                                              <div class="md-list-addon-element">
+                                                  <i class="md-list-addon-icon material-icons">&#xE566;</i>
+                                              </div>
+                                              <div class="md-list-content">
+                                                  <span class="md-list-heading">{{org_data.streetL1}}</span>
+                                                  <span class="uk-text-small uk-text-muted">District</span>
+                                              </div>
+                                          </li>
+                                          
+                                      </ul>
+                                  </div>
+                                  <div class="uk-width-large-1-1">
+                                    <h4 class="heading_c uk-margin-bottom">&nbsp;</h4>
+                                    <div class="timeline">
+                                        <!-- <div class="timeline_item" ng-repeat="event in user_data.timeline">
+                                            <div class="timeline_icon timeline_icon_danger" ng-if="event.status == 'danger'"><i class="material-icons" ng-bind-html="event.icon"></i></div>
+                                            <div class="timeline_icon timeline_icon_success" ng-if="event.status == 'success'"><i class="material-icons" ng-bind-html="event.icon"></i></div>
+                                            <div class="timeline_icon timeline_icon_warning" ng-if="event.status == 'warning'"><i class="material-icons" ng-bind-html="event.icon"></i></div>
+                                            <div class="timeline_icon timeline_icon_primary" ng-if="event.status == 'primary'"><i class="material-icons" ng-bind-html="event.icon"></i></div>
+                                            <div class="timeline_icon" ng-if="!event.status"><i class="material-icons" ng-bind-html="event.icon"></i></div>
+                                            <div class="timeline_date">
+                                                {{ event.date | jsonDate | date: 'dd' }}
+                                                <span>{{ event.date | jsonDate |date: 'MMM' }}</span>
+                                            </div>
+                                            <div class="timeline_content">
+                                                {{event.description}} <a href="#" ng-if="event.link_text"><strong>{{event.link_text}}</strong></a>
+                                                <div class="timeline_content_addon" ng-if="event.image || event.post_excerpt || event.user_name">
+                                                    <img ng-src="{{event.image}}" alt="" ng-if="event.image"/>
+                                                    <blockquote ng-if="event.post_excerpt">
+                                                        {{event.post_excerpt}}&hellip;
+                                                    </blockquote>
+                                                    <ul class="md-list md-list-addon" ng-if="event.user_name">
+                                                        <li>
+                                                            <div class="md-list-addon-element" ng-if="event.user_avatar">
+                                                                <img class="md-user-image md-list-addon-avatar" ng-src="{{event.user_avatar}}" alt=""/>
+                                                            </div>
+                                                            <div class="md-list-content">
+                                                                <span class="md-list-heading" ng-if="event.user_name">{{event.user_name}}</span>
+                                                                <span class="uk-text-small uk-text-muted" ng-if="event.user_status">{{event.user_status}}</span>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div> -->
+                                    </div>
+                                  </div>
+                              </div>                     
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

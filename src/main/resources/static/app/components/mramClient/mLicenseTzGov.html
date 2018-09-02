@@ -1,0 +1,28 @@
+ <div id="page_content" style="overflow:hidden;">
+    <div id="page_content_inner">
+   	   <div class="uk-grid">
+           <div class="uk-width-1-1">
+                <div id="file_upload-drop" class="uk-file-upload">
+                    <p class="uk-text">Drop file to upload</p>
+                    <p class="uk-text-muted uk-text-small uk-margin-small-bottom">or</p>
+                    <span class="uk-form-file md-btn">choose file<input id="file_upload-select" type="file" ng-model="file_upload.input_1"></span>
+                </div>
+                <div id="file_upload-progressbar" class="uk-progress uk-hidden">
+                    <div class="uk-progress-bar" style="width:0">0%</div>
+                </div>
+            </div>
+        </div>
+      	<div class="uk-grid" >
+      	   <div class="uk-width-medium-1">
+               <div class="md-card" data-uk-grid-margin>
+                   <div class="md-card-content confcc">
+                       <kendo-grid options="licensetz"></kendo-grid>       
+                   </div>
+               </div>
+           </div>
+        </div>              
+    </div>
+</div>
+<footer id="footer">
+    <span style="display:block;  text-align:right;">&copy; 2015-2016 <a href="#">Smart Green Technology LLC</a>, All rights reserved.</span>
+</footer>

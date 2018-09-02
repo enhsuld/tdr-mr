@@ -1,0 +1,126 @@
+<!-- Banner
+================================================== -->
+<div class="parallax" data-background="/front/images/home-parallax-2.jpg" data-color="#36383e" data-color-opacity="0.5" data-img-width="2500" data-img-height="1600">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="search-container" style="padding: 75px 0;">
+
+                    <!-- Form -->
+                    <h2>Тайлан төлөвлөгөө хайх</h2>
+                    <form  action="/search" method="post">
+                    <!-- Row With Forms -->
+                    <div class="row with-forms">
+                        <!-- Status -->
+                        <div class="col-md-3">
+                            <select data-placeholder="Төрөл сонгох" name="reporttype" class="chosen-select-no-single" >
+                                <option value="0" th:selected="${reporttype} == 0">Бүгд</option>
+                                <option value="3" th:selected="${reporttype} == 3">Төлөвлөгөө</option>
+                                <option value="4" th:selected="${reporttype} == 4">Тайлан</option>
+                            </select>
+                        </div>
+
+                        <!-- Main Search Input -->
+                        <div class="col-md-6">
+                            <div class="main-search-input">
+                                <input type="text" th:value="${q}" name="q" placeholder="Байгууллагын Нэр / УБД / ТЗ дугаар"/>
+                                <button class="button"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
+
+                    </div></form>
+                    <!-- Row With Forms / End -->
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h4 class="headline margin-top-70 margin-bottom-30">Хайлтын үр дүн</h4>
+            <table class="basic-table">
+                <thead>
+                    <tr>
+                        <th>Д/д</th>
+                        <th>Байгууллагын нэр (УБ дугаар)</th>
+                        <th>ТЗ дугаар</th>
+                        <!--<th>ТЗ төрөл</th>-->
+                        <th>Хэлтэс</th>
+                        <th>Байршил</th>
+                        <th>Төрөл</th>
+                        <th>Он</th>
+                        <th>Төлөв</th>
+                        <th>Үе шат</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="obj,iter  : ${results}">
+                        <td th:text="${iter.index + 1}"></td>
+                        <td>
+                            <span th:text="${obj[1]}"></span>
+                            (<span th:text="${obj[2]}"></span>)
+                        </td>
+                        <td th:text="${obj[0]}"></td>
+                        <td>
+                            <span th:if="${obj[7]} == 1">УУҮТХ</span>
+                            <span th:if="${obj[7]} == 2">НСХ</span>
+                            <span th:if="${obj[7]} == 3">ГХХ</span>
+                        </td>
+                        <td>
+                            <span th:text="${obj[8]}"></span>
+                            <span th:text="${obj[9]}"></span>
+                        </td>
+                        <td>
+                            <span th:if="${obj[3]} == 3 and ${obj[5]} != 0">Төлөвлөгөө</span>
+                            <span th:if="${obj[3]} == 3 and ${obj[5]} == 0">X төлөвлөгөө</span>
+                            <span th:if="${obj[3]} == 4 and ${obj[5]} != 0">Тайлан</span>
+                            <span th:if="${obj[3]} == 4 and ${obj[5]} == 0">Х тайлан</span>
+                        </td>
+                        <td th:text="${obj[4]}"></td>
+
+
+                        <td>
+                            <div th:if="${obj[10]}==1" class="notification success" style="padding: 5px;border: 1px solid #5f9025;">Зөвшөөрөгдсөн</div>
+                            <div th:if="${obj[10]}==2" class="notification error" style="padding: 5px;border: 1px solid #de5959;">ААН-д засвартай байгаа</div>
+                            <div th:if="${obj[10]}==7" class="notification warning" style="padding: 5px;border: 1px solid #8f872e;">АМГТГ-т хянагдаж байгаа</div>
+                            <div th:if="${obj[10]}==3" class="notification primary" style="padding: 5px;border: 1px solid #8f872e;">Татгалзсан</div>
+                        </td>
+                        <td>
+                            <span th:if="${obj[10]}==7 and ${obj[11]} == 1">Хүлээн авах хэсэг</span>
+                            <span th:if="${obj[10]}==7 and ${obj[11]} == 2">Нөөцийн хэсэг</span>
+                            <span th:if="${obj[10]}==7 and ${obj[11]} == 3">Технологийн хэсэг</span>
+                            <span th:if="${obj[10]}==7 and ${obj[11]} == 4">Бүтээгдэхүүн борлуулалтын хэсэг</span>
+                            <span th:if="${obj[10]}==7 and ${obj[11]} == 5">Эдийн засгийн хэсэг</span>
+                            <span th:if="${obj[10]}==7 and ${obj[11]} == 6">Эцсийн шийдвэр</span>
+                            <span th:if="${obj[10]}==7 and ${obj[11]} == 8">Геологийн хэсэг</span>
+                            <span th:if="${obj[10]}==7 and ${obj[11]} == 9">Зардлын доод хэмжээ</span>
+                            <span th:if="${obj[10]}==7 and ${obj[11]} == 10">Хүлээлгэн өгөх</span>
+                            <span th:if="${obj[10]}==2 and ${obj[12]} == 1">Хүлээн авах хэсэг</span>
+                            <span th:if="${obj[10]}==2 and ${obj[12]} == 2">Нөөцийн хэсэг</span>
+                            <span th:if="${obj[10]}==2 and ${obj[12]} == 3">Технологийн хэсэг</span>
+                            <span th:if="${obj[10]}==2 and ${obj[12]} == 4">Бүтээгдэхүүн борлуулалтын хэсэг</span>
+                            <span th:if="${obj[10]}==2 and ${obj[12]} == 5">Эдийн засгийн хэсэг</span>
+                            <span th:if="${obj[10]}==2 and ${obj[12]} == 6">Эцсийн шийдвэр</span>
+                            <span th:if="${obj[10]}==2 and ${obj[12]} == 8">Геологийн хэсэг</span>
+                            <span th:if="${obj[10]}==2 and ${obj[12]} == 9">Зардлын доод хэмжээ</span>
+                            <span th:if="${obj[10]}==2 and ${obj[12]} == 10">Хүлээлгэн өгөх</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <h4>Тайлбар:</h4>
+            <ul class="list-1">
+                <li>УУҮТХ - Уул уурхайн үйлдвэрлэл, технологийн хэлтэс</li>
+                <li>НСХ - Нүүрсний судалгааны хэлтэс</li>
+                <li>ГХХ - Геологи, хайгуулын хэлтэс</li>
+            </ul>
+
+        </div>
+    </div>
+</div>

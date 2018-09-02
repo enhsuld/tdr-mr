@@ -1,0 +1,32 @@
+<div id="page_content" style="overflow:hidden;" ng-init="init()">
+    <div id="page_content_inner">
+    	<div class="uk-grid" >
+       	   <div class="uk-width-medium-1">
+               <div class="md-card" data-uk-grid-margin>
+                   <div class="md-card-content">
+                   		<div class="uk-form-row  uk-grid">
+	                    	<div class="uk-width-1-4">
+			                	<label>Хэлтэс сонгох</label>
+			                	<input type="text" config="division_config" options="divisions" ng-model="filter_data.divisionid" selectize ng-change="getFormNotes()"/>
+			                </div>
+			                <div class="uk-width-1-4">
+			                	<label>Төрөл сонгох</label>
+			                	<input type="text" config="reporttype_config" options="report_types" ng-model="filter_data.reporttype" selectize ng-change="getFormNotes()"/>
+			                </div>
+			                <div class="uk-width-2-4">
+			                	<label>Маягт сонгох</label>
+			                	<input type="text" config="form_config" options="forms" ng-model="filter_data.formid" selectize ng-disabled="!(filter_data.divisionid > 0 && filter_data.reporttype > 0)" ng-change="loadFormDatas()"/>
+			                </div>
+			            </div>
+                   </div>
+               </div>
+           </div>
+         </div>
+         <div class="uk-grid" >
+           <div class="uk-width-medium-1">
+               <ng-include src="load_url"></ng-include>
+           </div>
+          </div>
+        </div>
+    </div>
+</div>

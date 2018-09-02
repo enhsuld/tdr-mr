@@ -1,0 +1,62 @@
+    <div id="page_content">
+        <div id="page_content_inner">
+             <div class="md-card">
+			     <div class="md-card-content">
+			        <!--  <h3 class="heading_a">Input fields</h3> -->
+			         <div class="uk-grid" data-uk-grid-margin>
+			             <div class="uk-width-medium-1-1 user ">    
+			             	 <kendo-grid options="puserGrid"></kendo-grid>                     	
+			                <!-- <div id="orgGrid"></div> -->
+			             </div> 			                       
+			         </div>               
+			     </div>
+			 </div> 
+        </div>
+    </div>
+	<footer id="footer">
+	    <span style="display:block;  text-align:right;">&copy; 2015-2016 <a href="www.staus.mn/sgt">Smart Green Technology LLC</a>, All rights reserved.</span>
+	</footer>
+	
+	
+	
+	 <div class="uk-modal" id="modal_update">
+          <div class="uk-modal-dialog" data-uk-grid-margin>
+              <button type="button" id="closemodal" class="uk-modal-close uk-close uk-close-alt"></button>
+              <h3 class="heading_a">Байгууллагын жагсаалт үүсгэх </h3>  
+ 			  	<form name="form_signin" id="quataform"  data-ng-submit="submitForm()"> 	
+ 			  		<input type="hidden" id="{{section.id}}" class="menu" ng-model="quata.id" value="{{roleid}}"/>	
+ 			  		
+	  			    <div class="uk-grid" data-uk-grid-margin>
+	                    <div class="uk-width-medium-1-1">
+	                    	<div class="parsley-row">
+	                            <input type="text" config="selectize_a_config" required options="selectize_a_data.options" ng-model="quata.ayear" name="selectize_a" selectize />
+                        		<span class="uk-form-help-block">Тайлангийн он</span>
+	                    	</div>
+	                    </div>
+	                </div>	  		
+ 			  	    <div class="uk-grid" data-uk-grid-margin>
+	                    <div class="uk-width-medium-1-1">
+	                    	<div class="parsley-row">
+		                        <input type="text" config="selectize_a_config" required options="selectize_b_data.options" ng-model="quata.category" name="selectize_a" selectize />
+                        		<span class="uk-form-help-block">Ангилал</span>
+	                        </div>
+	                    </div>
+	                </div>	
+	                
+	                <div class="uk-modal-footer uk-text-right">
+	                	 <p ng-show="loading">...LOADING...</p>
+	                	 <button type="submit" class="md-btn md-btn-primary md-btn-wave-light waves-effect waves-button waves-light">Хадгалах</button>
+                         <button type="button" class="md-btn md-btn-flat uk-modal-close">Хаах</button>                         
+                     </div>  
+				        
+                   
+                 </form> 
+              </div>
+              
+          </div>
+	
+	<script type="text/x-kendo-template" id="add">
+         <div id="details-container" style="text-align:left;">
+           <button class="k-button k-button-icontext" ng-click='res()'  data-uk-modal="{target:'\\#modal_update'}"> <span class='k-icon k-add'></span> Байгууллагын жагсаалт үүсгэх</button>
+         </div>
+    </script>

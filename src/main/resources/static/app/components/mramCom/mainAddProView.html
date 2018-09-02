@@ -1,0 +1,196 @@
+<div id="page_content" style="overflow:hidden;">
+    <div id="page_content_inner">
+   	   <!-- 	<div class="md-card uk-margin-medium-bottom">
+    	   	<div class="md-card-content">
+                 <table datatable="" dt-options="dtOptions" dt-columns="dtColumns" class="uk-table"></table> 
+            </div>
+        </div> -->
+    	<div class="uk-grid" >
+       	   <div class="uk-width-medium-1">
+               <div class="md-card" data-uk-grid-margin>
+                   <div class="md-card-content">                   		
+         				<kendo-grid options="AddPro"></kendo-grid>     
+                   </div>
+               </div>
+           </div>
+        </div>
+       
+    </div>
+     
+</div>
+<div id="footer">
+    <span style="display:block;  text-align:right;">&copy; 2015-2016 <a href="#">Smart Green Technology LLC</a>, All rights reserved.</span>
+</div>  
+
+<script type="text/x-kendo-template" id="Configuration1">	
+	    #if (licTypeId == 2)  { #
+     		<button data-uk-modal="{target:'\\#modal_main_config'}" class="md-btn md-btn-primary md-btn-wave-light waves-effect waves-button waves-light" ng-click="loadOnConfig(#:id#)"  data-translate="Configuration"></button>
+		# } else{#
+		 	
+		#}#
+	
+</script>
+
+<script type="text/x-kendo-template" id="Configuration">	
+	    #if (licTypeId == 2)  { #
+     		<button class="md-btn md-btn-primary md-btn-wave-light waves-effect waves-button waves-light" ng-click="loadOnConfig(#:id#)"  data-translate="Configuration"></button>
+		# } else{#
+		 	
+		#}#
+	
+</script>
+
+<div class="uk-modal" id="modal_main_config">
+    <div class="uk-modal-dialog">
+     	<button type="button" class="uk-modal-close uk-close"></button>
+        <div class="uk-modal-header">
+            <h3 class="uk-modal-title">Headline</h3>           
+        </div>
+        <form id="form_validation" class="uk-form-stacked">               
+               <div class="uk-grid" data-uk-grid-margin>
+                   <div class="uk-width-medium-1-1">
+                       <div class="parsley-row">
+                           <label for="fullname">Full Name<span class="req">*</span></label>
+                           <input id="fullname" type="text" name="fullname" required class="md-input" md-input />
+                       </div>
+                   </div>
+                   <div class="uk-width-medium-1-1">
+                       <div class="parsley-row">
+                           <label for="email">Email<span class="req">*</span></label>
+                           <input id="email" type="email" name="email" data-parsley-trigger="change" required  class="md-input" md-input />
+                       </div>
+                   </div>
+               </div>
+               <div custom-scrollbar style="height: 300px !important;">
+	               <div class="uk-grid" data-uk-grid-margin>
+	                   <div class="uk-width-medium-1-1">
+	                       <div class="parsley-row uk-margin-top">
+	                           <label for="val_birth">Birth Date<span class="req">*</span></label>
+	                           <input type="text" name="val_birth" id="val_birth" required class="md-input" data-parsley-americandate data-parsley-americandate-message="This value should be a valid date (MM.DD.YYYY)" data-uk-datepicker="{format:'MM.DD.YYYY'}" md-input />
+	                       </div>
+	                   </div>
+	                   <div class="uk-width-medium-1-1">
+	                       <div class="uk-form-row parsley-row">
+	                           <label class="uk-form-label">Gender<span class="req">*</span></label>
+	                           <span class="icheck-inline">
+	                               <input type="radio" name="val_radio_gender" id="val_radio_male" ng-model="validation_form.gender" icheck required value="male" />
+	                               <label for="val_radio_male" class="inline-label">Male</label>
+	                           </span>
+	                           <span class="icheck-inline">
+	                               <input type="radio" name="val_radio_gender" id="val_radio_female" ng-model="validation_form.gender" icheck value="female" />
+	                               <label for="val_radio_female" class="inline-label">Female</label>
+	                           </span>
+	                       </div>
+	                   </div>
+	               </div>
+	               <div class="uk-grid" data-uk-grid-margin>
+	                   <div class="uk-width-medium-1-1">
+	                       <div class="parsley-row">
+	                           <label class="uk-form-label">Hobbies (2 minimum):</label>
+	                               <span class="icheck-inline">
+	                                   <input type="checkbox" name="val_check_hobbies" id="val_check_ski" icheck ng-model="validation_form.hobbies_skiing" value="skiing" data-parsley-mincheck="2" />
+	                                   <label for="val_check_ski" class="inline-label">Skiing</label>
+	                               </span>
+	                               <span class="icheck-inline">
+	                                   <input type="checkbox" name="val_check_hobbies" id="val_check_run" icheck ng-model="validation_form.hobbies_running" value="running" />
+	                                   <label for="val_check_run" class="inline-label">Running</label>
+	                               </span>
+	                               <span class="icheck-inline">
+	                                   <input type="checkbox" name="val_check_hobbies" id="val_check_eat" icheck ng-model="validation_form.hobbies_eating" value="eating" />
+	                                   <label for="val_check_eat" class="inline-label">Eating</label>
+	                               </span>
+	                               <span class="icheck-inline">
+	                                   <input type="checkbox" name="val_check_hobbies" id="val_check_sleep" icheck ng-model="validation_form.hobbies_sleeping" value="sleeping" />
+	                                   <label for="val_check_sleep" class="inline-label">Sleeping</label>
+	                               </span>
+	                               <span class="icheck-inline">
+	                                   <input type="checkbox" name="val_check_hobbies" id="val_check_read" icheck ng-model="validation_form.hobbies_reading" value="reading" />
+	                                   <label for="val_check_read" class="inline-label">Reading</label>
+	                               </span>
+	                               <span class="icheck-inline">
+	                                   <input type="checkbox" name="val_check_hobbies" id="val_check_code" icheck ng-model="validation_form.hobbies_coding" value="coding" />
+	                                   <label for="val_check_code" class="inline-label">Coding</label>
+	                               </span>
+	                       </div>
+	                   </div>
+	                   <div class="uk-width-medium-1-1">
+	                       <div class="parsley-row">
+	                           <label class="uk-form-label">Heard us by*</label>
+	                           <input config="selectize_val_config" options="selectize_val_options" ng-model="validation_form.selectize_heard" required name="val_select" selectize />
+	                       </div>
+	                   </div>
+	               </div>
+	               <div class="uk-grid">
+	                   <div class="uk-width-1-1">
+	                       <div class="parsley-row">
+	                           <label for="message">Message (20 chars min, 100 max)</label>
+	                           <textarea id="message" class="md-input" name="message" cols="10" rows="8" md-input ng-model="validation_form.message" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-validation-threshold="10" data-parsley-minlength-message = "Come on! You need to enter at least a 20 caracters long comment.."></textarea>
+	                       </div>
+	                   </div>
+	               </div>
+               </div>
+        <div class="uk-modal-footer uk-text-right">
+            <button type="submit"  class="md-btn md-btn-primary md-btn-wave-light waves-effect waves-button waves-light" id="snippet_new_save" data-translate="Save"></button>
+			<button type="button" id="closemodal" class="md-btn md-btn-flat md-btn-flat-danger md-btn-wave waves-effect waves-button uk-modal-close" data-translate="Close"></button>
+        </div>
+        </form>
+    </div>
+</div>
+                            
+<style>
+	.uk-modal {
+	    z-index: 1304;
+	    background: rgba(0, 0, 0, 0.5);
+	    -webkit-transition: opacity 250ms ease-out;
+	    transition: opacity 250ms ease-out;
+	    overflow-y: hidden !important; 
+	}
+
+	.uk-datepicker {
+	    z-index: 1350;
+	    width: auto;
+	    padding: 0;
+	}
+	#footer {
+	  position:fixed;
+	  z-index:1000;
+	  bottom:0px;
+	  right:0px;
+	  background: #fff;
+	  padding: 0 25px;
+	  width:100%;
+	  border-top: 1px solid rgba(0, 0, 0, 0.12);
+	  line-height: 48px;
+	  -webkit-transition: margin-left 280ms cubic-bezier(0.4, 0, 0.2, 1);
+	  transition: margin-left 280ms cubic-bezier(0.4, 0, 0.2, 1);
+	}
+	@media only screen and (min-width: 1220px) {
+	  .sidebar_main_open #footer,
+	  .sidebar_main_active #footer {
+	    margin-left: 270px;
+	  }
+	  .sidebar_main_open #footer,
+	  .sidebar_main_active #footer span{
+	    padding-right: 24px;
+	  }
+	}
+	.footer_active #page_content {
+	  min-height: 100%;
+	  height: auto;
+	}
+	.footer_active #page_content {
+	  margin-bottom: -48px;
+	}
+	.footer_active #page_content:after {
+	  content: '';
+	  display: block;
+	}
+	.footer_active #page_content:after,
+	.footer_active #footer {
+	  height: 48px;
+	  box-sizing: border-box;
+	}
+	.footer_active #footer {
+	  margin-top: -48px;
+	}
+</style>

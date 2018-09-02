@@ -1,0 +1,31 @@
+    <div id="page_content">
+        <div id="page_content_inner">
+             <div class="md-card">
+			     <div class="md-card-content">
+		           <div class="uk-grid">
+	                    <div class="uk-width-1-1">
+	                        <div id="file_upload-drop" class="uk-file-upload">
+	                            <p class="uk-text">Drop file to upload</p>
+	                            <p class="uk-text-muted uk-text-small uk-margin-small-bottom">or</p>
+	                            <span class="uk-form-file md-btn">choose file<input id="file_upload-select" type="file" ng-model="file_upload.input_1"></span>
+	                        </div>
+	                        <div id="file_upload-progressbar" class="uk-progress uk-hidden">
+	                            <div class="uk-progress-bar" style="width:0">0%</div>
+	                        </div>
+	                    </div>
+	                </div>
+			         <div class="uk-grid" data-uk-grid-margin>
+			             <div class="uk-width-medium-1-1 orggrid">    
+			             	 <kendo-grid options="pmenuGrid"></kendo-grid>                     	
+			                <!-- <div id="orgGrid"></div> -->
+			             </div>                  
+			         </div>               
+			     </div>
+			 </div> 
+        </div>
+    </div>
+
+       <script type="text/x-kendo-template" id="update">
+          <input type='checkbox' class='switchery switchery-small' ng-change='change(#:id#)' ui-switch ng-model='confirmed[#:id#]'  ng-checked="isChecked(dataItem)" color='\#ffb300'  id='#:id#' />
+          <label for='#:id#' class='inline-label'>Label</label>
+     </script>

@@ -1,0 +1,1041 @@
+<div id="page_content">
+    <div id="page_content_inner">
+		 <div class="md-card">
+               <div class="md-card-content">
+                   <div class="uk-grid" data-uk-grid-margin> 
+                   	   <div class="uk-width-medium-6-10">
+                   	   		<h3 style="margin-top:7px;"><span data-translate="Company name"></span>: {{sgt.lpName}}, <span data-translate="Report year"></span>: {{sgt.reportyear}}, <span data-translate="License number"></span>: {{sgt.licenseXB}} </h3>
+                   	   </div> 
+                   </div>                    
+               </div>
+        </div>
+         <div class="uk-grid" ng-if="mcom.length>0" data-uk-grid-margin>		
+	         <div class="uk-width-1-1">
+		 	 	 <div class="uk-alert uk-alert-info" data-uk-alert>
+	                <a href="#" class="uk-alert-close uk-close"></a>
+	                   <ul class="md-list">
+	                   <li>
+	                       <div class="md-list-content" ng-repeat="item in mcom">
+	                           <span class="md-list-heading">{{item.username}}</span>
+	                           <span class="uk-text-small ">{{item.content}}</span>
+	                       </div>
+	                   </li>
+	               </ul>
+	            </div>
+	 	    </div>
+ 	    </div>
+ 	    
+        <div class="md-card uk-margin-large-bottom">        
+            <div class="md-card-content">
+				 <div class="uk-grid" data-uk-grid-margin>				 	
+                     <div class="uk-width-1-1">
+                     	<ul class="uk-tab" data-uk-tab="{connect:'#tabs_anim5', animation:'slide-right'}">
+                     		<li class="uk-active"><a href="#" data-translate="General information"></a></li>
+	                  		<li ng-click="openClose()" ng-repeat="item in inpt_options" ><a href="#">{{item.text}}</a></li>                            
+                        </ul>
+                        <ul id="tabs_anim5" class="uk-switcher uk-margin" style="overflow:visible">
+                        	<li>                           	   
+	                             	 <h3 class="full_width_in_card heading_c">
+	                                	 Байгууллагын мэдээлэл
+	                                	  
+	                             	 </h3>
+
+		                        	<div class="uk-grid uk-grid-width-1-1 uk-grid-width-large-1-3" data-uk-grid-margin>                        		 
+                                    <div>
+                                        <div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                                <i class="md-list-addon-icon material-icons">&#xE87C;</i>
+                                            </span>
+                                            <label>Овог</label>
+                                            <input class="md-input" type="text" id="user_edit_uname_control"  name="user_edit_uname_control" required ng-model="org_data.famName" md-input />
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                                <i class="md-list-addon-icon material-icons">&#xE7FD;</i>
+                                            </span>
+                                            <label>Нэр</label>
+                                             <input class="md-input" type="text" id="user_edit_uname_control"  name="user_edit_uname_control" required ng-model="org_data.givName" md-input />
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                                <i class="md-list-addon-icon material-icons">&#xE0BE;</i>
+                                            </span>
+                                            <label>Email</label>
+                                             <input class="md-input" type="text" id="user_edit_uname_control" name="user_edit_uname_control" required ng-model="org_data.email" md-input />
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                                <i class="md-list-addon-icon material-icons">&#xE87C;</i>
+                                            </span>
+                                            <label>First name</label>
+                                             <input class="md-input" type="text" id="user_edit_uname_control"  name="user_edit_uname_control" required ng-model="org_data.famNameL1" md-input />
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                                <i class="md-list-addon-icon material-icons">&#xE7FD;</i>
+                                            </span>
+                                            <label>Last name</label>
+                                             <input class="md-input" type="text" id="user_edit_uname_control"   name="user_edit_uname_control" required ng-model="org_data.givNameL1" md-input />
+                                        </div>
+                                    </div>                                  
+                                    <div>
+                                        <div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                                <i class="md-list-addon-icon material-icons">&#xE0CD;</i>
+                                            </span>
+                                            <label>Phone</label>
+                                             <input class="md-input"  id="user_edit_uname_control" name="user_edit_uname_control" required ng-model="org_data.phone" md-input />
+                                        </div>
+                                    </div>
+                                    
+                                    <div>
+                                        <div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                                <i class="md-list-addon-icon material-icons">&#xE0AF;</i>
+                                            </span>
+                                            <label>Хот</label>
+                                             <input class="md-input" type="text" id="user_edit_uname_control" name="user_edit_uname_control" required ng-model="org_data.city" md-input />
+                                        </div>
+                                    </div>
+                                    <div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                                 <i class="md-list-addon-icon material-icons">&#xE7F1;</i>
+                                            </span>
+                                            <label>Дүүрэг</label>
+                                             <input class="md-input" type="text" id="user_edit_uname_control" name="user_edit_uname_control" required ng-model="org_data.disctrict" md-input />
+                                   </div>
+                                   
+                                    <div>
+                                        <div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                               <i class="md-list-addon-icon material-icons">&#xE84F;</i>          
+                                            </span>
+                                            <label>Хороо</label>
+                                             <input class="md-input" type="text" id="user_edit_uname_control" name="user_edit_uname_control" required ng-model="org_data.khoroo" md-input />
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                                <i class="md-list-addon-icon material-icons">&#xE0AF;</i>
+                                            </span>
+                                            <label>City</label>
+                                             <input class="md-input" type="text" id="user_edit_uname_control" name="user_edit_uname_control" required ng-model="org_data.cityL1" md-input />
+                                        </div>
+                                    </div>                                
+                                    <div>
+                                        <div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                                 <i class="md-list-addon-icon material-icons">&#xE7F1;</i>
+                                            </span>
+                                            <label>District</label>
+                                             <input class="md-input" type="text" id="user_edit_uname_control" name="user_edit_uname_control" required ng-model="org_data.disctrictL1" md-input />
+                                        </div>
+                                    </div>                                 
+                                    <div>
+                                        <div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                               <i class="md-list-addon-icon material-icons">&#xE84F;</i>          
+                                            </span>
+                                            <label>Khoroo</label>
+                                             <input class="md-input" type="text" id="user_edit_uname_control" name="user_edit_uname_control" required ng-model="org_data.khorooL1" md-input />
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">                                                 
+                                                 <i class="md-list-addon-icon material-icons">&#xE8FE;</i>
+                                            </span>
+                                            <label>Гудамж</label>
+                                             <input class="md-input" type="text" id="user_edit_uname_control" name="user_edit_uname_control" required ng-model="org_data.street" md-input />
+                                        </div>
+                                    </div>
+                                  
+                                  
+                                    <div>
+                                        <div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                                 <i class="md-list-addon-icon material-icons">&#xE8FE;</i>
+                                            </span>
+                                            <label>Street</label>
+                                             <input class="md-input" type="text" id="user_edit_uname_control" name="user_edit_uname_control" required ng-model="org_data.streetL1" md-input />
+                                        </div>
+                                    </div>
+                                    
+                                     <div>
+                                        <div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                                 <i class="md-list-addon-icon material-icons">&#xE89B;</i>
+                                            </span>
+                                            <label>Post box</label>
+                                             <input class="md-input" type="text" id="user_edit_uname_control" name="user_edit_uname_control" required ng-model="org_data.postbox" md-input />
+                                        </div>
+                                    </div>
+                                   
+
+                                    <div>
+                                    	<div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                               <i class="md-list-addon-icon material-icons">&#xE566;</i>    
+                                            </span>
+                                            <label>Ерөнхий инженер</label>
+                                             <input class="md-input" type="text" id="user_edit_uname_control" name="user_edit_uname_control" required ng-model="org_data.gengineer" md-input />
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                               <i class="md-list-addon-icon material-icons">&#xE566;</i>    
+                                            </span>
+                                            <label>Утас</label>
+                                             <input class="md-input"  id="user_edit_uname_control" value="{{org_data.gengineerphone}}" name="user_edit_uname_control" required ng-model="org_data.gengineerphone" md-input />
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                               <i class="md-list-addon-icon material-icons">&#xE566;</i>    
+                                            </span>
+                                            <label>И-мэйл</label>
+                                             <input class="md-input" type="text" id="user_edit_uname_control" name="user_edit_uname_control" required ng-model="org_data.gengineermail" md-input />
+                                        </div>
+                                    </div>
+
+                                      <div>
+                                    	<div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                               <i class="md-list-addon-icon material-icons">&#xE566;</i>    
+                                            </span>
+                                            <label>Геологич</label>
+                                             <input class="md-input" type="text" id="user_edit_uname_control" name="user_edit_uname_control" required ng-model="org_data.geologist" md-input />
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                               <i class="md-list-addon-icon material-icons">&#xE566;</i>    
+                                            </span>
+                                            <label>Утас</label>
+                                             <input class="md-input"  id="user_edit_uname_control"  value="{{org_data.geologistphone}}" name="user_edit_uname_control" required ng-model="org_data.geologistphone" md-input />
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                               <i class="md-list-addon-icon material-icons">&#xE566;</i>    
+                                            </span>
+                                            <label>И-мэйл</label>
+                                             <input class="md-input" type="text" id="user_edit_uname_control" name="user_edit_uname_control" required ng-model="org_data.geologistmail" md-input />
+                                        </div>
+                                    </div>
+
+                                      <div>
+                                    	<div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                               <i class="md-list-addon-icon material-icons">&#xE566;</i>    
+                                            </span>
+                                            <label>Маркшейдер</label>
+                                             <input class="md-input" type="text" id="user_edit_uname_control" name="user_edit_uname_control" required ng-model="org_data.msurveyor" md-input />
+                                        </div>
+                                    </div>
+                           
+                                    <div>
+                                        <div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                               <i class="md-list-addon-icon material-icons">&#xE566;</i>    
+                                            </span>
+                                            <label>Утас</label>
+                                             <input class="md-input" id="user_edit_uname_control" value="{{org_data.msurveyorphone}}" name="user_edit_uname_control" required ng-model="org_data.msurveyorphone" md-input />
+                                        </div>
+                                    </div>
+         							<div>
+                                        <div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                               <i class="md-list-addon-icon material-icons">&#xE566;</i>    
+                                            </span>
+                                            <label>И-мэйл</label>
+                                             <input class="md-input" type="text" id="user_edit_uname_control" name="user_edit_uname_control" required ng-model="org_data.msurveyoremail" md-input />
+                                        </div>
+                                    </div>
+                                      <div>
+                                    	<div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                               <i class="md-list-addon-icon material-icons">&#xE566;</i>    
+                                            </span>
+                                            <label>Нягтлан</label>
+                                             <input class="md-input" type="text" id="user_edit_uname_control" name="user_edit_uname_control" required ng-model="org_data.accountant" md-input />
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                               <i class="md-list-addon-icon material-icons">&#xE566;</i>    
+                                            </span>
+                                            <label>Утас</label>
+                                             <input class="md-input" id="user_edit_uname_control"  value="{{org_data.accountantphone}}" name="user_edit_uname_control" required ng-model="org_data.accountantphone" md-input />
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                               <i class="md-list-addon-icon material-icons">&#xE566;</i>    
+                                            </span>
+                                            <label>И-мэйл</label>
+                                             <input class="md-input" type="text" id="user_edit_uname_control" name="user_edit_uname_control" required ng-model="org_data.accountantemail" md-input />
+                                        </div>
+                                    </div>
+                                    <div>
+                                    	<div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                               <i class="md-list-addon-icon material-icons">&#xE566;</i>    
+                                            </span>
+                                            <label>Эдийн засагч</label>
+                                             <input class="md-input" type="text" id="user_edit_uname_control" name="user_edit_uname_control" required ng-model="org_data.economist" md-input />
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                               <i class="md-list-addon-icon material-icons">&#xE566;</i>    
+                                            </span>
+                                            <label>Утас</label>
+                                             <input class="md-input"  id="user_edit_uname_control" value="{{org_data.economistphone}}" name="user_edit_uname_control" required ng-model="org_data.economistphone" md-input />
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                               <i class="md-list-addon-icon material-icons">&#xE566;</i>    
+                                            </span>
+                                            <label>И-мэйл</label>
+                                             <input class="md-input" type="text" id="user_edit_uname_control" name="user_edit_uname_control" required ng-model="org_data.economistemail" md-input />
+                                        </div>
+                                    </div>
+                                    <div>
+                                    	<div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                               <i class="md-list-addon-icon material-icons">&#xE566;</i>    
+                                            </span>
+                                            <label>Уурхайн дарга</label>
+                                             <input class="md-input" type="text" id="user_edit_uname_control" name="user_edit_uname_control" required ng-model="org_data.minehead" md-input />
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                               <i class="md-list-addon-icon material-icons">&#xE566;</i>    
+                                            </span>
+                                            <label>Утас</label>
+                                             <input class="md-input"  id="user_edit_uname_control" value="{{org_data.minephone}}" name="user_edit_uname_control" required ng-model="org_data.minephone" md-input />
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                               <i class="md-list-addon-icon material-icons">&#xE566;</i>    
+                                            </span>
+                                            <label>И-мэйл</label>
+                                             <input class="md-input" type="text" id="user_edit_uname_control" name="user_edit_uname_control" required ng-model="org_data.mineemail" md-input />
+                                        </div>
+                                    </div>
+                                   <div>
+                                    	<div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                               <i class="md-list-addon-icon material-icons">&#xE566;</i>    
+                                            </span>
+                                            <label>Мэргэжилтэн</label>
+                                             <input class="md-input" type="text" id="user_edit_uname_control" name="user_edit_uname_control" required ng-model="org_data.keyman" md-input />
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                               <i class="md-list-addon-icon material-icons">&#xE566;</i>    
+                                            </span>
+                                            <label>Утас</label>
+                                             <input class="md-input"  id="user_edit_uname_control" value="{{org_data.keymanphone}}" name="user_edit_uname_control" required ng-model="org_data.keymanphone" md-input />
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                               <i class="md-list-addon-icon material-icons">&#xE566;</i>    
+                                            </span>
+                                            <label>И-мэйл</label>
+                                             <input class="md-input" type="text" id="user_edit_uname_control" name="user_edit_uname_control" required ng-model="org_data.keymanemail" md-input />
+                                        </div>
+                                    </div>
+                              </div>       
+	                              <h3 class="full_width_in_card heading_c">
+	                                	 Тусгай зөвшөөрлийн уурхайн мэдээлэл	                                        	  
+	                             	  </h3>
+	                             	
+					                  <div class="uk-grid"  ng-show="{{cpv}}"  data-uk-grid-margin>
+					                  		<div class="uk-width-medium-1-1">
+					                    	
+					                            <div class="uk-grid">
+					                                <div class="uk-width-medium-1-3">
+					                                	<div class="uk-form-row parsley-row">
+					                                    <label>Баяжуулах үйлдвэрийн нэр</label>
+					                                    <input type="text" disabled required ng-model="config.factoryname" class="md-input" disabled md-input />
+					                                    </div>
+					                                </div>
+					                                <div class="uk-width-medium-1-3">
+					                                	<div class="uk-form-row parsley-row">
+					                                    <input id="categories" disabled required ng-model="config.aimagid" style="width: 100%; margin-top:10px;" />
+												            </div>
+					                                </div>
+					                                 <div class="uk-width-medium-1-3">
+					                                 	<div class="uk-form-row parsley-row">
+					                                   <select kendo-drop-down-list
+												            k-data-text-field="'name'"
+												            ng-model="config.sumid"								            
+												            k-data-value-field="'id'"
+												            k-cascade-from="'categories'"
+												            required
+												            disabled
+												            k-cascade-from-field="'parentid'"
+												            k-data-source="productsDataSource"
+												            k-option-label="'Сум / Дүүрэг'"
+												            disabled="disabled"
+												            style="width: 100%; margin-top:10px;"></select>
+												            </div>
+					                                </div>
+					                            </div>
+					                      
+					                    	
+					                            <div class="uk-grid">
+					                             	<div class="uk-width-medium-2-3">
+						                                 <div class="uk-form-row parsley-row">
+						                                    <label>Хөрөнгө оруулалт /Улсын нэр/</label>
+						                                    <input disabled type="text" required ng-model="config.invcountry" class="md-input" md-input />
+					                                    </div>
+					                                </div>
+					                                <div class="uk-width-medium-1-3">
+						                                 <div class="uk-form-row parsley-row">
+						                                    <label>Хөрөнгө оруулалтын хувь хэмжээ</label>
+						                                    <input  disabled type="number" required ng-model="config.invperccent" class="md-input" md-input />
+					                                    </div>
+					                                </div>
+					                            </div>
+					                      
+					                            <div class="uk-grid">
+					                                <div class="uk-width-medium-1-3">
+					                                	  <div class="uk-form-row parsley-row">
+					                                    <label>ТЭЗҮ хүлээн авсан/батлуулсан (он, сар, өдөр))</label>
+					                                    <input disabled class="md-input" required ng-model="config.tezuappdate" type="text" id="uk_dp_1" data-uk-datepicker="{format:'DD.MM.YYYY'}" md-input ng-model="forms_advanced.datepicker">
+					                                	</div>
+					                                </div>
+					                                <div class="uk-width-medium-1-3">
+					                                	  <div class="uk-form-row parsley-row">
+					                                    <label>ТЭЗҮ боловсруулсан ААН-ийн нэр</label>
+					                                    <input disabled type="text" required ng-model="config.tezulp" class="md-input" md-input />
+					                               		</div>
+					                                </div>
+					                                 <div class="uk-width-medium-1-3">
+					                                 	  <div class="uk-form-row parsley-row">
+					                                    <label>ТЭЗҮ-д тооцсон жилийн хүч чадал (Мян.тн/жил)/</label>
+					                                    <input  disabled type="number" required ng-model="config.tezupower" class="md-input" md-input />
+					                                    </div>
+					                                </div>
+					                            </div>
+					                            	               
+					                            <div class="uk-grid">
+					                                <div class="uk-width-medium-1-3">
+					                                	 <div class="uk-form-row parsley-row">
+					                                    	<label>Ашиглах нийт хугацаа (Жилээр)/</label>
+						                                    <input disabled class="md-input" ng-model="config.workyear" type="number" id="uk_dp_1"  md-input>
+					                                	</div> 
+					                                </div>
+					                                <div class="uk-width-medium-1-3">
+					                                 	 <div class="uk-form-row parsley-row">
+					                                    <label>Ашиглалт эхэлсэн огноо</label>
+					                                   <input disabled class="md-input" ng-model="config.startdate" type="text" id="uk_dp_1" data-uk-datepicker="{format:'DD.MM.YYYY'}" md-input>
+					                                	</div>
+					                                </div>
+					                                <div class="uk-width-medium-1-3">
+						                                <div class="uk-form-row parsley-row">
+						                                    <label>Түүхий эд авах уурхайн нэр</label>
+						                                    <input disabled type="text" ng-model="config.rawmine" class="md-input" md-input />
+					                                	</div>
+					                                </div>	                            
+					                        	</div>
+					                      
+					                    </div>                  
+					                </div>              
+								      <div class="uk-grid" ng-show="{{cann}}" data-uk-grid-margin>
+						                    <div class="uk-width-medium-1-1">
+						                    	
+						                            <div class="uk-grid">
+						                                <div class="uk-width-medium-1-3">
+						                                	<div class="uk-form-row parsley-row">
+						                                    <label>Ордын нэр</label>
+						                                    <input type="text" required ng-model="config.horde" disabled class="md-input " md-input />
+						                                    </div>
+						                                </div>
+						                                <div class="uk-width-medium-1-3">
+						                                	<div class="uk-form-row parsley-row">
+						                                
+						                                		<input id="categories1" required ng-model="config.aimagid"  disabled style="width: 100%; margin-top:10px;" /> 
+												            </div>
+						                                </div>
+						                                 <div class="uk-width-medium-1-3">
+						                                 	<div class="uk-form-row parsley-row">
+						                                   		<select kendo-drop-down-list
+														            k-data-text-field="'name'"
+														            ng-model="config.sumid"								            
+														            k-data-value-field="'id'"
+														            k-cascade-from="'categories1'"
+														            required
+														            k-cascade-from-field="'parentid'"
+														            k-data-source="productsDataSource"
+														            k-option-label="'Сум / Дүүрэг'"
+														            disabled="disabled"
+														            style="width: 100%; margin-top:10px;">
+													            </select> 
+												            </div>
+						                                </div>
+						                            </div>
+						                      
+						                    	
+						                            <div class="uk-grid">
+						                                <div class="uk-width-medium-1-3">
+						                                	<div class="uk-form-row parsley-row">
+					                                        <select kendo-drop-down-list
+													            k-data-text-field="'name'"
+													            k-data-value-field="'id'"
+													            required
+													            disabled
+													            ng-model="config.mineralid"
+													            k-data-source="mineralDataSource"
+													            k-option-label="'Ашигт малтмалын нэр'"
+													            style="width: 100%; margin-top:10px;"></select>
+						                                    </div>
+						                                </div>
+						                                <div class="uk-width-medium-1-3">
+						                                	<div class="uk-form-row parsley-row">
+						                                    <select kendo-drop-down-list
+													            k-data-text-field="'name'"
+													            k-data-value-field="'id'"
+													            required
+													            disabled
+													            ng-model="config.deposidid"
+													            k-data-source="deposididDataSource"
+													            k-option-label="'Ашигт малтмалын төрөл'"
+													            style="width: 100%; margin-top:10px;"></select>
+													            </div>
+						                                </div>
+						                                 <div class="uk-width-medium-1-3">
+						                                 <div class="uk-form-row parsley-row">
+						                                    <label>Хөрөнгө оруулалт /Улсын нэр/</label>
+						                                    <input type="text" disabled required ng-model="config.countries" class="md-input" md-input />
+						                                    </div>
+						                                </div>
+						                            </div>
+						                      
+						                            <div class="uk-grid">
+						                                <div class="uk-width-medium-1-3">
+						                                	  <div class="uk-form-row parsley-row">
+						                                    <label>ТЭЗҮ хүлээн авсан/батлуулсан (он, сар, өдөр)</label>
+						                                    <input class="md-input" disabled required ng-model="config.appdate" type="text" id="uk_dp_1" data-uk-datepicker="{format:'DD.MM.YYYY'}" md-input ng-model="forms_advanced.datepicker">
+						                                	</div>
+						                                </div>
+						                                <div class="uk-width-medium-1-3">
+						                                	  <div class="uk-form-row parsley-row">
+						                                    <label>ТЭЗҮ-д тооцсон жилийн хүч чадал (Мян.тн/жил)</label>
+						                                    <input type="number" disabled required ng-model="config.yearcapacity" class="md-input" md-input />
+						                               		</div>
+						                                </div>
+						                                 <div class="uk-width-medium-1-3">
+						                                 	  <div class="uk-form-row parsley-row">
+						                                    <label>Ашиглах нийт хугацаа (Жилээр)/</label>
+						                                    <input type="number"  disabled required ng-model="config.workyear" class="md-input" md-input />
+						                                    </div>
+						                                </div>
+						                            </div>
+						                        
+						                            <div class="uk-grid">
+						                                <div class="uk-width-medium-1-3">
+						                                	 <div class="uk-form-row parsley-row">
+						                                    <select kendo-drop-down-list
+													            k-data-text-field="'name'"
+													            k-data-value-field="'id'"
+													            k-data-source="mineType"
+													            required
+													            disabled
+													            ng-model="config.minetypeid"
+													            k-option-label="'Ашиглалтын технологи'"
+													            style="width: 100%; margin-top:10px;"></select>
+													            </div>
+						                                </div>
+						                                <div class="uk-width-medium-2-3">
+						                                	 <div class="uk-form-row parsley-row">
+						                                     <select kendo-drop-down-list
+													            k-data-text-field="'name'"
+													            k-data-value-field="'id'"
+													            required
+													            disabled
+													            ng-model="config.statebudgetid"
+													            k-data-source="yesno.data"
+													            k-option-label="'Улсын төсвийн хөрөнгөөр хийсэн хайгуулын ажлын нөхөн төлбөрийн гэрээтэй эсэх'"
+													            style="width: 100%; margin-top:10px;"></select>
+													            </div>
+						                                </div>
+						                            </div>
+						                            <div class="uk-grid">
+						                                <div class="uk-width-medium-1-3">
+						                                	 <div class="uk-form-row parsley-row">
+						                                    <select id="lala" kendo-drop-down-list
+													            k-data-text-field="'name'"
+													            k-data-value-field="'id'"
+													            required
+													            disabled
+													            ng-change="ena()"
+													            ng-model="config.komissid"
+													            k-data-source="yesno.data"
+													            k-option-label="'Улсын комисс ажилласан тухай'"
+													            style="width: 100%; margin-top:10px;"></select>
+													          </div>  
+						                                </div>
+						                                 <div class="uk-width-medium-1-3">
+						                                 	 <div class="uk-form-row parsley-row">
+						                                    <label>Ашиглалтанд хүлээж авсан огноо</label>
+						                                    <input class="md-input" ng-disabled="wer"  disabled ng-model="config.komissdate" type="text" id="uk_dp_1" data-uk-datepicker="{format:'DD.MM.YYYY'}" md-input>
+						                                	</div>
+						                                </div>
+						                                <div class="uk-width-medium-1-3">
+						                                 <div class="uk-form-row parsley-row">
+						                                    <label>Актын дугаарыг шивэх/</label>
+						                                    <input type="text" ng-disabled="wer" disabled ng-model="config.komissakt" class="md-input" md-input />
+						                                	</div>
+						                                </div>	                            
+						                        </div>
+						                        
+					                            <div class="uk-grid">
+					                                <div class="uk-width-medium-1-3">
+					                                	<div class="uk-form-row parsley-row">
+						                                    <label>Ашиглалт эхэлсэн огноо</label>
+						                                    <input class="md-input" required disabled ng-model="config.startdate" type="text" id="uk_dp_1" data-uk-datepicker="{format:'DD.MM.YYYY'}" md-input>
+					                                	</div>
+					                                </div>
+					                                 <div class="uk-width-medium-1-3">
+					                                 	<div class="uk-form-row parsley-row">
+					                                 	<!-- <input id="bomber"  required ng-model="config.bombid" style="width: 100%;  margin-top:10px;" /> -->
+					                                 		<select kendo-drop-down-list
+																id="aaa"
+																k-option-label="'Тэсэлгээний ажил...'"
+																k-data-text-field="'name'"
+																k-data-value-field="'id'"
+																ng-model="config.bombid"
+																required
+																disabled
+																style="width: 100%; margin-top:10px;"
+																k-data-source="OneSource"></select>
+					                                 	</div>
+					                                </div>
+					                                <div class="uk-width-medium-1-3">
+					                                	<div class="uk-form-row parsley-row">
+					                                		<select kendo-drop-down-list
+																id="bbb"
+																k-option-label="'Гүйцэтгэгч...'"
+																k-data-text-field="'name'"
+																k-data-value-field="'id'"
+																required
+																disabled
+																k-cascade-from-field="'parentid'"
+																k-cascade-from="'aaa'"
+																ng-model="config.bombtype"
+															
+																style="width: 100%; margin-top:10px;"
+																k-data-source="TwoSource"></select>
+					                                	 	<!-- <input id="bomberman" ng-model="config.bombtype" disabled="disabled" style="width: 100%;  margin-top:10px;" /> -->
+					                                	 </div>
+					                                </div>
+					                            </div>
+						                        <div class="uk-grid">
+					                                <div class="uk-width-medium-1-1">
+								                         <div class="uk-form-row parsley-row">
+								                            <label>Баяжуулалтын технологи</label>
+								                            <textarea cols="30"  disabled rows="5" required class="md-input" ng-model="config.concetrate" md-input textarea-autosize></textarea>
+								                        </div>
+						                        	</div>
+						                        </div>
+						                    </div>                  
+						                </div> 
+                             
+                             </li>
+                            <li ng-repeat="item in inpt_options">
+                            	<div class="uk-grid uk-grid-collapse" data-uk-grid-margin>
+					                <div class="uk-width-large-3-10 hidden-print uk-visible-large">
+					                 	<div class="md-card-toolbar">
+				                        	<h3 class="md-card-toolbar-heading-text uk-text-danger">Жагсаалт</h3>
+				                        </div>
+					                    <div id="notice" class="md-list-outside-wrapper" custom-scrollbar list-outside>					                    	
+					                        <ul class="md-list md-list-outside notes_list">
+				                        		<li style="display:none;" class="heading_list" ng-repeat-start="list in notes_data"  ng-class="{ 'uk-text-danger': $index == 0}"></li>
+					                            
+					                            <li ng-repeat-end ng-repeat="note in list.notes"  ng-if="note.inptype==item.value" ng-class="{
+					                            			'md-bg-light-green-50':note.issaved == 10,
+					                                        'md-bg-light-green-100':note.decision == '1',
+					                                        'md-bg-light-blue-100':note.decision == '3',
+					                                        'md-bg-deep-orange-100':note.decision == '2'
+					                                        }">
+					                                <a href="#" class="md-list-content note_link" ng-click="openNote($event,$parent.$index,$index,note)">
+					                                    <span class="md-list-heading uk-text-truncate">{{note.title}}</span>
+					                                    <span class="uk-text-small uk-text-muted">{{note.date}}</span>
+					                                </a>
+					                            </li>						                            
+					                        </ul>
+					                    </div>
+					                </div>
+					                <div class="uk-width-large-7-10">
+					                    <div class="md-card md-card-single"  style="height: 100%;" single-card>
+					                        <div ng-if="!noteActive">
+					                            <div class="md-card-toolbar">
+					                                <h3 class="md-card-toolbar-heading-text">Тайлан төлөвлөгөө илгээхэд анхаарах зүйлс</h3>
+					                            </div>
+					                            <div class="md-card-content" >
+					                                <ul class=" uk-text-large uk-margin-large-top uk-margin-large-bottom">	
+						                                	<li>						                                	
+						                                  		Зүүн хэсэгт байрлах жагсаалтаас сонгож ажлаа үргэлжлүүлнэ.
+						                                   </li>
+						                                   <li>						                                	
+						                                  		Файл хавсаргахдаа зөвхөн хавсрах боломжтой файлын төрлийг ашиглана.
+						                                   </li>
+						                                   <li>						                                	
+						                                  		Ажлаа дараа нь үргэлжлүүлэх бол заавал хадгалах товчийг дарж хадгална. 
+						                                   </li>
+						                                   <li>						                                	
+						                                  		Маягтуудыг заавал <strong class="md-color-red-600">PDF</strong>  файлаар хавсаргана.
+						                                   </li>
+						                                </ul>
+					                            </div>
+					                        </div>
+					                       <form name="myForm" ng-show="noteActive">
+					                            <div class="md-card-toolbar hidden-print">
+					                            	<h3 class="md-card-toolbar-heading-text">{{note_form.title}}</h3>
+					                            	<!-- <a ng-show="{{xonoff}}" ng-click="saveAttach($event,noteForm.id)" style="margin-top:5px;" class="uk-float-right md-btn md-btn-success md-btn-small md-btn-wave-light md-btn-icon waves-effect waves-button waves-light" href="javascript:void(0)">
+						                             	<i class="material-icons">games</i>
+						                                Хадгалах
+						                            </a> -->
+						                            <button ng-show="fileUp"  ng-disabled="!myForm.$valid" class="uk-float-right " ng-click="uploadPic(picFile)" style="margin-top:15px;">
+						                             	<i class="material-icons">games</i>
+						                                Хадгалах
+						                            </button>				                           
+					                            </div>
+					                            <div class="md-card-content" style="display:inline-block;">			                            	
+					                            	   <div class="uk-width-1-1" style="margin-top:15px;max-height: 60vh;overflow: auto;">
+									                    	<div class="uk-overflow-container" ng-if="note_form.images.length>0">
+							                                <table class="uk-table uk-table-hover" style="margin-bottom:15px;">
+							                                    <thead>
+							                                    <tr>
+							                                        <th class="uk-width-1-10 uk-text-center uk-text-upper">Файл</th>
+							                                    </tr>
+							                                    </thead>
+							                                    <tbody>
+							                                    <tr ng-repeat="image in note_form.images">
+							                                        <td>
+							                                            <div class="uk-grid" data-uk-grid-margin>
+						                                                    <a class="uk-width-2-5 uk-width-small-1-5 uk-text-center" href="{{image.url}}" data-uk-lightbox="{group:'gallery'}" ng-switch="image.ext">
+							                                                	<img ng-switch-when="image.ext=='jpeg'" class="md-user-image-large" style="width:82px; height:82px;" ng-src="{{image.url}}" alt=""/>
+							                                                	<img ng-switch-when="image.ext=='png'" class="md-user-image-large" style="width:82px; height:82px;" ng-src="{{image.url}}" alt=""/>
+							                                                	<img ng-switch-when="image.ext=='jpg'" class="md-user-image-large" style="width:82px; height:82px;" ng-src="{{image.url}}" alt=""/>
+							                                                	<img ng-switch-when="image.ext=='gif'" class="md-user-image-large" style="width:82px; height:82px;" ng-src="{{image.url}}" alt=""/>
+							                                                	<img ng-switch-when="image.ext=='JPG'" class="md-user-image-large" style="width:82px; height:82px;" ng-src="{{image.url}}" alt=""/>
+							                                                    <img ng-switch-default class="md-user-image-large" style="width:82px; height:82px;" ng-src="assets/img/avatars/avatar_05.png" alt=""/>
+							                                                </a>
+							                                                <div class="uk-width-3-5 uk-width-small-4-5">
+							                                                    <h4 class="heading_a uk-margin-small-bottom">{{image.title}}</h4>
+							                                                    <p class="uk-margin-remove"><span class="uk-text-muted">Огноо:</span>
+							                                                    	 {{image.date}} {{sgt.step}}
+							                                                    	 <!-- <span ng-if="sgt.step!=7">
+							                                                    	 	  <a class="md-btn md-btn-danger md-btn-small md-btn-wave-light " ng-if="note_form.decision==2 || note_form.decision==0 || note_form.decision==undefined" ng-click="removeAttach(image)" href="javascript:void(0)">
+											                                             	Устгах
+											                                             </a>
+							                                                    	 </span> -->
+										                                           
+									                                            	 <a ng-show="(sgt.divisionid != 3 && sgt.reporttype == 3) || note_form.isform != 1 || image.ext!='xlsm'" class="md-btn md-btn-primary md-btn-small md-btn-wave-light" target="_blank" download="{{image.title}}" href="{{image.url}}">
+																		                	Татах
+																		                </a>
+																		                <a ng-hide="(sgt.divisionid != 3 && sgt.reporttype == 3) || note_form.isform != 1 || image.ext!='xlsm'" class="md-btn md-btn-primary md-btn-small md-btn-wave-light" target="_blank" download="{{image.title}}" href="/import/downloadForm/{{note_form.id}}/{{$stateParams.param}}">
+																		                	Татах
+																		                </a>
+							                                                    </p>
+							                                                    <p class="uk-margin-remove"><span class="uk-text-muted">Хэмжээ:</span>{{image.size}}</p>								                                                   
+							                                                </div>						                                                
+							                                            </div>
+							                                        </td>
+							                                    </tr>								                 
+							                                    </tbody>
+							                                </table>
+							                                <!-- <div ng-if="note_form.isform==1">								                                	
+							                                	<iframe src="{{note_form.images[0].url}}" style="width:100%; height:600px;" frameborder="0"></iframe>
+							                                </div> -->
+							                            </div>
+				                						<div class="md-card toolbar-fixed" ng-show="note_form.isform == 1 && tz.reporttype == 4">
+									                        <div class="md-card-toolbar">
+									                            <div class="md-card-toolbar-actions">
+									                                <card-fullscreen-activate></card-fullscreen-activate>
+									                            </div>
+									                            <card-fullscreen-deactivate></card-fullscreen-deactivate>
+									                            <h3 class="md-card-toolbar-heading-text">
+									                                Маягт харах
+									                            </h3>
+									                        </div>
+									                        <div id="viewFormsArea" class="md-card-content">
+									                            <ng-include src="loadFormURL"></ng-include>
+									                            <div style="clear:both;"></div>
+									                        </div>
+									                    </div>
+						                            </div>
+								                	<div class="uk-grid">
+								                		<div class="uk-width-1-1" ng-if="note_form.comm.length>0">								                        	
+								                    	   <div class="md-card-toolbar" style="padding-left:0px;" ng-if="note_form.comm.length>0">
+								                                <h3 class="md-card-toolbar-heading-text">Шийдвэрлэлт</h3>
+								                            </div>
+								                            <div class="md-card"  ng-repeat="block in note_form.comm">
+												                <div style="padding:10px;">																	                   
+												                    <div class="uk-grid uk-grid-divider" data-uk-grid-margin>
+												                        <div class="uk-width-medium-1-2">
+												                        	<ul class="md-list">
+												                                <li>
+												                                    <div class="md-list-content">
+												                                        <span class="md-list-heading">Тайлбар</span>
+												                                        <span class="uk-text-small uk-text-muted">{{block.destext}}</span>
+												                                    </div>
+												                                </li>
+												                                <li>
+												                                    <div class="md-list-content">
+												                                        <span class="md-list-heading">Бүртгэсэн</span>
+												                                        <span class="uk-text-small uk-text-muted">{{block.user_name}}</span>
+												                                    </div>
+												                                </li>
+												                            </ul>
+													                    </div>
+													                   
+													                    <div class="uk-width-medium-1-2">
+													                    	<ul class="md-list">
+												                                <li>
+												                                    <div class="md-list-content">
+												                                        <span class="md-list-heading">Шийдвэр</span>
+												                                        <span class="sub-heading" ng-if="block.desicion==1">Зөвшөөрсөн</span>
+														                                <span class="sub-heading" ng-if="block.desicion==3">Татгалзсан</span>
+														                                <span class="sub-heading" ng-if="block.desicion==2">Засварт буцаасан</span>
+												                                    </div>
+												                                </li>
+												                                <li>
+												                                    <div class="md-list-content">
+												                                        <span class="md-list-heading">Бүртгэсэн огноо</span>
+												                                        <span class="uk-text-small uk-text-muted">{{block.date}}</span>
+												                                    </div>
+												                                </li>
+												                            </ul>										                  
+													                    </div>
+												                    </div>
+												                </div>
+												            </div>												                
+							                            </div>
+								                	</div>
+								                	<div class="uk-grid" ng-if="sgt.repstatusid==7 || sgt.repstatusid==2">	       	   
+									                    <div class="uk-width-1-1" ng-if="geoplan== false  && sgt.groupid==user.group && item.tabid==userStep" ng-show="geo"> 
+								                    	  <div class="md-card-toolbar uk-margin-bottom" ng-if="note_form.decision==undefined || note_form.decision==1 || note_form.decision==0" style="padding:0px;">										                          
+									                            <h3 class="md-card-toolbar-heading-text large">
+									                                <span class="uk-text-muted">Шалгаж гаргасан шийдвэр </span> 
+									                            </h3>
+									                        </div>												              
+											                  <div class="uk-grid" data-uk-grid-margin>
+											                    <div class="uk-width-medium-1-1">
+											                    	<div class="uk-form-row">
+											                            <label>Тайлбар</label>
+											                            <textarea cols="30" rows="4" class="md-input" ng-model="note_form.comment" md-input textarea-autosize></textarea>
+											                        </div>	
+											                        									                      
+											                    </div>
+											                </div>
+											                <div class="uk-grid" data-uk-grid-margin>
+											                    <div class="uk-width-large-1-2 uk-width-medium-1-2 uk-push-1-2">
+											                        <div class="uk-input-group">												                            
+											                            <input type="text"  ng-model="note_form.desicion" class="md-input" placeholder="Сонгоно уу..." id="isactive"
+									            						position="bottom" config="selectize_a_config" options="selectize_a_options" name="isactive" selectize />
+											                            <span class="uk-input-group-addon"><button class="md-btn" ng-click="saveComment($event,noteForm.id)">Хадгалах</button></span>
+											                        </div>
+											                    </div>												                    
+											                </div>
+									                    </div>
+									                    <div class="uk-width-1-1" ng-if="geoplan== false  && item.tabid==userStep" ng-show="zardal"> 
+								                    	  <div class="md-card-toolbar uk-margin-bottom" ng-if="note_form.decision==undefined || note_form.decision==1 || note_form.decision==0" style="padding:0px;">										                          
+									                            <h3 class="md-card-toolbar-heading-text large">
+									                                <span class="uk-text-muted">Шалгаж гаргасан шийдвэр </span> 
+									                            </h3>
+									                        </div>												              
+											                  <div class="uk-grid" data-uk-grid-margin>
+											                    <div class="uk-width-medium-1-1">
+											                    	<div class="uk-form-row">
+											                            <label>Тайлбар</label>
+											                            <textarea cols="30" rows="4" class="md-input" ng-model="note_form.comment" md-input textarea-autosize></textarea>
+											                        </div>	
+											                        									                      
+											                    </div>
+											                </div>
+											                <div class="uk-grid" data-uk-grid-margin>
+											                    <div class="uk-width-large-1-2 uk-width-medium-1-2 uk-push-1-2">
+											                        <div class="uk-input-group">												                            
+											                            <input type="text"  ng-model="note_form.desicion" class="md-input" placeholder="Сонгоно уу..." id="isactive"
+									            						position="bottom" config="selectize_a_config" options="selectize_a_options" name="isactive" selectize />
+											                            <span class="uk-input-group-addon"><button class="md-btn" ng-click="saveComment($event,noteForm.id)">Хадгалах</button></span>
+											                        </div>
+											                    </div>												                    
+											                </div>
+									                    </div>
+								                    </div>	
+								                    <div class="uk-grid" ng-if="sgt.repstatusid==7 || sgt.repstatusid==2">	                   	   
+									                    <div class="uk-width-1-1" ng-if="geoplan== true  && item.tabid==userStep && note_form.decision!=2"> 
+								                    	  <div class="md-card-toolbar uk-margin-bottom" style="padding:0px;">										                          
+									                            <h3 class="md-card-toolbar-heading-text large">
+									                                <span class="uk-text-muted">Шалгаж гаргасан шийдвэр </span> 
+									                            </h3>
+									                        </div>												              
+											                  <div class="uk-grid" data-uk-grid-margin>
+											                    <div class="uk-width-medium-1-1">
+											                    	<div class="uk-form-row">
+											                            <label>Тайлбар</label>
+											                            <textarea cols="30" rows="4" class="md-input" ng-model="note_form.comment" md-input textarea-autosize></textarea>
+											                        </div>	
+											                        									                      
+											                    </div>
+											                </div>
+											                <div class="uk-grid" data-uk-grid-margin>
+											                    <div class="uk-width-large-1-2 uk-width-medium-1-2 uk-push-1-2">
+											                        <div class="uk-input-group">												                            
+											                            <input type="text"  ng-model="note_form.desicion" class="md-input" placeholder="Сонгоно уу..." id="isactive"
+									            						position="bottom" config="selectize_a_config" options="selectize_a_options" name="isactive" selectize />
+											                            <span class="uk-input-group-addon"><button class="md-btn" ng-click="saveComment($event,noteForm.id)">Хадгалах</button></span>
+											                        </div>
+											                    </div>												                    
+											                </div>
+									                    </div>
+								                    </div>	
+								                    <div class="uk-grid" ng-if="sgt.repstatusid==7">	                   	   
+									                    <div class="uk-width-1-1" ng-if="geoplan== true  && item.tabid==userStep && note_form.decision==2"> 
+								                    	  <div class="md-card-toolbar uk-margin-bottom" style="padding:0px;">										                          
+									                            <h3 class="md-card-toolbar-heading-text large">
+									                                <span class="uk-text-muted">Шалгаж гаргасан шийдвэр </span> 
+									                            </h3>
+									                        </div>												              
+											                  <div class="uk-grid" data-uk-grid-margin>
+											                    <div class="uk-width-medium-1-1">
+											                    	<div class="uk-form-row">
+											                            <label>Тайлбар</label>
+											                            <textarea cols="30" rows="4" class="md-input" ng-model="note_form.comment" md-input textarea-autosize></textarea>
+											                        </div>	
+											                        									                      
+											                    </div>
+											                </div>
+											                <div class="uk-grid" data-uk-grid-margin>
+											                    <div class="uk-width-large-1-2 uk-width-medium-1-2 uk-push-1-2">
+											                        <div class="uk-input-group">												                            
+											                            <input type="text"  ng-model="note_form.desicion" class="md-input" placeholder="Сонгоно уу..." id="isactive"
+									            						position="bottom" config="selectize_a_config" options="selectize_a_options" name="isactive" selectize />
+											                            <span class="uk-input-group-addon"><button class="md-btn" ng-click="saveComment($event,noteForm.id)">Хадгалах</button></span>
+											                        </div>
+											                    </div>												                    
+											                </div>
+									                    </div>
+								                    </div>							               
+					                            </div>					                            
+			                            	</form>                       
+					                    </div>
+					                </div>
+				                </div>
+                            </li>
+                        </ul>         
+                     </div>
+                 </div>
+            </div>
+        </div>        
+    </div>
+</div>
+<div class="uk-modal" id="modal_help" aria-hidden="true" style="display: none; overflow-y: scroll;">
+    <div class="uk-modal-dialog" style="top: 288.5px;">
+        <button type="button" class="uk-modal-close uk-close"></button>
+        <p>{{note_form.help}}</p>
+    </div>
+</div>
+
+ <script type="text/javascript">
+ 
+                    var categories = $("#categories").kendoDropDownList({
+                        optionLabel: "Аймаг / Нийслэл...",
+                        dataTextField: "name",
+                        dataValueField: "id",
+                        filter: "startswith",
+                        dataSource: {
+                            serverFiltering: true,
+                            transport: {
+            	                read: {
+            	                    url: "/user/service/cascading/kendo/LutAdminunitParent",
+            	                    contentType:"application/json; charset=UTF-8",                                    
+                                    type:"POST"
+            	                },
+            	                parameterMap: function(options) {
+                               	   return JSON.stringify(options);
+                                }
+            	             }
+                        }                       
+                    }).data("kendoDropDownList");
+                    
+                    var categories1 = $("#categories1").kendoDropDownList({
+                        optionLabel: "Аймаг / Нийслэл...",
+                        dataTextField: "name",
+                        dataValueField: "id",
+                        filter: "startswith",
+                        dataSource: {
+                            serverFiltering: true,
+                            transport: {
+            	                read: {
+            	                    url: "/user/service/cascading/kendo/LutAdminunitParent",
+            	                    contentType:"application/json; charset=UTF-8",                                    
+                                    type:"POST"
+            	                },
+            	                parameterMap: function(options) {
+                               	   return JSON.stringify(options);
+                                }
+            	             }
+                        }                       
+                    }).data("kendoDropDownList");
+            </script>
+<style>
+	.md-card-toolbar{
+		position:relative;
+	}
+	#zero_report .md-card-toolbar .md-card-toolbar-heading-text {
+		position:absolute;
+	}
+	.gallery_grid_item, .gallery_grid_item:focus, .gallery_grid_item:hover{
+		height:250px !important;
+	}
+	.wizard > .content > .body{
+		padding:0px;
+	}
+/* 	em{
+		display:none;
+	} */
+	.k-upload-button{
+		display:inherit;
+	}
+	.lala{
+		min-height:564px;
+	}
+	
+	.note_link{
+		min-height:48px;
+	}
+</style>

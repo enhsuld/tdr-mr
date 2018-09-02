@@ -1,0 +1,248 @@
+<div class="index_page_header_shortcuts" style="display:none;">
+    <div class="uk-width-8-10 uk-container-center">
+        <ul class="top-bar-menu">
+            <li><i class="uk-icon-phone"></i> (976) 7746-6168</li>
+            <li><i class="uk-icon-envelope"></i> <a href="mailto:sgt.mongolia@gmail.com">sgt.mongolia@gmail.com</a></li>
+
+        </ul>
+    </div>
+</div>
+
+<div class="uk-modal" id="loginPopup">
+    <div class="uk-modal-dialog">
+        <div class="uk-modal-header">
+            <h3 class="uk-modal-title">Системд нэвтрэх <a class="uk-modal-close"><i style="float:right" class="material-icons">&#xE5CD;</i></a></h3>
+        </div>
+        <form id="form_login" class="uk-form-stacked" ng-submit="login()">
+
+            <div class="uk-form-row parsley-row">
+                <label for="login_username">Хэрэглэгчийн нэр</label>
+                <input class="md-input" required type="text" id="login_username" ng-model="credentials.username" md-input />
+            </div>
+            <div class="uk-form-row parsley-row">
+                <label for="login_password">Нууц үг</label>
+                <input class="md-input" required type="password" id="login_password" ng-model="credentials.password" md-input />
+            </div>
+            <div class="uk-alert uk-alert-danger" data-uk-alert ng-show="error != null" style="margin-bottom:0px;">
+                <a href="#" class="uk-alert-close uk-close"></a>
+                <span ng-bind="error"></span>
+            </div>
+            <div class="uk-margin-medium-top">
+                <button class="md-btn md-btn-primary md-btn-block md-btn-large" type="submit">Нэвтрэх</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="index_page_header">
+    <div class="uk-width-8-10 uk-container-center">
+        <img align="left" src="assets/img/mram_logo.png" style="height: 48px;margin-right: 15px;"/>
+        <span class="heading_b">
+            АШИГТ МАЛТМАЛ ГАЗРЫН ТОСНЫ ГАЗАР
+            <span class="sub-heading" style="color: #2e6698;">ХАЙГУУЛЫН БОЛОН УУЛЫН АЖЛЫН ТАЙЛАН ТӨЛӨВЛӨГӨӨГ ЦАХИМААР ХҮЛЭЭН АВАХ СИСТЕМ</span>
+        </span>
+    </div>
+</div>
+
+<div class="index_page_header_shortcuts">
+    <div class="uk-width-8-10 uk-container-center">
+        <ul class="top-bar-menu">
+            <li><a>Нүүр хуудас</a></li>
+            <li><a>Тайлан / төлөвлөгөө</a></li>
+            <li style="float: right;"><a data-uk-modal="{target:'#loginPopup'}"><i class="uk-icon-user"></i> Системд нэвтрэх</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="index_page_parallax">
+    <div class="uk-width-8-10 uk-container-center">
+        <div class="uk-width-medium-2-4 uk-container-center">
+            <div style="padding:30px;background: #fff;border-radius: 10px;">
+                <!--<h2 class="uk-margin-bottom" style="text-align: center;">Тайлан төлөвлөгөө хайх</h2>-->
+                <form ng-submit="doSearch()">
+                    <div class="uk-grid">
+                        <div class="uk-width-1-1">
+                            <span class="heading_a uk-text-muted"
+                                  style="float: left;line-height: 42px;">Төрөл сонгох:</span>
+                            <ul class="uk-subnav uk-subnav-pill">
+                                <li ng-class="{'uk-active' : searchForm.reporttype == 4}" ng-click="setReporttype(4)"
+                                    ng-init="setReporttype(4)"><a href="#">Тайлан</a></li>
+                                <li ng-class="{'uk-active' : searchForm.reporttype == 3}" ng-click="setReporttype(3)"><a
+                                        href="#">Төлөвлөгөө</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="uk-grid">
+                        <div class="uk-width-3-4">
+                            <input ng-model="searchForm.q" placeholder="Байгууллагын РД / Байгууллагын нэр / ТЗ дугаар"
+                                   style="width: 100%;padding: 14.5px;box-sizing: border-box;border-radius: 2px;font-size: 16px;border: 1px solid #d9d9d9;overflow: hidden;"/>
+                        </div>
+                        <div class="uk-width-1-4">
+                            <button class="md-btn md-btn-primary md-btn-wave-light md-btn-icon md-btn-large"
+                                    type="submit" style="width: 100%;background: #2e6698;">
+                                <i class="uk-icon-search no_margin" ng-hide="searchInProgress"></i>
+                                <!--<span ng-hide="searchInProgress">Хайх</span>-->
+                                <i class="uk-icon-spinner uk-icon-spin no_margin" ng-show="searchInProgress"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="index_page_result" ng-if="isSearched">
+    <div class="uk-width-8-10 uk-container-center">
+
+        <div class="md-card uk-margin-medium-bottom">
+            <div class="md-card-content">
+                <h4 class="heading_a uk-margin-bottom uk-margin-top">Хайлтын үр дүн</h4>
+
+                <div class="uk-overflow-container">
+                    <table class="uk-table uk-text-nowrap uk-table-striped">
+                        <thead>
+                        <tr>
+                            <th>Д/д</th>
+                            <th>Байгууллагын нэр</th>
+                            <th>УБ дугаар</th>
+                            <th>ТЗ дугаар</th>
+                            <!--<th>ТЗ төрөл</th>-->
+                            <th>Хэлтэс</th>
+                            <th>Аймаг/хот</th>
+                            <th>Сум/дүүрэг</th>
+                            <th>Төрөл</th>
+                            <th>Он</th>
+                            <th>Төлөв</th>
+                        </tr>
+                        </thead>
+                        <tbody ng-if="searchResult.length > 0">
+                        <tr ng-repeat="result in searchResult track by $index">
+                            <td ng-bind="$index + 1"></td>
+                            <td ng-bind="result.lpname"></td>
+                            <td ng-bind="result.lpreg"></td>
+                            <td ng-bind="result.licnum"></td>
+                            <!--<td ng-bind="result.lictype"></td>-->
+                            <td ng-bind="result.division"></td>
+                            <td ng-bind="result.aimag"></td>
+                            <td ng-bind="result.soum"></td>
+                            <td>
+                                <span ng-if="result.x == 0 && result.reptype == 3">X төлөвлөгөө</span>
+                                <span ng-if="result.x != 0 && result.reptype == 3">Төлөвлөгөө</span>
+                                <span ng-if="result.x == 0 && result.reptype == 4">X тайлан</span>
+                                <span ng-if="result.x != 0 && result.reptype == 4">Тайлан</span>
+                            </td>
+                            <td ng-bind="result.year"></td>
+                            <td>
+                                <span ng-class="getRepStatus(result.status).class"
+                                      ng-bind="getRepStatus(result.status).name"></span>
+                            </td>
+                        </tr>
+                        </tbody>
+                        <tbody ng-if="searchResult.length == 0">
+                        <tr>
+                            <td colspan="10" style="text-align: center">Уучлаарай, Хайлтын үр дүн олдсонгүй.</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="index_footer_1" >
+    <div class="uk-width-8-10 uk-container-center">
+        <div class="uk-grid">
+            <div class="uk-width-1-2" style="background: url(assets/img/sgt_logo_grey.png);background-repeat: no-repeat;background-size: contain;background-position: left center;padding-left: 50px;">
+                <a href="http://smartgt.mn" target="_blank">Смарт Грийн Технологи ХХК</a><!--, <a href="https://mrpam.gov.mn/" target="_blank">АШИГТ МАЛТМАЛ, ГАЗРЫН ТОСНЫ ГАЗАР</a>.-->
+                <br>
+                &copy; 2016-2017
+            </div>
+            <div class="uk-width-1-2">
+                <ul class="top-bar-menu" style="float: right">
+                    <li><i class="uk-icon-phone"></i> (976) 7746-6168</li>
+                    <li><i class="uk-icon-envelope"></i> <a href="mailto:sgt.mongolia@gmail.com">sgt.mongolia@gmail.com</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<style type="text/css">
+    body {
+        padding-top: 0px;
+        background: #fff;
+    }
+
+    .index_footer_1 {
+        background: #232323;
+        border-top: 2px solid #3d3d3d;
+        color:#fff;
+        padding:30px 0px;
+    }
+
+    .index_footer_1 a{
+        color:#fff;
+    }
+
+    .uk-subnav-pill > .uk-active > * {
+        background: #2e6698 !important;
+    }
+
+    .uk-subnav-pill > * > * {
+        padding: 10px 15px;
+        background: #fafafa;
+        box-shadow: 0 0 0 1px rgba(0, 0, 0, .15);
+        font-size: 16px;
+    }
+
+    .index_page_parallax {
+        padding: 30px 0;
+        background: url(assets/img/background.png);
+        background-size: cover !important;
+        background-position: center center;
+        background-attachment: fixed;
+    }
+
+    .index_page_header {
+        background: #fff;
+        color: #2e6698;
+        padding: 25px 0;
+    }
+
+    .index_page_header_shortcuts {
+        background: #2e6698;
+        color: #fff;
+    }
+
+    .index_page_result{
+        background: #fff;
+        margin-top: 30px;
+    }
+
+    ul.top-bar-menu {
+        margin: 0;
+        padding: 8px 0;
+        -webkit-transform: translate3d(0, 1px, 0);
+        -moz-transform: translate3d(0, 0, 0);
+    }
+
+    ul.top-bar-menu li {
+        font-size: 13px;
+        display: inline-block;
+        margin: 0 20px 0 0;
+    }
+
+    ul.top-bar-menu li i {
+        color: #fff;
+        margin: 0 5px 0 0;
+        font-size: 15px;
+        position: relative;
+        top: 1px;
+    }
+
+    ul.top-bar-menu li a {
+        color: #fff;
+    }
+</style>

@@ -1,0 +1,50 @@
+<div id="page_content" style="overflow:hidden;">
+    <div id="page_content_inner">
+    	<div class="uk-grid" >
+       	   <div class="uk-width-medium-1">
+               <div class="md-card" data-uk-grid-margin>
+                   <div class="md-card-content">
+                    	<kendo-grid id="newsGrid" options="proleGrid"></kendo-grid>     
+                   </div>
+               </div>
+           </div>
+        </div>
+    </div>
+</div>
+<div id="newsEditDialog" class="uk-modal">
+    <div class="uk-modal-dialog uk-modal-dialog-large">
+        <a class="uk-modal-close uk-close"></a>
+        <form ng-submit="submitNews()">
+	        <div class="uk-form-width-large" style="width:100%;">
+	            <div class="uk-form-row">
+	                <label>Гарчиг</label>
+	                <input type="text" class="md-input label-fixed" ng-model="selected_news.title" md-input required/>
+	            </div>
+	            <div class="uk-form-row">
+                    <label>Агуулга</label>
+                    <textarea cols="30" rows="4" class="md-input" ng-model="selected_news.description" md-input textarea-autosize required></textarea>
+                </div>
+                <div class="uk-form-row">
+                	<label>Төрөл сонгох</label>
+                	<input type="text" config="selectize_a_config" options="message_types" ng-model="selected_news.status" name="selectize_a" selectize required/>
+                </div>
+	        </div>
+	        <center><button class="md-btn md-btn-primary md-btn-wave-light waves-effect waves-button waves-light" type="submit" style="margin-top:15px;">Хадгалах</button></center>
+	        
+        </form>
+    </div>
+</div>
+
+<script type="text/x-kendo-template" id="add">
+     <div style="width: 230px; float: left;" id="details-container" style="text-align:left;">
+           <button class="k-button k-button-icontext" ng-click="showNewsDialog(0, '','',0)"> <span class='k-icon k-add'></span><span>Мэдээ нэмэх</span></button>
+     </div>
+</script>
+
+<script type="text/x-kendo-template" id="update">
+     <button class="k-button k-button-icontext" ng-click='showNewsDialog(#:id#, &quot;#:title#&quot;, &quot;#:description#&quot;, #:status#)'"><span class="k-icon k-edit"></span><span>Засах</span></button>
+</script>
+
+<script type="text/x-kendo-template" id="delete">
+     <button class="k-button k-button-icontext  k-grid-delete" ><span class="k-icon k-delete"></span><span>Устгах</span></button>
+</script>

@@ -1,0 +1,100 @@
+    <div id="page_content">
+        <div id="page_content_inner">
+        	<div class="uk-grid" >
+        	   <div class="uk-width-medium-1">
+                    <div class="md-card" data-uk-grid-margin>
+                        <div class="md-card-content">
+                            <div class="uk-grid uk-grid-divider" data-uk-grid-margin>
+					             <div class="uk-width-medium-1 rep">    
+					             	 <kendo-grid options=REPBundle></kendo-grid>                     	
+					                <!-- <div id="orgGrid"></div> -->
+					             </div>      
+					             <div class="uk-width-medium-1 lic">    
+					             	 <kendo-grid options="license"></kendo-grid>                     	
+					                <!-- <div id="orgGrid"></div> -->
+					             </div>                  
+					         </div> 
+                        </div>
+                    </div>
+                </div>
+             </div>
+             <div class="md-fab-wrapper">
+			    <a class="md-fab md-fab-accent" ng-click='init()' href="#new_issue" data-uk-modal="{ center:true }">
+			        <i class="material-icons">&#xE145;</i>
+			    </a>
+			</div> 
+			<div class="uk-modal" id="new_issue">
+				
+			    <div class="uk-modal-dialog">
+			        <form class="uk-form-stacked" kendo-validator="validator" ng-submit="validate($event)">   
+			           <input type="hidden" id="{{section.id}}" class="menu" ng-model="rrid" value="{{rrid}}"/>
+			            <div class="uk-margin-medium-bottom">
+			            	<div class="uk-form-row parsley-row">
+				                <label for="issue_assignee" class="uk-form-label" data-translate="Primary license"></label>
+				                <select kendo-drop-down-list
+			                        name="documentTypeArea" 
+			                        id="selectedDTA{{$index}}"
+			                        k-ng-model="main"
+			                        required
+			                         style="width: 100%"
+			                        k-data-source="primary"
+			                        k-data-text-field="'id'"
+			                        k-data-value-field="'id'"			                     
+			                        k-option-label="'Сонголт...'">
+		                        </select>				                
+			            	</div>
+			            </div>
+			            <div class="uk-margin-medium-bottom">
+			                <label for="issue_assignee" class="uk-form-label" data-translate="Secondary license"></label>
+				                
+		                    <select kendo-multi-select
+		                        name="documentType" 
+		                        data-ng-model="additional" 
+		                        k-options="selectOptions"
+		                        style="width: 100%"		                         
+		                        k-data-text-field="'id'"
+		                        k-data-value-field="'id'"
+		                        k-filter="'contains'"
+		                        k-cascade-from="'selectedDTA{{$index}}'"
+		                        k-option-label="'Сонголт...'">
+	                        </select>
+			                <!-- <selectize id="selec_adv_1" config="selectize_additional_config" options="selectize_additional_options" position="bottom" ng-model="additional"></selectize> -->
+			            </div>
+			            <div class="uk-margin-medium-bottom">
+			                <label for="issue_assignee" class="uk-form-label" data-translate="Экспортлогч улс"></label>
+				                
+		                    <select kendo-multi-select
+		                        name="documentType" 
+		                        data-ng-model="country" 
+		                        k-options="selectCountry"
+		                           style="width: 100%"
+		                        required 
+		                        k-data-text-field="'name'"
+		                        k-data-value-field="'id'"
+		                        k-filter="'contains'"
+		                        k-cascade-from="'selectedDTA{{$index}}'"
+		                        k-option-label="'Сонголт...'">
+	                        </select>
+			                <!-- <selectize id="selec_adv_1" config="selectize_additional_config" options="selectize_additional_options" position="bottom" ng-model="additional"></selectize> -->
+			            </div>
+			            <div class="uk-margin-medium-bottom">
+		            	  <div class="uk-form-row parsley-row">
+			            	  <label for="task_title" data-translate="Area name"></label>
+                			  <input type="text" class="md-input" id="Task_title" name="landname" ng-model="landname" md-input/>
+               			  </div>			                
+			            </div>
+			          
+			            <div class="uk-modal-footer uk-text-right">
+			                <button type="submit"  class="md-btn md-btn-flat md-btn-flat-primary" id="snippet_new_save" data-translate="Save"></button>
+			                <button type="button" id="closemodal" class="md-btn md-btn-flat uk-modal-close" data-translate="Close"></button>
+			            </div>
+			        </form>
+			    </div>        
+        </div>
+    </div>
+     <script type="text/x-kendo-template" id="config">
+		<a class="ts_remove_row" ng-click="config(dataItem)"  data-uk-tooltip title="Config" ><i class="md-icon material-icons">settings</i></a>
+     </script>
+     <script type="text/x-kendo-template" id="action">
+		<a class="ts_remove_row" data-uk-tooltip title="Delete" ng-click="loadOnConfirm(#:id#)" ><i class="md-icon material-icons">delete</i></a>
+     </script>

@@ -1,0 +1,92 @@
+    <div id="page_content">
+        <div id="page_content_inner">
+             <div class="md-card">
+			     <div class="md-card-content">
+			        <!--  <h3 class="heading_a">Input fields</h3> -->
+			         <div class="uk-grid" data-uk-grid-margin>
+			             <div class="uk-width-medium-1-1">    
+			             	 <kendo-grid options="pWeeklyGrid"></kendo-grid>                     	
+			                <!-- <div id="orgGrid"></div> -->
+			             </div>                  
+			         </div>  
+			         
+			         <div class="input-group ui-datepicker">
+                                <input type="text" 
+                                       class="form-control"
+                                       datepicker-popup="{{format}}"
+                                       ng-model="dt" 
+                                       is-open="opened" 
+                                       min-date="minDate" 
+                                       max-date="'2015-06-22'" 
+                                       datepicker-options="dateOptions" 
+                                       date-disabled="disabled(date, mode)" 
+                                       ng-required="true" 
+                                       close-text="Close">
+                                <span class="input-group-addon" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></span>
+                            </div>             
+			     </div>
+			 </div> 
+			 <div class="md-fab-wrapper md-fab-in-card md-fab-speed-dial">
+                <a class="md-fab md-fab-primary" data-uk-modal="{target:'#modal_config'}" href="#" md-fab-speed-dial><i class="material-icons">&#xE0BE;</i></a>
+                <!-- <div class="md-fab-wrapper-small"  ng-click="loadOnConfirm()">
+                    <a class="md-fab md-fab-small md-fab-warning" href="#"><i class="material-icons">&#xE2C3;</i></a>
+                    <a class="md-fab md-fab-small md-fab-danger" href="#"><i class="material-icons">&#xE153;</i></a>
+                    <a class="md-fab md-fab-small md-fab-success" href="#"><i class="material-icons">&#xE149;</i></a>
+                </div> -->
+            </div>
+             <div class="uk-modal" id="modal_config">
+		          <div class="uk-modal-dialog " data-uk-grid-margin>
+		              <button type="button" id="closemodal" ng-click="res()" class="uk-modal-close uk-close uk-close-alt"></button>
+		              <h3 class="heading_a">Тайлангийн тохируулга </h3>
+		              <form name="wizard_advanced_form" id="roleform" class="uk-form" data-ng-submit="submitForm()"> 	
+		              <hr>
+				      <div class="uk-grid" data-uk-grid-margin>
+                            <div class="uk-width-large-1-2 uk-width-medium-1-1">
+                                <div class="uk-input-group">
+                                    <span class="uk-input-group-addon"><i class="uk-input-group-icon uk-icon-calendar"></i></span>
+                                    <label for="uk_dp_start">Start Date</label>
+                                    <input class="md-input" type="text"  min-date="minDate"  date-disabled="disabled(date, mode)"  id="uk_dp_start" md-input ng-model="forms_advanced.dp_start">
+                                </div>
+                            </div>
+                            <div class="uk-width-large-1-2 uk-width-medium-1-1">
+                                <div class="uk-input-group">
+                                    <span class="uk-input-group-addon"><i class="uk-input-group-icon uk-icon-calendar"></i></span>
+                                    <label for="uk_dp_end">End Date</label>
+                                    <input class="md-input" type="text"  datepicker-popup="{{format}}"  max-date="'2015-10-22'"  id="uk_dp_end" md-input ng-model="forms_advanced.dp_end">
+                                </div>
+                            </div>
+                           <!--   <div class="col-lg-4 col-lg-offset-2">
+
+	                            <div class="input-group ui-datepicker">
+	                                <input type="text" 
+	                                       class="form-control"
+	                                       datepicker-popup="{{format}}"
+	                                       ng-model="dt" 
+	                                       is-open="opened" 
+	                                       min-date="minDate" 
+	                                       max-date="'2015-06-22'" 
+	                                       datepicker-options="dateOptions" 
+	                                       date-disabled="disabled(date, mode)" 
+	                                       ng-required="true" 
+	                                       close-text="Close">
+	                                <span class="input-group-addon" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></span>
+	                            </div>
+	                            <div class="callout callout-info">
+	                                <p>Date is: {{dt | date:'fullDate'}}</p>
+	                            </div>
+	                        </div>
+                             <md-button class="md-raised btn-w-md md-primary" ng-click="today()">Today</md-button> -->
+                        </div> 
+	                    <hr>
+	                    <div class="uk-grid" data-uk-grid-margin style="text-align:right;">	                  
+		                    <div class="uk-width-medium-1-1" >
+		                     	<button type="submit"   class="md-btn" >Хадгалах</button>
+		                     	<button type="button"   class="md-btn uk-modal-close" >Хаах</button>
+		                     </div>
+		                </div> 
+	                </form>             
+               </div>
+	           
+          </div>
+        </div>
+    </div>

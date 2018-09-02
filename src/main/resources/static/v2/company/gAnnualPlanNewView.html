@@ -1,0 +1,118 @@
+<div id="page_content" style="overflow:hidden;">
+    <div id="page_content_inner">
+    	<div class="uk-grid" >
+       	   <div class="uk-width-medium-1">
+               <div class="md-card" data-uk-grid-margin>
+                   <div class="md-card-content">                   		
+                      <kendo-grid options=REPBundle></kendo-grid>  
+                   </div>
+               </div>
+           </div>
+        </div>
+          
+			<div class="uk-modal" id="new_issue">
+				
+			    <div class="uk-modal-dialog">
+			        <form id="mlicense" name="mlicense" class="uk-form-stacked" ng-submit="submitForm()">   
+			           <input type="hidden" id="{{section.id}}" class="menu" ng-model="rrid" value="{{rrid}}"/>
+			            <div class="uk-margin-medium-bottom">
+			            	<div class="uk-form-row">
+				                <label for="issue_assignee" class="uk-form-label" data-translate="Primary license"></label>
+				               <!--  <input config="newIssue.assignee.config" required options="newIssue.assignee.options"  ng-model="main" id="issue_assignee" name="issue_assignee" selectize /> -->
+				                
+				                  <!--  <select kendo-drop-down-list
+						            k-options="selectMain"
+						            ng-model="main"
+						            k-data-source="newIssue.assignee.options"
+						            style="width: 100%"></select> -->
+						            
+						            <select kendo-drop-down-list
+			                        name="documentTypeArea" 
+			                        id="selectedDTA{{$index}}"
+			                        k-ng-model="main"
+			                         style="width: 100%"
+			                        k-data-source="conf.assignee.options"
+			                        k-data-text-field="'id'"
+			                        k-data-value-field="'id'"			                     
+			                        k-option-label="'Сонголт...'">
+			                        </select>
+				                
+			            	</div>
+			            </div>
+			            <div class="uk-margin-medium-bottom">
+			            	 <div class="uk-form-row">
+				                <label for="issue_assignee" class="uk-form-label" data-translate="Secondary license"></label>
+				                
+				                   <select kendo-multi-select
+			                        name="documentType" 
+			                        data-ng-model="additional" 
+			                        k-options="selectOptions"
+			                           style="width: 100%"
+			                        k-data-text-field="'id'"
+			                        k-data-value-field="'id'"
+			                        k-filter="'contains'"
+			                        k-cascade-from="'selectedDTA{{$index}}'"
+			                        k-option-label="'Сонголт...'"
+			                        >
+			                        </select>
+				                
+				              <!--   <select kendo-multi-select k-options="selectOptions" disabled="disabled" k-ng-model="additional"></select> -->
+				               <!--  <selectize id="selec_adv_1" config="selectize_planets_configqwe" options="selectize_planets_options" position="bottom" ng-model="additional"></selectize> -->
+			                </div>
+			            </div>
+			            <div class="uk-margin-medium-bottom">
+		            	  <div class="uk-form-row parsley-row">
+			            	  <label for="task_title" data-translate="Area name"></label>
+                			  <input type="text" class="md-input" required id="Task_title" name="landname" ng-model="landname" md-input/>
+               			  </div>			                
+			            </div>
+			          
+			            <div class="uk-modal-footer uk-text-right">
+			                <button type="submit"  class="md-btn md-btn-flat md-btn-flat-primary" id="snippet_new_save" data-translate="Save"></button>
+			                <button type="button" id="closemodal" class="md-btn md-btn-flat uk-modal-close" data-translate="Close"></button>
+			            </div>
+			        </form>
+			    </div>        
+        </div>
+        
+    </div>
+     
+</div>
+<footer id="footer">
+    <span style="display:block;  text-align:right;">&copy; 2015-2016 <a href="www.staus.mn/sgt">Smart Green Technology LLC</a>, All rights reserved.</span>
+</footer>
+
+<script type="text/x-kendo-template" id="approveddate">
+	<span data-translate="Edit"></span>
+</script>
+
+<script type="text/x-kendo-template" id="appstatus">
+	<span data-translate=""> {{#:repstatusid# | appstat}} </span>
+</script>
+<script type="text/x-kendo-template" id="lic">
+	#if(addBunLicenseNum!=null){#<span>{{#:addBunLicenseNum#}} </span>#}#
+</script>
+<script type="text/x-kendo-template" id="main">
+		#if (repstatusid == 0 || repstatusid == 2)  { #
+     		<a class='md-btn md-btn-flat md-btn-flat-warning' ng-click='loadOnUpdate(dataItem)' data-translate="Edit"></a>
+		# } else{#
+		 	<a class='md-btn md-btn-flat disabled' ng-click='loadOnUpdate(#:id#)' data-translate="Edit"></a>
+		#}#
+     </script>
+<script type="text/x-kendo-template" id="config">
+		<a class="ts_remove_row" ng-click="config(dataItem)"  data-uk-tooltip title="Config" ><i class="md-icon material-icons">settings</i></a>
+     </script>
+	<script type="text/x-kendo-template" id="action">
+		<kendo-button class="md-btn md-btn-primary md-btn-small"  ng-click="loadOnReport(dataItem,4,#:id#)" data-translate="Report" ng-disabled="#:creport#==1"></kendo-button>
+		<kendo-button class="md-btn md-btn-primary md-btn-small"  ng-click="loadOnPlan(dataItem,3,#:id#)"  data-translate="Plan" ng-disabled="#:cplan#==1"></kendo-button>
+	</script>
+	
+	<script type="text/x-kendo-template" id="xaction">
+		<div style="float:left;" ng-if="#:divisionId#!=3">
+			<kendo-button class="md-btn md-btn-primary md-btn-small"  ng-click="XloadOnReport(dataItem,4,#:id#)" ng-disabled="#:xreport#==1">X-тайлан</kendo-button>
+		</div>
+		<div style="float:left;">
+			<kendo-button class="md-btn md-btn-primary md-btn-small"  ng-click="XloadOnPlan(dataItem,3,#:id#)" ng-disabled="#:xplan#==1">X-төлөвлөгөө</kendo-button>
+		</div>
+		
+	</script>

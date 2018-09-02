@@ -1,0 +1,46 @@
+    <div id="page_content">
+        <div id="page_content_inner">
+
+            <!-- statistics (small charts) -->
+            <div class="uk-grid uk-grid-width-large-1-4 uk-grid-width-medium-1-2 uk-grid-medium uk-sortable sortable-handler hierarchical_show" data-uk-sortable data-uk-grid-margin hierarchical-show>
+                <div ng-repeat="stat in dynamicStats" on-last-repeat>
+                    <div class="md-card" id="stat_{{$index+1}}">
+                        <div class="md-card-content">
+                            <div class="uk-float-right uk-margin-top uk-margin-small-right">
+                                <peity-bar-chart data="stat.chart_data" options="stat.chart_options" ng-if="stat.id == '1'" ></peity-bar-chart>
+                                <peity-line-chart data="stat.chart_data" options="stat.chart_options" ng-if="stat.id == '2'"></peity-line-chart>
+                                <peity-donut-chart data="stat.chart_data" options="stat.chart_options" ng-if="stat.id == '3'"></peity-donut-chart>
+                                <peity-line-chart data="stat.chart_data" options="stat.chart_options" ng-if="stat.id == '4'"></peity-line-chart>
+                                <peity-line-chart data="stat.chart_data" options="stat.chart_options" ng-if="stat.id == '5'" ></peity-line-chart>
+                                <peity-line-chart data="stat.chart_data" options="stat.chart_options" ng-if="stat.id == '6'"></peity-line-chart>
+                                <peity-line-chart data="stat.chart_data" options="stat.chart_options" ng-if="stat.id == '7'"></peity-line-chart>
+                                <peity-line-chart data="stat.chart_data" options="stat.chart_options" ng-if="stat.id == '8'"></peity-line-chart>
+                                <peity-line-chart data="stat.chart_data" options="stat.chart_options" ng-if="stat.id == '9'" ></peity-line-chart>
+                                <peity-line-chart data="stat.chart_data" options="stat.chart_options" ng-if="stat.id == '10'"></peity-line-chart>
+                                <peity-line-chart data="stat.chart_data" options="stat.chart_options" ng-if="stat.id == '11'"></peity-line-chart>
+                                <peity-line-chart data="stat.chart_data" options="stat.chart_options" ng-if="stat.id == '12'"></peity-line-chart>
+                                <peity-bar-chart data="stat.chart_data" options="stat.chart_options" ng-if="stat.id == '13'" ></peity-bar-chart>
+                                <peity-bar-chart data="stat.chart_data" options="stat.chart_options" ng-if="stat.id == '14'"></peity-bar-chart>
+                                <peity-bar-chart data="stat.chart_data" options="stat.chart_options" ng-if="stat.id == '15'"></peity-bar-chart>
+                                <peity-bar-chart data="stat.chart_data" options="stat.chart_options" ng-if="stat.id == '16'"></peity-bar-chart>
+                                <peity-bar-chart data="stat.chart_data" options="stat.chart_options" ng-if="stat.id == '17'" ></peity-bar-chart>
+                                <peity-bar-chart data="stat.chart_data" options="stat.chart_options" ng-if="stat.id == '18'"></peity-bar-chart>
+                                <peity-bar-chart data="stat.chart_data" options="stat.chart_options" ng-if="stat.id == '19'"></peity-bar-chart>
+                                <peity-bar-chart data="stat.chart_data" options="stat.chart_options" ng-if="stat.id == '20'"></peity-bar-chart>
+                                <peity-bar-chart data="stat.chart_data" options="stat.chart_options" ng-if="stat.id == '21'"></peity-bar-chart>
+                                <peity-bar-chart data="stat.chart_data" options="stat.chart_options" ng-if="stat.id == '22'"></peity-bar-chart>
+                                <peity-bar-chart data="stat.chart_data" options="stat.chart_options" ng-if="stat.id == '23'" ></peity-bar-chart>
+                                <peity-bar-chart data="stat.chart_data" options="stat.chart_options" ng-if="stat.id == '24'"></peity-bar-chart>
+                                <peity-bar-chart data="stat.chart_data" options="stat.chart_options" ng-if="stat.id == '25'"></peity-bar-chart>
+                                <peity-bar-chart data="stat.chart_data" options="stat.chart_options" ng-if="stat.id == '26'"></peity-bar-chart>
+                                <peity-line-chart data="stat.chart_data" options="stat.chart_options" ng-if="stat.id == '27'"></peity-line-chart>
+                                <peity-line-chart data="stat.chart_data" options="stat.chart_options" ng-if="stat.id == '28'"></peity-line-chart>
+                            </div>
+                            <span class="uk-text-muted uk-text-small">{{ stat.title }}</span>
+                            <h2 class="uk-margin-remove"><span ng-if="stat.id == '2'"></span><span count-up id="count_{{$index+1}}" ng-model="stat.count">0</span><span ng-if="stat.id == '3'"></span></h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

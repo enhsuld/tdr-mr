@@ -1,0 +1,94 @@
+<div id="page_content" style="overflow:hidden;">
+    <div id="page_content_inner">
+    	  <div class="md-card" data-uk-grid-margin>
+             <div class="md-card-content">
+              	<kendo-grid options="gWeekStatus"></kendo-grid>     
+             </div>
+         </div>
+    </div>
+</div>
+
+<script type="text/x-kendo-template" id="add">
+         <div id="details-container" style="text-align:left;">
+           <button class="k-button k-button-icontext" ng-click='initConfig()'> <span class='k-icon k-add'></span>7 хоногийн тайлан шинээр үүсгэх</button>
+         </div>
+</script>
+
+<footer id="footer">
+    <span style="display:block;  text-align:right;">&copy; 2015-2016 <a href="#">Smart Green Technology LLC</a>, All rights reserved.</span>
+</footer>
+<script type="text/x-kendo-template" id="main">
+		#if (repstatusid == 0 || repstatusid == 3)  { #
+     		<a class='md-btn md-btn-warning md-btn-small md-btn-wave-light waves-effect waves-button waves-light' ng-click='loadOnView(dataItem)' data-translate="Edit"></a>
+		# } else{#
+		 	<a class='md-btn md-btn-primary md-btn-small md-btn-wave-light waves-effect waves-button waves-light' ng-click='loadOnView(dataItem)' data-translate="View"></a>
+		#}#
+</script>
+<script type="text/x-kendo-template" id="status">
+		#if (repstatusid == 0)  { #
+     		<span class="uk-badge uk-badge-primary" data-translate="Saved"></span>
+		# } else if (repstatusid == 7 || repstatusid == 8) {#
+			<span class="uk-badge uk-badge-warning" data-translate="Submitted"></span>
+		# } else if (repstatusid == 3) {#
+			<span class="uk-badge uk-badge-danger" data-translate="Back to edit"></span>
+		# } else if (repstatusid == 1) {#
+			<span class="uk-badge uk-badge-success" data-translate="Confirmed"></span>
+		#}#
+</script>
+
+
+<div class="uk-modal" id="modal_newweekreport">
+    <div class="uk-modal-dialog">
+        <div class="uk-modal-header">
+            <h3 class="uk-modal-title">7 хоногийн тайлан шинээр үүсгэх</h3>
+        </div>
+        <hr>
+        <form ng-submit="loadOnCreate(newreport)">
+        <div class="md-list-outside-wrapper uk-overflow-container" custom-scrollbar list-outside>
+
+            <div class="uk-width-medium-1-1">
+                <span class="uk-form-help-block">Долоо хоногийн дугаарыг сонгох</span>
+                <input required type="text" config="selectize_week_config" options="selectize_week_options" ng-model="newreport.weekid" name="weekid" selectize />
+            </div>
+            <table class="uk-table uk-table-striped  uk-table-align-vertical">
+                <thead>
+                <tr>
+                    <th>Сонгох</th>
+                    <th>ТЗ дугаар</th>
+                    <th>Хэлтэс</th>
+                    <th>Төрөл</th>
+                    <th>Он</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="obj in newWeekReportList track by $index">
+                    <td>
+                        <input required type="radio" name="planid" icheck ng-model="newreport.planid" ng-value="{{obj.id}}" />
+                    </td>
+                    <td ng-bind="obj.licenseXB"></td>
+                    <td>
+                        <span ng-if="obj.divisionid == 1">УУҮТХ</span>
+                        <span ng-if="obj.divisionid == 2">НСХ</span>
+                        <span ng-if="obj.divisionid == 3">ГХХ</span>
+                    </td>
+                    <td>
+                        <span ng-if="obj.reporttype == 3 && obj.xtype == 0">X төлөвлөгөө</span>
+                        <span ng-if="obj.reporttype == 3 && obj.xtype != 0">Төлөвлөгөө</span>
+                        <span ng-if="obj.reporttype == 4 && obj.xtype == 0">X тайлан</span>
+                        <span ng-if="obj.reporttype == 4 && obj.xtype != 0">Тайлан</span>
+
+                    </td>
+                    <td ng-bind="obj.reportyear"></td>                    
+                </tr>
+
+                </tbody>
+            </table>
+
+        </div>
+        <div class="uk-modal-footer uk-text-right">
+            <button type="submit" class="md-btn">Үүсгэх</button>
+            <button type="button" class="md-btn md-btn-flat uk-modal-close" data-translate="Close"></button>
+        </div>
+        </form>
+    </div>
+</div>

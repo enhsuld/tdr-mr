@@ -1,0 +1,287 @@
+<div id="page_content">
+    <div id="page_content_inner">
+        <div class="uk-grid">
+            <div class="uk-width-medium-1-1">
+                <div class="md-card">
+                    <div class="md-card-content">
+                        <div class="uk-overflow-container">
+                            <!--<h4 class="heading_b">Хөрс хуулалтын хэмжээ <span class="sub-heading">Ашигт малтмалын төрлөөр</span></h4>-->
+                            <ul class="uk-tab" data-uk-tab="{connect:'#tabs_1'}">
+                                <li class="uk-active"><a href="#">Хөрс хуулалтын хэмжээ</a></li>
+                                <li><a href="#">Хүдэр (элс) олборлолт</a></li>
+                                <li><a href="#">Бүтээгдэхүүн гаргалт</a></li>
+                                <li><a href="#">Бүтээгдэхүүн борлуулалт</a></li>
+                            </ul>
+                            <ul id="tabs_1" class="uk-switcher uk-margin">
+                                <li style="overflow: auto;">
+                                    <table class="uk-table uk-table-striped uk-table-condensed stattable">
+                                        <thead>
+                                        <tr>
+                                            <th rowspan="2">Ашигт малтмалын төрөл</th>
+                                            <th rowspan="2">Хэмжих нэгж</th>
+                                            <th rowspan="2">Жилийн төлөвлөгөө</th>
+                                            <th colspan="12">Сарууд</th>
+                                            <th colspan="4">Улирлууд</th>
+                                        </tr>
+                                        <tr>
+                                            <th>1</th>
+                                            <th>2</th>
+                                            <th>3</th>
+                                            <th>4</th>
+                                            <th>5</th>
+                                            <th>6</th>
+                                            <th>7</th>
+                                            <th>8</th>
+                                            <th>9</th>
+                                            <th>10</th>
+                                            <th>11</th>
+                                            <th>12</th>
+                                            <th>I</th>
+                                            <th>II</th>
+                                            <th>III</th>
+                                            <th>IV</th>
+                                        </tr>
+                                        </thead>
+
+                                        <tbody>
+                                        <tr ng-repeat="row in stat1 track by $index">
+                                            <td ng-repeat="col in row track by $index" ng-if="$index==0 || $index==1" ng-bind="col"></td>
+                                            <td ng-repeat="col in row track by $index" ng-if="$index > 1" ng-bind="col | number:0"></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </li>
+                                <li style="overflow: auto;">
+                                    <table class="uk-table uk-table-striped uk-table-condensed stattable">
+                                        <thead>
+                                        <tr>
+                                            <th rowspan="2">Ашигт малтмалын төрөл</th>
+                                            <th rowspan="2">Хэмжих нэгж</th>
+                                            <th rowspan="2">Жилийн төлөвлөгөө</th>
+                                            <th colspan="12">Сарууд</th>
+                                            <th colspan="4">Улирлууд</th>
+                                        </tr>
+                                        <tr>
+                                            <th>1</th>
+                                            <th>2</th>
+                                            <th>3</th>
+                                            <th>4</th>
+                                            <th>5</th>
+                                            <th>6</th>
+                                            <th>7</th>
+                                            <th>8</th>
+                                            <th>9</th>
+                                            <th>10</th>
+                                            <th>11</th>
+                                            <th>12</th>
+                                            <th>I</th>
+                                            <th>II</th>
+                                            <th>III</th>
+                                            <th>IV</th>
+                                        </tr>
+                                        </thead>
+
+                                        <tbody>
+                                        <tr ng-repeat="row in stat2 track by $index">
+                                            <td ng-repeat="col in row track by $index" ng-if="$index==0 || $index==1" ng-bind="col"></td>
+                                            <td ng-repeat="col in row track by $index" ng-if="$index > 1" ng-bind="col | number:0"></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </li>
+                                <li style="overflow: auto;">
+                                    <table class="uk-table uk-table-condensed stattable">
+                                        <thead>
+                                        <tr>
+                                            <th colspan="2" rowspan="2">Ашигт малтмалын төрөл</th>
+                                            <th rowspan="2">Хэмжих нэгж</th>
+                                            <th rowspan="2">Жилийн төлөвлөгөө</th>
+                                            <th colspan="12">Сарууд</th>
+                                            <th colspan="4">Улирлууд</th>
+                                        </tr>
+                                        <tr>
+                                            <th>1</th>
+                                            <th>2</th>
+                                            <th>3</th>
+                                            <th>4</th>
+                                            <th>5</th>
+                                            <th>6</th>
+                                            <th>7</th>
+                                            <th>8</th>
+                                            <th>9</th>
+                                            <th>10</th>
+                                            <th>11</th>
+                                            <th>12</th>
+                                            <th>I</th>
+                                            <th>II</th>
+                                            <th>III</th>
+                                            <th>IV</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody ng-repeat="row in stat3 track by $index">
+                                            <tr>
+                                                <td ng-bind="row.depositname" ng-attr-rowspan="{{row.details.length}}">></td>
+                                                <td ng-bind="row.details[0][0]"></td>
+                                                <td ng-bind="row.details[0][1]"></td>
+                                                <td ng-bind="row.details[0][2] | number:1"></td>
+                                                <td ng-bind="row.details[0][3] | number:1"></td>
+                                                <td ng-bind="row.details[0][4] | number:1"></td>
+                                                <td ng-bind="row.details[0][5] | number:1"></td>
+                                                <td ng-bind="row.details[0][6] | number:1"></td>
+                                                <td ng-bind="row.details[0][7] | number:1"></td>
+                                                <td ng-bind="row.details[0][8] | number:1"></td>
+                                                <td ng-bind="row.details[0][9] | number:1"></td>
+                                                <td ng-bind="row.details[0][10] | number:1"></td>
+                                                <td ng-bind="row.details[0][11] | number:1"></td>
+                                                <td ng-bind="row.details[0][12] | number:1"></td>
+                                                <td ng-bind="row.details[0][13] | number:1"></td>
+                                                <td ng-bind="row.details[0][14] | number:1"></td>
+                                                <td ng-bind="row.details[0][15] | number:1"></td>
+                                                <td ng-bind="row.details[0][16] | number:1"></td>
+                                                <td ng-bind="row.details[0][17] | number:1"></td>
+                                                <td ng-bind="row.details[0][18] | number:1"></td>
+                                            </tr>
+                                            <tr ng-repeat="stat in row.details track by $index" ng-if="$index > 0">
+                                                <td ng-repeat="s in stat track by $index" ng-bind="s" ng-if="$index >= 0 && $index < 2"></td>
+                                                <td ng-repeat="s in stat track by $index" ng-bind="s | number:1" ng-if="$index >= 2"></td>
+                                            </tr>
+                                        </tbody>
+
+                                        <!--<tbody ng-repeat="row in minerals track by $index" ng-if="row.stats.length > 0">
+                                            <tr>
+                                                <td ng-bind="row.name" ng-attr-rowspan="{{row.stats.length}}"></td>
+                                                <td ng-bind="row.stats[0][1]"></td>
+                                                <td ng-bind="row.stats[0][2]"></td>
+                                                <td ng-bind="row.stats[0][3] | number:0"></td>
+                                                <td ng-bind="row.stats[0][4] | number:0"></td>
+                                                <td ng-bind="row.stats[0][5] | number:0"></td>
+                                                <td ng-bind="row.stats[0][6] | number:0"></td>
+                                                <td ng-bind="row.stats[0][7] | number:0"></td>
+                                                <td ng-bind="row.stats[0][8] | number:0"></td>
+                                                <td ng-bind="row.stats[0][9] | number:0"></td>
+                                                <td ng-bind="row.stats[0][10] | number:0"></td>
+                                                <td ng-bind="row.stats[0][11] | number:0"></td>
+                                                <td ng-bind="row.stats[0][12] | number:0"></td>
+                                                <td ng-bind="row.stats[0][13] | number:0"></td>
+                                                <td ng-bind="row.stats[0][14] | number:0"></td>
+                                                <td ng-bind="row.stats[0][15] | number:0"></td>
+                                                <td ng-bind="row.stats[0][16] | number:0"></td>
+                                                <td ng-bind="row.stats[0][17] | number:0"></td>
+                                                <td ng-bind="row.stats[0][18] | number:0"></td>
+                                                <td ng-bind="row.stats[0][19] | number:0"></td>
+                                            </tr>
+                                            <tr ng-repeat="stat in row.stats track by $index" ng-if="$index > 0">
+                                                <td ng-repeat="s in stat track by $index" ng-bind="s" ng-if="$index > 0 && $index <= 2"></td>
+                                                <td ng-repeat="s in stat track by $index" ng-bind="s | number:0" ng-if="$index > 2"></td>
+                                            </tr>
+                                        </tbody>-->
+                                    </table>
+                                </li>
+                                <li style="overflow: auto;">
+                                    <table class="uk-table uk-table-condensed stattable">
+                                        <thead>
+                                        <tr>
+                                            <th colspan="2" rowspan="2">Ашигт малтмалын төрөл</th>
+                                            <th rowspan="2">Хэмжих нэгж</th>
+                                            <th rowspan="2">Жилийн төлөвлөгөө</th>
+                                            <th colspan="12">Сарууд</th>
+                                            <th colspan="4">Улирлууд</th>
+                                        </tr>
+                                        <tr>
+                                            <th>1</th>
+                                            <th>2</th>
+                                            <th>3</th>
+                                            <th>4</th>
+                                            <th>5</th>
+                                            <th>6</th>
+                                            <th>7</th>
+                                            <th>8</th>
+                                            <th>9</th>
+                                            <th>10</th>
+                                            <th>11</th>
+                                            <th>12</th>
+                                            <th>I</th>
+                                            <th>II</th>
+                                            <th>III</th>
+                                            <th>IV</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody ng-repeat="row in stat4 track by $index">
+                                        <tr>
+                                            <td ng-bind="row.depositname" ng-attr-rowspan="{{row.details.length}}">></td>
+                                            <td ng-bind="row.details[0][0]"></td>
+                                            <td ng-bind="row.details[0][1]"></td>
+                                            <td ng-bind="row.details[0][2] | number:1"></td>
+                                            <td ng-bind="row.details[0][3] | number:1"></td>
+                                            <td ng-bind="row.details[0][4] | number:1"></td>
+                                            <td ng-bind="row.details[0][5] | number:1"></td>
+                                            <td ng-bind="row.details[0][6] | number:1"></td>
+                                            <td ng-bind="row.details[0][7] | number:1"></td>
+                                            <td ng-bind="row.details[0][8] | number:1"></td>
+                                            <td ng-bind="row.details[0][9] | number:1"></td>
+                                            <td ng-bind="row.details[0][10] | number:1"></td>
+                                            <td ng-bind="row.details[0][11] | number:1"></td>
+                                            <td ng-bind="row.details[0][12] | number:1"></td>
+                                            <td ng-bind="row.details[0][13] | number:1"></td>
+                                            <td ng-bind="row.details[0][14] | number:1"></td>
+                                            <td ng-bind="row.details[0][15] | number:1"></td>
+                                            <td ng-bind="row.details[0][16] | number:1"></td>
+                                            <td ng-bind="row.details[0][17] | number:1"></td>
+                                            <td ng-bind="row.details[0][18] | number:1"></td>
+                                        </tr>
+                                        <tr ng-repeat="stat in row.details track by $index" ng-if="$index > 0">
+                                            <td ng-repeat="s in stat track by $index" ng-bind="s" ng-if="$index >= 0 && $index < 2"></td>
+                                            <td ng-repeat="s in stat track by $index" ng-bind="s | number:1" ng-if="$index >= 2"></td>
+                                        </tr>
+                                        </tbody>
+                                        <!--<tbody ng-repeat="row in minerals4 track by $index" ng-if="row.stats.length > 0">
+                                        <tr>
+                                            <td ng-bind="row.name" ng-attr-rowspan="{{row.stats.length}}"></td>
+                                            <td ng-bind="row.stats[0][1]"></td>
+                                            <td ng-bind="row.stats[0][2]"></td>
+                                            <td ng-bind="row.stats[0][3] | number:0"></td>
+                                            <td ng-bind="row.stats[0][4] | number:0"></td>
+                                            <td ng-bind="row.stats[0][5] | number:0"></td>
+                                            <td ng-bind="row.stats[0][6] | number:0"></td>
+                                            <td ng-bind="row.stats[0][7] | number:0"></td>
+                                            <td ng-bind="row.stats[0][8] | number:0"></td>
+                                            <td ng-bind="row.stats[0][9] | number:0"></td>
+                                            <td ng-bind="row.stats[0][10] | number:0"></td>
+                                            <td ng-bind="row.stats[0][11] | number:0"></td>
+                                            <td ng-bind="row.stats[0][12] | number:0"></td>
+                                            <td ng-bind="row.stats[0][13] | number:0"></td>
+                                            <td ng-bind="row.stats[0][14] | number:0"></td>
+                                            <td ng-bind="row.stats[0][15] | number:0"></td>
+                                            <td ng-bind="row.stats[0][16] | number:0"></td>
+                                            <td ng-bind="row.stats[0][17] | number:0"></td>
+                                            <td ng-bind="row.stats[0][18] | number:0"></td>
+                                            <td ng-bind="row.stats[0][19] | number:0"></td>
+                                        </tr>
+                                        <tr ng-repeat="stat in row.stats track by $index" ng-if="$index > 0">
+                                            <td ng-repeat="s in stat track by $index" ng-bind="s" ng-if="$index > 0 && $index <= 2"></td>
+                                            <td ng-repeat="s in stat track by $index" ng-bind="s | number:0" ng-if="$index > 2"></td>
+                                        </tr>
+                                        </tbody>-->
+                                    </table>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .stattable thead th{
+        text-align: center;
+    }
+
+    .stattable tbody td, .stattable tfoot td, .stattable tfoot th, .stattable thead th{
+        border:1px solid #c1c1c1 !important;
+    }
+
+    .stattable{
+        border:1px solid #c1c1c1 !important;
+    }
+</style>

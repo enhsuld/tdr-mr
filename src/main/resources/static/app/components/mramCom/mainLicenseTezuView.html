@@ -1,0 +1,83 @@
+<div id="page_content" style="overflow:hidden;">
+    <div id="page_content_inner">
+   	   <!-- 	<div class="md-card uk-margin-medium-bottom">
+    	   	<div class="md-card-content">
+                 <table datatable="" dt-options="dtOptions" dt-columns="dtColumns" class="uk-table"></table> 
+            </div>
+        </div> -->
+    	<div class="uk-grid" >
+       	   <div class="uk-width-medium-1">
+               <div class="md-card" data-uk-grid-margin>
+                   <div class="md-card-content">                   		
+         				<kendo-grid options="PlanExploration"></kendo-grid>     
+                   </div>
+               </div>
+           </div>
+        </div>
+       
+    </div>
+     
+</div>
+<footer id="footer">
+    <span style="display:block;  text-align:right;">&copy; 2015-2016 <a href="#">Smart Green Technology LLC</a>, All rights reserved.</span>
+</footer>
+
+<script type="text/x-kendo-template" id="Configuration1">	
+	    #if (licTypeId == 2)  { #
+     		<button data-uk-modal="{target:'\\#modal_main_config'}" class="md-btn md-btn-primary md-btn-wave-light waves-effect waves-button waves-light" ng-click="loadOnConfig(#:id#)"  data-translate="Тэзү"></button>
+		# } else{#
+		 	
+		#}#
+	
+</script>
+
+<script type="text/x-kendo-template" id="Configuration">	
+	    #if (licTypeId == 2)  { #
+     		<button data-uk-modal="{target:'\\#modal_main_tezu'}" class="md-btn md-btn-primary md-btn-wave-light waves-effect waves-button waves-light" ng-click="loadOnConfig(dataItem)"  data-translate="Тэзү"></button>
+		# } else{#
+		 	
+		#}#
+	
+</script>
+
+<style>
+	.k-invalid-msg{
+		width:517px;
+	}
+</style>
+<div class="uk-modal" id="modal_main_tezu">
+	  <div class="uk-modal-dialog">
+            <button class="uk-modal-close uk-close" type="button"></button>
+            <form id="form_validation" class="uk-form-stacked" data-ng-submit="validator()">
+                <div class="uk-modal-header">
+                    <h3 class="uk-modal-title">Compose Message</h3>
+                </div>
+                 <div class="uk-margin-medium-bottom">
+                     <div class="parsley-row">
+                         <input config="users_config" options="users_options" ng-model="message_compose.recipient" required name="val_select" selectize />
+                     </div>
+                 </div>
+             <!--    <div class="uk-margin-medium-bottom">
+                    <label for="mail_new_to">Title</label>
+                    <input type="text" class="md-input" id="mail_new_to" required md-input ng-model="message_compose.title" />
+                </div> -->
+                <div class="uk-margin-large-bottom">
+                	 <div class="parsley-row">
+	                    <label for="mail_new_message">Message</label>
+	                    <textarea name="mail_new_message" id="mail_new_message" cols="30" rows="6" required class="md-input" md-input ng-model="message_compose.message"></textarea>
+                	</div>
+                </div>
+                <div id="mail_upload-drop" class="uk-file-upload">
+                    <p class="uk-text">Drop file to upload</p>
+                    <p class="uk-text-muted uk-text-small uk-margin-small-bottom">or</p>
+                    <span class="uk-form-file md-btn">choose file<input id="mail_upload-select" type="file" ng-model="message_compose.attachments"></span>
+                </div>
+                <div id="mail_progressbar" class="uk-progress uk-hidden">
+                    <div class="uk-progress-bar" style="width:0">0%</div>
+                </div>
+                <div class="uk-modal-footer">
+                    <button type="submit" class="uk-float-right md-btn md-btn-primary md-btn-wave-light waves-effect waves-button waves-light">Send</button>
+                </div>
+            </form>
+        </div> 
+</div>

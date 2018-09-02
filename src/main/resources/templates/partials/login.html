@@ -1,0 +1,116 @@
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+<!-- Titlebar
+================================================== -->
+<div id="titlebar">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+
+				<h2> Системд нэвтрэх</h2>
+				
+				<!-- Breadcrumbs -->
+				<nav id="breadcrumbs">
+					<ul>
+						<li><a href="#">Эхлэл</a></li>
+						<li>Нэвтрэх</li>
+					</ul>
+				</nav>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- Contact
+================================================== -->
+
+<!-- Container -->
+<div class="container">
+
+	<div class="row">
+	<div class="col-md-4 col-md-offset-4">
+
+	<!--Tab -->
+	<div class="my-account style-1 margin-top-5 margin-bottom-40">
+
+		<ul class="tabs-nav">
+			<li class=""><a href="#tab1">Нэвтрэх</a></li>
+			<li><a href="#tab2">Нууц үг сэргээх</a></li>
+		</ul>
+
+		<div class="tabs-container alt">
+
+			<!-- Login -->
+			<div class="tab-content" id="tab1" style="display: none;">
+				<div th:if="${param.error}">
+		            Хэрэглэгчийн нэр эсвэл нууц үг буруу байна!!!
+		        </div>
+		        <div th:if="${param.logout}">
+		            Системээс амжилттай гарлаа.
+		        </div>
+				<form th:action="@{/login}" class="login" method="post">
+					<p class="form-row form-row-wide">
+						<label for="username">Хэрэглэгчийн нэр:
+							<i class="im im-icon-Male"></i>
+							<input type="text" class="input-text" name="username" id="username" value="" />
+						</label>
+					</p>
+
+					<p class="form-row form-row-wide">
+						<label for="password">Нууц үг:
+							<i class="im im-icon-Lock-2"></i>
+							<input class="input-text" type="password" name="password" id="password"/>
+						</label>
+					</p>
+
+					<p class="form-row">
+						<input type="submit" class="button border margin-top-10" name="login" value="Нэвтрэх" />
+
+						<label for="rememberme" class="rememberme">
+						<input name="remember-me" type="checkbox" id="rememberme" value="forever" /> Намайг сана.</label>
+					</p>
+					
+				</form>
+			</div>
+
+			<!-- Register -->
+			<div class="tab-content" id="tab2" style="display: none;">
+
+				<form method="post" class="register">
+							
+				<p class="form-row form-row-wide">
+					<label for="email2">И-мэйл хаяг:
+						<i class="im im-icon-Mail"></i>
+						<input type="text" class="input-text" name="email" id="email2" value="" />
+					</label>
+				</p>
+
+				<p class="form-row">
+					<input type="submit" class="button border fw margin-top-10" name="register" value="Илгээх" />
+				</p>
+
+				</form>
+			</div>
+
+		</div>
+	</div>
+
+
+
+	</div>
+	</div>
+
+</div>
+<!-- Container / End -->
+
+
+<!-- Back To Top Button -->
+<div id="backtotop"><a href="#"></a></div>
+
+</div>
+<!-- Wrapper / End -->
+

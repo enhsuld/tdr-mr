@@ -1,0 +1,27 @@
+<div id="page_content" style="overflow:hidden;">
+    <div id="page_content_inner">
+    	  <div class="md-card" data-uk-grid-margin>
+             <div class="md-card-content">
+              	<kendo-grid options="gWeekStatus"></kendo-grid>     
+             </div>
+         </div>
+    </div>
+</div>
+<script type="text/x-kendo-template" id="main">
+		#if (repstatusid == 0 || repstatusid == 3)  { #
+     		<a class='md-btn md-btn-flat md-btn-flat-warning' ng-click='loadOnView(dataItem)' data-translate="Edit"></a>
+		# } else{#
+		 	<a class='md-btn md-btn-flat md-btn-flat-info' ng-click='loadOnView(dataItem)' data-translate="View"></a>
+		#}#
+</script>
+<script type="text/x-kendo-template" id="status">
+		#if (repstatusid == 0)  { #
+     		<span class="uk-badge uk-badge-primary" data-translate="Saved"></span>
+		# } else if (repstatusid == 7 || repstatusid == 8) {#
+			<span class="uk-badge uk-badge-warning" data-translate="Submitted"></span>
+		# } else if (repstatusid == 3) {#
+			<span class="uk-badge uk-badge-danger" data-translate="Back to edit"></span>
+		# } else if (repstatusid == 1) {#
+			<span class="uk-badge uk-badge-success" data-translate="Confirmed"></span>
+		#}#
+</script>

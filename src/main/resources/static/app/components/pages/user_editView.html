@@ -1,0 +1,372 @@
+<div id="page_content">
+    <div id="page_content_inner">
+        <form id="user_edit_form" name="user_edit_form" data-ng-submit="submitForm()" class="uk-form-stacked">
+            <div class="uk-grid" data-uk-grid-margin>
+                <div class="uk-width-large-5-5">
+                    <div class="md-card">
+                        <div class="user_heading" data-uk-sticky="{ top: 48, media: 960 }">
+                           
+                            <div class="user_heading_content">
+                                <h2 class="heading_b uk-margin-bottom">
+                                    <span class="uk-text-truncate">{{org_data.lpName}}</span>
+                                    <span class="sub-heading">{{org_data.lpReg}}</span>
+                                </h2>
+                            </div>
+                            <button type="submit" class="md-fab md-fab-small md-fab-success" id="user_edit_submit">
+                                <i class="material-icons">&#xE161;</i>
+                            </button>
+                        </div>
+                        <div class="user_content">
+                        	 <h3 class="full_width_in_card heading_c">
+                                 Ерөнхий мэдээлэл 
+                             </h3>
+                        	<div class="uk-grid uk-grid-width-1-1 uk-grid-width-large-1-3" data-uk-grid-margin>                        		 
+                                    <div>
+                                        <div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                                <i class="md-list-addon-icon material-icons">&#xE87C;</i>
+                                            </span>
+                                            <label>Овог</label>
+                                            <input class="md-input" type="text" id="user_edit_uname_control"  name="user_edit_uname_control"  ng-model="org_data.famName" md-input />
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                                <i class="md-list-addon-icon material-icons">&#xE7FD;</i>
+                                            </span>
+                                            <label>Нэр</label>
+                                             <input class="md-input" type="text" id="user_edit_uname_control"  name="user_edit_uname_control"  ng-model="org_data.givName" md-input />
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                                <i class="md-list-addon-icon material-icons">&#xE0BE;</i>
+                                            </span>
+                                            <label>Email</label>
+                                             <input class="md-input" type="text" id="user_edit_uname_control" name="user_edit_uname_control"  ng-model="org_data.email" md-input />
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                                <i class="md-list-addon-icon material-icons">&#xE87C;</i>
+                                            </span>
+                                            <label>First name</label>
+                                             <input class="md-input" type="text" id="user_edit_uname_control"  name="user_edit_uname_control"  ng-model="org_data.famNameL1" md-input />
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                                <i class="md-list-addon-icon material-icons">&#xE7FD;</i>
+                                            </span>
+                                            <label>Last name</label>
+                                             <input class="md-input" type="text" id="user_edit_uname_control"   name="user_edit_uname_control"  ng-model="org_data.givNameL1" md-input />
+                                        </div>
+                                    </div>                                  
+                                    <div>
+                                        <div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                                <i class="md-list-addon-icon material-icons">&#xE0CD;</i>
+                                            </span>
+                                            <label>Phone</label>
+                                             <input class="md-input" type="text" id="user_edit_uname_control" name="user_edit_uname_control"  ng-model="org_data.phone" md-input />
+                                        </div>
+                                    </div>
+                                    
+                                    <div>
+                                        <div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                                <i class="md-list-addon-icon material-icons">&#xE0AF;</i>
+                                            </span>
+                                            <label>Хот</label>
+                                             <input class="md-input" type="text" id="user_edit_uname_control" name="user_edit_uname_control"  ng-model="org_data.city" md-input />
+                                        </div>
+                                    </div>
+                                    <div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                                 <i class="md-list-addon-icon material-icons">&#xE7F1;</i>
+                                            </span>
+                                            <label>Дүүрэг</label>
+                                             <input class="md-input" type="text" id="user_edit_uname_control" name="user_edit_uname_control"  ng-model="org_data.disctrict" md-input />
+                                   </div>
+                                   
+                                    <div>
+                                        <div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                               <i class="md-list-addon-icon material-icons">&#xE84F;</i>          
+                                            </span>
+                                            <label>Хороо</label>
+                                             <input class="md-input" type="text" id="user_edit_uname_control" name="user_edit_uname_control"  ng-model="org_data.khoroo" md-input />
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                                <i class="md-list-addon-icon material-icons">&#xE0AF;</i>
+                                            </span>
+                                            <label>City</label>
+                                             <input class="md-input" type="text" id="user_edit_uname_control" name="user_edit_uname_control"  ng-model="org_data.cityL1" md-input />
+                                        </div>
+                                    </div>                                
+                                    <div>
+                                        <div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                                 <i class="md-list-addon-icon material-icons">&#xE7F1;</i>
+                                            </span>
+                                            <label>District</label>
+                                             <input class="md-input" type="text" id="user_edit_uname_control" name="user_edit_uname_control"  ng-model="org_data.disctrictL1" md-input />
+                                        </div>
+                                    </div>                                 
+                                    <div>
+                                        <div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                               <i class="md-list-addon-icon material-icons">&#xE84F;</i>          
+                                            </span>
+                                            <label>Khoroo</label>
+                                             <input class="md-input" type="text" id="user_edit_uname_control" name="user_edit_uname_control"  ng-model="org_data.khorooL1" md-input />
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">                                                 
+                                                 <i class="md-list-addon-icon material-icons">&#xE8FE;</i>
+                                            </span>
+                                            <label>Гудамж</label>
+                                             <input class="md-input" type="text" id="user_edit_uname_control" name="user_edit_uname_control"  ng-model="org_data.street" md-input />
+                                        </div>
+                                    </div>
+                                  
+                                  
+                                    <div>
+                                        <div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                                 <i class="md-list-addon-icon material-icons">&#xE8FE;</i>
+                                            </span>
+                                            <label>Street</label>
+                                             <input class="md-input" type="text" id="user_edit_uname_control" name="user_edit_uname_control"  ng-model="org_data.streetL1" md-input />
+                                        </div>
+                                    </div>
+                                    
+                                     <div>
+                                        <div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                                 <i class="md-list-addon-icon material-icons">&#xE89B;</i>
+                                            </span>
+                                            <label>Post box</label>
+                                             <input class="md-input" type="text" id="user_edit_uname_control" name="user_edit_uname_control"  ng-model="org_data.postbox" md-input />
+                                        </div>
+                                    </div>
+                                   
+
+                                    <div>
+                                    	<div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                               <i class="md-list-addon-icon material-icons">&#xE566;</i>    
+                                            </span>
+                                            <label>Ерөнхий инженер</label>
+                                             <input class="md-input" type="text" id="user_edit_uname_control" name="user_edit_uname_control"  ng-model="org_data.gengineer" md-input />
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                               <i class="md-list-addon-icon material-icons">&#xE566;</i>    
+                                            </span>
+                                            <label>Утас</label>
+                                             <input class="md-input" type="text" id="user_edit_uname_control" value="{{org_data.gengineerphone}}" name="user_edit_uname_control"  ng-model="org_data.gengineerphone" md-input />
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                               <i class="md-list-addon-icon material-icons">&#xE566;</i>    
+                                            </span>
+                                            <label>И-мэйл</label>
+                                             <input class="md-input" type="text" id="user_edit_uname_control" name="user_edit_uname_control"  ng-model="org_data.gengineermail" md-input />
+                                        </div>
+                                    </div>
+
+                                      <div>
+                                    	<div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                               <i class="md-list-addon-icon material-icons">&#xE566;</i>    
+                                            </span>
+                                            <label>Геологич</label>
+                                             <input class="md-input" type="text" id="user_edit_uname_control" name="user_edit_uname_control"  ng-model="org_data.geologist" md-input />
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                               <i class="md-list-addon-icon material-icons">&#xE566;</i>    
+                                            </span>
+                                            <label>Утас</label>
+                                             <input class="md-input" type="text" id="user_edit_uname_control"  value="{{org_data.geologistphone}}" name="user_edit_uname_control"  ng-model="org_data.geologistphone" md-input />
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                               <i class="md-list-addon-icon material-icons">&#xE566;</i>    
+                                            </span>
+                                            <label>И-мэйл</label>
+                                             <input class="md-input" type="text" id="user_edit_uname_control" name="user_edit_uname_control"  ng-model="org_data.geologistmail" md-input />
+                                        </div>
+                                    </div>
+
+                                      <div>
+                                    	<div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                               <i class="md-list-addon-icon material-icons">&#xE566;</i>    
+                                            </span>
+                                            <label>Маркшейдер</label>
+                                             <input class="md-input" type="text" id="user_edit_uname_control" name="user_edit_uname_control"  ng-model="org_data.msurveyor" md-input />
+                                        </div>
+                                    </div>
+                           
+                                    <div>
+                                        <div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                               <i class="md-list-addon-icon material-icons">&#xE566;</i>    
+                                            </span>
+                                            <label>Утас</label>
+                                             <input class="md-input" type="text" id="user_edit_uname_control" value="{{org_data.msurveyorphone}}" name="user_edit_uname_control"  ng-model="org_data.msurveyorphone" md-input />
+                                        </div>
+                                    </div>
+         							<div>
+                                        <div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                               <i class="md-list-addon-icon material-icons">&#xE566;</i>    
+                                            </span>
+                                            <label>И-мэйл</label>
+                                             <input class="md-input" type="text" id="user_edit_uname_control" name="user_edit_uname_control"  ng-model="org_data.msurveyoremail" md-input />
+                                        </div>
+                                    </div>
+                                      <div>
+                                    	<div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                               <i class="md-list-addon-icon material-icons">&#xE566;</i>    
+                                            </span>
+                                            <label>Баяжуулагч инженер</label>
+                                             <input class="md-input" type="text" id="user_edit_uname_control" name="user_edit_uname_control"  ng-model="org_data.accountant" md-input />
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                               <i class="md-list-addon-icon material-icons">&#xE566;</i>    
+                                            </span>
+                                            <label>Утас</label>
+                                             <input class="md-input" type="text" id="user_edit_uname_control"  value="{{org_data.accountantphone}}" name="user_edit_uname_control"  ng-model="org_data.accountantphone" md-input />
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                               <i class="md-list-addon-icon material-icons">&#xE566;</i>    
+                                            </span>
+                                            <label>И-мэйл</label>
+                                             <input class="md-input" type="text" id="user_edit_uname_control" name="user_edit_uname_control"  ng-model="org_data.accountantemail" md-input />
+                                        </div>
+                                    </div>
+                                    <div>
+                                    	<div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                               <i class="md-list-addon-icon material-icons">&#xE566;</i>    
+                                            </span>
+                                            <label>Эдийн засагч</label>
+                                             <input class="md-input" type="text" id="user_edit_uname_control" name="user_edit_uname_control"  ng-model="org_data.economist" md-input />
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                               <i class="md-list-addon-icon material-icons">&#xE566;</i>    
+                                            </span>
+                                            <label>Утас</label>
+                                             <input class="md-input" type="text" id="user_edit_uname_control" value="{{org_data.economistphone}}" name="user_edit_uname_control"  ng-model="org_data.economistphone" md-input />
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                               <i class="md-list-addon-icon material-icons">&#xE566;</i>    
+                                            </span>
+                                            <label>И-мэйл</label>
+                                             <input class="md-input" type="text" id="user_edit_uname_control" name="user_edit_uname_control"  ng-model="org_data.economistemail" md-input />
+                                        </div>
+                                    </div>
+                                    <div>
+                                    	<div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                               <i class="md-list-addon-icon material-icons">&#xE566;</i>    
+                                            </span>
+                                            <label>Уурхайн дарга</label>
+                                             <input class="md-input" type="text" id="user_edit_uname_control" name="user_edit_uname_control"  ng-model="org_data.minehead" md-input />
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                               <i class="md-list-addon-icon material-icons">&#xE566;</i>    
+                                            </span>
+                                            <label>Утас</label>
+                                             <input class="md-input" type="text" id="user_edit_uname_control" value="{{org_data.minephone}}" name="user_edit_uname_control"  ng-model="org_data.minephone" md-input />
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                               <i class="md-list-addon-icon material-icons">&#xE566;</i>    
+                                            </span>
+                                            <label>И-мэйл</label>
+                                             <input class="md-input" type="text" id="user_edit_uname_control" name="user_edit_uname_control"  ng-model="org_data.mineemail" md-input />
+                                        </div>
+                                    </div>
+                                   <div>
+                                    	<div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                               <i class="md-list-addon-icon material-icons">&#xE566;</i>    
+                                            </span>
+                                            <label>Мэргэжилтэн</label>
+                                             <input class="md-input" type="text" id="user_edit_uname_control" name="user_edit_uname_control" required  ng-model="org_data.keyman" md-input />
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                               <i class="md-list-addon-icon material-icons">&#xE566;</i>    
+                                            </span>
+                                            <label>Утас</label>
+                                             <input class="md-input" type="text" id="user_edit_uname_control" value="{{org_data.keymanphone}}" required name="user_edit_uname_control"  ng-model="org_data.keymanphone" md-input />
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                               <i class="md-list-addon-icon material-icons">&#xE566;</i>    
+                                            </span>
+                                            <label>И-мэйл</label>
+                                             <input class="md-input" type="text" id="user_edit_uname_control" name="user_edit_uname_control" required ng-model="org_data.keymanemail" md-input />
+                                        </div>
+                                    </div>
+                                <!--     <div>
+                                        <div class="parsley-row uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                               <i class="md-list-addon-icon material-icons">&#xE566;</i>    
+                                            </span>
+                                            <label>Нууц үг</label>
+                                             <input class="md-input" type="text" id="user_edit_uname_control" name="user_edit_uname_control" required ng-model="org_data.userpass" md-input />
+                                        </div>
+                                    </div> -->
+                              </div>                         
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        </form>
+    </div>
+</div>

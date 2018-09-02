@@ -1,0 +1,39 @@
+<div id="page_content" style="overflow:hidden;">
+    <div id="page_content_inner">
+    	<div class="uk-grid" >
+       	   <div class="uk-width-medium-1">
+               <div class="md-card" data-uk-grid-margin>
+                   <div class="md-card-content">
+                    	<kendo-grid options="PlanExploration"></kendo-grid>     
+                   </div>
+               </div>
+           </div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <span style="display:block;  text-align:right;">&copy; 2015-2016 <a href="#">Smart Green Technology LLC</a>, All rights reserved.</span>
+</footer>
+<!-- <a class="ts_remove_row" data-uk-tooltip title="Засах" ng-click="loadOnUpdate(#:id#)" ><i class="md-icon material-icons">edit</i></a>
+		<a class="ts_remove_row" data-uk-tooltip title="Илгээх" ng-click="loadOnSend(#:id#)" ><i class="md-icon material-icons">flight_takeoff</i></a>	 -->	
+<script type="text/x-kendo-template" id="main">
+	<a class="md-btn md-btn-primary md-btn-small md-btn-wave-light waves-effect waves-button waves-light" ng-click="loadOnCheck(dataItem)" data-translate="View"></a>
+</script>
+<script type="text/x-kendo-template" id="status">
+		#if (repstatusid == 0)  { #
+     		<span class="uk-badge uk-badge-primary" data-translate="Saved"></span>
+		# } else if (repstatusid == 7 || repstatusid == 8) {#
+			<span class="uk-badge uk-badge-warning" data-translate="Submitted"></span>
+		# } else if (repstatusid == 2) {#
+			<span class="uk-badge uk-badge-danger" data-translate="Back to edit"></span>
+		# } else if (repstatusid == 1) {#
+			<span class="uk-badge uk-badge-success" data-translate="Confirmed"></span>
+		#}#
+</script>
+<a href="" id="downloadJS" style="display:none;">Download</a>
+<script type="text/x-kendo-template" id="export">
+	<div id="details-container" style="text-align:left;">
+		<a class="k-button k-button-icontext" ng-click="downloadFile()"><i style="color:\\#fff;" class="material-icons">file_download</i> Татах</a>
+	</div>
+</script>
+<!-- <a class="md-btn md-btn-primary md-btn-small md-btn-wave-light waves-effect waves-button waves-light" ng-click="loadOnCheck(#:id#)" >Хянах</a> -->

@@ -1,0 +1,636 @@
+<div id="page_content">
+    <div id="page_heading" data-uk-sticky="{ top: 48, media: 960 }">
+        <div class="heading_actions">
+            <a class="md-btn md-btn-primary md-btn-wave-light" data-uk-modal="{target:'#modal_header_footer_print'}"
+               href="javascript:void(0)" data-translate="Хэвлэх" ng-if="sgt.step==1"></a>
+            <div ng-show="sendBtn">
+                <a id="xlsmFormBtn"
+                   ng-if="(sgt.divisionid == 3) || (sgt.divisionid == 1 && sgt.reporttype == 4) || (sgt.divisionid == 2 && sgt.reporttype == 4)"
+                   class="md-btn md-btn-primary md-btn-wave-light" ng-click="showExcelPopup()">Маягт</a>
+                <a ng-hide="(sgt.divisionid == 3) || (sgt.divisionid == 1 && sgt.reporttype == 4) || (sgt.divisionid == 2 && sgt.reporttype == 4)"
+                   class="md-btn md-btn-primary md-btn-wave-light" data-uk-modal="{target:'#modal_header_footer'}"
+                   href="javascript:void(0)" data-translate="Form"></a>
+                <!--  <a class="md-btn md-btn-danger md-btn-wave-light" ng-if="sgt.reporttype==4 && sgt.divisionid != 3" ng-show="{{xonoff}}"  ng-click="showZeroReportModal()" data-uk-modal="{target:'#zero_report'}"  href="javascript:void(0)" data-translate="Zero Report"></a><a class="md-btn md-btn-danger md-btn-wave-light" ng-if="sgt.reporttype==3 && sgt.divisionid != 3" ng-show="sendBtn"  data-uk-modal="{target:'#zero_report'}"  href="javascript:void(0)">"Х" төлөвлөгөө</a> -->
+                <a class="md-btn md-btn-success md-btn-wave-light" ng-click="loadOnSend(1)" href="javascript:void(0)"
+                   data-translate="Submit"></a>
+            </div>
+        </div>
+        <h1>{{sgt.lpname}} / {{sgt.lcxb}}</h1>
+        <span class="uk-text-upper uk-text-small">{{sgt.year}} оны {{(sgt.xtype == 0) ? 'X ' : ''}}{{(sgt.reporttype == 3) ? 'төлөвлөгөө' : (sgt.reporttype == 4) ? 'тайлан' : ''}}</span>
+    </div>
+    <div id="page_content_inner">
+        <!--  <div class="uk-grid" ng-if="mcom.length>0" data-uk-grid-margin><div class="uk-width-1-1"><div class="uk-alert uk-alert-info" data-uk-alert><a href="#" class="uk-alert-close uk-close"></a><ul class="md-list"><li><div class="md-list-content" ng-repeat="item in mcom"><span class="md-list-heading">{{item.username}}</span><span class="uk-text-small ">{{item.content}} : {{item.cdate}}</span></div></li></ul></div></div></div> -->
+        <div class="md-card uk-margin-large-bottom">
+            <div class="md-card-content">
+                <div class="uk-grid" data-uk-grid-margin>
+                    <div class="uk-width-1-1">
+                        <ul class="uk-tab" data-uk-tab="{connect:'#tabs_anim5', animation:'slide-right'}">
+                            <li class="uk-active">
+                                <a href="#" data-translate="General information"></a>
+                            </li>
+                            <li ng-click="openClose()" ng-repeat="item in inpt_options">
+                                <a href="#">{{item.text}}</a>
+                            </li>
+                        </ul>
+                        <ul id="tabs_anim5" class="uk-switcher uk-margin" style="overflow:visible">
+                            <li ng-include="'v2/company/partial/planDetail.html'" onload="setHeight()"></li>
+                            <li ng-repeat="item in inpt_options">
+                                <div class="uk-grid uk-grid-collapse" data-uk-grid-margin>
+                                    <div class="uk-width-large-3-10 hidden-print uk-visible-large">
+                                        <div class="md-card-toolbar">
+                                            <h3 class="md-card-toolbar-heading-text uk-text-danger">Жагсаалт</h3>
+                                        </div>
+                                        <div id="notice" class="md-list-outside-wrapper" custom-scrollbar list-outside>
+                                            <ul class="md-list md-list-outside notes_list">
+                                                <li style="display:none;" class="heading_list"
+                                                    ng-repeat-start="list in notes_data"
+                                                    ng-class="{ 'uk-text-danger': $index == 0}"></li>
+                                                <li ng-repeat-end ng-repeat="note in list.notes"
+                                                    ng-if="note.inptype==item.value" ng-class="{
+					                            			'md-bg-light-green-50':note.issaved == 10,
+					                                        'md-bg-light-green-100':note.decision == '1',
+					                                        'md-bg-light-blue-100':note.decision == '3',
+					                                        'md-bg-deep-orange-100':note.decision == '2'
+					                                        }">
+                                                    <a href="#" class="md-list-content note_link"
+                                                       ng-click="openNote($event,$parent.$index,$index,note)">
+                                                        <span class="md-list-heading uk-text-truncate">{{note.title}}</span>
+                                                        <span class="uk-text-small uk-text-muted">{{note.date}}</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="uk-width-large-7-10">
+                                        <div class="md-card md-card-single" style="height: 100%;" single-card>
+                                            <div ng-if="!noteActive">
+                                                <div class="md-card-toolbar">
+                                                    <h3 class="md-card-toolbar-heading-text">Тайлан төлөвлөгөө илгээхэд
+                                                        анхаарах зүйлс</h3>
+                                                </div>
+                                                <div class="md-card-content">
+                                                    <ul class=" uk-text-large uk-margin-large-top uk-margin-large-bottom">
+                                                        <li>
+                                                            Зүүн хэсэгт байрлах жагсаалтаас сонгож ажлаа үргэлжлүүлнэ.
+                                                        </li>
+                                                        <li>
+                                                            Файл хавсаргахдаа зөвхөн хавсрах боломжтой файлын төрлийг
+                                                            ашиглана.
+                                                        </li>
+                                                        <li>
+                                                            Ажлаа дараа нь үргэлжлүүлэх бол заавал хадгалах товчийг дарж
+                                                            хадгална.
+                                                        </li>
+                                                        <li>
+                                                            Маягтуудыг заавал
+                                                            <strong
+                                                                    class="md-color-red-600">PDF</strong> файлаар
+                                                            хавсаргана.
+
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <form name="myForm" ng-show="noteActive">
+                                                <div class="md-card-toolbar hidden-print">
+                                                    <h3 class="md-card-toolbar-heading-text" style="width:80%;">
+                                                        {{note_form.title}}</h3>
+                                                    <!-- <a ng-show="{{xonoff}}" ng-click="saveAttach($event,noteForm.id)" style="margin-top:5px;" class="uk-float-right md-btn md-btn-success md-btn-small md-btn-wave-light md-btn-icon waves-effect waves-button waves-light" href="javascript:void(0)"><i class="material-icons">games</i>
+                                                        Хадгалах
+                                                    </a> -->
+                                                    <button ng-show="fileUp && ((note_form.isform != 1) || ((sgt.divisionid == 1 && sgt.reporttype == 3) || (sgt.divisionid == 2 && sgt.reporttype == 3)))"
+                                                            ng-disabled="!myForm.$valid" class="uk-float-right "
+                                                            ng-click="uploadPic(picFile)" style="margin-top:15px;">
+                                                        <i class="material-icons">games</i> Хадгалах
+
+                                                    </button>
+                                                </div>
+                                                <div class="md-card-content">
+                                                    <div class="uk-grid">
+                                                        <div ng-hide="note_form.isform == 1 && sgt.reporttype == 4"
+                                                             class="uk-width-1-1">
+                                                            <div id="file_upload-drop" class="uk-file-upload">
+                                                                <p class="uk-text">Drop file to upload </p>
+                                                                <p class="uk-text-muted uk-text-small uk-margin-small-bottom">
+                                                                    or</p>
+                                                                <span class="uk-form-file md-btn">Файл сонгох
+
+																	<input id="file_upload-select" type="file"
+                                                                           ngf-select ng-model="picFile" name="file"
+                                                                           ngf-max-size="30MB" required
+                                                                           ngf-model-invalid="errorFile">
+																	</span>
+                                                            </div>
+                                                            <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
+                                                            <div id="file_upload-progressbar" class="uk-progress"
+                                                                 ng-show="picFile.progress >= 0">
+                                                                <div class="uk-progress-bar"
+                                                                     style="width:{{picFile.progress}}%"
+                                                                     ng-bind="picFile.progress + '%'"></div>
+                                                            </div>
+                                                        </div>
+                                                        <div ng-show="note_form.isform == 1 && note_form.images.length < 1"
+                                                             class="uk-width-1-1">
+                                                            <h4 class="uk-margin-large-top">Excel Маягт хавсаргах
+                                                                заавар:</h4>
+                                                            <ul class=" uk-text-large uk-margin-large-bottom">
+                                                                <li>
+                                                                    Дээд хэсэгт байрлах
+                                                                    <strong
+                                                                            class="md-color-red-600">Excel
+                                                                        маягт</strong>
+                                                                    хэсгээс маягт тус бүрээр эсвэл нэгтгэсэн байдлаар
+                                                                    татаж авна.
+
+                                                                </li>
+                                                                <li>
+                                                                    Маягтыг бөглөж дуусаад
+                                                                    <strong
+                                                                            class="md-color-red-600"> цонхны
+                                                                        <b>Системд
+                                                                            оруулах</b>
+                                                                    </strong> хэсэгт файлыг сонгож оруулна.
+
+                                                                </li>
+                                                                <li>
+                                                                    Засварт буцаасан маягтыг
+                                                                    <strong
+                                                                            class="md-color-red-600">Excel
+                                                                        маягт</strong>
+                                                                    хэсгээс тухайн маягтыг татаж авч бөглөнө.
+
+                                                                </li>
+                                                                <li>
+                                                                    Маягтуудыг зөвхөн
+                                                                    <strong class="md-color-red-600">XLSM</strong>
+                                                                    өргөтгөлөөр оруулна.
+
+                                                                </li>
+                                                                <li>
+                                                                    Маягттай холбоотой асуудал гарвал
+                                                                    <a
+                                                                            href="mailto:sgt.mongolia@gmail.com?Subject={{sgt.lpname}}">
+                                                                        <b>sgt.mongolia@gmail.com</b>
+                                                                    </a>
+                                                                    хаягаар нэвтрэх нэр, нууц үг, шийдвэрлэх асуудал
+                                                                    болон холбогдох утасны дугаараа илгээнэ үү.
+
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="uk-width-1-1"
+                                                             style="margin-top:15px;max-height: 60vh;overflow: auto;">
+                                                            <div class="uk-overflow-container"
+                                                                 ng-if="note_form.images.length>0">
+                                                                <table class="uk-table uk-table-hover"
+                                                                       style="margin-bottom:15px;">
+                                                                    <thead>
+                                                                    <tr>
+                                                                        <th class="uk-width-1-10 uk-text-center uk-text-upper">
+                                                                            Файл
+                                                                        </th>
+                                                                    </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                    <tr ng-repeat="image in note_form.images">
+                                                                        <td>
+                                                                            <div class="uk-grid" data-uk-grid-margin>
+                                                                                <a class="uk-width-2-5 uk-width-small-1-5 uk-text-center"
+                                                                                   href="{{image.url}}"
+                                                                                   data-uk-lightbox="{group:'gallery'}"
+                                                                                   ng-switch="image.ext">
+                                                                                    <img ng-switch-when="image.ext=='jpeg'"
+                                                                                         class="md-user-image-large"
+                                                                                         style="width:82px; height:82px;"
+                                                                                         ng-src="{{image.url}}" alt=""/>
+                                                                                    <img ng-switch-when="image.ext=='png'"
+                                                                                         class="md-user-image-large"
+                                                                                         style="width:82px; height:82px;"
+                                                                                         ng-src="{{image.url}}" alt=""/>
+                                                                                    <img ng-switch-when="image.ext=='jpg'"
+                                                                                         class="md-user-image-large"
+                                                                                         style="width:82px; height:82px;"
+                                                                                         ng-src="{{image.url}}" alt=""/>
+                                                                                    <img ng-switch-when="image.ext=='gif'"
+                                                                                         class="md-user-image-large"
+                                                                                         style="width:82px; height:82px;"
+                                                                                         ng-src="{{image.url}}" alt=""/>
+                                                                                    <img ng-switch-when="image.ext=='JPG'"
+                                                                                         class="md-user-image-large"
+                                                                                         style="width:82px; height:82px;"
+                                                                                         ng-src="{{image.url}}" alt=""/>
+                                                                                    <img ng-switch-default
+                                                                                         class="md-user-image-large"
+                                                                                         style="width:82px; height:82px;"
+                                                                                         ng-src="assets/img/avatars/avatar_05.png"
+                                                                                         alt=""/>
+                                                                                </a>
+                                                                                <div class="uk-width-3-5 uk-width-small-4-5">
+                                                                                    <h4 class="heading_a uk-margin-small-bottom">
+                                                                                        {{image.title}}</h4>
+                                                                                    <p class="uk-margin-remove">
+																								<span
+                                                                                                        class="uk-text-muted">Огноо:</span>
+                                                                                        {{image.date}} {{sgt.step}}
+
+                                                                                        <span ng-if="sgt.step!=7">
+																									<a class="md-btn md-btn-danger md-btn-small md-btn-wave-light "
+                                                                                                       ng-if="note_form.decision==2 || note_form.decision==0 || note_form.decision==undefined"
+                                                                                                       ng-click="removeAttach(image)"
+                                                                                                       href="javascript:void(0)">
+												                                             	Устгах
+												                                             </a>
+																								</span>
+                                                                                        <a ng-show="(sgt.divisionid != 3 && sgt.reporttype == 3) || note_form.isform != 1 || image.ext!='xlsm'"
+                                                                                           class="md-btn md-btn-primary md-btn-small md-btn-wave-light"
+                                                                                           target="_blank"
+                                                                                           download="{{image.title}}"
+                                                                                           href="{{image.url}}">
+                                                                                            Татах
+                                                                                        </a>
+                                                                                        <a ng-hide="(sgt.divisionid != 3 && sgt.reporttype == 3) || note_form.isform != 1 || image.ext!='xlsm'"
+                                                                                           class="md-btn md-btn-primary md-btn-small md-btn-wave-light"
+                                                                                           target="_blank"
+                                                                                           download="{{image.title}}"
+                                                                                           href="/import/downloadForm/{{note_form.id}}/{{$stateParams.param}}">
+                                                                                            Татах
+                                                                                        </a>
+                                                                                    </p>
+                                                                                    <p class="uk-margin-remove">
+																								<span
+                                                                                                        class="uk-text-muted">Хэмжээ:</span>{{image.size}}
+
+                                                                                    </p>
+                                                                                </div>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                                <!-- <div ng-if="note_form.isform==1"><iframe src="{{note_form.images[0].url}}" style="width:100%; height:600px;" frameborder="0"></iframe></div> -->
+                                                            </div>
+                                                            <div class="md-card toolbar-fixed"
+                                                                 ng-show="note_form.isform == 1 && (sgt.divisionid == 3)">
+                                                                <div class="md-card-toolbar">
+                                                                    <div class="md-card-toolbar-actions">
+                                                                        <card-fullscreen-activate></card-fullscreen-activate>
+                                                                    </div>
+                                                                    <card-fullscreen-deactivate></card-fullscreen-deactivate>
+                                                                    <h3 class="md-card-toolbar-heading-text">
+                                                                        Маягт харах
+                                                                    </h3>
+                                                                </div>
+                                                                <div id="viewFormsArea" class="md-card-content">
+                                                                    <ng-include src="loadFormURL"></ng-include>
+                                                                    <div style="clear:both;"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="uk-width-1-1" ng-if="note_form.comm.length>0">
+                                                            <div class="uk-grid uk-grid-divider" data-uk-grid-margin>
+                                                                <div class="uk-width-medium-4-4">
+                                                                    <div class="md-card-toolbar"
+                                                                         style="padding-left:0px;"
+                                                                         ng-if="note_form.comm.length>0">
+                                                                        <h3 class="md-card-toolbar-heading-text">
+                                                                            Шийдвэрлэлт</h3>
+                                                                    </div>
+                                                                    <div class="md-card"
+                                                                         ng-repeat="block in note_form.comm | orderBy: 'date'">
+                                                                        <div style="padding:10px;">
+                                                                            <div class="uk-grid uk-grid-divider"
+                                                                                 data-uk-grid-margin>
+                                                                                <div class="uk-width-medium-1-2">
+                                                                                    <ul class="md-list">
+                                                                                        <li>
+                                                                                            <div class="md-list-content">
+                                                                                                <span class="md-list-heading">Тайлбар</span>
+                                                                                                <span class="uk-text-small uk-text-muted"
+                                                                                                      ng-bind-html="block.destext"></span>
+                                                                                            </div>
+                                                                                        </li>
+                                                                                        <li>
+                                                                                            <div class="md-list-content">
+                                                                                                <span class="md-list-heading">Бүртгэсэн</span>
+                                                                                                <span class="uk-text-small uk-text-muted">{{block.user_name}}</span>
+                                                                                            </div>
+                                                                                        </li>
+                                                                                    </ul>
+                                                                                </div>
+                                                                                <div class="uk-width-medium-1-2">
+                                                                                    <ul class="md-list">
+                                                                                        <li>
+                                                                                            <div class="md-list-content">
+                                                                                                <span class="md-list-heading">Шийдвэр</span>
+                                                                                                <span class="sub-heading"
+                                                                                                      ng-if="block.desicion==1">Зөвшөөрсөн</span>
+                                                                                                <span class="sub-heading"
+                                                                                                      ng-if="block.desicion==3">Татгалзсан</span>
+                                                                                                <span class="sub-heading"
+                                                                                                      ng-if="block.desicion==2">Засварт буцаасан</span>
+                                                                                            </div>
+                                                                                        </li>
+                                                                                        <li>
+                                                                                            <div class="md-list-content">
+                                                                                                <span class="md-list-heading">Бүртгэсэн огноо</span>
+                                                                                                <span class="uk-text-small uk-text-muted">{{block.date}}</span>
+                                                                                            </div>
+                                                                                        </li>
+                                                                                    </ul>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="uk-modal" id="modal_help" aria-hidden="true" style="display: none; overflow-y: scroll;">
+    <div class="uk-modal-dialog" style="top: 288.5px;">
+        <button type="button" class="uk-modal-close uk-close"></button>
+        <p>{{note_form.help}}</p>
+    </div>
+</div>
+<script type="text/javascript">
+    var categories = $("#categories").kendoDropDownList({
+        optionLabel: "Аймаг / Нийслэл...",
+        dataTextField: "name",
+        dataValueField: "id",
+        filter: "startswith",
+        dataSource: {
+            serverFiltering: true,
+            transport: {
+                read: {
+                    url: "/user/service/cascading/kendo/LutAdminunitParent",
+                    contentType: "application/json; charset=UTF-8",
+                    type: "POST"
+                },
+                parameterMap: function (options) {
+                    return JSON.stringify(options);
+                }
+            }
+        }
+    }).data("kendoDropDownList");
+
+    var categories1 = $("#categories1").kendoDropDownList({
+        optionLabel: "Аймаг / Нийслэл...",
+        dataTextField: "name",
+        dataValueField: "id",
+        filter: "startswith",
+        dataSource: {
+            serverFiltering: true,
+            transport: {
+                read: {
+                    url: "/user/service/cascading/kendo/LutAdminunitParent",
+                    contentType: "application/json; charset=UTF-8",
+                    type: "POST"
+                },
+                parameterMap: function (options) {
+                    return JSON.stringify(options);
+                }
+            }
+        }
+    }).data("kendoDropDownList");
+</script>
+<style>
+    .md-card-toolbar {
+        position: relative;
+    }
+
+    #zero_report .md-card-toolbar .md-card-toolbar-heading-text {
+        position: absolute;
+    }
+
+    .gallery_grid_item,
+    .gallery_grid_item:focus,
+    .gallery_grid_item:hover {
+        height: 250px !important;
+    }
+
+    .wizard > .content > .body {
+        padding: 0px;
+    }
+
+    /* 	em{
+        display:none;
+    } */
+
+    .k-upload-button {
+        display: inherit;
+    }
+
+    .lala {
+        min-height: 564px;
+    }
+
+    .note_link {
+        min-height: 48px;
+    }
+
+    #viewFormsArea {
+        height: auto !important;
+    }
+</style>
+<div class="uk-modal" id="modal_header_footer_print">
+    <div class="uk-modal-dialog">
+        <div class="uk-modal-header">
+            <h3 class="uk-modal-title" data-translate="Хэвлэх"></h3>
+        </div>
+        <hr>
+        <div class="md-list-outside-wrapper uk-overflow-container" custom-scrollbar list-outside>
+            <table class="uk-table uk-table-striped  uk-table-align-vertical">
+                <thead>
+                <tr>
+                    <th data-translate="Name"></th>
+                    <th data-translate="Download"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>
+                        <span style="float:left;">Нүүр</span>
+                    </td>
+                    <td class="uk-text-center">
+                        <a href="/word/mid/{{$stateParams.param}}">
+                            <i class="md-icon material-icons">&#xE2C0;</i>
+                        </a>
+                        <!-- <a class="md-btn md-btn-primary md-btn-small md-btn-wave-light" target="_blank" download href="/import/generateFormCover/{{$stateParams.param}}"><i class="material-icons">&#xE2C0;</i></a> -->
+                    </td>
+                </tr>
+                <tr ng-if="sgt.divisionid != 3">
+                    <td>
+                        <span style="float:left;">Ерөнхий мэдээлэл - Маягт 1</span>
+                    </td>
+                    <td class="uk-text-center">
+                        <!-- <a  href="/word/mid/{{mid}}"><i class="md-icon material-icons">&#xE2C0;</i></a> -->
+                        <a class="md-btn md-btn-primary md-btn-small md-btn-wave-light" target="_blank" download
+                           href="/import/generateFormCover/{{$stateParams.param}}">
+                            <i class="material-icons">&#xE2C0;</i>
+                        </a>
+                    </td>
+                </tr>
+                <tr ng-if="item.isform==1" ng-repeat="item in notes_data[0].notes track by $index">
+                    <td>
+                        <span style="float:left;">{{item.title}}</span>
+                        <span style="float:right;">{{item.form}}</span>
+                    </td>
+                    <td class="uk-text-center">
+                        <!-- href="{{item.url}}" -->
+                        <!-- <a  download  href="{{item.images[0].url}}"><i class="md-icon material-icons">&#xE2C0;</i></a>		 -->
+                        <a ng-show="(sgt.divisionid != 3 && sgt.reporttype == 3) || item.isform != 1 || item.images[0].ext!='xlsm'"
+                           class="md-btn md-btn-primary md-btn-small md-btn-wave-light" target="_blank" download
+                           href="{{item.images[0].url}}">
+                            <i class="material-icons">&#xE2C0;</i>
+                        </a>
+                        <a ng-hide="(sgt.divisionid != 3 && sgt.reporttype == 3) || item.isform != 1 || item.images[0].ext!='xlsm'"
+                           class="md-btn md-btn-primary md-btn-small md-btn-wave-light" target="_blank" download
+                           href="/import/downloadForm/{{item.id}}/{{$stateParams.param}}">
+                            <i class="material-icons">&#xE2C0;</i>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="uk-modal-footer uk-text-right">
+            <button type="button" class="md-btn md-btn-flat uk-modal-close" data-translate="Close"></button>
+        </div>
+    </div>
+</div>
+<div class="uk-modal" id="excel_popup">
+    <div class="uk-modal-dialog" ng-intro-options="IntroOptions" ng-intro-method="CallMe" ng-intro-autostart="false">
+        <div class="uk-modal-header">
+            <h3 class="uk-modal-title">Excel маягт оруулах</h3>
+            <div style="position: absolute;right: 24px;top: 24px;">
+                <!-- <i style="float:right; cursor:pointer;" class="md-icon material-icons uk-modal-close">&#xE5CD;</i> -->
+                <a class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon waves-effect waves-button waves-light"
+                   data-uk-tooltip="{pos:'bottom'}" title="Маягт татаж авах"
+                   href="/import/form/{{$stateParams.param}}/{{sgt.divisionid}}/0" download>
+                    <i
+                            class="uk-icon-cloud-download"></i> Бүх маягт татах
+                </a>
+                <a class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon waves-effect waves-button waves-light uk-modal-close"
+                   data-uk-tooltip="{pos:'bottom'}" title="Цонхыг хаах" style="margin-left:5px;">
+                    <i
+                            class="uk-icon-close"></i>
+                </a>
+            </div>
+        </div>
+        <hr>
+        <div class="md-list-outside-wrapper">
+            <div class="uk-grid uk-grid-collapse" data-uk-grid-margin>
+                <div class="uk-width-1-1" style="margin-bottom:30px;">
+                    <h4 class="uk-modal-title">Маягт татаж авах</h4>
+                    <div class="uk-width-1-1" style="max-height:250px; overflow:auto;">
+                        <table class="uk-table uk-table-striped  uk-table-align-vertical">
+                            <tbody>
+                            <tr ng-if="item.isform==1" ng-repeat="item in notes_data[0].notes track by $index">
+                                <td>
+                                    <span style="float:left;">{{item.title}}</span>
+                                    <span style="float:right;">{{item.form}}</span>
+                                </td>
+                                <td class="uk-text-center">
+                                    <!-- href="{{item.url}}" -->
+                                    <a data-uk-tooltip="{pos:'bottom'}" title="Татаж авах"
+                                       download="{{item.title}}.xlsm"
+                                       href="/import/form/{{$stateParams.param}}/{{sgt.divisionid}}/{{item.id}}">
+                                        <i
+                                                class="md-icon material-icons">&#xE2C0;</i>
+                                    </a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="uk-width-1-1"
+                     ng-show="sgt.divisionid == 3  || (sgt.divisionid == 1 && sgt.reporttype == 4) || (sgt.divisionid == 2 && sgt.reporttype == 4)">
+                    <h4 class="uk-modal-title">Системд оруулах</h4>
+                    <input type="file" accept=".xlsm" ng-files="getExcelFiles($files)" required id="input-file-a"
+                           class="dropify-excel" data-allowed-file-extensions="xlsm"/>
+                    <!-- <div style="width:100%;" id="file_upload-progressbar" class="uk-progress" ng-show="xslmFile.progress > 0"><div class="uk-progress-bar" style="width:{{xslmFile.progress}}%" ng-bind="xslmFile.progress + '%'"></div></div> -->
+                    <a style="width:100%; margin-top:15px;"
+                       class="md-btn md-btn-primary md-btn-wave-light md-btn-icon waves-effect waves-button waves-light"
+                       ng-click="uploadExcelForm()">
+                        <i class="material-icons">&#xE2C6;</i>Оруулах
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="uk-modal" id="modal_header_footer">
+    <div class="uk-modal-dialog">
+        <div class="uk-modal-header">
+            <h3 class="uk-modal-title" data-translate="Form"></h3>
+        </div>
+        <hr>
+        <div class="md-list-outside-wrapper uk-overflow-container" custom-scrollbar list-outside>
+            <table class="uk-table uk-table-striped  uk-table-align-vertical">
+                <thead>
+                <tr>
+                    <th data-translate="Name"></th>
+                    <th data-translate="Download"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="item in form track by $index">
+                    <td>
+                        <span style="float:left;">{{item.name}}</span>
+                        <span style="float:right;">{{item.form}}</span>
+                    </td>
+                    <td class="uk-text-center">
+                        <!-- href="{{item.url}}" -->
+                        <a download="{{item.form}}-{{item.name}}.pdf" href="/logic/pdf/{{planid}}/{{item.id}}">
+                            <i
+                                    class="md-icon material-icons">&#xE2C0;</i>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="uk-modal-footer uk-text-right">
+            <button type="button" class="md-btn md-btn-flat uk-modal-close" data-translate="Close"></button>
+        </div>
+    </div>
+</div>
+<div class="uk-modal" id="modal_header_notyet">
+    <div class="uk-modal-dialog">
+        <div class="uk-modal-header">
+            <h3 class="uk-modal-title" data-translate="You have the following tasks still not finished"></h3>
+        </div>
+        <hr>
+        <div class="md-list-outside-wrapper uk-overflow-container" custom-scrollbar list-outside>
+            <table class="uk-table uk-table-striped  uk-table-align-vertical ">
+                <thead>
+                <tr>
+                    <th data-translate="Name"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="item in notyet track by $index">
+                    <td>{{item.title}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="uk-modal-footer uk-text-right">
+            <button type="button" class="md-btn md-btn-flat uk-modal-close" data-translate="Close"></button>
+        </div>
+    </div>
+</div>
+</div>

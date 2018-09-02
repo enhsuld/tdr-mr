@@ -1,0 +1,186 @@
+<div id="page_content" style="overflow:hidden;">
+    <div id="page_content_inner">
+   	   <!-- 	<div class="md-card uk-margin-medium-bottom">
+    	   	<div class="md-card-content">
+                 <table datatable="" dt-options="dtOptions" dt-columns="dtColumns" class="uk-table"></table> 
+            </div>
+        </div> -->
+    	<div class="uk-grid" >
+       	   <div class="uk-width-medium-1">
+               <div class="md-card" data-uk-grid-margin>
+                   <div class="md-card-content">                   		
+         				<kendo-grid options="PlanExploration"></kendo-grid>     
+                   </div>
+               </div>
+           </div>
+        </div>
+       
+    </div>
+     
+</div>
+<footer id="footer">
+    <span style="display:block;  text-align:right;">&copy; 2015-2016 <a href="#">Smart Green Technology LLC</a>, All rights reserved.</span>
+</footer>
+
+<script type="text/x-kendo-template" id="Configuration1">	
+	    #if (licTypeId == 2)  { #
+     		<button data-uk-modal="{target:'\\#modal_main_config'}" class="md-btn md-btn-primary md-btn-wave-light waves-effect waves-button waves-light" ng-click="loadOnConfig(#:id#)"  data-translate="Configuration"></button>
+		# } else{#
+		 	
+		#}#
+	
+</script>
+
+<script type="text/x-kendo-template" id="Configuration">	
+	    #if (licTypeId == 2)  { #
+     		<button data-uk-modal="{target:'\\#modal_main_config'}" class="md-btn md-btn-primary md-btn-wave-light waves-effect waves-button waves-light" ng-click="loadOnConfig(#:id#)"  data-translate="Configuration"></button>
+		# } else{#
+		 	
+		#}#
+	
+</script>
+ <script>
+                $(document).ready(function() {
+                	var categories = $("#categories").kendoDropDownList({
+                        optionLabel: "Select category...",
+                        dataTextField: "name",
+                        dataValueField: "id",
+                        dataSource: {
+                            serverFiltering: true,    
+                            type: "GET",                       
+                            transport: {
+                                read: {
+                               		url: "/user/service/cascading/LutMinGroup",
+                               		type:"GET"                               	
+                                }
+                            }
+                        }
+                    }).data("kendoDropDownList");
+                   	
+
+                    var mineraltype = $("#mineraltype").kendoDropDownList({
+                        autoBind: false,
+                        cascadeFrom: "categories",
+                        optionLabel: "Select minerals...",
+                        dataTextField: "name",
+                        dataValueField: "mineralgroupid",
+                        dataSource: {
+                            serverFiltering: true,  
+                            type: "GET",                        
+                            transport: {
+                                read: {
+                               	 url: "/user/service/cascading/LutMinerals"                                                                  
+                                }
+                            }
+                        }
+                    }).data("kendoDropDownList");
+                    
+                    var deposit = $("#deposit").kendoDropDownList({
+                        autoBind: false,
+                        cascadeFrom: "mineraltype",
+                        optionLabel: "Select deposit...",
+                        dataTextField: "name",
+                        dataValueField: "id",
+                        dataSource: {
+                            serverFiltering: true,
+                            type: "GET",                
+                            transport: {
+                                read: {
+                               	 url: "/user/service/cascading/LutDeposit"
+                                }
+                            }
+                        }
+                    }).data("kendoDropDownList");
+
+                    var product = $("#product").kendoDropDownList({
+                        autoBind: false,
+                        cascadeFrom: "deposit",
+                        optionLabel: "Select product...",
+                        dataTextField: "name",
+                        dataValueField: "id",
+                        dataSource: {                           
+                            serverFiltering: true,
+                            type: "GET",    
+                            transport: {
+                            	 read: {
+                                   	 url: "/user/service/cascading/LutProducts"
+                                 }
+                            }
+                        }
+                    }).data("kendoDropDownList");
+
+                    var subproduct = $("#subproduct").kendoDropDownList({
+                        autoBind: false,
+                        cascadeFrom: "product",
+                        optionLabel: "Select sub product...",
+                        dataTextField: "name",
+                        dataValueField: "id",
+                        dataSource: {                           
+                            serverFiltering: true,
+                            type: "GET",    
+                            transport: {
+                            	 read: {
+                                   	 url: "/user/service/cascading/LutSubProduct"
+                                 }
+                            }
+                        }
+                    }).data("kendoDropDownList");
+
+                    $("#get").click(function() {
+                        var categoryInfo = "\nCategory: { id: " + categories.value() + ", name: " + categories.text() + " }",
+                            productInfo = "\nProduct: { id: " + products.value() + ", name: " + products.text() + " }",
+                            orderInfo = "\nOrder: { id: " + orders.value() + ", name: " + orders.text() + " }";
+
+                        alert("Order details:\n" + categoryInfo + productInfo + orderInfo);
+                    });
+                });
+            </script>
+<div class="uk-modal" id="modal_main_config">
+    <div class="uk-modal-dialog">
+     	<button type="button" class="uk-modal-close uk-close"></button>
+        <div class="uk-modal-header">
+            <h3 class="uk-modal-title" data-translate="Report configuration of the license"></h3>           
+        </div>
+        <form id="form_validation" class="uk-form-stacked">  
+        <!-- 	 <div class="demo-section k-content">
+
+                <h4>Categories:</h4>
+                <input id="categories" style="width: 100%;" />
+
+                <h4 style="margin-top: 2em;">Products:</h4>
+                <input id="products" disabled="disabled" style="width: 100%;" />
+
+                <button class="k-button k-primary" id="get" style="margin-top: 2em; float: right;">View Order</button>
+
+            </div>  -->      
+               <div class="uk-grid" data-uk-grid-margin>
+           		   <div class="uk-width-medium-1-1">
+           		   		<div class="uk-form-row">
+	           		   		<label class="uk-form-label" data-translate="Mineral category"></label>
+	           		   		<input id="categories" style="width: 100%;" />	                      
+                        </div>
+                       <div class="uk-form-row">
+	           		   		<label class="uk-form-label" data-translate="Mineral type"></label>
+	           		   		<input id="mineraltype" style="width: 100%;" />	                      
+                        </div>
+                       	<div class="uk-form-row">
+	           		   		<label class="uk-form-label" data-translate="Mineral mine type" ></label>
+	           		   		<input id="deposit" disabled="disabled" style="width: 100%;" />          		   		
+                        </div>
+                        <div class="uk-form-row">
+	           		   		<label class="uk-form-label" data-translate="Product name, type" ></label>
+	           		   		<input id="product" disabled="disabled" style="width: 100%;" />
+                        </div>
+                        <div class="uk-form-row">
+	           		   		<label class="uk-form-label" data-translate="Minerals within product" ></label>
+	           		   		<input id="subproduct" disabled="disabled" style="width: 100%;" />
+                        </div>
+                   </div>
+               </div>
+	        <div class="uk-modal-footer uk-text-right">
+	            <button type="submit"  class="md-btn md-btn-primary md-btn-wave-light waves-effect waves-button waves-light" id="snippet_new_save" data-translate="Save"></button>
+				<button type="button" id="closemodal" class="md-btn md-btn-flat md-btn-flat-danger md-btn-wave waves-effect waves-button uk-modal-close" data-translate="Close"></button>
+	        </div>
+        </form>
+    </div>
+</div>

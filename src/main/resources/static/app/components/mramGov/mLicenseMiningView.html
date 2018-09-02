@@ -1,0 +1,108 @@
+    <div id="page_content" style="overflow:hidden;">
+        <div id="page_content_inner">
+        	<div class="uk-grid" >
+        	   <div class="uk-width-medium-1">
+                    <div class="md-card" data-uk-grid-margin>
+                        <div class="md-card-content confcc">
+                            <kendo-grid options="license"></kendo-grid>       
+                        </div>
+                    </div>
+                </div>
+             </div>
+             <div class="uk-modal" id="modal_config_mlic">
+		          <div class="uk-modal-dialog " data-uk-grid-margin>
+		              <button type="button" id="closemodal"  class="uk-modal-close uk-close uk-close-alt"></button>
+		              <h3 class="heading_a">Тайлангийн тохируулга: ТЗ-ийн дугаар {{conf.licenseNum}} </h3>
+		               <form name="wizard_advanced_form" id="roleform" class="uk-form" data-ng-submit="submitForm()"> 	
+		               <hr>
+						      <div class="uk-grid" data-uk-grid-margin>            
+				                    <div class="uk-width-medium-1-2">
+				                    	<div class="uk-form-row">
+				                            <input type="checkbox"  icheck ng-model="conf.weekly" id="switch_demo_small1" />
+				                        	<label for="switch_demo_small1" class="inline-label">7 хоног</label>                            
+				                        </div>                        
+				                    </div>
+				                   <div class="uk-width-medium-1-2">
+				                   		<div class="uk-form-row">	
+					                        <input type="checkbox"  icheck ng-model="conf.monthly" id="switch_demo_small2" />
+					                        <label for="switch_demo_small2" class="inline-label">Сар</label>
+				                        </div>
+				                    </div>
+				                    </div>
+				                     <div class="uk-grid" data-uk-grid-margin> 
+				                   <div class="uk-width-medium-1-2">
+				                   		<div class="uk-form-row">
+					                        <input type="checkbox"  icheck ng-model="conf.plan" id="switch_demo_small3" />
+					                        <label for="switch_demo_small3" class="inline-label">Жилийн төлөвлөгөө</label>
+				                        </div>
+				                    </div>
+				                   <div class="uk-width-medium-1-2">
+				                   		<div class="uk-form-row">
+					                        <input type="checkbox"  icheck ng-model="conf.report" id="switch_demo_small4" />
+					                        <label for="switch_demo_small4" class="inline-label">Жилийн тайлан</label>
+				                        </div>
+				                    </div>
+				                    </div>
+				                    <div class="uk-grid" data-uk-grid-margin> 
+					                    <div class="uk-width-medium-1-2">
+					                   		<div class="uk-form-row">
+						                        <input type="checkbox"  icheck ng-model="conf.lplan" id="switch_demo_small5" />
+						                        <label for="switch_demo_small5" class="inline-label">Төлөвлөгөө хоцорсон эсэх</label>
+					                        </div>
+					                    </div>
+										<div class="uk-width-medium-1-2">
+					                   		<div class="uk-form-row">
+						                        <input type="checkbox"  icheck ng-model="conf.lreport" id="switch_demo_small6" />
+						                        <label for="switch_demo_small6" class="inline-label">Тайлан хоцорсон эсэх</label>
+					                        </div>
+					                    </div>
+				                    </div>
+				                    <div class="uk-grid" data-uk-grid-margin> 
+					                    <div class="uk-width-medium-1-2">
+					                   		<div class="uk-form-row">
+						                        <input type="checkbox"  icheck ng-model="conf.haiguulreport" id="switch_demo_small7" />
+						                        <label for="switch_demo_small7" class="inline-label">Хайгуулын тайлан/төлөвлөгөө</label>
+					                        </div>
+					                    </div>
+										<div class="uk-width-medium-1-2">
+					                   		<div class="uk-form-row">
+						                        <input type="checkbox"  icheck ng-model="conf.ftime" id="switch_demo_small8" />
+						                        <label for="switch_demo_small8" class="inline-label">Өмнө үүсгэсэн эсэх</label>
+					                        </div>
+					                    </div>
+				                    </div>
+		                <!--      <div class="uk-grid" data-uk-grid-margin> 
+				                   <div class="uk-width-medium-1-2">
+				                   		<div class="uk-form-row">
+					                        <input type="checkbox"  icheck ng-model="conf.redemptionplan" id="switch_demo_small5" />
+					                        <label for="switch_demo_small5" class="inline-label">Жилийн төлөвлөгөөнөөс чөлөөлөгдөх</label>
+				                        </div>
+				                    </div>
+				                   <div class="uk-width-medium-1-2">
+				                   		<div class="uk-form-row">
+					                        <input type="checkbox"  icheck ng-model="conf.redemptionreport" id="switch_demo_small6" />
+					                        <label for="switch_demo_small6" class="inline-label">Жилийн тайлангаас чөлөөлөгдөх</label>
+				                        </div>
+				                    </div> 
+		                    </div>  --> 
+		                    <hr>
+		                    <div class="uk-grid" data-uk-grid-margin style="text-align:right;">	                  
+			                    <div class="uk-width-medium-1-1" >
+			                     	<button type="submit"   class="md-btn" >Хадгалах</button>
+			                     	<button type="button"   class="md-btn uk-modal-close" >Хаах</button>
+			                     </div>
+			                </div> 
+			                </form>             
+		               </div>
+			           
+		          </div>
+		              
+		    </div>
+		</div>
+
+<footer id="footer">
+    <span style="display:block;  text-align:right;">&copy; 2015-2016 <a href="#">Smart Green Technology LLC</a>, All rights reserved.</span>
+</footer>
+    <script type="text/x-kendo-template" id="action">
+		<a class="ts_remove_row" ng-show="{{configuration}}"  ng-click='config(dataItem)'   data-uk-modal="{target:'\\#modal_config_mlic'}"><i class="md-icon material-icons">settings</i></a>
+     </script>

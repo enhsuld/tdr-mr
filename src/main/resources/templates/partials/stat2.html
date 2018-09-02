@@ -1,0 +1,254 @@
+<!-- Banner
+================================================== -->
+<div class="parallax" data-background="/front/images/home-parallax-2.jpg" data-color="#36383e" data-color-opacity="0.5"
+     data-img-width="2500" data-img-height="1600">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="search-container" style="padding: 75px 0;">
+
+                    <h2>Нүүрс судалгааны хэлтэс</h2>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 col-md-12" style="padding:15px;">
+            <div id="miningStat1"></div>
+        </div>
+        <div class="col-lg-6 col-md-12" style="padding:15px;">
+            <div id="miningStat2"></div>
+        </div>
+        <div class="col-md-12" style="padding:15px;">
+            <div id="miningStat3"></div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+<script type="text/javascript">
+    // Data gathered from http://populationpyramid.net/germany/2015/
+
+    // Age categories
+    $.ajax({
+        type: "GET",
+        url: "/public/stats/2/1",
+        dataType: 'json',
+        success: function (data) {
+            Highcharts.chart('miningStat1', {
+                chart: {
+                    type: 'bar'
+                },
+                title: {
+                    text: 'Жилийн төлөвлөгөөний явцын статистик'
+                },
+                colors: ["#ffa000", "#e53935"],
+                credits: {
+                    enabled: false
+                },
+                xAxis: [{
+                    categories: ["Хүлээн авах хэсэг", "Нөөцийн хэсэг", "Технологийн хэсэг", "Бүт/борлуулалтын хэсэг", "Эдийн засгийн хэсэг", "Эцсийн шийдвэр"],
+                    reversed: false,
+                    labels: {
+                        step: 1
+                    }
+                }, { // mirror axis on right side
+                    opposite: true,
+                    reversed: false,
+                    categories: ["Хүлээн авах хэсэг", "Нөөцийн хэсэг", "Технологийн хэсэг", "Бүт/борлуулалтын хэсэг", "Эдийн засгийн хэсэг", "Эцсийн шийдвэр"],
+                    linkedTo: 0,
+                    labels: {
+                        step: 1
+                    }
+                }],
+                yAxis: {
+                    title: {
+                        text: null
+                    },
+                    labels: {
+                        formatter: function () {
+                            return Math.abs(this.value);
+                        }
+                    }
+                },
+
+                plotOptions: {
+                    series: {
+                        stacking: 'normal'
+                    }
+                },
+
+                tooltip: {
+                    formatter: function () {
+                        return '<b>' + this.series.name + ' - ' + this.point.category + '</b><br/>' +
+                            'Утга: ' + Highcharts.numberFormat(Math.abs(this.point.y), 0);
+                    }
+                },
+
+                series: [{
+                    name: 'Илгээсэн төлөвлөгөө',
+                    data: data.stat3,
+                    dataLabels: {
+                        enabled: true,
+                        inside: false,
+                        color: "#212121",
+                        formatter: function () {
+                            return Highcharts.numberFormat(Math.abs(this.point.y), 0);
+                        }
+                    }
+                }, {
+                    name: 'Засварт буцаасан төлөвлөгөө',
+                    data: data.stat23,
+                    dataLabels: {
+                        enabled: true,
+                        inside: false,
+                        color: "#212121",
+                        formatter: function () {
+                            return Highcharts.numberFormat(Math.abs(this.point.y), 0);
+                        }
+                    }
+                }]
+            });
+
+            Highcharts.chart('miningStat2', {
+                chart: {
+                    type: 'bar'
+                },
+                title: {
+                    text: 'Жилийн тайлангийн явцын статистик'
+                },
+                colors: ["#ffa000", "#e53935"],
+                credits: {
+                    enabled: false
+                },
+                xAxis: [{
+                    categories: ["Хүлээн авах хэсэг", "Нөөцийн хэсэг", "Технологийн хэсэг", "Бүт/борлуулалтын хэсэг", "Эдийн засгийн хэсэг", "Эцсийн шийдвэр"],
+                    reversed: false,
+                    labels: {
+                        step: 1
+                    }
+                }, { // mirror axis on right side
+                    opposite: true,
+                    reversed: false,
+                    categories: ["Хүлээн авах хэсэг", "Нөөцийн хэсэг", "Технологийн хэсэг", "Бүт/борлуулалтын хэсэг", "Эдийн засгийн хэсэг", "Эцсийн шийдвэр"],
+                    linkedTo: 0,
+                    labels: {
+                        step: 1
+                    }
+                }],
+                yAxis: {
+                    title: {
+                        text: null
+                    },
+                    labels: {
+                        formatter: function () {
+                            return Math.abs(this.value);
+                        }
+                    }
+                },
+
+                plotOptions: {
+                    series: {
+                        stacking: 'normal'
+                    }
+                },
+
+                tooltip: {
+                    formatter: function () {
+                        return '<b>' + this.series.name + ' - ' + this.point.category + '</b><br/>' +
+                            'Утга: ' + Highcharts.numberFormat(Math.abs(this.point.y), 0);
+                    }
+                },
+
+                series: [{
+                    name: 'Илгээсэн тайлан',
+                    data: data.stat4,
+                    dataLabels: {
+                        enabled: true,
+                        formatter: function () {
+                            return Highcharts.numberFormat(Math.abs(this.point.y), 0);
+                        },
+                        inside: false,
+                        color: "#212121"
+                    }
+                }, {
+                    name: 'Засварт буцаасан тайлан',
+                    data: data.stat24,
+                    dataLabels: {
+                        enabled: true,
+                        formatter: function () {
+                            return Highcharts.numberFormat(Math.abs(this.point.y), 0);
+                        },
+                        inside: false,
+                        color: "#212121"
+                    }
+                }]
+            });
+
+            Highcharts.chart('miningStat3', {
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: 'Жилийн төлөвлөгөө/тайлангийн статистик /төлөвөөр/'
+                },
+                credits: {
+                    enabled: false
+                },
+                xAxis: {
+                    categories: [
+                        'Зөвшөөрсөн',
+                        'Засварт буцаасан',
+                        'Илгээсэн',
+                        'Татгалзсан'
+                    ],
+                    crosshair: true
+                },
+                yAxis: {
+                    title: {
+                        text: 'Утга'
+                    }
+                },
+                plotOptions: {
+                    column: {
+                        borderWidth: 0
+                    }
+                },
+                series: [{
+                    name: 'Төлөвлөгөө',
+                    data: data.statrepstatus3,
+                    dataLabels: {
+                        enabled: true,
+                        formatter: function () {
+                            return Highcharts.numberFormat(Math.abs(this.point.y), 0);
+                        },
+                        inside: true,
+                        color: "#212121"
+                    }
+                }, {
+                    name: 'Тайлан',
+                    data: data.statrepstatus4,
+                    dataLabels: {
+                        enabled: true,
+                        formatter: function () {
+                            return Highcharts.numberFormat(Math.abs(this.point.y), 0);
+                        },
+                        inside: true,
+                        color: "#212121"
+                    }
+                }]
+            });
+        }
+    });
+
+
+</script>

@@ -1,0 +1,258 @@
+<div id="page_content">
+    <!--<div id="top_bar">
+        <div ncy-breadcrumb></div>
+    </div>-->
+    <div id="page_heading" data-uk-sticky="{ top: 48, media: 960 }">
+        <div class="heading_actions">
+            <a ui-sref="restricted.v2.company.edit" class="md-btn md-btn-primary md-btn-wave-light md-btn-icon"><i class="uk-icon-edit"></i> Засах</a>
+        </div>
+        <h1>{{user_data.lpname}}</h1>
+        <span class="uk-text-upper uk-text-small">{{user_data.lpreg}}</span>
+    </div>
+
+    <div id="page_content_inner">
+        <div class="uk-grid" data-uk-grid-margin data-uk-grid-match="{target:'.md-card-content'}">
+            <div class="uk-width-medium-2-3">
+                <div class="md-card">
+                    <div class="md-card-toolbar">
+                        <h3 class="md-card-toolbar-heading-text">
+                            Байгууллагын мэдээлэл
+                        </h3>
+                        <div class="md-card-toolbar-actions">
+                            <ul class="uk-tab" data-uk-tab="{connect:'#org_tabs',animation:'slide-horizontal'}">
+                                <li class="uk-active"><a href="#">Монгол</a></li>
+                                <li><a href="#">English</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="md-card-content">
+                        <ul id="org_tabs" class="uk-switcher uk-margin">
+                            <li>
+                                <div class="uk-grid uk-grid-divider uk-grid-medium">
+                                    <div class="uk-width-large-1-2">
+                                        <div class="uk-grid uk-grid-small">
+                                            <div class="uk-width-large-1-3">
+                                                <span class="uk-text-muted uk-text-small">Овог</span>
+                                            </div>
+                                            <div class="uk-width-large-2-3">
+                                                <span class="uk-text-large uk-text-middle">{{org_data.famName || "-"}}</span>
+                                            </div>
+                                        </div>
+                                        <hr class="uk-grid-divider">
+                                        <div class="uk-grid uk-grid-small">
+                                            <div class="uk-width-large-1-3">
+                                                <span class="uk-text-muted uk-text-small">Нэр</span>
+                                            </div>
+                                            <div class="uk-width-large-2-3">
+                                                <span class="uk-text-large uk-text-middle">{{org_data.givName || "-"}}</span>
+                                            </div>
+                                        </div>
+                                        <hr class="uk-grid-divider">
+                                        <div class="uk-grid uk-grid-small">
+                                            <div class="uk-width-large-1-3">
+                                                <span class="uk-text-muted uk-text-small">Цахим шуудан</span>
+                                            </div>
+                                            <div class="uk-width-large-2-3">
+                                                {{org_data.email || "-"}}
+                                            </div>
+                                        </div>
+                                        <hr class="uk-grid-divider">
+                                        <div class="uk-grid uk-grid-small">
+                                            <div class="uk-width-large-1-3">
+                                                <span class="uk-text-muted uk-text-small">Тайлан илгээх хүн</span>
+                                            </div>
+                                            <div class="uk-width-large-2-3">
+                                                {{org_data.personName || "-"}}
+                                            </div>
+                                        </div>
+                                        <hr class="uk-grid-divider">
+                                        <div class="uk-grid uk-grid-small">
+                                            <div class="uk-width-large-1-3">
+                                                <span class="uk-text-muted uk-text-small">Суурин утас</span>
+                                            </div>
+                                            <div class="uk-width-large-2-3">
+                                                {{org_data.phone || "-"}}
+                                            </div>
+                                        </div>
+                                        <hr class="uk-grid-divider">
+                                        <div class="uk-grid uk-grid-small">
+                                            <div class="uk-width-large-1-3">
+                                                <span class="uk-text-muted uk-text-small">Гар утас</span>
+                                            </div>
+                                            <div class="uk-width-large-2-3">
+                                                {{org_data.mobile || "-"}}
+                                            </div>
+                                        </div>
+                                        <hr class="uk-grid-divider uk-hidden-large">
+                                    </div>
+                                    <div class="uk-width-large-1-2">
+                                        <p>
+                                            <span class="uk-text-muted uk-text-small uk-display-block uk-margin-small-bottom">Хот</span>
+                                            {{org_data.city || "-"}}
+                                        </p>
+                                        <hr class="uk-grid-divider">
+                                        <p>
+                                            <span class="uk-text-muted uk-text-small uk-display-block uk-margin-small-bottom">Дүүрэг</span>
+                                            {{org_data.disctrict || "-"}}
+                                        </p>
+                                        <hr class="uk-grid-divider">
+                                        <p>
+                                            <span class="uk-text-muted uk-text-small uk-display-block uk-margin-small-bottom">Хороо</span>
+                                            {{org_data.khoroo || "-"}}
+                                        </p>
+                                        <hr class="uk-grid-divider">
+                                        <p>
+                                            <span class="uk-text-muted uk-text-small uk-display-block uk-margin-small-bottom">Гудамж</span>
+                                            {{org_data.street || "-"}}
+                                        </p>
+
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="uk-grid uk-grid-divider uk-grid-medium">
+                                    <div class="uk-width-large-1-2">
+                                        <div class="uk-grid uk-grid-small">
+                                            <div class="uk-width-large-1-3">
+                                                <span class="uk-text-muted uk-text-small">Surname</span>
+                                            </div>
+                                            <div class="uk-width-large-2-3">
+                                                <span class="uk-text-large uk-text-middle">{{org_data.famNameL1 || "-"}}</span>
+                                            </div>
+                                        </div>
+                                        <hr class="uk-grid-divider">
+                                        <div class="uk-grid uk-grid-small">
+                                            <div class="uk-width-large-1-3">
+                                                <span class="uk-text-muted uk-text-small">Name</span>
+                                            </div>
+                                            <div class="uk-width-large-2-3">
+                                                <span class="uk-text-large uk-text-middle">{{org_data.givNameL1 || "-"}}</span>
+                                            </div>
+                                        </div>
+                                        <hr class="uk-grid-divider">
+                                        <div class="uk-grid uk-grid-small">
+                                            <div class="uk-width-large-1-3">
+                                                <span class="uk-text-muted uk-text-small">Email</span>
+                                            </div>
+                                            <div class="uk-width-large-2-3">
+                                                {{org_data.email || "-"}}
+                                            </div>
+                                        </div>
+                                        <hr class="uk-grid-divider">
+                                        <div class="uk-grid uk-grid-small">
+                                            <div class="uk-width-large-1-3">
+                                                <span class="uk-text-muted uk-text-small">Person</span>
+                                            </div>
+                                            <div class="uk-width-large-2-3">
+                                                {{org_data.personName || "-"}}
+                                            </div>
+                                        </div>
+                                        <hr class="uk-grid-divider">
+                                        <div class="uk-grid uk-grid-small">
+                                            <div class="uk-width-large-1-3">
+                                                <span class="uk-text-muted uk-text-small">Telephone</span>
+                                            </div>
+                                            <div class="uk-width-large-2-3">
+                                                {{org_data.phone || "-"}}
+                                            </div>
+                                        </div>
+                                        <hr class="uk-grid-divider">
+                                        <div class="uk-grid uk-grid-small">
+                                            <div class="uk-width-large-1-3">
+                                                <span class="uk-text-muted uk-text-small">Mobile</span>
+                                            </div>
+                                            <div class="uk-width-large-2-3">
+                                                {{org_data.mobile || "-"}}
+                                            </div>
+                                        </div>
+                                        <hr class="uk-grid-divider uk-hidden-large">
+                                    </div>
+                                    <div class="uk-width-large-1-2">
+                                        <p>
+                                            <span class="uk-text-muted uk-text-small uk-display-block uk-margin-small-bottom">City</span>
+                                            {{org_data.cityL1 || "-"}}
+                                        </p>
+                                        <hr class="uk-grid-divider">
+                                        <p>
+                                            <span class="uk-text-muted uk-text-small uk-display-block uk-margin-small-bottom">District</span>
+                                            {{org_data.disctrictL1 || "-"}}
+                                        </p>
+                                        <hr class="uk-grid-divider">
+                                        <p>
+                                            <span class="uk-text-muted uk-text-small uk-display-block uk-margin-small-bottom">Khoroo</span>
+                                            {{org_data.khorooL1 || "-"}}
+                                        </p>
+                                        <hr class="uk-grid-divider">
+                                        <p>
+                                            <span class="uk-text-muted uk-text-small uk-display-block uk-margin-small-bottom">Street</span>
+                                            {{org_data.streetL1 || "-"}}
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="md-card" ng-init="loadReportData()">
+                    <div class="md-card-toolbar">
+                        <h3 class="md-card-toolbar-heading-text">
+                            Тайлан/төлөвлөгөөний явц
+                        </h3>
+                    </div>
+                    <div class="md-card-content">
+                        <table class="uk-table uk-table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Хэлтэс</th>
+                                    <th>ТЗ дугаар</th>
+                                    <th>Он</th>
+                                    <th>Төрөл</th>
+                                    <th>Төлөв</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-if="report_data.length == 0">
+                                    <td colspan="6">Харуулах үр дүн байхгүй байна.</td>
+                                </tr>
+                                <tr ng-repeat="report in report_data track by $index">
+                                    <td>{{$index + 1}}</td>
+                                    <td>{{getAnDivision(report)}}</td>
+                                    <td>{{report.licenseXB}}</td>
+                                    <td>{{report.reportyear}}</td>
+                                    <td>{{(report.xtype == 0) ? 'X ' : ''}}{{getReportType(report.reporttype)}}</td>
+                                    <td><span class="uk-badge" ng-bind="getAnStatus(report)" ng-class="getAnStatusClass(report)"></span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="uk-width-medium-1-3">
+                <div class="md-card">
+                    <div class="md-card-toolbar">
+                        <h3 class="md-card-toolbar-heading-text">
+                            Мэдээлэл & Зарлал
+                        </h3>
+                    </div>
+                    <div class="md-card-content">
+                        <ul class="md-list md-list-addon" style="max-height: 100vh; overflow:auto;">
+                            <li ng-repeat="m in messages.messages | limitTo:10">
+                                <div class="md-list-addon-element">
+                                    <i class="md-list-addon-icon material-icons" ng-if="m.status == 0">&#xE0B9;</i>
+                                    <i class="md-list-addon-icon material-icons uk-text-warning" ng-if="m.status == 1">&#xE8B2;</i>
+                                </div>
+                                <div class="md-list-content">
+                                    <a class="md-list-heading" ng-bind="m.title" ng-click="showMessage(m)"></a>
+                                    <span class="uk-text-small uk-text-muted" ng-bind="m.createdat | limitTo : 10"></span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

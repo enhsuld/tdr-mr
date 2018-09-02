@@ -1,0 +1,96 @@
+<div id="page_content" style="overflow:hidden;">
+    <div id="page_content_inner">
+    	<div class="uk-grid" >
+       	   <div class="uk-width-medium-1">
+               <div class="md-card" data-uk-grid-margin>
+                   <div class="md-card-content">
+                    	<kendo-grid options="PlanExploration"></kendo-grid>     
+                   </div>
+               </div>
+           </div>
+        </div>
+    </div>
+</div>
+	
+<a href="" id="downloadJS" style="display:none;">Download</a>
+<script type="text/x-kendo-template" id="main">
+		#if (repstatusid == 7 || repstatusid == 8)  { #
+			#if (xtype == 0)  { #
+	     		<a class="md-btn md-btn-primary md-btn-small md-btn-wave-light waves-effect waves-button waves-light" ng-click="loadOnZero(dataItem)" data-translate="Check"></a>
+			#} else {#
+				<a class="md-btn md-btn-primary md-btn-small md-btn-wave-light waves-effect waves-button waves-light" ng-click="loadOnCheck(dataItem)" data-translate="Check"></a>
+			#}#
+		# } else if(repstatusid == 1){#
+				#if (xtype == 0)  { #
+	     			<a class="md-btn md-btn-primary md-btn-small md-btn-wave-light waves-effect waves-button waves-light" ng-click="loadOnZero(dataItem)" data-translate="View"></a>
+				#} else {#
+					<a class="md-btn md-btn-primary md-btn-small md-btn-wave-light waves-effect waves-button waves-light" ng-click="loadOnCheck(dataItem)" data-translate="Approve"></a>
+				#}#
+		#} else if(repstatusid == 5){#
+			<a class="md-btn md-btn-primary md-btn-small md-btn-wave-light waves-effect waves-button waves-light" ng-click="loadOnCheck(dataItem)" data-translate="View"></a>
+		#}#	
+</script>
+
+
+<script type="text/x-kendo-template" id="status">
+		#if (repstatusid == 0)  { #
+     		<span class="uk-badge uk-badge-primary" data-translate="Saved"></span>
+		# }  else if (repstatusid == 7) {#
+			<span class="uk-badge uk-badge-warning" data-translate="Submitted"></span>
+		#if (rejectstep == repstepid)  { # <span class="uk-badge uk-badge-danger" data-uk-tooltip="{pos:'right'}" title="Засварлагдан" style="margin-top:-25px;"><i class="material-icons">mode_edit</i></span> #}#
+		# } else if (repstatusid == 2) {#
+			<span class="uk-badge uk-badge-danger" data-translate="Back to edit"></span>
+		# } else if (repstatusid == 1) {#
+			<span class="uk-badge uk-badge-success" data-translate="Confirmed"></span>
+		#} else if (repstatusid == 5) {#
+			<span class="uk-badge uk-badge-success" data-translate="Finalized"></span>
+		#}#
+</script>
+
+<script type="text/x-kendo-template" id="rejectstep">
+		#if (rejectstep == 0)  { #
+     		<span class="uk-badge uk-badge-primary" data-translate="Saved"></span>
+		# } else if (rejectstep == 7 || repstatusid == 8) {#
+			<span class="uk-badge uk-badge-warning" data-translate="Submitted"></span>
+		# } else if (rejectstep == 2) {#
+			<span class="uk-badge uk-badge-danger" data-translate="Back to edit"></span>
+		# } else if (repstatusid == 1) {#
+			<span class="uk-badge uk-badge-success" data-translate="Confirmed"></span>
+		#}#
+</script>
+
+<script type="text/x-kendo-template" id="comesEject">
+		#if (repstatusid == 7 and rejectstep!=null)  { #
+     		<span class="uk-badge uk-badge-primary" data-translate="Засварлагдсан"></span>
+		# } #
+</script>
+
+<script type="text/x-kendo-template" id="export">
+	<div id="details-container" style="text-align:left;">
+		<a class="k-button k-button-icontext" ng-click="downloadFile(1)"><i style="color:\\#fff;" class="material-icons">file_download</i> ААН-ээс ирсэн</a>
+		<a class="k-button k-button-icontext" ng-click="downloadFile(2)"><i style="color:\\#fff;" class="material-icons">file_download</i> ААН-рүү буцаагдсан</a>
+	</div>
+</script>
+
+<script type="text/x-kendo-template" id="export5">
+	<div id="details-container" style="text-align:left;">
+		<a class="k-button k-button-icontext" ng-click="downloadFile(5)"><i style="color:\\#fff;" class="material-icons">file_download</i> Татах</a>
+	</div>
+</script>
+
+<script type="text/x-kendo-template" id="division3">
+		#if (divisionid == 3)  { #
+			#if (groupid == 10)  { # 
+				Үнэт, өнгөт металл
+			#} else if (groupid == 11){ #
+				ЦИМ, ГХЭ, харь ховор металл
+			#} else if (groupid == 12){ #
+				Металл бус, түгээмэл тархацтай ашигт малтмал
+			#} else if (groupid == 12){ #
+				Нүүрс,  уламжлалт бус газрын тос
+			#}#
+
+		# } else {#
+			<span ng-bind="finddeposit(#:depositid#)"></span> 
+		# } #
+</script>  

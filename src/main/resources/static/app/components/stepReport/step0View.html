@@ -1,0 +1,40 @@
+<div id="page_content" style="overflow:hidden;">
+    <div id="page_content_inner">
+    	<div class="uk-grid" >
+       	   <div class="uk-width-medium-1">
+               <div class="md-card" data-uk-grid-margin>
+                   <div class="md-card-content">
+                    	<kendo-grid options="PlanExploration"></kendo-grid>     
+                   </div>
+               </div>
+           </div>
+        </div>
+    </div>
+</div>
+<a href="" id="downloadJS" style="display:none;">Download</a>
+
+<script type="text/x-kendo-template" id="main">
+		#if (repstatusid == 7 || repstatusid == 8)  { #
+			#if (xtype == 0)  { #
+	     		<a class="md-btn md-btn-primary md-btn-small md-btn-wave-light waves-effect waves-button waves-light" ng-click="loadOnZero(dataItem)" data-translate="Check"></a>
+			#} else {#
+				<a class="md-btn md-btn-primary md-btn-small md-btn-wave-light waves-effect waves-button waves-light" ng-click="loadOnCheck(dataItem)" data-translate="Check"></a>
+			#}#
+		# } else if(repstatusid == 1){#
+				#if (xtype == 0)  { #
+	     			<a class="md-btn md-btn-primary md-btn-small md-btn-wave-light waves-effect waves-button waves-light" ng-click="loadOnZero(dataItem)" data-translate="View"></a>
+				#} else {#
+					<a class="md-btn md-btn-primary md-btn-small md-btn-wave-light waves-effect waves-button waves-light" ng-click="loadOnCheck(dataItem)" data-translate="Approve"></a>
+				#}#
+		#} else if(repstatusid == 5){#
+			<a class="md-btn md-btn-primary md-btn-small md-btn-wave-light waves-effect waves-button waves-light" ng-click="loadOnCheck(dataItem)" data-translate="View"></a>
+		#}#	
+</script>
+
+<script type="text/x-kendo-template" id="export">
+	<div id="details-container" style="text-align:left;">
+		<a role="button" class="k-button k-button-icontext k-grid-excel" href="\\#"><span class="k-icon k-i-file-excel"></span>Export to Excel</a>
+		<a class="k-button k-button-icontext" ng-click="downloadFile(3)"><i style="color:\\#fff;" class="material-icons">file_download</i> ААН-ээс ирсэн</a>
+		<a class="k-button k-button-icontext" ng-click="downloadFile(4)"><i style="color:\\#fff;" class="material-icons">file_download</i> ААН-рүү буцаагдсан</a>
+	</div>
+</script>

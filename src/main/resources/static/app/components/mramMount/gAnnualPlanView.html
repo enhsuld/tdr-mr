@@ -1,0 +1,21 @@
+<div id="page_content" style="overflow:hidden;">
+    <div id="page_content_inner">
+    	<div class="uk-grid" >
+       	   <div class="uk-width-medium-1">
+               <div class="md-card" data-uk-grid-margin>
+                   <div class="md-card-content">
+                    	<kendo-grid options="PlanExploration"></kendo-grid>     
+                   </div>
+               </div>
+           </div>
+        </div>
+    </div>
+</div>
+<script type="text/x-kendo-template" id="main">
+		#if (repstatusid == 7)  { #
+     		<a class="md-btn md-btn-primary md-btn-small md-btn-wave-light waves-effect waves-button waves-light" ng-click="loadOnCheck(dataItem)" >Хянах</a>
+		# } else if(repstatusid == 1){#
+		 	<a class="md-btn md-btn-primary md-btn-small md-btn-wave-light waves-effect waves-button waves-light" ng-click="loadOnLook(dataItem)" >Харах</a>
+		#}#	
+</script>
+

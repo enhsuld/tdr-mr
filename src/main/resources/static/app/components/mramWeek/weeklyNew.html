@@ -1,0 +1,100 @@
+    <div id="page_content">
+        <div id="page_content_inner">
+        	<div class="uk-grid" >
+	       	   <div class="uk-width-medium-1">
+	               <div class="md-card" data-uk-grid-margin>
+	                   <div class="md-card-content">                   		
+	                   		<kendo-grid options="PlanExploration" id="grid"  k-rebind="PlanExploration.language"></kendo-grid>     
+	                   </div>
+	               </div>
+	           </div>
+	        </div>
+        
+        	<div class="uk-grid" >
+        	   <div class="uk-width-medium-1">
+                    <div class="md-card" data-uk-grid-margin>
+                        <div class="md-card-content">
+                            <div class="uk-grid uk-grid-divider" data-uk-grid-margin>
+					             <div class="uk-width-medium-1 rep">    
+					             	 <kendo-grid options=REPBundle></kendo-grid>    
+					             </div>                  
+					         </div> 
+                        </div>
+                    </div>
+                </div>
+             </div>
+         </div>
+    </div>
+	<footer id="footer">
+	    <span style="display:block;  text-align:right;">&copy; 2015-2016 <a href="#">Smart Green Technology LLC</a>, All rights reserved.</span>
+	</footer>
+
+     <script type="text/x-kendo-template" id="config">
+		<a class="ts_remove_row" ng-click="config(dataItem)"  data-uk-tooltip title="Config" ><i class="md-icon material-icons">settings</i></a>
+     </script>
+     <script type="text/x-kendo-template" id="action">
+		<a class='k-button k-button-icontext' href='javascript:void(0)' ng-click="loadOnCreate(dataItem)"><span class='k-icon k-add'></span>Шинэ тайлан</a>
+     </script>
+<script type="text/x-kendo-template" id="status">
+		#if (repstatusid == 0)  { #
+     		<span class="uk-badge uk-badge-primary" data-translate="Saved"></span>
+			#if (xtype == 0)  { # <span class="uk-badge uk-badge-danger" data-uk-tooltip="{pos:'right'}" title="X-төлөвлөгөө / тайлан" style="margin-top:-25px;">X</span> #}#
+		# } else if (repstatusid == 7 || repstatusid == 8) {#
+			<span class="uk-badge uk-badge-warning" data-translate="Submitted"></span>
+			#if (xtype == 0)  { # <span class="uk-badge uk-badge-danger" data-uk-tooltip="{pos:'right'}" title="X-төлөвлөгөө / тайлан" style="margin-top:-25px;">X</span> #}#
+		# } else if (repstatusid == 3) {#
+			<span class="uk-badge uk-badge-danger" data-translate="Rejected"></span>
+			#if (xtype == 0)  { # <span class="uk-badge uk-badge-danger" data-uk-tooltip="{pos:'right'}" title="X-төлөвлөгөө / тайлан" style="margin-top:-25px;">X</span> #}#
+		# } else if (repstatusid == 2) {#
+			<span class="uk-badge uk-badge-danger" data-translate="Back to edit"></span>
+			#if (xtype == 0)  { # <span class="uk-badge uk-badge-danger" data-uk-tooltip="{pos:'right'}" title="X-төлөвлөгөө / тайлан" style="margin-top:-25px;">X</span> #}#
+		# } else if (repstatusid == 1) {#
+			<span class="uk-badge uk-badge-success" data-translate="Confirmed"></span>
+			#if (xtype == 0)  { # <span class="uk-badge uk-badge-danger" data-uk-tooltip="{pos:'right'}" title="X-төлөвлөгөө / тайлан" style="margin-top:-25px;">X</span> #}#
+		#}#
+</script>  
+
+<script type="text/x-kendo-template" id="division3">
+		#if (divisionid == 3)  { #
+			#if (groupid == 10)  { # 
+				Үнэт, өнгөт металл
+			#} else if (groupid == 11){ #
+				ЦИМ, ГХЭ, харь ховор металл
+			#} else if (groupid == 12){ #
+				Металл бус, түгээмэл тархацтай ашигт малтмал
+			#} else if (groupid == 12){ #
+				Нүүрс,  уламжлалт бус газрын тос
+			#}#
+
+		# } else {#
+			<span ng-bind="finddeposit(#:depositid#)"></span> 
+		# } #
+</script>  
+
+<script type="text/x-kendo-template" id="main">
+		#if (repstatusid == 0 || repstatusid == 2)  { #
+				#if (xtype == 0)  { #
+	     			<a class="md-btn md-btn-primary md-btn-small md-btn-wave-light waves-effect waves-button waves-light" ng-click="loadOnZero(dataItem)" data-translate="Edit"></a>
+				#} else {#
+					<a class="md-btn md-btn-primary md-btn-small md-btn-wave-light waves-effect waves-button waves-light" ng-click="loadOnUpdate(dataItem)" data-translate="Edit"></a>
+				#}#
+     		
+		# } else if(repstatusid == 7 || repstatusid == 3){#
+
+				#if (xtype == 0)  { #
+					<a class='md-btn md-btn-primary md-btn-small md-btn-wave-light waves-effect waves-button waves-light' ng-click='loadOnZero(dataItem)' data-translate="View"></a>
+	     			
+				#} else {#
+					<a class='md-btn md-btn-primary md-btn-small md-btn-wave-light waves-effect waves-button waves-light' ng-click='loadOnUpdate(dataItem)' data-translate="View"></a>
+				#}#
+		 	
+		#} else {#
+
+				#if (xtype == 0)  { #
+	     			<a class="md-btn md-btn-primary md-btn-small md-btn-wave-light waves-effect waves-button waves-light" ng-click="loadOnZero(dataItem)" >Харах</a>
+				#} else {#
+					<a class="md-btn md-btn-primary md-btn-small md-btn-wave-light waves-effect waves-button waves-light" ng-click="loadOnUpdate(dataItem)" data-translate="View"></a>
+				#}#
+		 	
+		#}#
+     </script>

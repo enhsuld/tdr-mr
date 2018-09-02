@@ -1,0 +1,185 @@
+<div id="page_content" style="overflow:hidden;">
+    <div id="page_content_inner">
+        <div class="uk-grid" >
+            <div class="uk-width-medium-1">
+                <div class="md-card" data-uk-grid-margin>
+                    <div class="md-card-content">
+                        <kendo-grid id="listGrid" options="listGrid"></kendo-grid>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <span style="display:block;  text-align:right;">&copy; 2015-2017 <a href="#">Smart Green Technology LLC</a>, All rights reserved.</span>
+</footer>
+
+<style>
+    .k-grid-content-locked {
+        float: right;
+    }
+
+    .k-grid-header-locked {
+        float: right;
+    }
+</style>
+
+<script type="text/x-kendo-template" id="main">
+    <a class="md-btn md-btn-primary md-btn-small md-btn-wave-light waves-effect waves-button waves-light" ng-bind="getAnButton(dataItem)" ng-click="showDetail(dataItem)"></a>
+</script>
+
+<script type="text/x-kendo-template" id="status">
+    <span class="uk-badge" ng-bind="getAnStatus(dataItem)" ng-class="getAnStatusClass(dataItem)"></span>
+    #if (repstatusid == 7 && rejectstep > 0)  { # <span class="uk-badge uk-badge-danger" data-uk-tooltip="{pos:'right'}" title="Засварлагдан" style="margin-top:-25px;"><i class="material-icons">mode_edit</i></span> #}#
+</script>
+
+<div class="uk-modal uk-modal-card-fullscreen" id="modal_detail">
+    <div class="uk-modal-dialog uk-modal-dialog-blank">
+        <div class="md-card uk-height-viewport">
+            <div class="md-card-toolbar">
+                <!--<div class="md-card-toolbar-actions">
+                    <div class="md-card-dropdown" data-uk-dropdown="{pos:'bottom-right'}">
+                        <i class="md-icon material-icons">&#xE5D4;</i>
+                        <div class="uk-dropdown">
+                            <ul class="uk-nav">
+                                <li><a href="#">Action 1</a></li>
+                                <li><a href="#">Action 2</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>-->
+                <span class="md-icon material-icons uk-modal-close">&#xE5C4;</span>
+                <h3 class="md-card-toolbar-heading-text">
+                    {{sgt.lpname}} ({{sgt.lpreg}}) / ТЗ дугаар: {{sgt.lcnum}} / {{sgt.year}} оны {{getReportType(sgt.reporttype)}}
+                </h3>
+            </div>
+            <div class="md-card-content">
+                <ul class="uk-tab" data-uk-tab="{connect:'#anTabs', animation:'slide-right'}">
+                    <!--<li class="uk-active"><a href="#" data-translate="General information"></a></li>-->
+                    <li ng-click="openClose()" ng-repeat="item in repsteps[sgt.divisionid-1]"><a href="#">{{item.text}}</a></li>
+                </ul>
+                <ul id="anTabs" class="uk-switcher uk-margin" style="overflow:visible">
+                    <!--<li ng-include="'v2/lists/firstTab.html'"></li>-->
+                    <li ng-repeat="item in repsteps[sgt.divisionid-1]">
+                        <div class="uk-width-medium-10-10 uk-container-center reset-print">
+                            <div class="uk-grid uk-grid-collapse" data-uk-grid-margin>
+                                <div class="uk-width-large-3-10 hidden-print uk-visible-large">
+                                    <div class="md-list-outside-wrapper" custom-scrollbar list-outside>
+                                        <ul class="md-list md-list-outside notes_list">
+                                            <li class="heading_list" ng-repeat-start="list in anObj"  ng-class="{ 'uk-text-danger': $index == 0}">Жагсаалт</li>
+
+                                            <li ng-repeat-end ng-repeat="note in list.notes"  ng-if="note.inptype==item.tab" ng-class="{
+						                            			'md-bg-light-green-50':note.issaved == 10,
+						                                        'md-bg-light-green-100':note.decision == '1',
+						                                        'md-bg-light-blue-100':note.decision == '3',
+						                                        'md-bg-deep-orange-100':note.decision == '2'
+
+						                                        }">
+                                                <a href="#" class="md-list-content note_link" ng-click="openNote($event,$parent.$index,$index,note)">
+                                                    <span class="md-list-heading uk-text-truncate">{{note.title}}</span>
+                                                    <span class="uk-text-small uk-text-muted">{{note.date}}</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="uk-width-large-7-10">
+                                    <div class="md-card md-card-single" style="height:100%;" single-card>
+                                        <div ng-if="!noteActive">
+                                            <div class="md-card-toolbar">
+                                                <h3 class="md-card-toolbar-heading-text">Тайлан төлөвлөгөө хянахад анхаарах зүйлс</h3>
+                                            </div>
+                                            <div class="md-card-content">
+                                                <ul class="uk-text-large uk-margin-large-top uk-margin-large-bottom">
+                                                    <li>Зүүн хэсэгт байрлах жагсаалтаас сонгож ажлаа үргэлжлүүлнэ.</li>
+                                                    <li>Ажлаа дараа нь үргэлжлүүлэх бол заавал хадгалах товчийг дарж хадгална.</li>
+                                                    <li>Ажил тус бүрийг хянаж шийдвэр хэсэгт заавал үр дүн бичнэ.</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <form  ng-if="noteActive" data-ng-submit="submitForm()">
+                                            <div class="md-card-toolbar hidden-print">
+
+                                                <h3 class="md-card-toolbar-heading-text">{{note_form.title}}</h3>
+                                            </div>
+                                            <div class="md-card-content" ng-if="note_form.images.length==0" style="min-height:278px;">
+                                                <div ng-if="note_form.content==null">
+                                                    <div class="md-card-content">
+                                                        <p class="uk-text-center uk-text-large uk-margin-large-top">
+                                                            Ямар нэгэн өгөгдөл илгээгээгүй байна.
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div ng-if="note_form.content!=null">
+                                                    <div class="md-card-content">
+                                                        <p class="uk-text-center uk-text-large uk-margin-large-top" ng-bind-html="note_form.content"></p>
+                                                    </div>
+                                                </div>
+                                                <input type="hidden" name="note_id" ng-model="noteForm.id">
+                                            </div>
+                                            <div class="md-card-content lala " ng-if="note_form.images.length>0">
+                                                <input type="hidden" name="note_id" id="noteid" ng-model="noteForm.id">
+                                                <div class="uk-overflow-container">
+                                                    <table class="uk-table uk-table-striped">
+                                                        <thead>
+                                                        <tr>
+                                                            <th style="width: 70px">Төрөл</th>
+                                                            <th>Файлын нэр</th>
+                                                            <th>Огноо</th>
+                                                            <th style="width: 150px"></th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr ng-repeat="item in note_form.images">
+                                                            <td>
+									                                            <span  ng-switch on="item.ext">
+									                                                	<span ng-switch-when="png" style="text-align:center;">
+															                             	<i style="font-size:30px;" class="material-icons uk-text-primary">photo</i>
+															                            </span>
+															                            <span ng-switch-when="jpg" style="text-align:center;">
+															                             	<i style="font-size:30px;" class="material-icons uk-text-primary">photo</i>
+															                            </span>
+															                            <span ng-switch-when="jpeg" style="text-align:center;">
+															                             	<i style="font-size:50px;" class="material-icons uk-text-primary">photo</i>
+															                            </span>
+															                            <span ng-switch-when="gif" style="text-align:center;">
+															                             	<i style="font-size:30px;" class="material-icons uk-text-primary">photo</i>
+															                            </span>
+									                                                    <span ng-switch-default target="_self" style="text-align:center;">
+															                             	<i style="font-size:30px;" class="material-icons uk-text-primary">archive</i>
+															                            </span>
+									                                                </span>
+
+                                                            </td>
+                                                            <td>{{item.title}}</td>
+                                                            <td>{{item.date}}</td>
+                                                            <td>
+                                                                <!--<a class="md-btn md-btn-primary md-btn-small md-btn-wave-light" target="_blank" download="{{item.title}}" href="{{item.url}}">
+                                                                    Татах
+                                                                </a>-->
+
+                                                                <a ng-show="(sgt.divisionid != 3 && sgt.reporttype == 3) || note_form.isform != 1 || item.ext!='xlsm'" class="md-btn md-btn-primary md-btn-small md-btn-wave-light" target="_blank" download="{{item.title}}" href="{{item.url}}">
+                                                                    Татах
+                                                                </a>
+
+                                                                <a ng-hide="(sgt.divisionid != 3 && sgt.reporttype == 3) || note_form.isform != 1 || item.ext!='xlsm'" class="md-btn md-btn-primary md-btn-small md-btn-wave-light" target="_blank" download="{{item.title}}" href="/import/downloadForm/{{note_form.id}}/{{$stateParams.param}}">
+                                                                    Татах
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

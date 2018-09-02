@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en-US" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+
+<!-- Basic Page Needs
+================================================== -->
+<title>MRPAM</title>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<base href="/"/>
+<!-- CSS
+================================================== -->
+<link rel="stylesheet" href="front/css/style.css" ></link>
+<link rel="stylesheet" href="front/css/colors/main.css" id="colors" ></link>
+
+</head>
+
+<body>
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+
+
+<div class="clearfix"></div>
+    <div th:include="partials/header"></div>
+
+	<th:block th:switch="${path}">
+		<div th:case="'index'" th:include="partials/index">
+			print object is not active
+		</div>
+		<div th:case="'sign-in'" th:include="partials/login">
+
+		</div>
+        <div th:case="'search'" th:include="partials/search">
+
+        </div>
+        <div th:case="'stat1'" th:include="partials/stat1">
+
+        </div>
+        <div th:case="'stat2'" th:include="partials/stat2">
+
+        </div>
+	</th:block>
+
+	<!-- Footer
+    ================================================== -->
+	<div id="footer"  th:include="partials/footer" class="sticky-footer"></div>
+
+
+
+<!-- Back To Top Button -->
+<div id="backtotop"><a href="#"></a></div>
+
+
+<!-- Scripts
+================================================== -->
+<script type="text/javascript" src="front/scripts/jquery-2.2.0.min.js"></script>
+<script type="text/javascript" src="front/scripts/chosen.min.js"></script>
+<script type="text/javascript" src="front/scripts/magnific-popup.min.js"></script>
+<script type="text/javascript" src="front/scripts/owl.carousel.min.js"></script>
+<script type="text/javascript" src="front/scripts/rangeSlider.js"></script>
+<script type="text/javascript" src="front/scripts/sticky-kit.min.js"></script>
+<script type="text/javascript" src="front/scripts/slick.min.js"></script>
+<script type="text/javascript" src="front/scripts/masonry.min.js"></script>
+<script type="text/javascript" src="front/scripts/jquery.jpanelmenu.js"></script>
+<script type="text/javascript" src="front/scripts/tooltips.min.js"></script>
+<script type="text/javascript" src="front/scripts/custom.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js" th:if="${path} == 'index'"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js" th:if="${path} == 'index'"></script>
+    <script type="text/javascript" src="front/scripts/graphcustom.js" th:if="${path} == 'index'"></script>
+
+
+<!-- Style Switcher
+================================================== -->
+<script src="/front/scripts/switcher.js"></script>
+
+<div id="style-switcher">
+	<h2>Өнгө солих <a href="#"><i class="sl sl-icon-settings"></i></a></h2>
+	
+	<div>
+		<ul class="colors" id="color1">
+			<li><a href="#" class="blue" title="Blue"></a></li>
+			<li><a href="#" class="green" title="Green"></a></li>
+			<li><a href="#" class="orange" title="Orange"></a></li>
+			<li><a href="#" class="navy" title="Navy"></a></li>
+			<li><a href="#" class="yellow" title="Yellow"></a></li>
+			<li><a href="#" class="peach" title="Peach"></a></li>
+			<li><a href="#" class="beige" title="Beige"></a></li>
+			<li><a href="#" class="purple" title="Purple"></a></li>
+			<li><a href="#" class="celadon" title="Celadon"></a></li>
+			<li><a href="#" class="pink" title="Pink"></a></li>
+			<li><a href="#" class="red" title="Red"></a></li>
+			<li><a href="#" class="brown" title="Brown"></a></li>
+			<li><a href="#" class="cherry" title="Cherry"></a></li>
+			<li><a href="#" class="cyan" title="Cyan"></a></li>
+			<li><a href="#" class="gray" title="Gray"></a></li>
+			<li><a href="#" class="olive" title="Olive"></a></li>
+		</ul>
+	</div>
+		
+</div>
+<!-- Style Switcher / End -->
+
+
+</div>
+<!-- Wrapper / End -->
+
+</body>
+</html>

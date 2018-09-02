@@ -1,0 +1,82 @@
+    <div id="page_content">
+        <div id="page_content_inner">
+        	<div class="uk-grid" >
+        	   <div class="uk-width-medium-1">
+                    <div class="md-card" data-uk-grid-margin>
+                        <div class="md-card-content">
+                            <ul class="uk-tab" data-uk-tab="{connect:'#tabs_anim5', animation:'slide-right'}">
+                                <li class="uk-active"><a href="#">Илгээсэн мэдээлэл</a></li>
+                                <li><a href="#">Статистик</a></li>
+                                <li ><a href="#">Тайлангийн шаардлага</a></li>
+                            </ul>
+                            <ul id="tabs_anim5" class="uk-switcher uk-margin">
+                                <li>
+                               		<div class="uk-grid uk-grid-divider" data-uk-grid-margin>
+							             <div class="uk-width-medium-1 sub">    
+							             	 <kendo-grid options=subForm></kendo-grid> 
+							             </div>                   
+							         </div> 
+                                </li>
+                                <li>Est cupiditate quia quidem reiciendis sunt eum aut consequatur voluptatum pariatur eius quisquam nisi ut neque esse nostrum tempora in architecto totam esse ratione aut qui voluptas quis explicabo voluptas laboriosam ea quia sed qui molestiae velit deserunt.</li>
+                                <li>
+                                	<div class="uk-grid uk-grid-divider" data-uk-grid-margin>
+							             <div class="uk-width-medium-1 rep">    
+							             	 <kendo-grid options=REPBundle></kendo-grid>                     	
+							                <!-- <div id="orgGrid"></div> -->
+							             </div>      
+							             <div class="uk-width-medium-1 lic">    
+							             	 <kendo-grid options="license"></kendo-grid>                     	
+							                <!-- <div id="orgGrid"></div> -->
+							             </div>                  
+							         </div>             
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+             </div>
+             <div class="md-fab-wrapper">
+			    <a class="md-fab md-fab-accent" ng-click='init()' href="#new_issue" data-uk-modal="{ center:true }">
+			        <i class="material-icons">&#xE145;</i>
+			    </a>
+			</div> 
+			<div class="uk-modal" id="new_issue">
+				
+			    <div class="uk-modal-dialog">
+			        <form class="uk-form-stacked" id="mlicense" name="mlicense" data-ng-submit="submitForm()">   
+			           <input type="hidden" id="{{section.id}}" class="menu" ng-model="rrid" value="{{rrid}}"/>
+			            <div class="uk-margin-medium-bottom">
+			            	<div class="uk-form-row parsley-row">
+				                <label for="issue_assignee" class="uk-form-label">Үндсэн тусгай зөвшөөрөл</label>
+				                <input config="newIssue.assignee.config" required options="newIssue.assignee.options" ng-change="chang()" ng-model="main" id="issue_assignee" name="issue_assignee" selectize />
+			            	</div>
+			            </div>
+			            <div class="uk-margin-medium-bottom">
+			                <label for="issue_assignee" class="uk-form-label">Нэмэлт тусгай зөвшөөрөл</label>
+			                <selectize id="selec_adv_1" config="selectize_planets_config" options="selectize_planets_options" position="bottom" ng-model="additional"></selectize>
+			            </div>
+			            <div class="uk-margin-medium-bottom">
+		            	  <div class="uk-form-row parsley-row">
+			            	  <label for="task_title">Талбайн нэр</label>
+                			  <input type="text" class="md-input" required id="Task_title" name="landname" ng-model="landname" md-input/>
+               			  </div>			                
+			            </div>
+			          
+			            <div class="uk-modal-footer uk-text-right">
+			                <button type="submit"  class="md-btn md-btn-flat md-btn-flat-primary" id="snippet_new_save">Хадгалах</button>
+			                <button type="button" id="closemodal" class="md-btn md-btn-flat uk-modal-close">Хаах</button>
+			            </div>
+			        </form>
+			    </div>        
+        </div>
+    </div>
+     <script type="text/x-kendo-template" id="config">
+		<a class="ts_remove_row" ng-click="config(dataItem)"  data-uk-tooltip title="Config" ><i class="md-icon material-icons">settings</i></a>
+     </script>
+     <script type="text/x-kendo-template" id="action">
+		<a class="ts_remove_row" ng-click="config(dataItem)"  data-uk-tooltip title="Config" ><i class="md-icon material-icons">settings</i></a>
+		<a class="ts_remove_row" ng-click="close()"  data-uk-tooltip title="View" ><i class="md-icon material-icons">visibility</i></a>
+		<a class="ts_remove_row" ng-click="prompt()" data-uk-tooltip title="Modify" ><i class="md-icon material-icons">input</i></a>
+		<a class="ts_remove_row" data-uk-tooltip title="Create" ng-click="loadOnCreate(#:id#)" ><i class="md-icon material-icons">add_box</i></a>
+		<a class="ts_remove_row" data-uk-tooltip title="Delete" ng-click="loadOnConfirm(#:id#)" ><i class="md-icon material-icons">delete</i></a>
+     </script>

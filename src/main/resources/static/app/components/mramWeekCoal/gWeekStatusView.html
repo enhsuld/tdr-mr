@@ -1,0 +1,32 @@
+<div id="page_content">
+    <div id="page_content_inner">
+               <div class="md-card" data-uk-grid-margin>
+                   <div class="md-card-content">
+                    	<kendo-grid options="gWeekStatus"></kendo-grid>     
+                   </div>
+               </div>
+    </div>
+</div>
+<footer id="footer">
+    <span style="display:block;  text-align:right;">&copy; 2015-2016 <a href="#">Smart Green Technology LLC</a>, All rights reserved.</span>
+</footer>
+<script type="text/x-kendo-template" id="main">
+		#if (repstatusid != 0)  { #
+     		<a class='md-btn md-btn-primary md-btn-small md-btn-wave-light waves-effect waves-button waves-light' ng-click='loadOnView(dataItem)' data-translate="Detail"></a>
+		# }#
+</script>
+<script type="text/x-kendo-template" id="status">
+		#if (repstatusid == 0)  { #
+     		<span class="uk-badge uk-badge-primary" data-translate="Saved"></span>
+		# } else if (repstatusid == 7) {#
+			<span class="uk-badge uk-badge-warning" data-translate="New"></span>
+		# } else if (repstatusid == 8) {#
+			<span class="uk-badge uk-badge-warning" data-translate="Засвараас ирсэн"></span>
+		# } else if (repstatusid == 3) {#
+			<span class="uk-badge uk-badge-danger" data-translate="Back to edit"></span>
+		# } else if (repstatusid == 1) {#
+			<span class="uk-badge uk-badge-success" data-translate="Approved"></span>
+		# } else if (repstatusid == 2) {#
+			<span class="uk-badge uk-badge-primary" data-translate="Rejected"></span>
+		#}#
+</script>
