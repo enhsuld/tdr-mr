@@ -113,6 +113,32 @@ public class FormImportController {
 					}
 				}
 			}
+			else if (type.equalsIgnoreCase("DATA_MIN_PLAN_5")){
+				List<Object[]> resultObj = (List<Object[]>) dao.getNativeSQLResult("SELECT A.LICENSEXB, A.LICTYPE, A.LPNAME, A.LP_REG, A.DIVISIONID, A.REPORTYEAR, A.REPORTTYPE, A.MINID, A.DEPOSITID, A.GROUPID, D.DATA1, D.DATA2, D.DATA3, D.DATA4, D.DATA5, D.DATA6, D.DATA7, D.DATA8 FROM DATA_MIN_PLAN_5 D LEFT JOIN ANNUAL_REGISTRATION A ON A.ID = D.PLANID WHERE A.REPSTATUSID = 1 AND A.DIVISIONID = "+loguser.getDivisionid()+" ORDER BY D.PLANID, D.ID", "list");
+				String[] headers = {"LICENSEXB", "LICTYPE", "LPNAME", "LP_REG", "DIVISIONID", "REPORTYEAR", "REPORTTYPE", "MINID", "DEPOSITID", "GROUPID", "DATA1", "DATA2", "DATA3", "DATA4", "DATA5", "DATA6", "DATA7", "DATA8"};
+				if (resultObj != null){
+					for(Object[] o : resultObj){
+						JSONObject obj = new JSONObject();
+						for(int i=0;i<headers.length;i++){
+							obj.put(headers[i].toLowerCase(), (o[i] != null) ? o[i] : "");
+						}
+						result.put(obj);
+					}
+				}
+			}
+			else if (type.equalsIgnoreCase("DATA_MIN_PLAN_6_1")){
+				List<Object[]> resultObj = (List<Object[]>) dao.getNativeSQLResult("SELECT A.LICENSEXB, A.LICTYPE, A.LPNAME, A.LP_REG, A.DIVISIONID, A.REPORTYEAR, A.REPORTTYPE, A.MINID, A.DEPOSITID, A.GROUPID, D.DATA1, D.DATA2, D.DATA3, D.DATA4, D.DATA5 FROM DATA_MIN_PLAN_6_1 D LEFT JOIN ANNUAL_REGISTRATION A ON A.ID = D.PLANID WHERE A.REPSTATUSID = 1 AND A.DIVISIONID = "+loguser.getDivisionid()+" ORDER BY D.PLANID, D.ID", "list");
+				String[] headers = {"LICENSEXB", "LICTYPE", "LPNAME", "LP_REG", "DIVISIONID", "REPORTYEAR", "REPORTTYPE", "MINID", "DEPOSITID", "GROUPID", "DATA1", "DATA2", "DATA3", "DATA4", "DATA5"};
+				if (resultObj != null){
+					for(Object[] o : resultObj){
+						JSONObject obj = new JSONObject();
+						for(int i=0;i<headers.length;i++){
+							obj.put(headers[i].toLowerCase(), (o[i] != null) ? o[i] : "");
+						}
+						result.put(obj);
+					}
+				}
+			}
 			else if (type.equalsIgnoreCase("DATA_MIN_PLAN_6_2")){
 				List<Object[]> resultObj = (List<Object[]>) dao.getNativeSQLResult("SELECT A.LICENSEXB, A.LICTYPE, A.LPNAME, A.LP_REG, A.DIVISIONID, A.REPORTYEAR, A.REPORTTYPE, A.MINID, A.DEPOSITID, A.GROUPID, D.DATA1, D.DATA2, D.DATA3, D.DATA4, D.DATA5, D.DATA6, D.DATA7, D.DATA8, D.DATA9 FROM DATA_MIN_PLAN_6_2 D LEFT JOIN ANNUAL_REGISTRATION A ON A.ID = D.PLANID WHERE A.REPSTATUSID = 1 AND A.DIVISIONID = "+loguser.getDivisionid()+" ORDER BY D.PLANID, D.ID", "list");
 				String[] headers = {"LICENSEXB", "LICTYPE", "LPNAME", "LP_REG", "DIVISIONID", "REPORTYEAR", "REPORTTYPE", "MINID", "DEPOSITID", "GROUPID", "DATA1", "DATA2", "DATA3", "DATA4", "DATA5", "DATA6", "DATA7", "DATA8", "DATA9"};

@@ -1,68 +1,104 @@
 <div id="page_content">
-     <div id="page_content_inner">
-		<div class="uk-grid">
-			<div class="uk-width-medium-1-1">
-		             	<div class="md-card">
-		                  <div class="md-card-content">
-                    <div class="uk-overflow-container">
-                    	<h3>Тайлан татаж авах хэсэг
-                            <span>
+    <div id="page_content_inner">
+        <div class="uk-grid">
+            <div class="uk-width-medium-1-1">
+                <div class="md-card">
+                    <div class="md-card-content">
+                        <div class="uk-overflow-container">
+                            <h3>Тайлан татаж авах хэсэг
+                                <span>
                                 <select kendo-drop-down-list k-ng-model="yearSelected">
                                     <option>2018</option>
                                     <option>2017</option>
                                     <option>2016</option>
                                 </select>
                             </span>
-
-                        </h3>
-                        <table class="uk-table">
-                            <thead>
-                            <tr>
-                                <th>Маягтын нэр</th>
-                                <th width="150px">Татаж авах</th>
-                            </tr>
-                            </thead>
-                            <tr>
-                                <td>Миний шийдвэрүүд</td>
-                                <td>
-                                    <a ui-sref="restricted.pages.commentslist" class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon"><i class="uk-icon-eye"></i>Харах</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Бүх тайлан төлөвлөгөөний жагсаалт</td>
-                                <td>
-                                    <a ng-if="yearSelected.value!=null"  href="/export/stat/excel/{{yearSelected.value}}/16" download class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon" ><i class="uk-icon-cloud-download"></i>Татах</a>
-                                </td>
-                            </tr>
-                            <tbody ng-if="user_data.divisionid == 1">
+                            </h3>
+                            <table class="uk-table">
+                                <thead>
+                                <tr>
+                                    <th>Маягтын нэр</th>
+                                    <th width="150px">Татаж авах</th>
+                                </tr>
+                                </thead>
+                                <tr>
+                                    <td>Миний шийдвэрүүд</td>
+                                    <td>
+                                        <a ui-sref="restricted.pages.commentslist"
+                                           class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon"><i
+                                                class="uk-icon-eye"></i>Харах</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Бүх тайлан төлөвлөгөөний жагсаалт</td>
+                                    <td>
+                                        <a ng-if="yearSelected.value!=null"
+                                           href="/export/stat/excel/{{yearSelected.value}}/16" download
+                                           class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon"><i
+                                                class="uk-icon-cloud-download"></i>Татах</a>
+                                    </td>
+                                </tr>
+                                <tbody ng-if="user_data.divisionid == 1">
                                 <tr>
                                     <td>Маягт 2-ын мэдээ</td>
                                     <td>
-                                        <a ng-if="yearSelected.value!=null"  href="/export/stat/excel/{{yearSelected.value}}/1" download class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon" onclick="$(this).addClass('disabled');$(this).prop('disabled',true);$(this).html('&lt;i class=&quot;uk-icon-spinner uk-icon-spin&quot;&gt;&lt;/i&gt;Түр хүлээнэ үү…');$(this).click();" ><i class="uk-icon-cloud-download"></i>Татах</a>
+                                        <a ng-if="yearSelected.value!=null"
+                                           href="/export/stat/excel/{{yearSelected.value}}/1" download
+                                           class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon"
+                                           onclick="$(this).addClass('disabled');$(this).prop('disabled',true);$(this).html('&lt;i class=&quot;uk-icon-spinner uk-icon-spin&quot;&gt;&lt;/i&gt;Түр хүлээнэ үү…');$(this).click();"><i
+                                                class="uk-icon-cloud-download"></i>Татах</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Төлөвлөгөөний Маягт 5-ын мэдээ</td>
+                                    <td>
+                                        <a ui-sref="restricted.pages.report_viewer({formname:'DATA_MIN_PLAN_5',reporttype:3})"
+                                           class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon"><i
+                                                class="uk-icon-eye"></i>Харах</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Төлөвлөгөөний Маягт 6.1-ын мэдээ</td>
+                                    <td>
+                                        <a ui-sref="restricted.pages.report_viewer({formname:'DATA_MIN_PLAN_6_1',reporttype:3})"
+                                           class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon"><i
+                                                class="uk-icon-eye"></i>Харах</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Төлөвлөгөөний Маягт 6.2-ын мэдээ</td>
                                     <td>
-                                        <a ui-sref="restricted.pages.report_viewer({formname:'DATA_MIN_PLAN_6_2',reporttype:3})" class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon"><i class="uk-icon-eye"></i>Харах</a>
+                                        <a ui-sref="restricted.pages.report_viewer({formname:'DATA_MIN_PLAN_6_2',reporttype:3})"
+                                           class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon"><i
+                                                class="uk-icon-eye"></i>Харах</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Тайлангийн Маягт 6.2-ын мэдээ</td>
                                     <td>
-                                        <a ng-if="yearSelected.value!=null"  href="/export/stat/excel/{{yearSelected.value}}/6" download class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon" onclick="$(this).addClass('disabled');$(this).prop('disabled',true);$(this).html('&lt;i class=&quot;uk-icon-spinner uk-icon-spin&quot;&gt;&lt;/i&gt;Түр хүлээнэ үү…');$(this).click();" ><i class="uk-icon-cloud-download"></i>Татах</a>
+                                        <a ng-if="yearSelected.value!=null"
+                                           href="/export/stat/excel/{{yearSelected.value}}/6" download
+                                           class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon"
+                                           onclick="$(this).addClass('disabled');$(this).prop('disabled',true);$(this).html('&lt;i class=&quot;uk-icon-spinner uk-icon-spin&quot;&gt;&lt;/i&gt;Түр хүлээнэ үү…');$(this).click();"><i
+                                                class="uk-icon-cloud-download"></i>Татах</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Төлөвлөгөөний Маягт 8-ын мэдээ</td>
                                     <td>
-                                        <a ui-sref="restricted.pages.report_viewer({formname:'DATA_MIN_PLAN_8',reporttype:3})" class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon"><i class="uk-icon-eye"></i>Харах</a>
+                                        <a ui-sref="restricted.pages.report_viewer({formname:'DATA_MIN_PLAN_8',reporttype:3})"
+                                           class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon"><i
+                                                class="uk-icon-eye"></i>Харах</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Тайлангийн Маягт 8-ын мэдээ</td>
                                     <td>
-                                        <a ng-if="yearSelected.value!=null" href="/export/stat/excel/{{yearSelected.value}}/11" download class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon" onclick="$(this).addClass('disabled');$(this).prop('disabled',true);$(this).html('&lt;i class=&quot;uk-icon-spinner uk-icon-spin&quot;&gt;&lt;/i&gt;Түр хүлээнэ үү…');$(this).click();" ><i class="uk-icon-cloud-download"></i>Татах</a>
+                                        <a ng-if="yearSelected.value!=null"
+                                           href="/export/stat/excel/{{yearSelected.value}}/11" download
+                                           class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon"
+                                           onclick="$(this).addClass('disabled');$(this).prop('disabled',true);$(this).html('&lt;i class=&quot;uk-icon-spinner uk-icon-spin&quot;&gt;&lt;/i&gt;Түр хүлээнэ үү…');$(this).click();"><i
+                                                class="uk-icon-cloud-download"></i>Татах</a>
                                     </td>
                                 </tr>
                                 <!--<tr>
@@ -74,87 +110,124 @@
                                 <tr>
                                     <td>Маягт 10-ын мэдээ</td>
                                     <td>
-                                        <a ng-if="yearSelected.value!=null" href="/export/stat/excel/{{yearSelected.value}}/8" download class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon" onclick="$(this).addClass('disabled');$(this).prop('disabled',true);$(this).html('&lt;i class=&quot;uk-icon-spinner uk-icon-spin&quot;&gt;&lt;/i&gt;Түр хүлээнэ үү…');$(this).click();" ><i class="uk-icon-cloud-download"></i>Татах</a>
+                                        <a ng-if="yearSelected.value!=null"
+                                           href="/export/stat/excel/{{yearSelected.value}}/8" download
+                                           class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon"
+                                           onclick="$(this).addClass('disabled');$(this).prop('disabled',true);$(this).html('&lt;i class=&quot;uk-icon-spinner uk-icon-spin&quot;&gt;&lt;/i&gt;Түр хүлээнэ үү…');$(this).click();"><i
+                                                class="uk-icon-cloud-download"></i>Татах</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Маягт 11-ын мэдээ</td>
                                     <td>
-                                        <a href="/export/stat/excel/9" download class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon" onclick="$(this).addClass('disabled');$(this).prop('disabled',true);$(this).html('&lt;i class=&quot;uk-icon-spinner uk-icon-spin&quot;&gt;&lt;/i&gt;Түр хүлээнэ үү…');$(this).click();" ><i class="uk-icon-cloud-download"></i>Татах</a>
+                                        <a href="/export/stat/excel/9" download
+                                           class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon"
+                                           onclick="$(this).addClass('disabled');$(this).prop('disabled',true);$(this).html('&lt;i class=&quot;uk-icon-spinner uk-icon-spin&quot;&gt;&lt;/i&gt;Түр хүлээнэ үү…');$(this).click();"><i
+                                                class="uk-icon-cloud-download"></i>Татах</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Маягт 12-ын мэдээ</td>
                                     <td>
-                                        <a href="/export/stat/excel/10" download class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon" onclick="$(this).addClass('disabled');$(this).prop('disabled',true);$(this).html('&lt;i class=&quot;uk-icon-spinner uk-icon-spin&quot;&gt;&lt;/i&gt;Түр хүлээнэ үү…');$(this).click();" ><i class="uk-icon-cloud-download"></i>Татах</a>
+                                        <a href="/export/stat/excel/10" download
+                                           class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon"
+                                           onclick="$(this).addClass('disabled');$(this).prop('disabled',true);$(this).html('&lt;i class=&quot;uk-icon-spinner uk-icon-spin&quot;&gt;&lt;/i&gt;Түр хүлээнэ үү…');$(this).click();"><i
+                                                class="uk-icon-cloud-download"></i>Татах</a>
                                     </td>
                                 </tr>
 
                                 <tr>
                                     <td>Тайлангийн Маягт 14-ын мэдээ</td>
                                     <td>
-                                        <a href="/export/stat/excel/14" download class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon" onclick="$(this).addClass('disabled');$(this).prop('disabled',true);$(this).html('&lt;i class=&quot;uk-icon-spinner uk-icon-spin&quot;&gt;&lt;/i&gt;Түр хүлээнэ үү…');$(this).click();" ><i class="uk-icon-cloud-download"></i>Татах</a>
+                                        <a href="/export/stat/excel/14" download
+                                           class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon"
+                                           onclick="$(this).addClass('disabled');$(this).prop('disabled',true);$(this).html('&lt;i class=&quot;uk-icon-spinner uk-icon-spin&quot;&gt;&lt;/i&gt;Түр хүлээнэ үү…');$(this).click();"><i
+                                                class="uk-icon-cloud-download"></i>Татах</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Тайлангийн Маягт 15-ын мэдээ</td>
                                     <td>
-                                        <a href="/export/stat/excel/15" download class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon" onclick="$(this).addClass('disabled');$(this).prop('disabled',true);$(this).html('&lt;i class=&quot;uk-icon-spinner uk-icon-spin&quot;&gt;&lt;/i&gt;Түр хүлээнэ үү…');$(this).click();" ><i class="uk-icon-cloud-download"></i>Татах</a>
+                                        <a href="/export/stat/excel/15" download
+                                           class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon"
+                                           onclick="$(this).addClass('disabled');$(this).prop('disabled',true);$(this).html('&lt;i class=&quot;uk-icon-spinner uk-icon-spin&quot;&gt;&lt;/i&gt;Түр хүлээнэ үү…');$(this).click();"><i
+                                                class="uk-icon-cloud-download"></i>Татах</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Тайлангийн Маягт 6.2-ын мэдээ</td>
                                     <td>
-                                        <a href="/export/stat/excel/17" download class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon" onclick="$(this).addClass('disabled');$(this).prop('disabled',true);$(this).html('&lt;i class=&quot;uk-icon-spinner uk-icon-spin&quot;&gt;&lt;/i&gt;Түр хүлээнэ үү…');$(this).click();" ><i class="uk-icon-cloud-download"></i>Татах</a>
+                                        <a href="/export/stat/excel/17" download
+                                           class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon"
+                                           onclick="$(this).addClass('disabled');$(this).prop('disabled',true);$(this).html('&lt;i class=&quot;uk-icon-spinner uk-icon-spin&quot;&gt;&lt;/i&gt;Түр хүлээнэ үү…');$(this).click();"><i
+                                                class="uk-icon-cloud-download"></i>Татах</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>АЛТ ОЛБОРЛОГЧ АЖ АХУЙН НЭГЖҮҮДИЙН УУЛЫН АЖЛЫН ТӨЛӨВЛӨГӨӨНИЙ ЯВЦ</td>
                                     <td>
-                                       <!-- <a href="/export/stat/excel/12" download class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon" onclick="$(this).addClass('disabled');$(this).prop('disabled',true);$(this).html('&lt;i class=&quot;uk-icon-spinner uk-icon-spin&quot;&gt;&lt;/i&gt;Түр хүлээнэ үү…');$(this).click();" ><i class="uk-icon-cloud-download"></i>Татах</a>-->
+                                        <!-- <a href="/export/stat/excel/12" download class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon" onclick="$(this).addClass('disabled');$(this).prop('disabled',true);$(this).html('&lt;i class=&quot;uk-icon-spinner uk-icon-spin&quot;&gt;&lt;/i&gt;Түр хүлээнэ үү…');$(this).click();" ><i class="uk-icon-cloud-download"></i>Татах</a>-->
 
-                                        <a ng-if="yearSelected.value!=null" href="/export/stat/excel/{{yearSelected.value}}/12" download class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon"><i class="uk-icon-cloud-download"></i>Татах</a>
+                                        <a ng-if="yearSelected.value!=null"
+                                           href="/export/stat/excel/{{yearSelected.value}}/12" download
+                                           class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon"><i
+                                                class="uk-icon-cloud-download"></i>Татах</a>
                                     </td>
                                 </tr>
-                            </tbody>
+                                </tbody>
 
-                            <tbody ng-if="user_data.divisionid == 3">
+                                <tbody ng-if="user_data.divisionid == 3">
                                 <tr>
                                     <td>Маягт 1. Хувийн хөрөнгөөр хийсэн геологи хайгуулын ажил /Нэгтгэл/</td>
                                     <td>
-                                        <a ng-if="yearSelected.value!=null"  href="/export/stat/excel/{{yearSelected.value}}/2" download class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon" ><i class="uk-icon-cloud-download"></i>Татах</a>
+                                        <a ng-if="yearSelected.value!=null"
+                                           href="/export/stat/excel/{{yearSelected.value}}/2" download
+                                           class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon"><i
+                                                class="uk-icon-cloud-download"></i>Татах</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Маягт 1. Хувийн хөрөнгөөр хийсэн геологи хайгуулын ажил /Дэлгэрэнгүй/</td>
                                     <td>
-                                        <a ng-if="yearSelected.value!=null" href="/export/stat/excel/{{yearSelected.value}}/7" download class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon"  ><i class="uk-icon-cloud-download"></i>Татах</a>
+                                        <a ng-if="yearSelected.value!=null"
+                                           href="/export/stat/excel/{{yearSelected.value}}/7" download
+                                           class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon"><i
+                                                class="uk-icon-cloud-download"></i>Татах</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Маягт 3-ын мэдээ</td>
-                                    <td >
-                                        <a ng-if="yearSelected.value!=null" href="/export/stat/excel/{{yearSelected.value}}/3" download class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon" ><i class="uk-icon-cloud-download"></i>Татах</a>
+                                    <td>
+                                        <a ng-if="yearSelected.value!=null"
+                                           href="/export/stat/excel/{{yearSelected.value}}/3" download
+                                           class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon"><i
+                                                class="uk-icon-cloud-download"></i>Татах</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Маягт 5-ын мэдээ</td>
                                     <td>
-                                        <a ng-if="yearSelected.value!=null" href="/export/stat/excel/{{yearSelected.value}}/4" download class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon" ><i class="uk-icon-cloud-download"></i>Татах</a>
+                                        <a ng-if="yearSelected.value!=null"
+                                           href="/export/stat/excel/{{yearSelected.value}}/4" download
+                                           class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon"><i
+                                                class="uk-icon-cloud-download"></i>Татах</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Тайлангийн бүртгэлийн мэдээ</td>
                                     <td>
-                                        <a ng-if="yearSelected.value!=null" href="/export/stat/excel/{{yearSelected.value}}/5" download class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon" ><i class="uk-icon-cloud-download"></i>Татах</a>
+                                        <a ng-if="yearSelected.value!=null"
+                                           href="/export/stat/excel/{{yearSelected.value}}/5" download
+                                           class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon"><i
+                                                class="uk-icon-cloud-download"></i>Татах</a>
                                     </td>
                                 </tr>
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
-		              </div>
-		          </div>
-      </div>
-     </div>
+            </div>
+        </div>
+    </div>
 </div>
