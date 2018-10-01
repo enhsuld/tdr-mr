@@ -1636,7 +1636,7 @@ public class StatisticController {
                 font.setFontName("Arial");
                 style.setFont(font);
 
-                int reportyear = 2016;
+                Long reportyear = year;
 
                 Sheet sheet = workbook.getSheet("SGT");
                 if (sheet != null) {

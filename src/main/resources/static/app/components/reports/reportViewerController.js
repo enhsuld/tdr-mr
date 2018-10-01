@@ -79,6 +79,57 @@ angular
 
             ];
 
+            $scope.columnHeaders['DATA_EXCEL_MINREP5'] = [
+                {title: "#", template: "<span class='row-number'></span>", width: "60px"},
+                {field: "lpname", title: "Байгууллагын нэр", width: "150px"},
+                {field: "lpreg", title: "Байгууллагын РД", hidden: true, width: "150px"},
+                {field: "licensexb", title: "Лицензийн дугаар", width: "100px"},
+                /*{field: "repstatusid",values: $scope.repstatuses,title: "Төлөв",width: "100px"},*/
+                {field: "divisionid", title: "Хэлтэс", width: "100px", values: $scope.divisions, hidden:true},
+                {field: "lictype",width: "100px",title: "Лицензийн төрөл",values: lic_type},
+                {field: "reporttype", title: "Төрөл", values: rep_type, width: "100px"},
+                /*{field: "xtype",title: "X эсэх",template: "# if(xtype != 0) { # Энгийн #} else {# Х #}#",width: "80px"},*/
+                {field: "reportyear", title: "Он", width: "75px"},
+                /*{field: "add_bunlicensenum", title: "Нэмэлт ТЗ", width: "100px"},*/
+                {field: "groupid", title: "АМ-ын ангилал", values: $scope.mingroups, width: "100px"},
+                {field: "minid", title: "АМ-ын нэр", values: mineralData, width: "100px"},
+                {field: "depositid", title: "АМ-ын төрөл", values: p_deposit, width: "100px"},
+                {field: "data1", title: "Д/д", width: "100px"},
+                {field: "data1", title: "Урвалжын нэр", width: "150px"},
+                {field: "data2", title: "Химийн томьео", width: "150px"},
+                {field: "data3", title: "Зориулалт", width: "150px"},
+                {title:"Зарцуулалт", columns:[
+                        {field: "data4", title: "Хэмжих нэгж", width: "150px"},
+                        {field: "data5", title: "Тоон утга", width: "150px"}]},
+                {title:"Нийт хэрэглээ", columns:[
+                        {field: "data6", title: "Хэмжих нэгж", width: "150px"},
+                        {field: "data7", title: "Тоон утга", width: "150px"}]},
+                {field: "data8", title: "Тайлбар", width: "150px"},
+                {field: "data9", title: "Тайлбар", width: "150px"},
+                {field: "data10", title: "Тайлбар", width: "150px"},
+                {field: "data11", title: "Тайлбар", width: "150px"},
+            ];
+
+            $scope.columnHeaders['DATA_EXCEL_MINREP6_1'] = [
+                {title: "#", template: "<span class='row-number'></span>", width: "60px"},
+                {field: "lpname", title: "Байгууллагын нэр", width: "150px"},
+                {field: "lpreg", title: "Байгууллагын РД", hidden: true, width: "150px"},
+                {field: "licensexb", title: "Лицензийн дугаар", width: "100px"},
+                {field: "divisionid", title: "Хэлтэс", width: "100px", values: $scope.divisions, hidden:true},
+                {field: "lictype",width: "100px",title: "Лицензийн төрөл",values: lic_type},
+                {field: "reporttype", title: "Төрөл", values: rep_type, width: "100px"},
+                {field: "reportyear", title: "Он", width: "75px"},
+                {field: "groupid", title: "АМ-ын ангилал", values: $scope.mingroups, width: "100px"},
+                {field: "minid", title: "АМ-ын нэр", values: mineralData, width: "100px"},
+                {field: "depositid", title: "АМ-ын төрөл", values: p_deposit, width: "100px"},
+                {field: "data1", title: "Д/д", width: "100px"},
+                {field: "data2", title: "Хэрэглэгчдийн жагсаалт", width: "150px"},
+                {field: "data3", title: "Хэмжих нэгж", width: "150px"},
+                {field: "data4", title: "Тоон утга", width: "150px"},
+                {field: "data5", title: "Тайлбар", width: "150px"},
+                {field: "data6", title: "Тайлбар", width: "150px"},
+            ];
+
             $scope.columnHeaders['DATA_MIN_PLAN_6_1'] = [
                 {title: "#", template: "<span class='row-number'></span>", width: "60px"},
                 {field: "lpname", title: "Байгууллагын нэр", width: "150px"},

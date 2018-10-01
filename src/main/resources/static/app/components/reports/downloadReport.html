@@ -58,9 +58,25 @@
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td>Тайлангийн Маягт 5-ын мэдээ</td>
+                                    <td>
+                                        <a ui-sref="restricted.pages.report_viewer({formname:'DATA_EXCEL_MINREP5',reporttype:3})"
+                                           class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon"><i
+                                                class="uk-icon-eye"></i>Харах</a>
+                                    </td>
+                                </tr>
+                                <tr>
                                     <td>Төлөвлөгөөний Маягт 6.1-ын мэдээ</td>
                                     <td>
                                         <a ui-sref="restricted.pages.report_viewer({formname:'DATA_MIN_PLAN_6_1',reporttype:3})"
+                                           class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon"><i
+                                                class="uk-icon-eye"></i>Харах</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Тайлангийн Маягт 6.1-ын мэдээ</td>
+                                    <td>
+                                        <a ui-sref="restricted.pages.report_viewer({formname:'DATA_EXCEL_MINREP6_1',reporttype:3})"
                                            class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon"><i
                                                 class="uk-icon-eye"></i>Харах</a>
                                     </td>
@@ -148,7 +164,7 @@
                                 <tr>
                                     <td>Тайлангийн Маягт 15-ын мэдээ</td>
                                     <td>
-                                        <a href="/export/stat/excel/15" download
+                                        <a ng-if="yearSelected.value!=null" href="/export/stat/excel/{{yearSelected.value}}//15" download
                                            class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon"
                                            onclick="$(this).addClass('disabled');$(this).prop('disabled',true);$(this).html('&lt;i class=&quot;uk-icon-spinner uk-icon-spin&quot;&gt;&lt;/i&gt;Түр хүлээнэ үү…');$(this).click();"><i
                                                 class="uk-icon-cloud-download"></i>Татах</a>
