@@ -828,3 +828,422 @@ java.net.ConnectException: Connection refused: connect
 2018-07-23 14:51:37.496  INFO 8580 --- [main] com.peace.MramApplication                : Started MramApplication in 74.641 seconds (JVM running for 87.289)
 2018-07-23 14:51:44.030  INFO 8580 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring FrameworkServlet 'dispatcherServlet'
 2018-07-23 14:52:06.645  WARN 8580 --- [http-nio-8080-exec-6] o.h.hql.internal.ast.HqlSqlWalker        : [DEPRECATION] Encountered positional parameter near line 1, column 57.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2018-09-24 13:25:02.858  INFO 2444 --- [main] com.peace.MramApplication                : Starting MramApplication on DESKTOP-T4D838U with PID 2444 (F:\workspace-tdr\tdr-mr\target\classes started by suld in F:\workspace-tdr\tdr-mr)
+2018-09-24 13:25:02.861 DEBUG 2444 --- [main] com.peace.MramApplication                : Running with Spring Boot v1.3.5.RELEASE, Spring v4.2.6.RELEASE
+2018-09-24 13:25:02.861  INFO 2444 --- [main] com.peace.MramApplication                : No active profile set, falling back to default profiles: default
+2018-09-24 13:25:05.782  WARN 2444 --- [main] org.hibernate.cfg.SettingsFactory        : Unrecognized value for "hibernate.hbm2ddl.auto": none
+2018-09-24 13:25:07.697  INFO 2444 --- [main] o.apache.catalina.core.StandardService   : Starting service Tomcat
+2018-09-24 13:25:07.697  INFO 2444 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.0.33
+2018-09-24 13:25:07.769  INFO 2444 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2018-09-24 13:25:08.286  WARN 2444 --- [localhost-startStop-1] org.hibernate.cfg.SettingsFactory        : Unrecognized value for "hibernate.hbm2ddl.auto": none
+2018-09-24 13:25:09.278  INFO 2444 --- [localhost-startStop-1] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: org.springframework.security.web.util.matcher.AnyRequestMatcher@1, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1eb5a0a, org.springframework.security.web.context.SecurityContextPersistenceFilter@5997d7, org.springframework.security.web.header.HeaderWriterFilter@1629205, org.springframework.security.web.authentication.logout.LogoutFilter@b8babb, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@182f275, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@16e6b77, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@10d7598, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7a376a, org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter@99e22, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@a2e6a8, org.springframework.security.web.session.SessionManagementFilter@35bb6c, org.springframework.security.web.access.ExceptionTranslationFilter@10891a1, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@1efcbe1]
+2018-09-24 13:25:10.622 ERROR 2444 --- [main] o.a.coyote.http11.Http11NioProtocol      : Failed to start end point associated with ProtocolHandler ["http-nio-8080"]
+
+java.net.BindException: Address already in use: bind
+	at sun.nio.ch.Net.bind0(Native Method) ~[na:1.8.0_181]
+	at sun.nio.ch.Net.bind(Net.java:433) ~[na:1.8.0_181]
+	at sun.nio.ch.Net.bind(Net.java:425) ~[na:1.8.0_181]
+	at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:223) ~[na:1.8.0_181]
+	at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74) ~[na:1.8.0_181]
+	at org.apache.tomcat.util.net.NioEndpoint.bind(NioEndpoint.java:340) ~[tomcat-embed-core-8.0.33.jar:8.0.33]
+	at org.apache.tomcat.util.net.AbstractEndpoint.start(AbstractEndpoint.java:773) ~[tomcat-embed-core-8.0.33.jar:8.0.33]
+	at org.apache.coyote.AbstractProtocol.start(AbstractProtocol.java:473) ~[tomcat-embed-core-8.0.33.jar:8.0.33]
+	at org.apache.catalina.connector.Connector.startInternal(Connector.java:986) [tomcat-embed-core-8.0.33.jar:8.0.33]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:147) [tomcat-embed-core-8.0.33.jar:8.0.33]
+	at org.apache.catalina.core.StandardService.addConnector(StandardService.java:239) [tomcat-embed-core-8.0.33.jar:8.0.33]
+	at org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainer.addPreviouslyRemovedConnectors(TomcatEmbeddedServletContainer.java:194) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainer.start(TomcatEmbeddedServletContainer.java:151) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.startEmbeddedServletContainer(EmbeddedWebApplicationContext.java:293) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.finishRefresh(EmbeddedWebApplicationContext.java:141) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:541) [spring-context-4.2.6.RELEASE.jar:4.2.6.RELEASE]
+	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.refresh(EmbeddedWebApplicationContext.java:118) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:766) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.SpringApplication.createAndRefreshContext(SpringApplication.java:361) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:307) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1191) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1180) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at com.peace.MramApplication.main(MramApplication.java:22) [classes/:na]
+
+2018-09-24 13:25:10.623 ERROR 2444 --- [main] o.apache.catalina.core.StandardService   : Failed to start connector [Connector[HTTP/1.1-8080]]
+
+org.apache.catalina.LifecycleException: Failed to start component [Connector[HTTP/1.1-8080]]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:153) ~[tomcat-embed-core-8.0.33.jar:8.0.33]
+	at org.apache.catalina.core.StandardService.addConnector(StandardService.java:239) ~[tomcat-embed-core-8.0.33.jar:8.0.33]
+	at org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainer.addPreviouslyRemovedConnectors(TomcatEmbeddedServletContainer.java:194) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainer.start(TomcatEmbeddedServletContainer.java:151) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.startEmbeddedServletContainer(EmbeddedWebApplicationContext.java:293) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.finishRefresh(EmbeddedWebApplicationContext.java:141) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:541) [spring-context-4.2.6.RELEASE.jar:4.2.6.RELEASE]
+	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.refresh(EmbeddedWebApplicationContext.java:118) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:766) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.SpringApplication.createAndRefreshContext(SpringApplication.java:361) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:307) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1191) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1180) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at com.peace.MramApplication.main(MramApplication.java:22) [classes/:na]
+Caused by: org.apache.catalina.LifecycleException: service.getName(): "Tomcat";  Protocol handler start failed
+	at org.apache.catalina.connector.Connector.startInternal(Connector.java:993) ~[tomcat-embed-core-8.0.33.jar:8.0.33]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:147) ~[tomcat-embed-core-8.0.33.jar:8.0.33]
+	... 13 common frames omitted
+Caused by: java.net.BindException: Address already in use: bind
+	at sun.nio.ch.Net.bind0(Native Method) ~[na:1.8.0_181]
+	at sun.nio.ch.Net.bind(Net.java:433) ~[na:1.8.0_181]
+	at sun.nio.ch.Net.bind(Net.java:425) ~[na:1.8.0_181]
+	at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:223) ~[na:1.8.0_181]
+	at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74) ~[na:1.8.0_181]
+	at org.apache.tomcat.util.net.NioEndpoint.bind(NioEndpoint.java:340) ~[tomcat-embed-core-8.0.33.jar:8.0.33]
+	at org.apache.tomcat.util.net.AbstractEndpoint.start(AbstractEndpoint.java:773) ~[tomcat-embed-core-8.0.33.jar:8.0.33]
+	at org.apache.coyote.AbstractProtocol.start(AbstractProtocol.java:473) ~[tomcat-embed-core-8.0.33.jar:8.0.33]
+	at org.apache.catalina.connector.Connector.startInternal(Connector.java:986) ~[tomcat-embed-core-8.0.33.jar:8.0.33]
+	... 14 common frames omitted
+
+2018-09-24 13:25:10.627  INFO 2444 --- [main] o.apache.catalina.core.StandardService   : Stopping service Tomcat
+2018-09-24 13:25:10.635 ERROR 2444 --- [main] o.s.boot.SpringApplication               : Application startup failed
+
+org.springframework.boot.context.embedded.EmbeddedServletContainerException: Unable to start embedded Tomcat servlet container
+	at org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainer.start(TomcatEmbeddedServletContainer.java:165) ~[spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.startEmbeddedServletContainer(EmbeddedWebApplicationContext.java:293) ~[spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.finishRefresh(EmbeddedWebApplicationContext.java:141) ~[spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:541) ~[spring-context-4.2.6.RELEASE.jar:4.2.6.RELEASE]
+	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.refresh(EmbeddedWebApplicationContext.java:118) ~[spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:766) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.SpringApplication.createAndRefreshContext(SpringApplication.java:361) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:307) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1191) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1180) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at com.peace.MramApplication.main(MramApplication.java:22) [classes/:na]
+Caused by: java.lang.IllegalStateException: Tomcat connector in failed state
+	at org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainer.start(TomcatEmbeddedServletContainer.java:159) ~[spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	... 10 common frames omitted
+
+2018-09-24 13:29:15.586  INFO 12020 --- [main] com.peace.MramApplication                : Starting MramApplication on DESKTOP-T4D838U with PID 12020 (F:\workspace-tdr\tdr-mr\target\classes started by suld in F:\workspace-tdr\tdr-mr)
+2018-09-24 13:29:15.588 DEBUG 12020 --- [main] com.peace.MramApplication                : Running with Spring Boot v1.3.5.RELEASE, Spring v4.2.6.RELEASE
+2018-09-24 13:29:15.588  INFO 12020 --- [main] com.peace.MramApplication                : No active profile set, falling back to default profiles: default
+2018-09-24 13:29:18.383  WARN 12020 --- [main] org.hibernate.cfg.SettingsFactory        : Unrecognized value for "hibernate.hbm2ddl.auto": none
+2018-09-24 13:29:20.250  INFO 12020 --- [main] o.apache.catalina.core.StandardService   : Starting service Tomcat
+2018-09-24 13:29:20.251  INFO 12020 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.0.33
+2018-09-24 13:29:20.340  INFO 12020 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2018-09-24 13:29:20.932  WARN 12020 --- [localhost-startStop-1] org.hibernate.cfg.SettingsFactory        : Unrecognized value for "hibernate.hbm2ddl.auto": none
+2018-09-24 13:29:21.984  INFO 12020 --- [localhost-startStop-1] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: org.springframework.security.web.util.matcher.AnyRequestMatcher@1, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@26f7e5, org.springframework.security.web.context.SecurityContextPersistenceFilter@153345d, org.springframework.security.web.header.HeaderWriterFilter@110e9f0, org.springframework.security.web.authentication.logout.LogoutFilter@1f1742e, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@1b2deb1, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@1516411, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@149a973, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@10b1cb, org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter@13ea757, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@153f21, org.springframework.security.web.session.SessionManagementFilter@19d0906, org.springframework.security.web.access.ExceptionTranslationFilter@1236f7b, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@3bb8e3]
+2018-09-24 13:29:23.391  INFO 12020 --- [main] com.peace.MramApplication                : Started MramApplication in 8.037 seconds (JVM running for 8.538)
+2018-09-24 13:29:45.029  INFO 12020 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring FrameworkServlet 'dispatcherServlet'
+2018-09-24 13:30:24.307  WARN 12020 --- [http-nio-8080-exec-6] o.h.hql.internal.ast.HqlSqlWalker        : [DEPRECATION] Encountered positional parameter near line 1, column 57.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2018-09-24 13:34:24.396  INFO 712 --- [main] com.peace.MramApplication                : Starting MramApplication on DESKTOP-T4D838U with PID 712 (F:\workspace-tdr\tdr-mr\target\classes started by suld in F:\workspace-tdr\tdr-mr)
+2018-09-24 13:34:24.398 DEBUG 712 --- [main] com.peace.MramApplication                : Running with Spring Boot v1.3.5.RELEASE, Spring v4.2.6.RELEASE
+2018-09-24 13:34:24.398  INFO 712 --- [main] com.peace.MramApplication                : No active profile set, falling back to default profiles: default
+2018-09-24 13:34:27.391  WARN 712 --- [main] org.hibernate.cfg.SettingsFactory        : Unrecognized value for "hibernate.hbm2ddl.auto": none
+2018-09-24 13:34:29.202  INFO 712 --- [main] o.apache.catalina.core.StandardService   : Starting service Tomcat
+2018-09-24 13:34:29.203  INFO 712 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.0.33
+2018-09-24 13:34:29.275  INFO 712 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2018-09-24 13:34:29.786  WARN 712 --- [localhost-startStop-1] org.hibernate.cfg.SettingsFactory        : Unrecognized value for "hibernate.hbm2ddl.auto": none
+2018-09-24 13:34:30.808  INFO 712 --- [localhost-startStop-1] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: org.springframework.security.web.util.matcher.AnyRequestMatcher@1, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@13825f7, org.springframework.security.web.context.SecurityContextPersistenceFilter@9d6dd8, org.springframework.security.web.header.HeaderWriterFilter@184923a, org.springframework.security.web.authentication.logout.LogoutFilter@b304fa, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@14d896f, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@f02c8b, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1bfa512, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@13f6739, org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter@17a14a6, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@846c49, org.springframework.security.web.session.SessionManagementFilter@20d8c8, org.springframework.security.web.access.ExceptionTranslationFilter@b42c83, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@c0e6f5]
+2018-09-24 13:34:32.178  INFO 712 --- [main] com.peace.MramApplication                : Started MramApplication in 7.997 seconds (JVM running for 8.467)
+2018-09-24 13:34:48.421  INFO 712 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring FrameworkServlet 'dispatcherServlet'
+2018-09-24 13:36:13.417  WARN 712 --- [http-nio-8080-exec-10] o.h.hql.internal.ast.HqlSqlWalker        : [DEPRECATION] Encountered positional parameter near line 1, column 57.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2018-09-24 13:38:25.370  INFO 2132 --- [main] com.peace.MramApplication                : Starting MramApplication on DESKTOP-T4D838U with PID 2132 (F:\workspace-tdr\tdr-mr\target\classes started by suld in F:\workspace-tdr\tdr-mr)
+2018-09-24 13:38:25.373 DEBUG 2132 --- [main] com.peace.MramApplication                : Running with Spring Boot v1.3.5.RELEASE, Spring v4.2.6.RELEASE
+2018-09-24 13:38:25.373  INFO 2132 --- [main] com.peace.MramApplication                : No active profile set, falling back to default profiles: default
+2018-09-24 13:38:28.558  WARN 2132 --- [main] org.hibernate.cfg.SettingsFactory        : Unrecognized value for "hibernate.hbm2ddl.auto": none
+2018-09-24 13:38:30.467  INFO 2132 --- [main] o.apache.catalina.core.StandardService   : Starting service Tomcat
+2018-09-24 13:38:30.468  INFO 2132 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.0.33
+2018-09-24 13:38:30.542  INFO 2132 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2018-09-24 13:38:31.075  WARN 2132 --- [localhost-startStop-1] org.hibernate.cfg.SettingsFactory        : Unrecognized value for "hibernate.hbm2ddl.auto": none
+2018-09-24 13:38:32.127  INFO 2132 --- [localhost-startStop-1] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: org.springframework.security.web.util.matcher.AnyRequestMatcher@1, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1a6b10, org.springframework.security.web.context.SecurityContextPersistenceFilter@5d0858, org.springframework.security.web.header.HeaderWriterFilter@aaf873, org.springframework.security.web.authentication.logout.LogoutFilter@1001492, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@340c9e, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@128c4fe, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@19cb593, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@775927, org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter@83a371, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@15cb810, org.springframework.security.web.session.SessionManagementFilter@aafa1f, org.springframework.security.web.access.ExceptionTranslationFilter@2f265, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@b8f91f]
+2018-09-24 13:38:33.553  INFO 2132 --- [main] com.peace.MramApplication                : Started MramApplication in 8.425 seconds (JVM running for 9.257)
+2018-09-24 13:38:37.637  INFO 2132 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring FrameworkServlet 'dispatcherServlet'
+2018-09-24 13:38:52.176  WARN 2132 --- [http-nio-8080-exec-10] o.h.hql.internal.ast.HqlSqlWalker        : [DEPRECATION] Encountered positional parameter near line 1, column 57.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2018-09-24 13:48:15.611  INFO 11300 --- [main] com.peace.MramApplication                : Starting MramApplication on DESKTOP-T4D838U with PID 11300 (F:\workspace-tdr\tdr-mr\target\classes started by suld in F:\workspace-tdr\tdr-mr)
+2018-09-24 13:48:15.613 DEBUG 11300 --- [main] com.peace.MramApplication                : Running with Spring Boot v1.3.5.RELEASE, Spring v4.2.6.RELEASE
+2018-09-24 13:48:15.613  INFO 11300 --- [main] com.peace.MramApplication                : No active profile set, falling back to default profiles: default
+2018-09-24 13:48:18.262  WARN 11300 --- [main] org.hibernate.cfg.SettingsFactory        : Unrecognized value for "hibernate.hbm2ddl.auto": none
+2018-09-24 13:48:20.030  INFO 11300 --- [main] o.apache.catalina.core.StandardService   : Starting service Tomcat
+2018-09-24 13:48:20.030  INFO 11300 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.0.33
+2018-09-24 13:48:20.116  INFO 11300 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2018-09-24 13:48:20.613  WARN 11300 --- [localhost-startStop-1] org.hibernate.cfg.SettingsFactory        : Unrecognized value for "hibernate.hbm2ddl.auto": none
+2018-09-24 13:48:21.577  INFO 11300 --- [localhost-startStop-1] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: org.springframework.security.web.util.matcher.AnyRequestMatcher@1, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1f27d2e, org.springframework.security.web.context.SecurityContextPersistenceFilter@3aee0, org.springframework.security.web.header.HeaderWriterFilter@15b228e, org.springframework.security.web.authentication.logout.LogoutFilter@1bfa512, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@1e80c28, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@67e880, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@16ccb65, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@184923a, org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter@1122809, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@19c606b, org.springframework.security.web.session.SessionManagementFilter@1035c7b, org.springframework.security.web.access.ExceptionTranslationFilter@1be5b3c, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@1a0485f]
+2018-09-24 13:48:22.917  INFO 11300 --- [main] com.peace.MramApplication                : Started MramApplication in 7.69 seconds (JVM running for 8.197)
+2018-09-24 13:48:35.025  INFO 11300 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring FrameworkServlet 'dispatcherServlet'
+2018-09-24 13:48:38.675  WARN 11300 --- [http-nio-8080-exec-9] o.h.hql.internal.ast.HqlSqlWalker        : [DEPRECATION] Encountered positional parameter near line 1, column 57.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2018-09-24 13:48:52.965  WARN 11300 --- [http-nio-8080-exec-10] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 904, SQLState: 42000
+2018-09-24 13:48:52.965 ERROR 11300 --- [http-nio-8080-exec-10] o.h.engine.jdbc.spi.SqlExceptionHelper   : ORA-00904: "D"."DATA9": invalid identifier
+
+2018-09-24 13:49:33.125  INFO 8952 --- [main] com.peace.MramApplication                : Starting MramApplication on DESKTOP-T4D838U with PID 8952 (F:\workspace-tdr\tdr-mr\target\classes started by suld in F:\workspace-tdr\tdr-mr)
+2018-09-24 13:49:33.127 DEBUG 8952 --- [main] com.peace.MramApplication                : Running with Spring Boot v1.3.5.RELEASE, Spring v4.2.6.RELEASE
+2018-09-24 13:49:33.128  INFO 8952 --- [main] com.peace.MramApplication                : No active profile set, falling back to default profiles: default
+2018-09-24 13:49:35.703  WARN 8952 --- [main] org.hibernate.cfg.SettingsFactory        : Unrecognized value for "hibernate.hbm2ddl.auto": none
+2018-09-24 13:49:37.393  INFO 8952 --- [main] o.apache.catalina.core.StandardService   : Starting service Tomcat
+2018-09-24 13:49:37.393  INFO 8952 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.0.33
+2018-09-24 13:49:37.474  INFO 8952 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2018-09-24 13:49:37.964  WARN 8952 --- [localhost-startStop-1] org.hibernate.cfg.SettingsFactory        : Unrecognized value for "hibernate.hbm2ddl.auto": none
+2018-09-24 13:49:38.931  INFO 8952 --- [localhost-startStop-1] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: org.springframework.security.web.util.matcher.AnyRequestMatcher@1, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@147e47e, org.springframework.security.web.context.SecurityContextPersistenceFilter@1d5a470, org.springframework.security.web.header.HeaderWriterFilter@1d5fc81, org.springframework.security.web.authentication.logout.LogoutFilter@512e0c, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@190a7c, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@7a4c6d, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1a7c6b0, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@16115dd, org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter@1f77c73, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4b7e08, org.springframework.security.web.session.SessionManagementFilter@408ac8, org.springframework.security.web.access.ExceptionTranslationFilter@a1a4f7, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@186ca48]
+2018-09-24 13:49:40.234  INFO 8952 --- [main] com.peace.MramApplication                : Started MramApplication in 7.327 seconds (JVM running for 7.791)
+2018-09-24 13:49:57.395  INFO 8952 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring FrameworkServlet 'dispatcherServlet'
+2018-09-24 13:50:00.541  WARN 8952 --- [http-nio-8080-exec-10] o.h.hql.internal.ast.HqlSqlWalker        : [DEPRECATION] Encountered positional parameter near line 1, column 57.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2018-09-24 14:00:41.830  INFO 10020 --- [main] com.peace.MramApplication                : Starting MramApplication on DESKTOP-T4D838U with PID 10020 (F:\workspace-tdr\tdr-mr\target\classes started by suld in F:\workspace-tdr\tdr-mr)
+2018-09-24 14:00:41.832 DEBUG 10020 --- [main] com.peace.MramApplication                : Running with Spring Boot v1.3.5.RELEASE, Spring v4.2.6.RELEASE
+2018-09-24 14:00:41.833  INFO 10020 --- [main] com.peace.MramApplication                : No active profile set, falling back to default profiles: default
+2018-09-24 14:00:45.149  WARN 10020 --- [main] org.hibernate.cfg.SettingsFactory        : Unrecognized value for "hibernate.hbm2ddl.auto": none
+2018-09-24 14:00:46.892  INFO 10020 --- [main] o.apache.catalina.core.StandardService   : Starting service Tomcat
+2018-09-24 14:00:46.893  INFO 10020 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.0.33
+2018-09-24 14:00:46.971  INFO 10020 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2018-09-24 14:00:47.473  WARN 10020 --- [localhost-startStop-1] org.hibernate.cfg.SettingsFactory        : Unrecognized value for "hibernate.hbm2ddl.auto": none
+2018-09-24 14:00:48.456  INFO 10020 --- [localhost-startStop-1] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: org.springframework.security.web.util.matcher.AnyRequestMatcher@1, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@29a7e1, org.springframework.security.web.context.SecurityContextPersistenceFilter@f10d1b, org.springframework.security.web.header.HeaderWriterFilter@163310e, org.springframework.security.web.authentication.logout.LogoutFilter@79727e, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@7f3d4, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@1c2348, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@17880d0, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1504696, org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter@199687, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1d0b8d3, org.springframework.security.web.session.SessionManagementFilter@1a59812, org.springframework.security.web.access.ExceptionTranslationFilter@1c2c105, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@6c86c2]
+2018-09-24 14:00:49.828  INFO 10020 --- [main] com.peace.MramApplication                : Started MramApplication in 8.346 seconds (JVM running for 8.965)
+2018-09-24 14:00:53.914  INFO 10020 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring FrameworkServlet 'dispatcherServlet'
+2018-09-24 14:00:57.568  WARN 10020 --- [http-nio-8080-exec-6] o.h.hql.internal.ast.HqlSqlWalker        : [DEPRECATION] Encountered positional parameter near line 1, column 57.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2018-09-24 14:35:12.052  INFO 8012 --- [main] com.peace.MramApplication                : Starting MramApplication on DESKTOP-T4D838U with PID 8012 (F:\workspace-tdr\tdr-mr\target\classes started by suld in F:\workspace-tdr\tdr-mr)
+2018-09-24 14:35:12.056 DEBUG 8012 --- [main] com.peace.MramApplication                : Running with Spring Boot v1.3.5.RELEASE, Spring v4.2.6.RELEASE
+2018-09-24 14:35:12.056  INFO 8012 --- [main] com.peace.MramApplication                : No active profile set, falling back to default profiles: default
+2018-09-24 14:35:14.637  WARN 8012 --- [main] org.hibernate.cfg.SettingsFactory        : Unrecognized value for "hibernate.hbm2ddl.auto": none
+2018-09-24 14:35:16.457  INFO 8012 --- [main] o.apache.catalina.core.StandardService   : Starting service Tomcat
+2018-09-24 14:35:16.458  INFO 8012 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.0.33
+2018-09-24 14:35:16.541  INFO 8012 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2018-09-24 14:35:17.064  WARN 8012 --- [localhost-startStop-1] org.hibernate.cfg.SettingsFactory        : Unrecognized value for "hibernate.hbm2ddl.auto": none
+2018-09-24 14:35:18.086  INFO 8012 --- [localhost-startStop-1] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: org.springframework.security.web.util.matcher.AnyRequestMatcher@1, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1fe019d, org.springframework.security.web.context.SecurityContextPersistenceFilter@f0d7d4, org.springframework.security.web.header.HeaderWriterFilter@b800b0, org.springframework.security.web.authentication.logout.LogoutFilter@1c1050, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@f20942, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@ddcf0, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@182892e, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@128c4fe, org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter@44ff11, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@448fd4, org.springframework.security.web.session.SessionManagementFilter@10fd318, org.springframework.security.web.access.ExceptionTranslationFilter@19064ce, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@340c9e]
+2018-09-24 14:35:19.463 ERROR 8012 --- [main] o.a.coyote.http11.Http11NioProtocol      : Failed to start end point associated with ProtocolHandler ["http-nio-8080"]
+
+java.net.BindException: Address already in use: bind
+	at sun.nio.ch.Net.bind0(Native Method) ~[na:1.8.0_181]
+	at sun.nio.ch.Net.bind(Net.java:433) ~[na:1.8.0_181]
+	at sun.nio.ch.Net.bind(Net.java:425) ~[na:1.8.0_181]
+	at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:223) ~[na:1.8.0_181]
+	at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74) ~[na:1.8.0_181]
+	at org.apache.tomcat.util.net.NioEndpoint.bind(NioEndpoint.java:340) ~[tomcat-embed-core-8.0.33.jar:8.0.33]
+	at org.apache.tomcat.util.net.AbstractEndpoint.start(AbstractEndpoint.java:773) ~[tomcat-embed-core-8.0.33.jar:8.0.33]
+	at org.apache.coyote.AbstractProtocol.start(AbstractProtocol.java:473) ~[tomcat-embed-core-8.0.33.jar:8.0.33]
+	at org.apache.catalina.connector.Connector.startInternal(Connector.java:986) [tomcat-embed-core-8.0.33.jar:8.0.33]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:147) [tomcat-embed-core-8.0.33.jar:8.0.33]
+	at org.apache.catalina.core.StandardService.addConnector(StandardService.java:239) [tomcat-embed-core-8.0.33.jar:8.0.33]
+	at org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainer.addPreviouslyRemovedConnectors(TomcatEmbeddedServletContainer.java:194) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainer.start(TomcatEmbeddedServletContainer.java:151) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.startEmbeddedServletContainer(EmbeddedWebApplicationContext.java:293) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.finishRefresh(EmbeddedWebApplicationContext.java:141) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:541) [spring-context-4.2.6.RELEASE.jar:4.2.6.RELEASE]
+	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.refresh(EmbeddedWebApplicationContext.java:118) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:766) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.SpringApplication.createAndRefreshContext(SpringApplication.java:361) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:307) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1191) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1180) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at com.peace.MramApplication.main(MramApplication.java:22) [classes/:na]
+
+2018-09-24 14:35:19.464 ERROR 8012 --- [main] o.apache.catalina.core.StandardService   : Failed to start connector [Connector[HTTP/1.1-8080]]
+
+org.apache.catalina.LifecycleException: Failed to start component [Connector[HTTP/1.1-8080]]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:153) ~[tomcat-embed-core-8.0.33.jar:8.0.33]
+	at org.apache.catalina.core.StandardService.addConnector(StandardService.java:239) ~[tomcat-embed-core-8.0.33.jar:8.0.33]
+	at org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainer.addPreviouslyRemovedConnectors(TomcatEmbeddedServletContainer.java:194) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainer.start(TomcatEmbeddedServletContainer.java:151) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.startEmbeddedServletContainer(EmbeddedWebApplicationContext.java:293) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.finishRefresh(EmbeddedWebApplicationContext.java:141) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:541) [spring-context-4.2.6.RELEASE.jar:4.2.6.RELEASE]
+	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.refresh(EmbeddedWebApplicationContext.java:118) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:766) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.SpringApplication.createAndRefreshContext(SpringApplication.java:361) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:307) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1191) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1180) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at com.peace.MramApplication.main(MramApplication.java:22) [classes/:na]
+Caused by: org.apache.catalina.LifecycleException: service.getName(): "Tomcat";  Protocol handler start failed
+	at org.apache.catalina.connector.Connector.startInternal(Connector.java:993) ~[tomcat-embed-core-8.0.33.jar:8.0.33]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:147) ~[tomcat-embed-core-8.0.33.jar:8.0.33]
+	... 13 common frames omitted
+Caused by: java.net.BindException: Address already in use: bind
+	at sun.nio.ch.Net.bind0(Native Method) ~[na:1.8.0_181]
+	at sun.nio.ch.Net.bind(Net.java:433) ~[na:1.8.0_181]
+	at sun.nio.ch.Net.bind(Net.java:425) ~[na:1.8.0_181]
+	at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:223) ~[na:1.8.0_181]
+	at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74) ~[na:1.8.0_181]
+	at org.apache.tomcat.util.net.NioEndpoint.bind(NioEndpoint.java:340) ~[tomcat-embed-core-8.0.33.jar:8.0.33]
+	at org.apache.tomcat.util.net.AbstractEndpoint.start(AbstractEndpoint.java:773) ~[tomcat-embed-core-8.0.33.jar:8.0.33]
+	at org.apache.coyote.AbstractProtocol.start(AbstractProtocol.java:473) ~[tomcat-embed-core-8.0.33.jar:8.0.33]
+	at org.apache.catalina.connector.Connector.startInternal(Connector.java:986) ~[tomcat-embed-core-8.0.33.jar:8.0.33]
+	... 14 common frames omitted
+
+2018-09-24 14:35:19.468  INFO 8012 --- [main] o.apache.catalina.core.StandardService   : Stopping service Tomcat
+2018-09-24 14:35:19.476 ERROR 8012 --- [main] o.s.boot.SpringApplication               : Application startup failed
+
+org.springframework.boot.context.embedded.EmbeddedServletContainerException: Unable to start embedded Tomcat servlet container
+	at org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainer.start(TomcatEmbeddedServletContainer.java:165) ~[spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.startEmbeddedServletContainer(EmbeddedWebApplicationContext.java:293) ~[spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.finishRefresh(EmbeddedWebApplicationContext.java:141) ~[spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:541) ~[spring-context-4.2.6.RELEASE.jar:4.2.6.RELEASE]
+	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.refresh(EmbeddedWebApplicationContext.java:118) ~[spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:766) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.SpringApplication.createAndRefreshContext(SpringApplication.java:361) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:307) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1191) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1180) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at com.peace.MramApplication.main(MramApplication.java:22) [classes/:na]
+Caused by: java.lang.IllegalStateException: Tomcat connector in failed state
+	at org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainer.start(TomcatEmbeddedServletContainer.java:159) ~[spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	... 10 common frames omitted
+
+2018-09-24 14:35:31.026  INFO 10264 --- [main] com.peace.MramApplication                : Starting MramApplication on DESKTOP-T4D838U with PID 10264 (F:\workspace-tdr\tdr-mr\target\classes started by suld in F:\workspace-tdr\tdr-mr)
+2018-09-24 14:35:31.029 DEBUG 10264 --- [main] com.peace.MramApplication                : Running with Spring Boot v1.3.5.RELEASE, Spring v4.2.6.RELEASE
+2018-09-24 14:35:31.029  INFO 10264 --- [main] com.peace.MramApplication                : No active profile set, falling back to default profiles: default
+2018-09-24 14:35:33.599  WARN 10264 --- [main] org.hibernate.cfg.SettingsFactory        : Unrecognized value for "hibernate.hbm2ddl.auto": none
+2018-09-24 14:35:35.271  INFO 10264 --- [main] o.apache.catalina.core.StandardService   : Starting service Tomcat
+2018-09-24 14:35:35.271  INFO 10264 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.0.33
+2018-09-24 14:35:35.357  INFO 10264 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2018-09-24 14:35:35.850  WARN 10264 --- [localhost-startStop-1] org.hibernate.cfg.SettingsFactory        : Unrecognized value for "hibernate.hbm2ddl.auto": none
+2018-09-24 14:35:36.785  INFO 10264 --- [localhost-startStop-1] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: org.springframework.security.web.util.matcher.AnyRequestMatcher@1, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@15242b0, org.springframework.security.web.context.SecurityContextPersistenceFilter@13d6384, org.springframework.security.web.header.HeaderWriterFilter@14b467, org.springframework.security.web.authentication.logout.LogoutFilter@18e7774, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@b8caf9, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@159ae9a, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@db7463, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@12a641d, org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter@12eedca, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1c3202f, org.springframework.security.web.session.SessionManagementFilter@1dd2b1, org.springframework.security.web.access.ExceptionTranslationFilter@1b31ffa, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@1fcdd42]
+2018-09-24 14:35:38.063  INFO 10264 --- [main] com.peace.MramApplication                : Started MramApplication in 7.247 seconds (JVM running for 7.709)
+2018-09-24 14:35:55.792  INFO 10264 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring FrameworkServlet 'dispatcherServlet'
+2018-09-24 14:36:02.993  WARN 10264 --- [http-nio-8080-exec-3] o.h.hql.internal.ast.HqlSqlWalker        : [DEPRECATION] Encountered positional parameter near line 1, column 57.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2018-10-01 10:36:39.447  INFO 10440 --- [main] com.peace.MramApplication                : Starting MramApplication on DESKTOP-T4D838U with PID 10440 (F:\workspace-tdr\tdr-mr\target\classes started by suld in F:\workspace-tdr\tdr-mr)
+2018-10-01 10:36:39.462 DEBUG 10440 --- [main] com.peace.MramApplication                : Running with Spring Boot v1.3.5.RELEASE, Spring v4.2.6.RELEASE
+2018-10-01 10:36:39.463  INFO 10440 --- [main] com.peace.MramApplication                : No active profile set, falling back to default profiles: default
+2018-10-01 10:36:55.243  WARN 10440 --- [main] org.hibernate.cfg.SettingsFactory        : Unrecognized value for "hibernate.hbm2ddl.auto": none
+2018-10-01 10:36:57.095  INFO 10440 --- [main] o.apache.catalina.core.StandardService   : Starting service Tomcat
+2018-10-01 10:36:57.096  INFO 10440 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.0.33
+2018-10-01 10:36:57.183  INFO 10440 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2018-10-01 10:36:57.678  WARN 10440 --- [localhost-startStop-1] org.hibernate.cfg.SettingsFactory        : Unrecognized value for "hibernate.hbm2ddl.auto": none
+2018-10-01 10:36:58.488  INFO 10440 --- [localhost-startStop-1] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: org.springframework.security.web.util.matcher.AnyRequestMatcher@1, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@e762da, org.springframework.security.web.context.SecurityContextPersistenceFilter@499082, org.springframework.security.web.header.HeaderWriterFilter@2afb64, org.springframework.security.web.authentication.logout.LogoutFilter@150bd2d, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@1a91133, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@1bc2105, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@cd1cf6, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@17caa15, org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter@9e725e, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@10b807b, org.springframework.security.web.session.SessionManagementFilter@178324c, org.springframework.security.web.access.ExceptionTranslationFilter@10f6a5f, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@4b39e6]
+2018-10-01 10:37:00.052 ERROR 10440 --- [main] o.a.coyote.http11.Http11NioProtocol      : Failed to start end point associated with ProtocolHandler ["http-nio-8080"]
+
+java.net.BindException: Address already in use: bind
+	at sun.nio.ch.Net.bind0(Native Method) ~[na:1.8.0_181]
+	at sun.nio.ch.Net.bind(Net.java:433) ~[na:1.8.0_181]
+	at sun.nio.ch.Net.bind(Net.java:425) ~[na:1.8.0_181]
+	at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:223) ~[na:1.8.0_181]
+	at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74) ~[na:1.8.0_181]
+	at org.apache.tomcat.util.net.NioEndpoint.bind(NioEndpoint.java:340) ~[tomcat-embed-core-8.0.33.jar:8.0.33]
+	at org.apache.tomcat.util.net.AbstractEndpoint.start(AbstractEndpoint.java:773) ~[tomcat-embed-core-8.0.33.jar:8.0.33]
+	at org.apache.coyote.AbstractProtocol.start(AbstractProtocol.java:473) ~[tomcat-embed-core-8.0.33.jar:8.0.33]
+	at org.apache.catalina.connector.Connector.startInternal(Connector.java:986) [tomcat-embed-core-8.0.33.jar:8.0.33]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:147) [tomcat-embed-core-8.0.33.jar:8.0.33]
+	at org.apache.catalina.core.StandardService.addConnector(StandardService.java:239) [tomcat-embed-core-8.0.33.jar:8.0.33]
+	at org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainer.addPreviouslyRemovedConnectors(TomcatEmbeddedServletContainer.java:194) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainer.start(TomcatEmbeddedServletContainer.java:151) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.startEmbeddedServletContainer(EmbeddedWebApplicationContext.java:293) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.finishRefresh(EmbeddedWebApplicationContext.java:141) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:541) [spring-context-4.2.6.RELEASE.jar:4.2.6.RELEASE]
+	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.refresh(EmbeddedWebApplicationContext.java:118) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:766) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.SpringApplication.createAndRefreshContext(SpringApplication.java:361) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:307) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1191) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1180) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at com.peace.MramApplication.main(MramApplication.java:22) [classes/:na]
+
+2018-10-01 10:37:00.053 ERROR 10440 --- [main] o.apache.catalina.core.StandardService   : Failed to start connector [Connector[HTTP/1.1-8080]]
+
+org.apache.catalina.LifecycleException: Failed to start component [Connector[HTTP/1.1-8080]]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:153) ~[tomcat-embed-core-8.0.33.jar:8.0.33]
+	at org.apache.catalina.core.StandardService.addConnector(StandardService.java:239) ~[tomcat-embed-core-8.0.33.jar:8.0.33]
+	at org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainer.addPreviouslyRemovedConnectors(TomcatEmbeddedServletContainer.java:194) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainer.start(TomcatEmbeddedServletContainer.java:151) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.startEmbeddedServletContainer(EmbeddedWebApplicationContext.java:293) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.finishRefresh(EmbeddedWebApplicationContext.java:141) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:541) [spring-context-4.2.6.RELEASE.jar:4.2.6.RELEASE]
+	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.refresh(EmbeddedWebApplicationContext.java:118) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:766) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.SpringApplication.createAndRefreshContext(SpringApplication.java:361) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:307) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1191) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1180) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at com.peace.MramApplication.main(MramApplication.java:22) [classes/:na]
+Caused by: org.apache.catalina.LifecycleException: service.getName(): "Tomcat";  Protocol handler start failed
+	at org.apache.catalina.connector.Connector.startInternal(Connector.java:993) ~[tomcat-embed-core-8.0.33.jar:8.0.33]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:147) ~[tomcat-embed-core-8.0.33.jar:8.0.33]
+	... 13 common frames omitted
+Caused by: java.net.BindException: Address already in use: bind
+	at sun.nio.ch.Net.bind0(Native Method) ~[na:1.8.0_181]
+	at sun.nio.ch.Net.bind(Net.java:433) ~[na:1.8.0_181]
+	at sun.nio.ch.Net.bind(Net.java:425) ~[na:1.8.0_181]
+	at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:223) ~[na:1.8.0_181]
+	at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74) ~[na:1.8.0_181]
+	at org.apache.tomcat.util.net.NioEndpoint.bind(NioEndpoint.java:340) ~[tomcat-embed-core-8.0.33.jar:8.0.33]
+	at org.apache.tomcat.util.net.AbstractEndpoint.start(AbstractEndpoint.java:773) ~[tomcat-embed-core-8.0.33.jar:8.0.33]
+	at org.apache.coyote.AbstractProtocol.start(AbstractProtocol.java:473) ~[tomcat-embed-core-8.0.33.jar:8.0.33]
+	at org.apache.catalina.connector.Connector.startInternal(Connector.java:986) ~[tomcat-embed-core-8.0.33.jar:8.0.33]
+	... 14 common frames omitted
+
+2018-10-01 10:37:00.059  INFO 10440 --- [main] o.apache.catalina.core.StandardService   : Stopping service Tomcat
+2018-10-01 10:37:00.067 ERROR 10440 --- [main] o.s.boot.SpringApplication               : Application startup failed
+
+org.springframework.boot.context.embedded.EmbeddedServletContainerException: Unable to start embedded Tomcat servlet container
+	at org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainer.start(TomcatEmbeddedServletContainer.java:165) ~[spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.startEmbeddedServletContainer(EmbeddedWebApplicationContext.java:293) ~[spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.finishRefresh(EmbeddedWebApplicationContext.java:141) ~[spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:541) ~[spring-context-4.2.6.RELEASE.jar:4.2.6.RELEASE]
+	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.refresh(EmbeddedWebApplicationContext.java:118) ~[spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:766) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.SpringApplication.createAndRefreshContext(SpringApplication.java:361) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:307) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1191) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1180) [spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	at com.peace.MramApplication.main(MramApplication.java:22) [classes/:na]
+Caused by: java.lang.IllegalStateException: Tomcat connector in failed state
+	at org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainer.start(TomcatEmbeddedServletContainer.java:159) ~[spring-boot-1.3.5.RELEASE.jar:1.3.5.RELEASE]
+	... 10 common frames omitted
+
+2018-10-01 10:39:24.963  INFO 11768 --- [main] com.peace.MramApplication                : Starting MramApplication on DESKTOP-T4D838U with PID 11768 (F:\workspace-tdr\tdr-mr\target\classes started by suld in F:\workspace-tdr\tdr-mr)
+2018-10-01 10:39:24.965 DEBUG 11768 --- [main] com.peace.MramApplication                : Running with Spring Boot v1.3.5.RELEASE, Spring v4.2.6.RELEASE
+2018-10-01 10:39:24.965  INFO 11768 --- [main] com.peace.MramApplication                : No active profile set, falling back to default profiles: default
+2018-10-01 10:39:27.552  WARN 11768 --- [main] org.hibernate.cfg.SettingsFactory        : Unrecognized value for "hibernate.hbm2ddl.auto": none
+2018-10-01 10:39:29.212  INFO 11768 --- [main] o.apache.catalina.core.StandardService   : Starting service Tomcat
+2018-10-01 10:39:29.213  INFO 11768 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.0.33
+2018-10-01 10:39:29.288  INFO 11768 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2018-10-01 10:39:29.765  WARN 11768 --- [localhost-startStop-1] org.hibernate.cfg.SettingsFactory        : Unrecognized value for "hibernate.hbm2ddl.auto": none
+2018-10-01 10:39:30.698  INFO 11768 --- [localhost-startStop-1] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: org.springframework.security.web.util.matcher.AnyRequestMatcher@1, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1ba628a, org.springframework.security.web.context.SecurityContextPersistenceFilter@1a63c72, org.springframework.security.web.header.HeaderWriterFilter@974ade, org.springframework.security.web.authentication.logout.LogoutFilter@af7131, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@16a02a1, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@685698, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@3f2763, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@ed3897, org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter@1f6cf70, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@f25473, org.springframework.security.web.session.SessionManagementFilter@140bce2, org.springframework.security.web.access.ExceptionTranslationFilter@10fa262, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@cdca2f]
+2018-10-01 10:39:31.943  INFO 11768 --- [main] com.peace.MramApplication                : Started MramApplication in 7.191 seconds (JVM running for 7.651)
+2018-10-01 10:39:38.170  INFO 11768 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring FrameworkServlet 'dispatcherServlet'
+2018-10-01 10:39:45.659  WARN 11768 --- [http-nio-8080-exec-6] o.h.hql.internal.ast.HqlSqlWalker        : [DEPRECATION] Encountered positional parameter near line 1, column 57.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2018-10-01 10:45:21.290  INFO 7104 --- [main] com.peace.MramApplication                : Starting MramApplication on DESKTOP-T4D838U with PID 7104 (F:\workspace-tdr\tdr-mr\target\classes started by suld in F:\workspace-tdr\tdr-mr)
+2018-10-01 10:45:21.334 DEBUG 7104 --- [main] com.peace.MramApplication                : Running with Spring Boot v1.3.5.RELEASE, Spring v4.2.6.RELEASE
+2018-10-01 10:45:21.335  INFO 7104 --- [main] com.peace.MramApplication                : No active profile set, falling back to default profiles: default
+2018-10-01 10:45:25.104  WARN 7104 --- [main] org.hibernate.cfg.SettingsFactory        : Unrecognized value for "hibernate.hbm2ddl.auto": none
+2018-10-01 10:45:26.717  INFO 7104 --- [main] o.apache.catalina.core.StandardService   : Starting service Tomcat
+2018-10-01 10:45:26.718  INFO 7104 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.0.33
+2018-10-01 10:45:26.886  INFO 7104 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2018-10-01 10:45:27.396  WARN 7104 --- [localhost-startStop-1] org.hibernate.cfg.SettingsFactory        : Unrecognized value for "hibernate.hbm2ddl.auto": none
+2018-10-01 10:45:28.180  INFO 7104 --- [localhost-startStop-1] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: org.springframework.security.web.util.matcher.AnyRequestMatcher@1, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@111b204, org.springframework.security.web.context.SecurityContextPersistenceFilter@e4e4e7, org.springframework.security.web.header.HeaderWriterFilter@c92ec, org.springframework.security.web.authentication.logout.LogoutFilter@1bb2ee1, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@1c079ea, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@25c191, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@3ed548, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@cd075b, org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter@e5c148, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1739197, org.springframework.security.web.session.SessionManagementFilter@dc468c, org.springframework.security.web.access.ExceptionTranslationFilter@18984b7, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@24bd4e]
+2018-10-01 10:45:29.653  INFO 7104 --- [main] com.peace.MramApplication                : Started MramApplication in 8.855 seconds (JVM running for 10.312)
+2018-10-01 10:47:13.414  INFO 8376 --- [main] com.peace.MramApplication                : Starting MramApplication on DESKTOP-T4D838U with PID 8376 (F:\workspace-tdr\tdr-mr\target\classes started by suld in F:\workspace-tdr\tdr-mr)
+2018-10-01 10:47:13.423 DEBUG 8376 --- [main] com.peace.MramApplication                : Running with Spring Boot v1.3.5.RELEASE, Spring v4.2.6.RELEASE
+2018-10-01 10:47:13.423  INFO 8376 --- [main] com.peace.MramApplication                : No active profile set, falling back to default profiles: default
+2018-10-01 10:47:16.338  WARN 8376 --- [main] org.hibernate.cfg.SettingsFactory        : Unrecognized value for "hibernate.hbm2ddl.auto": none
+2018-10-01 10:47:18.039  INFO 8376 --- [main] o.apache.catalina.core.StandardService   : Starting service Tomcat
+2018-10-01 10:47:18.040  INFO 8376 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.0.33
+2018-10-01 10:47:18.117  INFO 8376 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2018-10-01 10:47:18.607  WARN 8376 --- [localhost-startStop-1] org.hibernate.cfg.SettingsFactory        : Unrecognized value for "hibernate.hbm2ddl.auto": none
+2018-10-01 10:47:19.388  INFO 8376 --- [localhost-startStop-1] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: org.springframework.security.web.util.matcher.AnyRequestMatcher@1, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@104896b, org.springframework.security.web.context.SecurityContextPersistenceFilter@329dcc, org.springframework.security.web.header.HeaderWriterFilter@4e0e65, org.springframework.security.web.authentication.logout.LogoutFilter@1a58b1f, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@1189480, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@b23ff7, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@11df90, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1b8d563, org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter@f013aa, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@b1dfc2, org.springframework.security.web.session.SessionManagementFilter@d92e9, org.springframework.security.web.access.ExceptionTranslationFilter@424284, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@7c6ba]
+2018-10-01 10:47:20.825  INFO 8376 --- [main] com.peace.MramApplication                : Started MramApplication in 8.008 seconds (JVM running for 8.771)
+2018-10-01 10:47:22.806  INFO 8376 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring FrameworkServlet 'dispatcherServlet'
+2018-10-01 10:47:27.151  WARN 8376 --- [http-nio-8080-exec-9] o.h.hql.internal.ast.HqlSqlWalker        : [DEPRECATION] Encountered positional parameter near line 1, column 57.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2018-10-01 15:38:39.852  INFO 11048 --- [main] com.peace.MramApplication                : Starting MramApplication on DESKTOP-T4D838U with PID 11048 (F:\workspace-tdr\tdr-mr\target\classes started by suld in F:\workspace-tdr\tdr-mr)
+2018-10-01 15:38:39.854 DEBUG 11048 --- [main] com.peace.MramApplication                : Running with Spring Boot v1.3.5.RELEASE, Spring v4.2.6.RELEASE
+2018-10-01 15:38:39.855  INFO 11048 --- [main] com.peace.MramApplication                : No active profile set, falling back to default profiles: default
+2018-10-01 15:38:43.338  WARN 11048 --- [main] org.hibernate.cfg.SettingsFactory        : Unrecognized value for "hibernate.hbm2ddl.auto": none
+2018-10-01 15:38:45.548  INFO 11048 --- [main] o.apache.catalina.core.StandardService   : Starting service Tomcat
+2018-10-01 15:38:45.549  INFO 11048 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.0.33
+2018-10-01 15:38:45.638  INFO 11048 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2018-10-01 15:38:46.319  WARN 11048 --- [localhost-startStop-1] org.hibernate.cfg.SettingsFactory        : Unrecognized value for "hibernate.hbm2ddl.auto": none
+2018-10-01 15:38:47.316  INFO 11048 --- [localhost-startStop-1] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: org.springframework.security.web.util.matcher.AnyRequestMatcher@1, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1bf6616, org.springframework.security.web.context.SecurityContextPersistenceFilter@8f8c94, org.springframework.security.web.header.HeaderWriterFilter@1c7313, org.springframework.security.web.authentication.logout.LogoutFilter@103f330, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@10a9e04, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@16cc437, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6c715a, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@995703, org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter@7f41bb, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@120f0c2, org.springframework.security.web.session.SessionManagementFilter@88e62e, org.springframework.security.web.access.ExceptionTranslationFilter@1a90c74, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@5f554e]
+2018-10-01 15:38:48.654  INFO 11048 --- [main] com.peace.MramApplication                : Started MramApplication in 9.01 seconds (JVM running for 9.61)
+2018-10-10 12:04:02.303  INFO 6560 --- [main] com.peace.MramApplication                : Starting MramApplication on DESKTOP-T4D838U with PID 6560 (F:\workspace-tdr\tdr-mr\target\classes started by suld in F:\workspace-tdr\tdr-mr)
+2018-10-10 12:04:02.319 DEBUG 6560 --- [main] com.peace.MramApplication                : Running with Spring Boot v1.3.5.RELEASE, Spring v4.2.6.RELEASE
+2018-10-10 12:04:02.320  INFO 6560 --- [main] com.peace.MramApplication                : No active profile set, falling back to default profiles: default
+2018-10-10 12:04:19.077  WARN 6560 --- [main] org.hibernate.cfg.SettingsFactory        : Unrecognized value for "hibernate.hbm2ddl.auto": none
+2018-10-10 12:04:20.862  INFO 6560 --- [main] o.apache.catalina.core.StandardService   : Starting service Tomcat
+2018-10-10 12:04:20.863  INFO 6560 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.0.33
+2018-10-10 12:04:20.958  INFO 6560 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2018-10-10 12:04:21.514  WARN 6560 --- [localhost-startStop-1] org.hibernate.cfg.SettingsFactory        : Unrecognized value for "hibernate.hbm2ddl.auto": none
+2018-10-10 12:04:22.482  INFO 6560 --- [localhost-startStop-1] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: org.springframework.security.web.util.matcher.AnyRequestMatcher@1, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@79b052, org.springframework.security.web.context.SecurityContextPersistenceFilter@3a025, org.springframework.security.web.header.HeaderWriterFilter@1dd11f9, org.springframework.security.web.authentication.logout.LogoutFilter@57ce0b, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@1fb7ab5, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@1f6008f, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1c3be56, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@170da67, org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter@68e6fc, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@11c005f, org.springframework.security.web.session.SessionManagementFilter@189ac05, org.springframework.security.web.access.ExceptionTranslationFilter@1900d2, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@187332e]
+2018-10-10 12:04:24.148  INFO 6560 --- [main] com.peace.MramApplication                : Started MramApplication in 22.319 seconds (JVM running for 23.281)
+2018-10-10 12:07:07.541  INFO 6560 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring FrameworkServlet 'dispatcherServlet'
+2018-10-10 12:07:47.571  WARN 6560 --- [http-nio-8080-exec-4] o.h.hql.internal.ast.HqlSqlWalker        : [DEPRECATION] Encountered positional parameter near line 1, column 57.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2018-10-10 12:26:45.283  INFO 12184 --- [main] com.peace.MramApplication                : Starting MramApplication on DESKTOP-T4D838U with PID 12184 (F:\workspace-tdr\tdr-mr\target\classes started by suld in F:\workspace-tdr\tdr-mr)
+2018-10-10 12:26:45.289 DEBUG 12184 --- [main] com.peace.MramApplication                : Running with Spring Boot v1.3.5.RELEASE, Spring v4.2.6.RELEASE
+2018-10-10 12:26:45.289  INFO 12184 --- [main] com.peace.MramApplication                : No active profile set, falling back to default profiles: default
+2018-10-10 12:26:51.280  WARN 12184 --- [main] org.hibernate.cfg.SettingsFactory        : Unrecognized value for "hibernate.hbm2ddl.auto": none
+2018-10-10 12:26:54.757  INFO 12184 --- [main] o.apache.catalina.core.StandardService   : Starting service Tomcat
+2018-10-10 12:26:54.758  INFO 12184 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.0.33
+2018-10-10 12:26:54.941  INFO 12184 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2018-10-10 12:26:55.956  WARN 12184 --- [localhost-startStop-1] org.hibernate.cfg.SettingsFactory        : Unrecognized value for "hibernate.hbm2ddl.auto": none
+2018-10-10 12:26:57.614  INFO 12184 --- [localhost-startStop-1] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: org.springframework.security.web.util.matcher.AnyRequestMatcher@1, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7e5faa, org.springframework.security.web.context.SecurityContextPersistenceFilter@246923, org.springframework.security.web.header.HeaderWriterFilter@149599b, org.springframework.security.web.authentication.logout.LogoutFilter@1268751, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@127f057, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@4a2c56, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@806774, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@cb5d5, org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter@133a3ba, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@18aa16d, org.springframework.security.web.session.SessionManagementFilter@1283f52, org.springframework.security.web.access.ExceptionTranslationFilter@1e792d4, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@185bed4]
+2018-10-10 12:26:58.977  INFO 12184 --- [main] com.peace.MramApplication                : Started MramApplication in 14.166 seconds (JVM running for 15.267)
+2018-10-10 12:27:56.790  INFO 12184 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring FrameworkServlet 'dispatcherServlet'
+2018-10-10 12:28:11.272  WARN 12184 --- [http-nio-8080-exec-6] o.h.hql.internal.ast.HqlSqlWalker        : [DEPRECATION] Encountered positional parameter near line 1, column 57.  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
