@@ -4316,8 +4316,14 @@ public class PlanReportController {
 									temp.setData9(data1_array.getDouble(i*17 +9));
 								}
 								if (!(data1_array.getString(i*17 + 10).equalsIgnoreCase(null) || data1_array.getString(i*17 + 10).length() == 0)){
-									System.out.println("a@@@@@@@@@@@@@"+data1_array.getDouble(i*17 +10));
-									temp.setData10(data1_array.getDouble(i*17 +10));
+									System.out.println("a@@@@@@@@@@@@@"+data1_array.get(i*17 +10));
+									if(data1_array.get(i*17 +10).toString().equalsIgnoreCase("-")){
+										temp.setData10((double) 0);
+									}
+									else{
+										temp.setData10(data1_array.getDouble(i*17 +10));
+									}
+
 								}
 								temp.setData11(data1_array.getString(i*17 +11));
 								if (!(data1_array.getString(i*17+12).equalsIgnoreCase(null) || data1_array.getString(i*17+12).length() == 0)){
