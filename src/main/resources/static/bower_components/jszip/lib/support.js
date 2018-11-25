@@ -20,7 +20,7 @@ else {
     }
     catch (e) {
         try {
-            var Builder = window.BlobBuilder || window.WebKitBlobBuilder || window.MozBlobBuilder || window.MSBlobBuilder;
+            var Builder = self.BlobBuilder || self.WebKitBlobBuilder || self.MozBlobBuilder || self.MSBlobBuilder;
             var builder = new Builder();
             builder.append(buffer);
             exports.blob = builder.getBlob('application/zip').size === 0;
@@ -31,4 +31,8 @@ else {
     }
 }
 
-exports.nodestream = !!require("./nodejs/NodejsStreamOutputAdapter").prototype;
+try {
+    exports.nodestream = !!require('readable-stream').Readable;
+} catch(e) {
+    exports.nodestream = false;
+}

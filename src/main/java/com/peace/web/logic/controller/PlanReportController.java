@@ -2,27 +2,11 @@ package com.peace.web.logic.controller;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferByte;
-import java.awt.image.WritableRaster;
 import java.io.*;
-import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Random;
-import java.util.Set;
-import java.util.UUID;
-
-import org.w3c.dom.Element;
-import com.peace.users.model.User;
+import java.util.*;
 import com.peace.users.model.mram.AnnualRegistration;
 import com.peace.users.model.mram.DataCoalForm1_1;
 import com.peace.users.model.mram.DataCoalForm2;
@@ -38,9 +22,6 @@ import com.peace.users.model.mram.DataGeoPlan1;
 import com.peace.users.model.mram.DataGeoReport10;
 import com.peace.users.model.mram.DataGeoReport2;
 import com.peace.users.model.mram.DataGeoReport3;
-import com.peace.users.model.mram.DataGeoReport31;
-import com.peace.users.model.mram.DataGeoReport32;
-import com.peace.users.model.mram.DataGeoReport33;
 import com.peace.users.model.mram.DataGeoReport4;
 import com.peace.users.model.mram.DataGeoReport6;
 import com.peace.users.model.mram.DataGeoReport8;
@@ -85,10 +66,7 @@ import com.peace.users.model.mram.LutConcentration;
 import com.peace.users.model.mram.LutDecisions;
 import com.peace.users.model.mram.LutDeposit;
 import com.peace.users.model.mram.LutFormNotes;
-import com.peace.users.model.mram.LutFormindicators;
-import com.peace.users.model.mram.LutForms;
 import com.peace.users.model.mram.LutInternalization;
-import com.peace.users.model.mram.LutLictype;
 import com.peace.users.model.mram.LutMinGroup;
 import com.peace.users.model.mram.LutMinerals;
 import com.peace.users.model.mram.LutRole;
@@ -96,11 +74,8 @@ import com.peace.users.model.mram.LutUsers;
 import com.peace.users.model.mram.LutWeeks;
 import com.peace.users.model.mram.LutYear;
 import com.peace.users.model.mram.RegReportReq;
-import com.peace.users.model.mram.RegWeeklyMontly;
-import com.peace.users.model.mram.SubContract;
 import com.peace.users.model.mram.SubLegalpersons;
 import com.peace.users.model.mram.SubLicenses;
-import com.peace.users.model.mram.SubNoContract;
 import com.peace.users.model.mram.WeeklyMainData;
 import com.peace.users.model.mram.WeeklyRegistration;
 import com.peace.web.controller.JXML;
@@ -112,15 +87,11 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Result;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
-import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
@@ -155,24 +126,13 @@ import org.springframework.web.multipart.MultipartRequest;
 
 import com.google.common.io.Files;
 import com.google.gson.Gson;
-import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.AcroFields;
-import com.itextpdf.text.pdf.AcroFields.Item;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfStamper;
-import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.pdf.XfaForm;
 import com.peace.MramApplication;
 import com.peace.users.dao.UserDao;
-import com.peace.users.model.Tbstudentdetail;
-import com.sun.mail.handlers.multipart_mixed;
-
-//import oracle.net.aso.d;
-
-import org.w3c.dom.Attr;
-import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -7664,98 +7624,6 @@ public class PlanReportController {
 
 	}
 
-
-	@RequestMapping(value="/upload",method=RequestMethod.POST)
-	public @ResponseBody String upload(@RequestParam MultipartFile file, @RequestParam String path,HttpServletRequest req) throws IllegalStateException, IOException {
-		if (file != null) {
-			System.out.println("zam "+path);
-			System.out.println("upload hiigdeh file "+file.getOriginalFilename());
-			File newDFile = new File(req.getSession().getServletContext().getRealPath(""+path+""));
-			if(!newDFile.exists()){
-				newDFile.mkdir();
-			}
-			newDFile=null;
-
-			File newD = new File(req.getSession().getServletContext().getRealPath(""+path+file.getOriginalFilename()+""));
-
-			file.transferTo(newD);
-			Tbstudentdetail d = new Tbstudentdetail();
-			//d.setType("f");
-			d.setFile(file.getOriginalFilename());
-			Gson gson =new Gson();
-			String rjson =gson.toJson(d);
-			d=null;
-			gson=null;
-			return rjson;
-		}        
-		return null;
-	}
-
-	@RequestMapping(value="/create",method=RequestMethod.POST)
-	public @ResponseBody String create(@RequestParam final String name, @RequestParam final String type, @RequestParam String path,HttpServletRequest req) throws IOException {
-		try{
-			Tbstudentdetail d = new Tbstudentdetail();
-			//d.setType(type);
-			d.setFile(name);
-			File newD = new File(req.getSession().getServletContext().getRealPath("uploads")+"/"+path.substring(7)+name);
-			System.out.println("sss1"+path.substring(7));
-			System.out.println("sss2"+newD);
-			System.out.println("sss3"+name);
-			if(!newD.exists()){
-				System.out.println("shine folder uussen eseh "+ newD.mkdir());
-			}
-			Gson gson = new Gson();
-			String rjson = gson.toJson(d);
-			gson =  null;
-			d=null;
-			return rjson;
-		}
-		catch(Exception e){
-			e.printStackTrace();
-			return null;
-		}
-
-	}
-	@RequestMapping(value="/read",method=RequestMethod.POST)
-	public @ResponseBody String getImagePath(String path,HttpServletRequest req){
-		Gson gson=new Gson();
-
-
-		List <Tbstudentdetail> rjson1 = new ArrayList<>();
-
-		System.out.println(gson.toJson(rjson1));
-		File folder = new File(req.getSession().getServletContext().getRealPath(""+path+""));
-		if(!folder.exists()){
-			folder.mkdir();
-		}
-		for (final File fileEntry : folder.listFiles()) {
-			Tbstudentdetail rjson = new Tbstudentdetail();
-
-			if (fileEntry.isDirectory()) {
-				//rjson.setType("d");
-				rjson.setFile(fileEntry.getName());
-
-			}
-			else {
-				//rjson.setType("f");
-				rjson.setFile(fileEntry.getName());
-				File file =new File(fileEntry.getAbsolutePath());
-				//rjson.setSize(file.length());
-
-			}
-			rjson1.add(rjson);
-			rjson=null;
-		}
-
-		String rjsonr = gson.toJson(rjson1);
-
-		gson=null;
-		rjson1=null;
-
-		System.out.println("rrr"+rjsonr);
-
-		return rjsonr;
-	}
 	@RequestMapping(value="/thumbnail",method=RequestMethod.GET)
 	public void getThumbnail(HttpServletRequest req,HttpServletResponse response){
 		try{
@@ -7999,50 +7867,6 @@ public class PlanReportController {
 		stamper.setFormFlattening(true);
 		stamper.close();
 		reader.close();
-	}
-
-
-	@RequestMapping(value="/withid",method=RequestMethod.POST)
-	public @ResponseBody String withid(@RequestParam final int userid, @RequestParam("files") MultipartFile files, HttpServletRequest req) throws IOException {
-		try{
-			Tbstudentdetail detail = new Tbstudentdetail();
-			User loguser= null;
-			if(userid!=0){
-				loguser=(User) dao.getHQLResult("from User t where t.id='"+userid+"'", "current");
-				MultipartFile mfile =  null;
-				mfile = (MultipartFile)files;
-				if (mfile != null) { 	
-					detail.setUserid(userid);
-					String appPath = req.getSession().getServletContext().getRealPath("");
-					String SAVE_DIR = "uploads";
-					DateFormat dateFormat1 = new SimpleDateFormat("yyyyMMdd");
-					Date date1 = new Date();
-					String special = dateFormat1.format(date1);
-					String savePath = appPath + "/" + SAVE_DIR+ "/" +loguser.getUsername();
-					System.out.println("de dir"+special);
-					File logodestination = new File(savePath);
-					if(!logodestination.exists()){
-						logodestination.mkdir();
-						System.out.println("end"+logodestination);
-					}
-
-					String path = appPath + "/" + SAVE_DIR+ "/" +loguser.getUsername()+ "/" + mfile.getOriginalFilename();
-					File logoorgpath = new File(path);
-
-					detail.setFile(path);
-					dao.PeaceCrud(detail, "Tbstudentdetail", "save", (long) 0, 0, 0, null);
-					mfile.transferTo(logoorgpath);
-					return "true";
-				} 
-			}				
-
-			return "false";
-		}
-		catch(Exception e){
-			e.printStackTrace();
-			return null;
-		}
-
 	}
 
 	@RequestMapping(value="/delete",method=RequestMethod.POST)

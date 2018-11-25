@@ -1,9 +1,9 @@
 // uikit custom styles
 
 /* animations */
-[class^="uk-animation-"] {
+[class*="uk-animation-"] {
     animation-timing-function: @md_easing;
-    animation-duration: 280ms;
+    animation-duration: 560ms;
 }
 
 /* alerts */
@@ -53,6 +53,13 @@
     line-height: 15px;
     font-weight: 400;
     white-space: nowrap;
+    a {
+        color: @white !important;
+    }
+    &-default {
+        background: @md-color-grey-500;
+        color: @white;
+    }
     &-primary {
         background: @theme_primary_color;
     }
@@ -71,6 +78,11 @@
     &-notification {
         border-radius: 20px;
     }
+    &-large {
+        font-size: 13px;
+        line-height: 16px;
+        padding: 4px 8px;
+    }
     &.inline-label {
         vertical-align: 1px;
         margin-left: 4px;
@@ -81,6 +93,17 @@
         color: @text_primary_color;
         padding-bottom: 0;
         line-height: 16px;
+    }
+    &-inline {
+        vertical-align: 2px;
+    }
+}
+.uk-badge-group {
+    overflow: hidden;
+    .uk-badge {
+        float: left;
+        display: block;
+        margin: 0 4px 4px 0;
     }
 }
 
@@ -193,6 +216,7 @@
                 right: -11px;
                 .boxShadowHelper(3);
                 border: none;
+                z-index: 10;
             }
         }
         .uk-overflow-container {
@@ -226,7 +250,6 @@
                 }
             }
         }
-
     }
     .uk-margin.uk-modal-content {
         margin-bottom: 0;
@@ -242,6 +265,9 @@
         margin-top: -17px;
         left: 50%;
         right: auto;
+    }
+    .uk-modal-aside {
+        padding: 16px 32px 32px;
     }
 }
 
@@ -499,6 +525,64 @@ fieldset {
     }
 }
 
+/* nav */
+.uk-nav {
+    &-header {
+        color: @text_secondary_color;
+        font-weight: normal;
+    }
+    &-divider {
+        box-shadow: none;
+        border-top-color: @border_color;
+        + .uk-nav-header {
+            margin-top: 0;
+        }
+    }
+    &-label {
+        width: 12px;
+        height: 12px;
+        display: inline-block;
+        vertical-align: -1px;
+        margin-right: 8px;
+    }
+    &-side {
+        > li {
+            > a {
+                font-weight: 500;
+                line-height: 22px;
+                > i {
+                    font-size: 24px;
+                    margin-right: 10px;
+                    vertical-align: -7px;
+                }
+                &:hover,
+                &:focus {
+                    background: transparent;
+                    box-shadow: none;
+                }
+            }
+            &.uk-active {
+                > a {
+                    background: transparent;
+                    box-shadow: none;
+                    &,
+                    > i {
+                        color: @accent_color;
+                    }
+                }
+            }
+            li a {
+                text-shadow: none;
+                color: @text_primary_color;
+            }
+        }
+        ul.uk-nav-sub {
+            padding-top: 0;
+            padding-left: 24px;
+        }
+    }
+}
+
 /* pagination */
 .uk-pagination {
     margin: 0;
@@ -652,7 +736,7 @@ fieldset {
         background: @background_color_default;
     }
     &-hover tbody tr:hover {
-        background: @background_color_default;
+        background: @theme_light_color;
     }
 }
 
@@ -722,6 +806,10 @@ fieldset {
         font-family: "Material Icons";
     }
 }
+.uk-float-none {
+    float: none !important;
+}
+
 
 /* ------------ Components ------------ */
 
@@ -815,7 +903,7 @@ fieldset {
 }
 
 /* dotnav */
-@import (less) "../../bower_components/uikit/css/components/dotnav.css";
+@import (less) "../../bower_components/uikit/css/components/dotnav.almost-flat.css";
 
 /* progress */
 @import (less) "../../bower_components/uikit/css/components/progress.almost-flat.css";
@@ -1294,6 +1382,12 @@ a.uk-datepicker-table-muted {
     }
     &-small {
         transform: scale(0.85);
+    }
+    &-top {
+        z-index: 9999;
+    }
+    .touch & {
+        opacity: 1;
     }
 }
 

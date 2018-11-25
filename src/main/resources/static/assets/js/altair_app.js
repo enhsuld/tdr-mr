@@ -46,14 +46,17 @@ altairApp
         '$http',
         '$window',
         '$timeout',
-        'preloaders',
         'variables',
-        function ($rootScope, $state, $stateParams,$http,$window, $timeout,variables) {
+        '$transitions',
+        '$trace',
+        function ($rootScope, $state, $stateParams,$http,$window, $timeout,variables,$transitions,$trace) {
+
+            $trace.enable('TRANSITION');
 
             $rootScope.$state = $state;
             $rootScope.$stateParams = $stateParams;
 
-            $rootScope.$on('$stateChangeSuccess', function () {
+            $transitions.onSuccess({},function ($transition) {
 
                 // scroll view to top
                 $("html, body").animate({
@@ -98,7 +101,8 @@ altairApp
 
             });
 
-            $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+            $transitions.onStart({},function($transition) {
+
                 // main search
                 $rootScope.mainSearchActive = false;
                 // secondary sidebar
@@ -110,7 +114,9 @@ altairApp
                     $rootScope.primarySidebarActive = false;
                     $rootScope.hide_content_sidebar = false;
                 }
-                if(!toParams.hasOwnProperty('hidePreloader')) {
+
+                var params = $transition.params();
+                if(!params.hasOwnProperty('hidePreloader')) {
                     $rootScope.pageLoading = true;
                     $rootScope.pageLoaded = false;
                 }
@@ -121,7 +127,7 @@ altairApp
             FastClick.attach(document.body);
 
             // get version from package.json
-            $http.get('./package.json').success(function(response) {
+            $http.get('./package.json').then(function onSuccess(response) {
                 $rootScope.appVer = response.version;
             });
 
@@ -239,6 +245,9 @@ altairApp
                             }
                         })
                         .velocity('reverse');
+                },
+                randomNUmber: function (min,max) {
+                    return Math.floor( Math.random()*(max-min+1)+min );
                 }
             };
         }]
@@ -249,32 +258,42 @@ angular.module("ConsoleLogger", [])
     .factory("PrintToConsole", ["$rootScope", function ($rootScope) {
         var handler = { active: false };
         handler.toggle = function () { handler.active = !handler.active; };
-        if (handler.active) {
-            $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+        $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+            if (handler.active) {
                 console.log("$stateChangeStart --- event, toState, toParams, fromState, fromParams");
                 console.log(arguments);
-            });
-            $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
+            };
+        });
+        $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
+            if (handler.active) {
                 console.log("$stateChangeError --- event, toState, toParams, fromState, fromParams, error");
                 console.log(arguments);
-            });
-            $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
+            };
+        });
+        $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
+            if (handler.active) {
                 console.log("$stateChangeSuccess --- event, toState, toParams, fromState, fromParams");
                 console.log(arguments);
-            });
-            $rootScope.$on('$viewContentLoading', function (event, viewConfig) {
+            };
+        });
+        $rootScope.$on('$viewContentLoading', function (event, viewConfig) {
+            if (handler.active) {
                 console.log("$viewContentLoading --- event, viewConfig");
                 console.log(arguments);
-            });
-            $rootScope.$on('$viewContentLoaded', function (event) {
+            };
+        });
+        $rootScope.$on('$viewContentLoaded', function (event) {
+            if (handler.active) {
                 console.log("$viewContentLoaded --- event");
                 console.log(arguments);
-            });
-            $rootScope.$on('$stateNotFound', function (event, unfoundState, fromState, fromParams) {
+            };
+        });
+        $rootScope.$on('$stateNotFound', function (event, unfoundState, fromState, fromParams) {
+            if (handler.active) {
                 console.log("$stateNotFound --- event, unfoundState, fromState, fromParams");
                 console.log(arguments);
-            });
-        };
+            };
+        })
         return handler;
     }]);
 altairApp
@@ -350,19 +369,22 @@ altairApp
     .directive('pageTitle', [
         '$rootScope',
         '$timeout',
-        function($rootScope, $timeout) {
+        '$transitions',
+        function($rootScope, $timeout,$transitions) {
             return {
                 restrict: 'A',
                 link: function() {
-                    var listener = function(event, toState) {
-                        var default_title = 'Altair Admin';
+
+                    $transitions.onSuccess({},function ($transition) {
+                        var default_title = 'Altair Admin',
+                            state = $transition.to();
                         $timeout(function() {
-                            $rootScope.page_title = (toState.data && toState.data.pageTitle)
-                                ? default_title + ' - ' + toState.data.pageTitle : default_title;
+                            $rootScope.page_title = (state.data && state.data.pageTitle)
+                                ? default_title + ' - ' + state.data.pageTitle : default_title;
                         });
-                    };
-                    $rootScope.$on('$stateChangeSuccess', listener);
+                    });
                 }
+
             }
         }
     ])
@@ -422,7 +444,14 @@ altairApp
                 link: function (scope, elem, attrs) {
                     $(elem).on('click', function(e) {
                         e.preventDefault();
-                        screenfull.toggle();
+                        if(screenfull.enabled) {
+                            screenfull.request();
+                            $(elem).children('.material-icons').text("fullscreen_exit");
+                            if(screenfull.isFullscreen) {
+                                screenfull.exit();
+                                $(elem).children('.material-icons').text("fullscreen");
+                            }
+                        }
                         $(window).resize();
                     });
                 }
@@ -550,6 +579,53 @@ altairApp
                         } else {
                             $this.closest('tr').removeClass('row_checked');
                         }
+                    });
+
+                }
+            }
+        }
+    ])
+    // table row childrens check
+    .directive('tableCheckChildrens', [
+        '$window',
+        '$timeout',
+        function ($window,$timeout) {
+            return {
+                restrict: 'A',
+                require: 'ngModel',
+                link: function (scope, elem, attr, ngModel) {
+
+                    var $this = $(elem).closest('tr'),
+                        $thisChildrens = $this.nextUntil('.table-parent-row').find('.check_row');
+
+                    $this
+                        .on('ifChecked',function() {
+                            $this.addClass('row_checked');
+                            $thisChildrens.iCheck('check');
+                        })
+                        .on('ifUnchecked',function() {
+                            $this.removeClass('row_checked');
+                            $thisChildrens.iCheck('uncheck');
+                        });
+
+                }
+            }
+        }
+    ])
+    // table tree toggle
+    .directive('tableTreeToggle', [
+        '$window',
+        '$timeout',
+        function ($window,$timeout) {
+            return {
+                restrict: 'A',
+                link: function (scope, elem, attr, ngModel) {
+
+                    $(elem).closest('tr.show_child_row').nextUntil('.table-parent-row').hide();
+
+                    $(elem).on('click', function(e) {
+                        e.preventDefault();
+                        $(this).closest('tr').toggleClass('show_child_row').nextUntil('.table-parent-row').toggle();
                     });
 
                 }
@@ -1164,7 +1240,9 @@ altairApp
                         var $thisCard = $(el),
                             mdCardToolbarFixed = $thisCard.hasClass('toolbar-fixed'),
                             mdCard_h = $thisCard.height(),
-                            mdCard_w = $thisCard.width();
+                            mdCard_w = $thisCard.width(),
+                            body_scroll_top = $('body').scrollTop(),
+                            mdCard_offset = $thisCard.offset();
 
                         // create placeholder for card
                         $thisCard.after('<div class="md-card-placeholder" style="width:'+ mdCard_w+'px;height:'+ mdCard_h+'px;"/>');
@@ -1466,12 +1544,19 @@ altairApp
                     var $elem = $($element);
                     $scope.updateInput = function() {
                         // clear wrapper classes
+                        $elem.closest('.uk-input-group').removeClass('uk-input-group-danger uk-input-group-success');
                         $elem.closest('.md-input-wrapper').removeClass('md-input-wrapper-danger md-input-wrapper-success md-input-wrapper-disabled');
 
                         if($elem.hasClass('md-input-danger')) {
+                            if($elem.closest('.uk-input-group').length) {
+                                $elem.closest('.uk-input-group').addClass('uk-input-group-danger')
+                            }
                             $elem.closest('.md-input-wrapper').addClass('md-input-wrapper-danger')
                         }
                         if($elem.hasClass('md-input-success')) {
+                            if($elem.closest('.uk-input-group').length) {
+                                $elem.closest('.uk-input-group').addClass('uk-input-group-success')
+                            }
                             $elem.closest('.md-input-wrapper').addClass('md-input-wrapper-success')
                         }
                         if($elem.prop('disabled')) {
@@ -1560,12 +1645,84 @@ altairApp
     // material design fab speed dial
     .directive('mdFabSpeedDial',[
         'variables',
-        function (variables) {
+        '$timeout',
+        function (variables,$timeout) {
             return {
                 restrict: 'A',
                 scope: true,
                 link: function (scope, elem, attrs) {
-                    $(elem)
+
+                    var $elem = $(elem),
+                        $wrapper = $(elem).closest('.md-fab-speed-dial,.md-fab-speed-dial-horizontal');
+
+                    function activateFAB(obj) {
+                        obj.closest('.md-fab-wrapper').addClass('md-fab-active');
+                        obj.velocity({
+                            scale: 0
+                        }, {
+                            duration: 140,
+                            easing: variables.easing_swiftOut,
+                            complete: function() {
+                                obj
+                                    .velocity({ scale: 1 },{
+                                        duration: 140,
+                                        easing: variables.easing_swiftOut
+                                    })
+                                    .children().toggle()
+                            }
+                        })
+                    }
+                    function deactivateFAB(obj) {
+                        obj.closest('.md-fab-wrapper').removeClass('md-fab-active');
+                        obj.velocity({
+                            scale: 0
+                        }, {
+                            duration: 140,
+                            easing: variables.easing_swiftOut,
+                            complete: function() {
+                                obj
+                                    .velocity({ scale: 1 },{
+                                        duration: 140,
+                                        easing: variables.easing_swiftOut
+                                    })
+                                    .children().toggle()
+                            }
+                        })
+                    }
+
+                    $(elem).append('<i class="material-icons md-fab-action-close" style="display:none">&#xE5CD;</i>');
+
+                    if($wrapper.is('[data-fab-hover]')) {
+                        var deactiveateFabTimeout;
+                        $wrapper
+                            .on('mouseenter',function() {
+                                $wrapper.addClass('md-fab-over');
+                                $timeout.cancel(deactiveateFabTimeout);
+                                setTimeout(function() {
+                                    activateFAB($elem);
+                                },100);
+                            })
+                            .on('mouseleave',function() {
+                                deactivateFAB($elem);
+                                deactiveateFabTimeout = $timeout(function() {
+                                    $wrapper.removeClass('md-fab-over');
+                                },500);
+                            })
+                    } else {
+                        $elem
+                            .on('click',function() {
+                                if(!$elem.closest('.md-fab-wrapper').hasClass('md-fab-active')) {
+                                    activateFAB($elem);
+                                } else {
+                                    deactivateFAB($elem);
+                                }
+                            })
+                            .closest('.md-fab-wrapper').find('.md-fab-small')
+                            .on('click',function() {
+                                deactivateFAB($elem);
+                            });
+                    }
+                    /*$(elem)
                         .append('<i class="material-icons md-fab-action-close" style="display:none">&#xE5CD;</i>')
                         .on('click',function(e) {
                             e.preventDefault();
@@ -1598,7 +1755,7 @@ altairApp
                         .closest('.md-fab-wrapper').find('.md-fab-small')
                         .on('click',function() {
                             $(elem).trigger('click');
-                        });
+                        });*/
                 }
             }
         }
@@ -1767,6 +1924,17 @@ altairApp
                        }
                     });
 
+                    scope.$watch(function() {
+                        return parent_el.hasClass('hierarchical_show');
+                    }, function(newValue){
+                        if($rootScope.pageLoaded && newValue) {
+                            var children = parent_el.children(),
+                                children_length = children.length;
+                            add_animation(children,children_length);
+                        }
+                    });
+
+
                 }
             }
         }
@@ -1819,6 +1987,18 @@ altairApp
                                     add_animation(thisChildren,thisContext,thisChildrenLength)
                                 },560)
                             }
+                        }
+                    });
+
+                    scope.$watch(function() {
+                        return $this.hasClass('hierarchical_slide');
+                    }, function(newValue){
+                        if($rootScope.pageLoaded && newValue) {
+                            var thisChildren = attrs['slideChildren'] ? $this.children(attrs['slideChildren']) : $this.children(),
+                                thisContext = attrs['slideContext'] ? $this.closest(attrs['slideContext']) : 'window',
+                                thisChildrenLength = thisChildren.length;
+
+                            add_animation(thisChildren,thisContext,thisChildrenLength);
                         }
                     });
 
@@ -2019,6 +2199,124 @@ altairApp
             }
         }
     ])
+    .directive('pageAside', [
+        '$timeout',
+        '$window',
+        function ($timeout,$window) {
+            return {
+                restrict: 'A',
+                link: function (scope, elem, attrs) {
+                    var w = angular.element($window);
+
+                    function calculateHeight() {
+                        var viewportHeight = w.height(),
+                            asideTop = $(elem).offset().top;
+
+                        $(elem).height(viewportHeight - asideTop);
+                    }
+                    calculateHeight();
+                    w.on('debouncedresize',function() {
+                        calculateHeight();
+                    });
+                }
+            }
+        }
+    ])
+    .directive('pageAsideToggle', [
+        '$timeout',
+        '$window',
+        function ($timeout,$window) {
+            return {
+                restrict: 'A',
+                link: function (scope, elem, attrs) {
+                    $(elem).on('click',function() {
+                        $('body').toggleClass('page_aside_collapsed');
+                    })
+                }
+            }
+        }
+    ])
+    .directive('pageOverflow', [
+        '$timeout',
+        '$window',
+        function ($timeout,$window) {
+            return {
+                restrict: 'A',
+                link: function (scope, elem, attrs) {
+                    var w = angular.element($window);
+
+                    function calculateHeight() {
+                        var viewportHeight = w.height(),
+                            overflowTop = $(elem).offset().top,
+                            height = viewportHeight - overflowTop;
+
+                        if($(elem).children('.uk-overflow-container').length) {
+                            $(elem).children('.uk-overflow-container').height(height);
+                        } else {
+                            $(elem).height(height);
+                        }
+
+                    }
+                    calculateHeight();
+                    w.on('debouncedresize',function() {
+                        calculateHeight();
+                    });
+
+                }
+            }
+        }
+    ])
+    .directive('altairUiSelect', [
+        '$timeout',
+        function($timeout) {
+            return {
+                require: 'uiSelect',
+                link: function(scope, element, attrs, $select) {
+
+                    $timeout(function() {
+                        scope.dropdown = $($select.$element).find('.ui-select-dropdown')
+                    },1000);
+
+                    scope.onOpenClose = function(isOpen) {
+                        var $dropdown = scope.dropdown;
+                        if(isOpen) {
+                            $dropdown
+                                .hide()
+                                .velocity('slideDown', {
+                                    duration: 200,
+                                    easing: [ 0.4,0,0.2,1 ]
+                                })
+                        } else {
+                            scope.dropdown
+                                .show()
+                                .velocity('slideUp', {
+                                    duration: 200,
+                                    easing: [ 0.4,0,0.2,1 ]
+                                });
+                        }
+                    };
+
+                }
+            };
+        }
+    ])
+    .directive('maskedInput', [
+        '$timeout',
+        function($timeout) {
+            return {
+                restrict: 'A',
+                link: function (scope, elem, attrs) {
+
+                    var $this = $(elem);
+
+                    $timeout(function () {
+                        $this.inputmask();
+                    })
+
+                }
+            };
+        }
+    ])
 ;
 altairApp
     .filter('multiSelectFilter', function () {
@@ -2093,7 +2391,10 @@ altairApp
     .config([
         '$stateProvider',
         '$urlRouterProvider',
-        function ($stateProvider, $urlRouterProvider) {
+        '$locationProvider',
+        function ($stateProvider, $urlRouterProvider, $locationProvider) {
+
+            $locationProvider.hashPrefix('');
 
             // Use $urlRouterProvider to configure any redirects (when) and invalid urls (otherwise).
             $urlRouterProvider
@@ -2132,6 +2433,20 @@ altairApp
                                 'lazy_uikit',
                                 'lazy_iCheck',
                                 'app/components/pages/loginController.js'
+                            ]);
+                        }]
+                    }
+                })
+                .state("login_v2", {
+                    url: "/login_v2",
+                    templateUrl: 'app/components/pages/login_v2View.html',
+                    controller: 'login_v2Ctrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'lazy_uikit',
+                                'lazy_iCheck',
+                                'app/components/pages/login_v2Controller.js'
                             ]);
                         }]
                     }
@@ -2224,6 +2539,8 @@ altairApp
                                 'lazy_ionRangeSlider',
                                 'lazy_masked_inputs',
                                 'lazy_character_counter',
+                                'bower_components/jquery-ui/jquery-ui.min.js',
+                                'lazy_uiSelect',
                                 'app/components/forms/advancedController.js'
                             ], {serie:true} );
                         }]
@@ -2601,6 +2918,19 @@ altairApp
                         pageTitle: 'Accordion (components)'
                     }
                 })
+                .state("restricted.components.animations", {
+                    url: "/animations",
+                    templateUrl: 'app/components/components/animationsView.html',
+                    controller: 'animationsCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load('app/components/components/animationsController.js');
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Animations (MD)'
+                    }
+                })
                 .state("restricted.components.autocomplete", {
                     url: "/autocomplete",
                     templateUrl: 'app/components/components/autocompleteView.html',
@@ -2804,6 +3134,13 @@ altairApp
                         pageTitle: 'Slideshow (components)'
                     }
                 })
+                .state("restricted.components.smooth_scroll", {
+                    url: "/smooth_scroll",
+                    templateUrl: 'app/components/components/smooth_scrollView.html',
+                    data: {
+                        pageTitle: 'Smooth Scroll (components)'
+                    }
+                })
                 .state("restricted.components.sortable", {
                     url: "/sortable",
                     templateUrl: 'app/components/components/sortableView.html',
@@ -2856,6 +3193,27 @@ altairApp
                         pageTitle: 'Tabs (components)'
                     }
                 })
+                .state("restricted.components.timeline", {
+                    url: "/timeline",
+                    templateUrl: 'app/components/components/timelineView.html',
+                    controller: 'timelineCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'app/components/components/timelineController.js'
+                            ]);
+                        }],
+                        user_data: function ($http) {
+                            return $http({method: 'GET', url: 'data/user_data.json'})
+                                .then(function (data) {
+                                    return data.data;
+                                });
+                        }
+                    },
+                    data: {
+                        pageTitle: 'Timeline'
+                    }
+                })
                 .state("restricted.components.tooltips", {
                     url: "/tooltips",
                     templateUrl: 'app/components/components/tooltipsView.html',
@@ -2875,6 +3233,21 @@ altairApp
                     url: "/ecommerce",
                     template: '<div ui-view autoscroll="false"/>',
                     abstract: true
+                })
+                .state("restricted.ecommerce.payment_page", {
+                    url: "/payment_page",
+                    templateUrl: 'app/components/ecommerce/paymentView.html',
+                    controller: 'paymentCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'app/components/ecommerce/paymentController.js'
+                            ]);
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Product Details'
+                    }
                 })
                 .state("restricted.ecommerce.product_details", {
                     url: "/product_details",
@@ -3045,6 +3418,22 @@ altairApp
                         pageTitle: 'Charts (echarts)'
                     }
                 })
+                .state("restricted.plugins.crud_table", {
+                    url: "/crud_table",
+                    templateUrl: 'app/components/plugins/crud_tableView.html',
+                    controller: 'crud_tableCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'lazy_masked_inputs',
+                                'app/components/plugins/crud_tableController.js'
+                            ], {serie: true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Context Menu'
+                    }
+                })
                 .state("restricted.plugins.context_menu", {
                     url: "/context_menu",
                     templateUrl: 'app/components/plugins/context_menuView.html',
@@ -3091,6 +3480,22 @@ altairApp
                     },
                     data: {
                         pageTitle: 'Diff View'
+                    }
+                })
+                .state("restricted.plugins.dropzone", {
+                    url: "/dropzone",
+                    templateUrl: 'app/components/plugins/dropzoneView.html',
+                    controller: 'dropzoneCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'lazy_dropzone',
+                                'app/components/plugins/dropzoneController.js'
+                            ]);
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Dropzone (multiupload)'
                     }
                 })
                 .state("restricted.plugins.filemanager", {
@@ -3180,7 +3585,7 @@ altairApp
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
                                 // push.js
-                                'bower_components/push.js/push.min.js',
+                                'bower_components/push.js/bin/push.min.js',
                                 'app/components/plugins/push_notificationsController.js'
                             ],{serie:true});
                         }]
@@ -3347,6 +3752,55 @@ altairApp
                         pageTitle: 'Contact List Horizontal'
                     }
                 })
+                .state("restricted.pages.contact_list_v2", {
+                    url: "/contact_list_v2",
+                    templateUrl: 'app/components/pages/contact_list_v2View.html',
+                    controller: 'contact_list_v2Ctrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'lazy_listNav',
+                                'app/components/pages/contact_list_v2Controller.js'
+                            ],{serie: true});
+                        }],
+                        contact_list: function($http){
+                            return $http({ method: 'GET', url: 'data/contact_list.json' })
+                                .then(function (data) {
+                                    return data.data;
+                                });
+                        }
+                    },
+                    data: {
+                        pageTitle: 'Contact List v2'
+                    }
+                })
+                .state("restricted.pages.forum", {
+                    url: "/forum",
+                    abstract: true,
+                    template: '<div ui-view autoscroll="false" ng-class="{ \'uk-height-1-1\': page_full_height }" />',
+                    controller: 'forumCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'app/components/pages/forumController.js'
+                            ]);
+                        }]
+                    },
+                })
+                .state("restricted.pages.forum.dashboard", {
+                    url: "/dashboard",
+                    templateUrl: 'app/components/pages/forumView.html',
+                    data: {
+                        pageTitle: 'Forum'
+                    }
+                })
+                .state("restricted.pages.forum.single", {
+                    url: "/single",
+                    templateUrl: 'app/components/pages/forum_singleView.html',
+                    data: {
+                        pageTitle: 'Forum (single thread)'
+                    }
+                })
                 .state("restricted.pages.gallery", {
                     url: "/gallery",
                     templateUrl: 'app/components/pages/galleryView.html',
@@ -3355,6 +3809,21 @@ altairApp
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
                                 'app/components/pages/galleryController.js'
+                            ],{serie: true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Gallery'
+                    }
+                })
+                .state("restricted.pages.gallery_v2", {
+                    url: "/gallery_v2",
+                    templateUrl: 'app/components/pages/gallery_v2View.html',
+                    controller: 'gallery_v2Ctrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'app/components/pages/gallery_v2Controller.js'
                             ],{serie: true});
                         }]
                     },
@@ -3420,7 +3889,9 @@ altairApp
                             controller: 'invoicesCtrl'
                         }
                     },
-                    params: { hidePreloader: true }
+                    params: {
+                        hidePreloader: true
+                     }
                 })
                 .state("restricted.pages.invoices.add", {
                     url: "/add",
@@ -3430,7 +3901,9 @@ altairApp
                             controller: 'invoicesCtrl'
                         }
                     },
-                    params: { hidePreloader: true }
+                    params: {
+                        hidePreloader: true
+                    }
                 })
                 .state("restricted.pages.mailbox", {
                     url: "/mailbox",
@@ -3449,6 +3922,25 @@ altairApp
                     },
                     data: {
                         pageTitle: 'Mailbox'
+                    }
+                })
+                .state("restricted.pages.mailbox_v2", {
+                    url: "/mailbox_v2",
+                    templateUrl: 'app/components/pages/mailbox_v2View.html',
+                    controller: 'mailbox_v2Ctrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load('app/components/pages/mailbox_v2Controller.js');
+                        }],
+                        messages: function($http){
+                            return $http({ method: 'GET', url: 'data/mailbox_data.json' })
+                                .then(function (data) {
+                                    return data.data;
+                                });
+                        }
+                    },
+                    data: {
+                        pageTitle: 'Mailbox v2'
                     }
                 })
                 .state("restricted.pages.notes", {
@@ -3477,6 +3969,13 @@ altairApp
                     templateUrl: 'app/components/pages/pricing_tablesView.html',
                     data: {
                         pageTitle: 'Pricing Tables'
+                    }
+                })
+                .state("restricted.pages.pricing_tables_v2", {
+                    url: "/pricing_tables_v2",
+                    templateUrl: 'app/components/pages/pricing_tables_v2View.html',
+                    data: {
+                        pageTitle: 'Pricing Tables v2'
                     }
                 })
                 .state("restricted.pages.scrum_board", {
@@ -3635,6 +4134,22 @@ altairApp
                     },
                     data: {
                         pageTitle: 'User edit'
+                    }
+                })
+                .state("restricted.pages.quiz", {
+                    url: "/quiz",
+                    templateUrl: 'app/components/pages/quizView.html',
+                    controller: 'quizCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'lazy_quiz',
+                                'app/components/pages/quizController.js'
+                            ]);
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Quiz'
                     }
                 })
                 .state("restricted.pages.issues", {
@@ -3943,6 +4458,7 @@ altairApp
                         files: [
                             "bower_components/prism/prism.js",
                             "bower_components/prism/components/prism-php.js",
+                            "bower_components/prism/components/prism-markup-templating.js",
                             "bower_components/prism/plugins/line-numbers/prism-line-numbers.js",
                             'app/modules/angular-prism.min.js'
                         ],
@@ -3951,7 +4467,7 @@ altairApp
                     {
                         name: 'lazy_dragula',
                         files: [
-                            'bower_components/angular-dragula/dist/angular-dragula.min.js'
+                            'bower_components/angular-dragula/dist/angularjs-dragula.min.js'
                         ]
                     },
                     {
@@ -4056,7 +4572,14 @@ altairApp
                         name: 'lazy_dropify',
                         files: [
                             'assets/skins/dropify/css/dropify.css',
-                            'assets/js/custom/dropify/dist/js/dropify.min.js'
+                            'bower_components/dropify/dist/js/dropify.min.js'
+                        ],
+                        insertBefore: '#main_stylesheet'
+                    },
+                    {
+                        name: 'lazy_dropzone',
+                        files: [
+                            'bower_components/dropzone/dist/dropzone.js'
                         ],
                         insertBefore: '#main_stylesheet'
                     },
@@ -4112,6 +4635,25 @@ altairApp
                         ],
                         insertBefore: '#main_stylesheet',
                         serie: true
+                    },
+                    {
+                        name: 'lazy_quiz',
+                        files: [
+                            'assets/js/custom/slickQuiz/slickQuiz.js'
+                        ]
+                    },
+                    {
+                        name: 'lazy_listNav',
+                        files: [
+                            'bower_components/jquery-listnav/jquery-listnav.min.js'
+                        ]
+                    },
+                    {
+                        name: 'lazy_uiSelect',
+                        files: [
+                            'bower_components/angular-ui-select/dist/select.min.css',
+                            'bower_components/angular-ui-select/dist/select.min.js'
+                        ]
                     },
 
                     // ----------- KENDOUI COMPONENTS -----------

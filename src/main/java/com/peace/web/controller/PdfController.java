@@ -78,41 +78,11 @@ import com.itextpdf.text.pdf.AcroFields;
 import com.peace.users.model.DataSourceResult;
 import com.peace.users.dao.FileBean;
 import com.peace.users.dao.UserDao;
-import com.peace.users.model.AccountList;
-import com.peace.users.model.Excel;
 import com.peace.users.model.FileMeta;
-import com.peace.users.model.PUserRoleRel;
-import com.peace.users.model.PUserRoles;
-import com.peace.users.model.Pmenu;
-import com.peace.users.model.Role;
-import com.peace.users.model.Tbbranches;
-import com.peace.users.model.Tbdepartment;
-import com.peace.users.model.User;
-import com.peace.users.model.Tbuniversities;
-import com.peace.users.model.UserAuthority;
-import com.peace.users.service.MyUserDetailsService;
-
-import java.io.BufferedInputStream; 
-import java.io.FileInputStream; 
-import java.io.IOException; 
-import java.io.InputStream; 
-import java.util.Iterator; 
-
-import org.apache.poi.poifs.filesystem.POIFSFileSystem; 
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.FormulaEvaluator;
-import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.docx4j.model.fields.merge.DataFieldName;
 import org.docx4j.model.fields.merge.MailMerger.OutputField;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
 import org.apache.commons.io.FilenameUtils;
-import org.apache.poi.hssf.usermodel.HSSFCell;
-import org.apache.poi.hssf.usermodel.HSSFSheet; 
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.hssf.usermodel.HSSFRow;
 
 @RestController
 public class PdfController {

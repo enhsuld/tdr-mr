@@ -375,4 +375,21 @@
     .search_list_link {
         color: @app_my_theme_colorAccent;
     }
+    // chatboxes
+    .chatbox {
+        &.cb_active {
+            .chatbox_header {
+                background: @app_my_theme_colorDark;
+            }
+        }
+        &_content .chatbox_message.own .chatbox_message_content li > span {
+            background: @app_my_theme_color;
+        }
+    }
+    .uk-table {
+        tr.row_checked td,
+        &-hover tbody tr:hover {
+            background: @app_my_theme_colorLight;
+        }
+    }
 }

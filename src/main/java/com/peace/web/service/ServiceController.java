@@ -67,21 +67,7 @@ import com.peace.users.model.DataSourceResult;
 import com.peace.MramApplication;
 import com.peace.users.dao.FileBean;
 import com.peace.users.dao.UserDao;
-import com.peace.users.model.AccountList;
 import com.peace.users.model.Excel;
-import com.peace.users.model.PMenuRel;
-import com.peace.users.model.PUserAuth;
-import com.peace.users.model.PUserRoleRel;
-//import com.peace.users.model.PMenuRel;
-import com.peace.users.model.PUserRoles;
-import com.peace.users.model.Role;
-import com.peace.users.model.Tbbranches;
-import com.peace.users.model.Tbdepartment;
-import com.peace.users.model.Tbuniversities;
-/*import com.peace.users.model.PeaceMenu;
-import com.peace.users.model.PeaceOrganization;*/
-import com.peace.users.model.User;
-import com.peace.users.model.UserAuthority;
 import com.peace.users.service.MyUserDetailsService;
 
 
@@ -3471,46 +3457,6 @@ public class ServiceController {
 
         return "error.500";
 
-    }
-
-    @ResponseBody
-    @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
-    public String detailPerson(@PathVariable int id, HttpServletRequest req) throws ClassNotFoundException, JSONException {
-        try {
-            List<Map<String, Object>> result = new ArrayList<Map<String, Object>>();
-            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-            System.out.println("end end");
-            if (!(auth instanceof AnonymousAuthenticationToken)) {
-                UserDetails userDetail = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-                User loguser = (User) dao.getHQLResult("from User t where t.id='" + id + "'", "current");
-
-                List<User> wrap = new ArrayList<User>();
-                User or = loguser;
-                User cor = new User();
-                cor.setId(or.getId());
-                cor.setUniversityid(or.getUniversityid());
-                cor.setUsername(or.getUsername());
-                cor.setRoleid(or.getRole().getId());
-                cor.setStudentFirstname(or.getStudentFirstname());
-                cor.setStudentUragname(or.getStudentUragname());
-                cor.setStudentLastname(or.getStudentLastname());
-                cor.setStudentMobilephone(or.getStudentMobilephone());
-                cor.setStudentIdAddress(or.getStudentIdAddress());
-                cor.setStudentCurrentaddress(or.getStudentCurrentaddress());
-                cor.setStudentRd(or.getStudentRd());
-                cor.setPassword(or.getPassword());
-                cor.setEnabled(or.isEnabled());
-                cor.setStudentPicture(or.getStudentPicture());
-                wrap.add(cor);
-
-                Gson gson = new Gson();
-                return gson.toJson(wrap);
-            }
-        } catch (Exception e) {
-            logger.error(e);
-        }
-        return "error.500";
     }
 
     @RequestMapping(value = "/ujson", method = RequestMethod.GET, produces = {"application/json; charset=UTF-8"})

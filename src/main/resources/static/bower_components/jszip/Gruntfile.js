@@ -115,13 +115,10 @@ module.exports = function(grunt) {
           test: ['./test/helpers/**/*.js', './test/asserts/**/*.js'],
           documentation: {
               options: {
-                  globals: {
-                      jQuery: false,
-                      JSZip: false,
-                      JSZipUtils: false,
-                      saveAs: false
-                  },
-                  // implied still give false positives in our case
+                  // we include js files with jekyll, jshint can't see all
+                  // variables and we can't declare all of them
+                  undef: false,
+                  // 'implied' still give false positives in our case
                   strict: false
               },
               files: {
@@ -138,15 +135,14 @@ module.exports = function(grunt) {
           browserifyOptions: {
             standalone: 'JSZip',
             transform: ['package-json-versionify'],
-            insertGlobalVars : {
-              Buffer: function () {
-                // instead of the full polyfill, we just use the raw value
-                // (or undefined).
-                return '(typeof Buffer !== "undefined" ? Buffer : undefined)';
-              }
-            }
+            insertGlobalVars: {
+                process: undefined,
+                Buffer: undefined,
+                __filename: undefined,
+                __dirname: undefined
+            },
+            builtins: false
           },
-          ignore : ["./lib/nodejs/*"],
           banner : grunt.file.read('lib/license_header.js').replace(/__VERSION__/, version)
         }
       }

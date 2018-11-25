@@ -29,6 +29,11 @@ function string2binary(str) {
  * @param {String|ArrayBuffer} part the content to put in the blob. DO NOT use
  * an Uint8Array because the stock browser of android 4 won't accept it (it
  * will be silently converted to a string, "[object Uint8Array]").
+ *
+ * Use only ONE part to build the blob to avoid a memory leak in IE11 / Edge:
+ * when a large amount of Array is used to create the Blob, the amount of
+ * memory consumed is nearly 100 times the original data amount.
+ *
  * @param {String} type the mime type of the blob.
  * @return {Blob} the created blob.
  */
@@ -45,7 +50,7 @@ exports.newBlob = function(part, type) {
 
         try {
             // deprecated, browser only, old way
-            var Builder = window.BlobBuilder || window.WebKitBlobBuilder || window.MozBlobBuilder || window.MSBlobBuilder;
+            var Builder = self.BlobBuilder || self.WebKitBlobBuilder || self.MozBlobBuilder || self.MSBlobBuilder;
             var builder = new Builder();
             builder.append(part);
             return builder.getBlob(type);
@@ -143,7 +148,7 @@ var arrayToStringHelper = {
          */
         nodebuffer : (function () {
             try {
-                return support.nodebuffer && String.fromCharCode.apply(null, nodejsUtils.newBuffer(1)).length === 1;
+                return support.nodebuffer && String.fromCharCode.apply(null, nodejsUtils.allocBuffer(1)).length === 1;
             } catch (e) {
                 return false;
             }
@@ -223,7 +228,7 @@ transform["string"] = {
         return stringToArrayLike(input, new Uint8Array(input.length));
     },
     "nodebuffer": function(input) {
-        return stringToArrayLike(input, nodejsUtils.newBuffer(input.length));
+        return stringToArrayLike(input, nodejsUtils.allocBuffer(input.length));
     }
 };
 
@@ -238,7 +243,7 @@ transform["array"] = {
         return new Uint8Array(input);
     },
     "nodebuffer": function(input) {
-        return nodejsUtils.newBuffer(input);
+        return nodejsUtils.newBufferFrom(input);
     }
 };
 
@@ -255,7 +260,7 @@ transform["arraybuffer"] = {
         return new Uint8Array(input);
     },
     "nodebuffer": function(input) {
-        return nodejsUtils.newBuffer(new Uint8Array(input));
+        return nodejsUtils.newBufferFrom(new Uint8Array(input));
     }
 };
 
@@ -270,7 +275,7 @@ transform["uint8array"] = {
     },
     "uint8array": identity,
     "nodebuffer": function(input) {
-        return nodejsUtils.newBuffer(input);
+        return nodejsUtils.newBufferFrom(input);
     }
 };
 
@@ -420,7 +425,11 @@ exports.prepareContent = function(name, inputData, isBinary, isOptimizedBinarySt
 
     // if inputData is already a promise, this flatten it.
     var promise = external.Promise.resolve(inputData).then(function(data) {
-        if (support.blob && data instanceof Blob && typeof FileReader !== "undefined") {
+        
+        
+        var isBlob = support.blob && (data instanceof Blob || ['[object File]', '[object Blob]'].indexOf(Object.prototype.toString.call(data)) !== -1);
+
+        if (isBlob && typeof FileReader !== "undefined") {
             return new external.Promise(function (resolve, reject) {
                 var reader = new FileReader();
 
@@ -442,7 +451,8 @@ exports.prepareContent = function(name, inputData, isBinary, isOptimizedBinarySt
 
         if (!dataType) {
             return external.Promise.reject(
-                new Error("The data of '" + name + "' is in an unsupported format !")
+                new Error("Can't read the data of '" + name + "'. Is it " +
+                          "in a supported JavaScript type (String, Blob, ArrayBuffer, etc) ?")
             );
         }
         // special case : it's way easier to work with Uint8Array than with ArrayBuffer

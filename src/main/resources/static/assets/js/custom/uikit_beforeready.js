@@ -111,10 +111,17 @@ if (typeof UIkit !== 'undefined') {
                 });
         }
 
+        // tabs
+        if (typeof UIkit.components.tab !== "undefined") { // check if tab component is defined
+            $.extend(UIkit.components.tab.prototype.defaults, {
+                swiping: false
+            });
+        }
+
         // tooltip
         if (typeof UIkit.components.tooltip !== "undefined") { // check if tooltip component is defined
             $.extend(UIkit.components.tooltip.prototype.defaults, {
-                animation: 280,
+                animation: UIkit.support.touch ? false : 280,
                 offset: 8
             });
         }

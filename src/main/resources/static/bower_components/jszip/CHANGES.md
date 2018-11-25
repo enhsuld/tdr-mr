@@ -4,6 +4,30 @@ layout: default
 section: main
 ---
 
+### v3.1.5 2017-11-09
+- Fix IE11 memory leak (see [#429](https://github.com/Stuk/jszip/pull/429)).
+- Handle 2 nodejs deprecations (see [#459](https://github.com/Stuk/jszip/pull/459)).
+- Improve the "unsupported format" error message (see [#461](https://github.com/Stuk/jszip/pull/461)).
+- Improve webworker compatibility (see [#468](https://github.com/Stuk/jszip/pull/468)).
+- Fix nodejs 0.10 compatibility (see [#480](https://github.com/Stuk/jszip/pull/480)).
+- Improve the error without type in async() (see [#481](https://github.com/Stuk/jszip/pull/481)).
+
+### v3.1.4 2017-08-24
+- consistently use our own utils object for inheritance (see [#395](https://github.com/Stuk/jszip/pull/395)).
+- lower the memory consumption in `generate*` with a lot of files (see [#449](https://github.com/Stuk/jszip/pull/449)).
+
+### v3.1.3 2016-10-06
+- instanceof failing in window / iframe contexts (see [#350](https://github.com/Stuk/jszip/pull/350)).
+- remove a copy with blob output (see [#357](https://github.com/Stuk/jszip/pull/357)).
+- fix crc32 check for empty entries (see [#358](https://github.com/Stuk/jszip/pull/358)).
+- fix the base64 error message with data uri (see [#359](https://github.com/Stuk/jszip/pull/359)).
+
+### v3.1.2 2016-08-23
+- fix support of nodejs `process.platform` in `generate*` methods (see [#335](https://github.com/Stuk/jszip/pull/335)).
+- improve browserify/webpack support (see [#333](https://github.com/Stuk/jszip/pull/333)).
+- partial support of a promise of text (see [#337](https://github.com/Stuk/jszip/pull/337)).
+- fix streamed zip files containing folders (see [#342](https://github.com/Stuk/jszip/pull/342)).
+
 ### v3.1.1 2016-08-08
 - Use a hard-coded JSZip.version, fix an issue with webpack (see [#328](https://github.com/Stuk/jszip/pull/328)).
 

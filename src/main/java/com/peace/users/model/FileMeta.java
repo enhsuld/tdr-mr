@@ -1,8 +1,6 @@
 package com.peace.users.model;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
-@JsonIgnoreProperties({"bytes"}) 
 public class FileMeta {
  	private String fileName;
     private String fileSize;

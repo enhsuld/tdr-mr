@@ -3,10 +3,10 @@ import $ from 'jquery';
 var globalID = 1;
 var pastWarnings = {};
 
-var ParsleyUtils = {
+var Utils = {
   // Parsley DOM-API
   // returns object from dom attributes and values
-  attr: function ($element, namespace, obj) {
+  attr: function (element, namespace, obj) {
     var i;
     var attribute;
     var attributes;
@@ -22,10 +22,10 @@ var ParsleyUtils = {
       }
     }
 
-    if ('undefined' === typeof $element || 'undefined' === typeof $element[0])
+    if (!element)
       return obj;
 
-    attributes = $element[0].attributes;
+    attributes = element.attributes;
     for (i = attributes.length; i--; ) {
       attribute = attributes[i];
 
@@ -37,12 +37,16 @@ var ParsleyUtils = {
     return obj;
   },
 
-  checkAttr: function ($element, namespace, checkAttr) {
-    return $element.is('[' + namespace + checkAttr + ']');
+  checkAttr: function (element, namespace, checkAttr) {
+    return element.hasAttribute(namespace + checkAttr);
   },
 
-  setAttr: function ($element, namespace, attr, value) {
-    $element[0].setAttribute(this.dasherize(namespace + attr), String(value));
+  setAttr: function (element, namespace, attr, value) {
+    element.setAttribute(this.dasherize(namespace + attr), String(value));
+  },
+
+  getType: function(element) {
+    return element.getAttribute('type') || 'text';
   },
 
   generateID: function () {
@@ -50,7 +54,6 @@ var ParsleyUtils = {
   },
 
   /** Third party functions **/
-  // Zepto deserialize function
   deserializeValue: function (value) {
     var num;
 
@@ -60,7 +63,7 @@ var ParsleyUtils = {
         (value == "false" ? false :
         value == "null" ? null :
         !isNaN(num = Number(value)) ? num :
-        /^[\[\{]/.test(value) ? $.parseJSON(value) :
+        /^[\[\{]/.test(value) ? JSON.parse(value) :
         value)
         : value;
     } catch (e) { return value; }
@@ -100,6 +103,65 @@ var ParsleyUtils = {
 
   trimString: function(string) {
     return string.replace(/^\s+|\s+$/g, '');
+  },
+
+  parse: {
+    date: function(string) {
+      let parsed = string.match(/^(\d{4,})-(\d\d)-(\d\d)$/);
+      if (!parsed)
+        return null;
+      let [_, year, month, day] = parsed.map(x => parseInt(x, 10));
+      let date = new Date(year, month - 1, day);
+      if (date.getFullYear() !== year || date.getMonth() + 1 !== month || date.getDate() !== day)
+        return null;
+      return date;
+    },
+    string: function(string) {
+      return string;
+    },
+    integer: function(string) {
+      if (isNaN(string))
+        return null;
+      return parseInt(string, 10);
+    },
+    number: function(string) {
+      if (isNaN(string))
+        throw null;
+      return parseFloat(string);
+    },
+    'boolean': function _boolean(string) {
+      return !(/^\s*false\s*$/i.test(string));
+    },
+    object: function(string) {
+      return Utils.deserializeValue(string);
+    },
+    regexp: function(regexp) {
+      var flags = '';
+
+      // Test if RegExp is literal, if not, nothing to be done, otherwise, we need to isolate flags and pattern
+      if (/^\/.*\/(?:[gimy]*)$/.test(regexp)) {
+        // Replace the regexp literal string with the first match group: ([gimy]*)
+        // If no flag is present, this will be a blank string
+        flags = regexp.replace(/.*\/([gimy]*)$/, '$1');
+        // Again, replace the regexp literal string with the first match group:
+        // everything excluding the opening and closing slashes and the flags
+        regexp = regexp.replace(new RegExp('^/(.*?)/' + flags + '$'), '$1');
+      } else {
+        // Anchor regexp:
+        regexp = '^' + regexp + '$';
+      }
+      return new RegExp(regexp, flags);
+    }
+  },
+
+  parseRequirement: function(requirementType, string) {
+    var converter = this.parse[requirementType || 'string'];
+    if (!converter)
+      throw 'Unknown requirement specification: "' + requirementType + '"';
+    let converted = converter(string);
+    if (converted === null)
+      throw `Requirement is not a ${requirementType}: "${string}"`;
+    return converted;
   },
 
   namespaceEvents: function(events, namespace) {
@@ -145,4 +207,4 @@ var ParsleyUtils = {
   _SubmitSelector: 'input[type="submit"], button:submit'
 };
 
-export default ParsleyUtils;
+export default Utils;

@@ -2,7 +2,7 @@
  Velocity UI Pack
  **********************/
 
-/* VelocityJS.org UI Pack (5.1.1). (C) 2014 Julian Shapiro. MIT @license: en.wikipedia.org/wiki/MIT_License. Portions copyright Daniel Eden, Christian Pucci. */
+/* VelocityJS.org UI Pack (5.2.0). (C) 2014 Julian Shapiro. MIT @license: en.wikipedia.org/wiki/MIT_License. Portions copyright Daniel Eden, Christian Pucci. */
 
 (function(factory) {
 	"use strict";
@@ -85,7 +85,7 @@
 
 					parentNode = element.parentNode;
 
-					propertiesToSum = ["height", "paddingTop", "paddingBottom", "marginTop", "marginBottom"];
+					var propertiesToSum = ["height", "paddingTop", "paddingBottom", "marginTop", "marginBottom"];
 
 					/* If box-sizing is border-box, the height already includes padding and margin */
 					if (Velocity.CSS.getPropertyValue(element, "boxSizing").toString().toLowerCase() === "border-box") {
@@ -106,17 +106,28 @@
 			}
 
 			/* Register a custom redirect for each effect. */
-			Velocity.Redirects[effectName] = function(element, redirectOptions, elementsIndex, elementsSize, elements, promiseData) {
-				var finalElement = (elementsIndex === elementsSize - 1);
+			Velocity.Redirects[effectName] = function(element, redirectOptions, elementsIndex, elementsSize, elements, promiseData, loop) {
+				var finalElement = (elementsIndex === elementsSize - 1),
+						totalDuration = 0;
 
+				loop = loop || properties.loop;
 				if (typeof properties.defaultDuration === "function") {
 					properties.defaultDuration = properties.defaultDuration.call(elements, elements);
 				} else {
 					properties.defaultDuration = parseFloat(properties.defaultDuration);
 				}
 
-				/* Iterate through each effect's call array. */
+				/* Get the total duration used, so we can share it out with everything that doesn't have a duration */
 				for (var callIndex = 0; callIndex < properties.calls.length; callIndex++) {
+					durationPercentage = properties.calls[callIndex][1];
+					if (typeof durationPercentage === "number") {
+						totalDuration += durationPercentage;
+					}
+				}
+				var shareDuration = totalDuration >= 1 ? 0 : properties.calls.length ? (1 - totalDuration) / properties.calls.length : 1;
+
+				/* Iterate through each effect's call array. */
+				for (callIndex = 0; callIndex < properties.calls.length; callIndex++) {
 					var call = properties.calls[callIndex],
 							propertyMap = call[0],
 							redirectDuration = 1000,
@@ -131,10 +142,11 @@
 					}
 
 					/* Assign the whitelisted per-call options. */
-					opts.duration = redirectDuration * (durationPercentage || 1);
+					opts.duration = redirectDuration * (typeof durationPercentage === "number" ? durationPercentage : shareDuration);
 					opts.queue = redirectOptions.queue || "";
 					opts.easing = callOptions.easing || "ease";
 					opts.delay = parseFloat(callOptions.delay) || 0;
+					opts.loop = !properties.loop && callOptions.loop;
 					opts._cacheValues = callOptions._cacheValues || true;
 
 					/* Special processing for the first effect call. */
@@ -200,6 +212,9 @@
 						};
 
 						opts.complete = function() {
+							if (loop) {
+								Velocity.Redirects[effectName](element, redirectOptions, elementsIndex, elementsSize, elements, promiseData, loop === true ? true : Math.max(0, loop - 1));
+							}
 							if (properties.reset) {
 								for (var resetProperty in properties.reset) {
 									if (!properties.reset.hasOwnProperty(resetProperty)) {
@@ -265,24 +280,24 @@
 					"callout.shake": {
 						defaultDuration: 800,
 						calls: [
-							[{translateX: -11}, 0.125],
-							[{translateX: 11}, 0.125],
-							[{translateX: -11}, 0.125],
-							[{translateX: 11}, 0.125],
-							[{translateX: -11}, 0.125],
-							[{translateX: 11}, 0.125],
-							[{translateX: -11}, 0.125],
-							[{translateX: 0}, 0.125]
+							[{translateX: -11}],
+							[{translateX: 11}],
+							[{translateX: -11}],
+							[{translateX: 11}],
+							[{translateX: -11}],
+							[{translateX: 11}],
+							[{translateX: -11}],
+							[{translateX: 0}]
 						]
 					},
 					/* Animate.css */
 					"callout.flash": {
 						defaultDuration: 1100,
 						calls: [
-							[{opacity: [0, "easeInOutQuad", 1]}, 0.25],
-							[{opacity: [1, "easeInOutQuad"]}, 0.25],
-							[{opacity: [0, "easeInOutQuad"]}, 0.25],
-							[{opacity: [1, "easeInOutQuad"]}, 0.25]
+							[{opacity: [0, "easeInOutQuad", 1]}],
+							[{opacity: [1, "easeInOutQuad"]}],
+							[{opacity: [0, "easeInOutQuad"]}],
+							[{opacity: [1, "easeInOutQuad"]}]
 						]
 					},
 					/* Animate.css */
@@ -297,11 +312,11 @@
 					"callout.swing": {
 						defaultDuration: 950,
 						calls: [
-							[{rotateZ: 15}, 0.20],
-							[{rotateZ: -10}, 0.20],
-							[{rotateZ: 5}, 0.20],
-							[{rotateZ: -5}, 0.20],
-							[{rotateZ: 0}, 0.20]
+							[{rotateZ: 15}],
+							[{rotateZ: -10}],
+							[{rotateZ: 5}],
+							[{rotateZ: -5}],
+							[{rotateZ: 0}]
 						]
 					},
 					/* Animate.css */
@@ -379,8 +394,8 @@
 					"transition.flipBounceXOut": {
 						defaultDuration: 800,
 						calls: [
-							[{opacity: [0.9, 1], transformPerspective: [400, 400], rotateY: -10}, 0.50],
-							[{opacity: 0, rotateY: 90}, 0.50]
+							[{opacity: [0.9, 1], transformPerspective: [400, 400], rotateY: -10}],
+							[{opacity: 0, rotateY: 90}]
 						],
 						reset: {transformPerspective: 0, rotateY: 0}
 					},
@@ -400,8 +415,8 @@
 					"transition.flipBounceYOut": {
 						defaultDuration: 800,
 						calls: [
-							[{opacity: [0.9, 1], transformPerspective: [400, 400], rotateX: -15}, 0.50],
-							[{opacity: 0, rotateX: 90}, 0.50]
+							[{opacity: [0.9, 1], transformPerspective: [400, 400], rotateX: -15}],
+							[{opacity: 0, rotateX: 90}]
 						],
 						reset: {transformPerspective: 0, rotateX: 0}
 					},
@@ -468,9 +483,9 @@
 					"transition.bounceIn": {
 						defaultDuration: 800,
 						calls: [
-							[{opacity: [1, 0], scaleX: [1.05, 0.3], scaleY: [1.05, 0.3]}, 0.40],
+							[{opacity: [1, 0], scaleX: [1.05, 0.3], scaleY: [1.05, 0.3]}, 0.35],
 							[{scaleX: 0.9, scaleY: 0.9, translateZ: 0}, 0.20],
-							[{scaleX: 1, scaleY: 1}, 0.50]
+							[{scaleX: 1, scaleY: 1}, 0.45]
 						]
 					},
 					/* Animate.css */
@@ -785,5 +800,5 @@
 
 			Velocity(sequence[0]);
 		};
-	}((window.jQuery || window.Zepto || window), window, document);
+	}((window.jQuery || window.Zepto || window), window, (window ? window.document : undefined));
 }));

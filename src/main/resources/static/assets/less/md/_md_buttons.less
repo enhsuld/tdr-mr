@@ -447,7 +447,6 @@
             transform: scale(1);
             opacity: 1;
             z-index: 10;
-
             // transition for small buttons (on show)
             &:nth-last-child(1) {
                 transition: box-shadow 280ms @md_easing,transform 100ms @md_easing @fab_transition_delay,opacity 100ms @md_easing @fab_transition_delay;
@@ -508,6 +507,68 @@
                     .generate-fab-child-active(@n, (@i + 1));
                 }
                 .generate-fab-child-active(8);
+            }
+        }
+        &[data-fab-hover] {
+            .md-fab {
+                display: inline-block;
+                vertical-align: bottom;
+            }
+            .md-fab-wrapper-small {
+                display: none;
+                min-height: @fab_small_size;
+                width: auto;
+                z-index: -1;
+                white-space: nowrap;
+                padding-bottom: 8px;
+                vertical-align: bottom;
+                position: static;
+                right: auto;
+                bottom: auto;
+                .md-fab-small {
+                    position: static;
+                    right: auto;
+                    display: inline-block;
+                    vertical-align: bottom;
+                    + .md-fab-small {
+                        margin-left: 16px
+                    }
+                    &:last-child {
+                        margin-right: 16px
+                    }
+                }
+            }
+            &.md-fab-active {
+                .md-fab-small {}
+            }
+            &.md-fab-over {
+                .md-fab-wrapper-small {
+                    display: inline-block;
+                }
+            }
+        }
+    }
+    &[data-fab-hover] {
+        .md-fab-wrapper-small {
+            margin-left: 8px;
+            position: static;
+            display: none;
+            bottom: auto;
+            right: auto;
+            .md-fab-small {
+                position: static;
+                bottom: auto;
+                + .md-fab-small {
+                    margin-top: 16px
+                }
+                &:last-child {
+                    margin-bottom: 16px
+                }
+            }
+        }
+        &.md-fab-over {
+            .md-fab-wrapper-small {
+                display: block;
             }
         }
     }

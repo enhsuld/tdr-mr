@@ -164,10 +164,52 @@ h1,h2,h3,h4,h5,h6 {
     .no-border td {
         border-bottom: none;
     }
+    .row-selected {
+        background: @md-color-amber-50 !important;
+    }
+    [data-link] {
+        cursor: pointer;
+    }
 }
 
 .uk-text-pre {
     white-space: pre;
+}
+
+.table_tree {
+    margin-bottom: 4px !important;
+    .table-child-row {
+        display: none;
+    }
+    .toggle-childrens {
+        display: block;
+        padding-left: 24px;
+        position: relative;
+        &:before {
+            content: '\e313';
+            font-family: "Material Icons";
+            font-size: 28px;
+            position: absolute;
+            left: -6px;
+            top: -10px;
+            color: @text_secondary_color;
+            transition: all 280ms @md_easing;
+            transform: rotate(0deg);
+        }
+    }
+    .table-child-row {
+        display: table-row;
+        .child-row-main-col {
+            padding-left: 40px;
+        }
+    }
+    .show_child_row {
+        .toggle-childrens {
+            &:before {
+                transform: rotate(-90deg);
+            }
+        }
+    }
 }
 
 /* custom styles */
@@ -316,6 +358,11 @@ body {
         padding: 24px 24px 100px;
     }
 }
+#page_overflow {
+    min-height: 100%;
+    overflow-y: auto;
+}
+
 
 @media @screen_xlarge {
     .boxed_layout {
@@ -342,5 +389,17 @@ body {
             border-color: @border_color;
             box-sizing: border-box;
         }
+    }
+}
+
+.disable_transitions {
+    #sidebar_main,
+    #page_content,
+    #header_main,
+    #top_bar,
+    #header_main .sSwitch .sSwitchIcon,
+    #header_main .sSwitch .sSwitchIcon:before,
+    #header_main .sSwitch .sSwitchIcon:after {
+        transition: none !important;
     }
 }

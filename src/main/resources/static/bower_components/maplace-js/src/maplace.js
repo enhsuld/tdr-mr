@@ -388,7 +388,8 @@
         var self = this;
 
         google.maps.event.addListener(marker, 'click', function(ev) {
-            self.o.beforeShow(index, point, marker);
+            self.CloseInfoWindow();
+            self.o.beforeShow.call(self, index, point, marker);
 
             //show infowindow?
             if (self.o.show_infowindows && (point.show_infowindow === false ? false : true)) {
@@ -409,7 +410,7 @@
             //update current location index
             self.current_index = index;
 
-            self.o.afterShow(index, point, marker);
+            self.o.afterShow.call(self, index, point, marker);
         });
 
         if (point.draggable) {
@@ -426,11 +427,11 @@
         });
 
         google.maps.event.addListener(marker, 'center_changed', function() {
-            self.o.circleCenterChanged(index, circle, marker);
+            self.o.circleCenterChanged.call(self, index, circle, marker);
         });
 
         google.maps.event.addListener(marker, 'radius_changed', function() {
-            self.o.circleRadiusChanged(index, circle, marker);
+            self.o.circleRadiusChanged.call(self, index, circle, marker);
         });
 
         if (circle.draggable) {
@@ -483,15 +484,15 @@
             }
 
             //fire drag event
-            self.o.drag(index, obj, marker);
+            self.o.drag.call(self, index, obj, marker);
         });
 
         google.maps.event.addListener(marker, 'dragend', function() {
-            self.o.dragEnd(index, obj, marker);
+            self.o.dragEnd.call(self, index, obj, marker);
         });
 
         google.maps.event.addListener(marker, 'dragstart', function() {
-            self.o.dragStart(index, obj, marker);
+            self.o.dragStart.call(self, index, obj, marker);
         });
 
         google.maps.event.addListener(marker, 'center_changed', function() {
@@ -500,7 +501,7 @@
                 self.markers[index].setPosition(marker.getCenter());
             }
 
-            self.o.drag(index, obj, marker);
+            self.o.drag.call(self, index, obj, marker);
         });
     };
 
@@ -509,14 +510,23 @@
         var self = this;
 
         google.maps.event.addListener(this[typeName].getPath(), 'set_at', function(index, obj) {
-            var item = self[typeName].getPath().getAt(index),
-                newPos = new google.maps.LatLng(item.lat(), item.lng());
-
-            self.markers[index] && self.markers[index].setPosition(newPos);
-            self.circles[index] && self.circles[index].setCenter(newPos);
-
-            self.o['on' + typeName + 'Changed'](index, obj, self[typeName].getPath().getArray());
+            self.trigger_polyEv(typeName, index, obj);
         });
+
+        google.maps.event.addListener(this[typeName].getPath(), 'insert_at', function(index, obj) {
+            self.trigger_polyEv(typeName, index, obj);
+        });
+    };
+
+    //trigger events to poly objs
+    Maplace.prototype.trigger_polyEv = function(typeName, index, obj) {
+        var item = this[typeName].getPath().getAt(index),
+            newPos = new google.maps.LatLng(item.lat(), item.lng());
+
+        this.markers[index] && this.markers[index].setPosition(newPos);
+        this.circles[index] && this.circles[index].setCenter(newPos);
+
+        this.o['on' + typeName + 'Changed'](index, obj, this[typeName].getPath().getArray());
     };
 
     //wrapper for the map types
@@ -524,12 +534,9 @@
 
         //single marker
         marker: function(index, point, marker) {
-            var self = this,
-                circle;
-
             //allow mix circles with markers
             if (point.type === 'circle' && !marker) {
-                circle = this.create_objCircle(point);
+                var circle = this.create_objCircle(point);
 
                 if (!point.visible) {
                     circle.draggable = point.draggable;
@@ -554,7 +561,7 @@
             //store the new marker
             this.markers[index] = marker;
 
-            this.o.afterCreateMarker(index, point, marker);
+            this.o.afterCreateMarker.call(this, index, point, marker);
 
             return marker;
         },
@@ -647,7 +654,7 @@
                 : this.Polygon = new google.maps.Polygon(stroke);
 
             google.maps.event.addListener(this.Polygon, 'click', function(obj) {
-                self.o.onPolygonClick(obj);
+                self.o.onPolygonClick.call(self, obj);
             });
 
             this.add_polyEv('Polygon');
@@ -719,8 +726,9 @@
 
             if (this.o.draggable) {
                 google.maps.event.addListener(this.directionsDisplay, 'directions_changed', function() {
+                    var result = self.directionsDisplay.getDirections();
                     distance = self.compute_distance(self.directionsDisplay.directions);
-                    self.o.afterRoute(distance);
+                    self.o.afterRoute.call(self, distance, result.status, result);
                 });
             }
 
@@ -730,7 +738,7 @@
                     distance = self.compute_distance(result);
                     self.directionsDisplay.setDirections(result);
                 }
-                self.o.afterRoute(distance, status, result);
+                self.o.afterRoute.call(self, distance, status, result);
             });
         }
     };
@@ -753,25 +761,29 @@
     Maplace.prototype.type_to_open = {
         //google default infowindow
         bubble: function(location) {
-            this.infowindow = new google.maps.InfoWindow({
-                content: location.html || ''
+            var self = this,
+                infoWindow = { content: location.html || '' };
+            if (location.infoWindowMaxWidth) {
+                infoWindow.maxWidth = location.infoWindowMaxWidth;
+            }
+            this.infowindow = new google.maps.InfoWindow(infoWindow);
+            google.maps.event.addListener(this.infowindow, 'closeclick', function(){
+                self.CloseInfoWindow();
             });
         }
     };
 
     //open the infowindow
     Maplace.prototype.open_infowindow = function(index, marker, ev) {
-        //close if any open
-        this.CloseInfoWindow();
         var point = this.o.locations[index],
             type = this.o.infowindow_type;
 
         //show if content and valid infowindow type provided
         if (point.html && this.type_to_open[type]) {
-            this.o.beforeOpenInfowindow(index, point, marker);
+            this.o.beforeOpenInfowindow.call(this, index, point, marker);
             this.type_to_open[type].call(this, point);
             this.infowindow.open(this.oMap, marker);
-            this.o.afterOpenInfowindow(index, point, marker);
+            this.o.afterOpenInfowindow.call(this, index, point, marker);
         }
     };
 
@@ -813,6 +825,7 @@
         cntr.append(inner);
 
         //attach controls
+        this.oMap.controls[this.o.controls_position].clear();
         this.oMap.controls[this.o.controls_position].push(cntr.get(0));
     };
 
@@ -862,6 +875,8 @@
 
     //perform the first view of the map
     Maplace.prototype.perform_load = function() {
+        this.CloseInfoWindow();
+
         //one location
         if (this.ln === 1) {
             if (this.o.map_options.set_center) {
@@ -929,10 +944,10 @@
     //close the infowindow
     Maplace.prototype.CloseInfoWindow = function() {
         if (this.infowindow && (this.current_index || this.current_index === 0)) {
-            this.o.beforeCloseInfowindow(this.current_index, this.o.locations[this.current_index]);
+            this.o.beforeCloseInfowindow.call(this, this.current_index, this.o.locations[this.current_index]);
             this.infowindow.close();
             this.infowindow = null;
-            this.o.afterCloseInfowindow(this.current_index, this.o.locations[this.current_index]);
+            this.o.afterCloseInfowindow.call(this, this.current_index, this.o.locations[this.current_index]);
         }
         return this;
     };
@@ -958,14 +973,15 @@
     Maplace.prototype.ViewOnMap = function(index) {
         //view all
         if (index === this.view_all_key) {
-            this.o.beforeViewAll();
+            this.o.beforeViewAll.call(this);
+
             this.current_index = index;
             if (this.o.locations.length > 0 && this.o.generate_controls && this.current_control && this.current_control.activateCurrent) {
                 this.current_control.activateCurrent.apply(this, [index]);
             }
             this.oMap.fitBounds(this.oBounds);
-            this.CloseInfoWindow();
-            this.o.afterViewAll();
+
+            this.o.afterViewAll.call(this);
 
         //specific location
         } else {

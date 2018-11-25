@@ -17,19 +17,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Locale;
-import java.util.Random;
-import java.util.Set;
-import org.w3c.dom.Element;
-import com.peace.users.model.User;
 import com.peace.users.model.mram.AnnualRegistration;
-import com.peace.users.model.mram.LnkComment;
-import com.peace.users.model.mram.LnkCommentMain;
-import com.peace.users.model.mram.LnkPlanAttachedFiles;
-import com.peace.users.model.mram.LnkPlanNotes;
-import com.peace.users.model.mram.LnkPlanTab;
-import com.peace.users.model.mram.LnkPlanTransition;
-import com.peace.users.model.mram.LnkReportRegBunl;
 import com.peace.users.model.mram.LnkReqAnn;
 import com.peace.users.model.mram.LutDecisions;
 import com.peace.users.model.mram.LutDeposit;
@@ -68,26 +56,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartRequest;
-
-import com.google.common.io.Files;
-import com.google.gson.Gson;
-import com.itextpdf.text.pdf.AcroFields;
-import com.itextpdf.text.pdf.PdfReader;
-import com.itextpdf.text.pdf.PdfStamper;
-import com.itextpdf.text.pdf.XfaForm;
 import com.peace.users.dao.UserDao;
-import com.peace.users.model.Tbstudentdetail;
-import com.sun.mail.handlers.multipart_mixed;
-
-import org.w3c.dom.Attr;
-import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 @Controller
 @RequestMapping("/logic")

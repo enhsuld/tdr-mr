@@ -7,7 +7,9 @@
 	<requires>
 		* Buttons' _HTML5 export button_ plug-in.
 		* [JSZip](https://stuk.github.io/jszip/)
-		* A browser that supports local file saving (IE10+, Chrome, Firefox, Opera)
+		* A browser that supports local file saving (IE10+, Chrome, Firefox, Opera).
+
+		To ensure that all files required for Excel HTML5 export are included, the [DataTables download builder](/download) is recommend - select the _HTML5 export_ and _JSZip_ options.
 	</requires>
 
 	<description>
@@ -30,21 +32,20 @@
 		* Edge: Yes
 		* Chrome: Yes
 		* Opera: Yes
-		* Safari: No
-		  * Safari does not currently support the ability to download generated files ([see WebKit bug 156056](https://bugs.webkit.org/show_bug.cgi?id=156056)). As soon as this has been addressed in Safari it will be released here.
+		* Safari: Yes (tech preview 18+) Safari 10.0.x and earlier are _not_ supported.
 
 
 		## Customisation
 
-		< ## XSLX file format
+		< ## XLSX file format
 		< 
-		< It is important to note that Buttons does not provide any kind of abstraction for the XSLX XML! If you want to modify the output Excel file you need to understand the [XML used for the spreadsheet](https://msdn.microsoft.com/en-us/library/aa140066(office.10).aspx). If you require an abstraction layer, consider creating a custom button that uses [js-xslx](https://github.com/SheetJS/js-xlsx).
+		< It is important to note that Buttons does not provide any kind of abstraction for the XLSX XML! If you want to modify the output Excel file you need to understand the [XML used for the spreadsheet](https://msdn.microsoft.com/en-us/library/aa140066(office.10).aspx). If you require an abstraction layer, consider creating a custom button that uses [js-xlsx](https://github.com/SheetJS/js-xlsx).
 
 		The Excel file that Buttons creates is intentionally quite simple - the default styling is:
 
 		* _Calibri_ font, size 11 (matching Excel default)
 		* Header and footer are bold
-		* Column widths are auto sized to fit their contents (min: _5_, max: _40_)
+		* Column widths are auto sized to fit their contents (min: _5_, max: _52_)
 
 		However, you may wish to add additional information or formatting to the document to suit your output requirements. This ability is provided by the `customize` option of this button type.
 
@@ -70,12 +71,12 @@
 		}
 		```
 
-		If you've developed with XSLX files before you will notice that this object's structure mimics the file structure of the XSLX file. When zipped this file structure will create an XSLX file - which is exactly what this button type does. The `customize` method provides you with the ability to modify any of the XML documents inside it, and even to add extra files (these are automatically detected in the structure and will be included in the zip).
+		If you've developed with XLSX files before you will notice that this object's structure mimics the file structure of the XLSX file. When zipped this file structure will create an XLSX file - which is exactly what this button type does. The `customize` method provides you with the ability to modify any of the XML documents inside it, and even to add extra files (these are automatically detected in the structure and will be included in the zip).
 
 		As an example, let's modify the text shown in cell _A1_:
 
 		```js
-		customize: function ( xslx ) {
+		customize: function ( xlsx ) {
 			var sheet = xlsx.xl.worksheets['sheet1.xml'];
 
 			$('c[r=A1] t', sheet).text( 'Custom text' );
@@ -84,14 +85,14 @@
 
 		On line two we get the XML document used for the spreadsheet's data. Then on line four a little bit of jQuery is used to select the correct cell's text node (the `r` attribute of the `-tag c` element is where the cell will be shown and the `-tag t` element is the text node). Then set the text for the cell. You could just as readily use DOM methods if you prefer.
 
-		We can use the a similar method to customize the styling of the cells in the document. This is done by adding the `s` attribute to the `-tag c` element(s), where the attribute value is the style index you wish to use. The XSLX file created by Buttons has a number of built in styles which are documented below.
+		We can use the a similar method to customize the styling of the cells in the document. This is done by adding the `s` attribute to the `-tag c` element(s), where the attribute value is the style index you wish to use. The XLSX file created by Buttons has a number of built in styles which are documented below.
 
-		This is only a brief summary of how to customise the XSLX files. Full details of the XSLX file format and its features are outside the scope of this documentation. Please refer to the [Microsoft](https://msdn.microsoft.com/en-us/library/aa140066(office.10).aspx) and [Office Open XML](http://officeopenxml.com/SSstyles.php) documentation for details.
+		This is only a brief summary of how to customise the XLSX files. Full details of the XLSX file format and its features are outside the scope of this documentation. Please refer to the [Microsoft](https://msdn.microsoft.com/en-us/library/aa140066(office.10).aspx) and [Office Open XML](http://officeopenxml.com/SSstyles.php) documentation for details.
 
 
 		### Built in styles
 
-		The following indexes are available form the styles that are predefined in the Editor XSLX style file. These indexes can be applied to any cells in the generated spreadsheet, altering their appearance.
+		The following indexes are available form the styles that are predefined in the Editor XLSX style file. These indexes can be applied to any cells in the generated spreadsheet, altering their appearance.
 
 		* `0` - Normal text
 		* `1` - White text
@@ -113,7 +114,7 @@
 		* `17` - Bold, green background
 		* `18` - Italic, green background
 		* `19` - Underline, green background
-		* `10` - Normal text, blue background
+		* `20` - Normal text, blue background
 		* `21` - White text, blue background
 		* `22` - Bold, blue background
 		* `23` - Italic, blue background
@@ -144,11 +145,22 @@
 		* `48` - Italic, blue background, thin black border
 		* `49` - Underline, blue background, thin black border
 		* `50` - Left aligned text (since 1.2.2)
-		* `51` - Centred text
-		* `52` - Right aligned text
-		* `53` - Justified text
-		* `54` - Text rotated 90°
-		* `55` - Wrapped text
+		* `51` - Centred text (since 1.2.2)
+		* `52` - Right aligned text (since 1.2.2)
+		* `53` - Justified text (since 1.2.2)
+		* `54` - Text rotated 90° (since 1.2.2)
+		* `55` - Wrapped text (since 1.2.2)
+		* `56` - Percentage integer value (automatically detected and used by buttons - since 1.2.3)
+		* `57` - Dollar currency values (automatically detected and used by buttons - since 1.2.3)
+		* `58` - Pound currency values (automatically detected and used by buttons - since 1.2.3)
+		* `59` - Euro currency values (automatically detected and used by buttons - since 1.2.3)
+		* `60` - Percentage with 1 decimal place (automatically detected and used by buttons - since 1.2.3)
+		* `61` - Negative numbers indicated by brackets (automatically detected and used by buttons - since 1.2.3)
+		* `62` - Negative numbers indicated by brackets - 2 decimal places (automatically detected and used by buttons - since 1.2.3)
+		* `63` - Numbers with thousand separators (automatically detected and used by buttons - since 1.2.3)
+		* `64` - Numbers with thousand separators - 2 decimal places (automatically detected and used by buttons - since 1.2.3)
+		* `65` - Numbers without thousand separators (automatically detected and used by buttons - since 1.2.4)
+		* `66` - Numbers without thousand separators - 2 decimal places (automatically detected and used by buttons - since 1.2.4)
 
 		Notes:
 
@@ -196,12 +208,30 @@
 		Name for the worksheet in Excel file created. The characters [] \ /: *? : are not allowed and will be removed if present.
 	</option>
 
-	<option type="function" name="customizeData" default="undefined" since="1.1.3">
-		A function that can be used to customise the data that will be saved to the Excel spreadsheet. A single parameter is passed in, an object with `header`, `footer` and `body` parameters, each of which contains the data to be exported. The data in this object should be modified as required - no return values is expected, or used, from this callback.
+	<option type="boolean" name="createEmptyCells" default="false" since="1.5.0">
+		Option to instruct the Excel export to create empty cells. By default if a cell contains `null` or empty data, it will not be created in the exported spreadsheet. You may however wish for it to do so, based on styling requirements.
 	</option>
 
 	<option type="function" name="customize" default="undefined" since="1.2.0">
-		This method can be used to modify the XSLX file that is created by Buttons. A single parameter is passed, an object that contains the XML files and the object structure matches the file system paths for those files in an XSLX file. Customisation of the XSLX file is a complex topic - please refer to the _Customisation_ section above for full details.
+		This method can be used to modify the XLSX file that is created by Buttons. The first parameter that is passed in is an object that contains the XML files and the object structure matches the file system paths for those files in an XLSX file. Customisation of the XLSX file is a complex topic - please refer to the _Customisation_ section in the `b-button excelHtml5` button documentation for full details.
+
+		As of Buttons 1.5.2 this function is passed three parameters:
+
+		1. An object that contains the XML files in the ZIP file structure used by Excel
+		2. The button configuration object
+		3. A DataTables API instance for the table the button belongs to.
+	</option>
+
+	<option type="string|function" name="title" default="*" since="1.4.0">
+		Title of the table that will be included in the exported data. Please see `-api buttons.exportInfo()` for all options relating to this parameter.
+	</option>
+
+	<option type="string|function" name="messageTop" default="*" since="1.4.0">
+		Message to be shown at the top of the table, or the `-tag caption` tag if displayed at the top of the table.
+	</option>
+
+	<option type="string|function" name="messageBottom" default="*" since="1.4.0">
+		Message to be shown at the bottom of the table, or the `-tag caption` tag if displayed at the bottom of the table.
 	</option>
 
 

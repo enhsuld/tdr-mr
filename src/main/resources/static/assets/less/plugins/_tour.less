@@ -18,6 +18,10 @@
         height: 1500px;
         z-index: @eh_zindex + 10;
         pointer-events: all;
+        @media @screen_medium_max {
+            width: 100%;
+            height: 100%;
+        }
     }
     &_next_btn,
     &_skip_btn,
@@ -48,6 +52,9 @@
             .boxShadowHelper(3);
             transition: none;
         }
+        @media @screen_medium_max {
+            left: 20px !important;
+        }
     }
     &_skip_btn{
         color: @md-color-light-blue-400;
@@ -57,6 +64,10 @@
         &:active{
             background: rgba(0,0,0,.1);
             transition: none;
+        }
+        @media @screen_medium_max {
+            right: 20px !important;
+            left: auto !important;
         }
     }
     &_close_btn {
@@ -192,6 +203,9 @@
         color: @white;
         font-size: 24px;
     }
+    @media @screen_medium_max {
+        left: 20px !important;
+    }
 }
 
 #kinetic_container{
@@ -205,4 +219,8 @@
 
 div.kineticjs-content{
     position: absolute !important;
+}
+
+.enjoyhint_disable_events {
+    position: fixed;
 }

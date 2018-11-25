@@ -6,10 +6,25 @@
 
 ECharts is a free, powerful charting and visualization library offering an easy way of adding intuitive, interactive, and highly customizable charts to your commercial products. It is written in pure JavaScript and based on <a href="https://github.com/ecomfe/zrender">zrender</a>, which is a whole new lightweight canvas library.
 
+Now ECharts is an incubator project of Apache Software Foundation.
+Please check its incubator status [here](http://incubator.apache.org/projects/echarts.html)
+
+**[中文官网](http://echarts.baidu.com)** | **[ENGLISH HOMEPAGE](http://ecomfe.github.io/echarts-doc/public/en/index.html)**
+
 ## Get ECharts
 
-+ Download on [echarts.baidu.com](http://echarts.baidu.com/download.html)
++ Download [中文](http://echarts.baidu.com/download.html)
++ Download [English](https://ecomfe.github.io/echarts-doc/public/en/download.html)
+
 + `npm install echarts --save`
+
+## Get ECharts GL
+
+ECharts-GL is an extension pack of ECharts, which provides 3D plots, globe visualization and WebGL acceleration.
+
++ Get from [https://github.com/ecomfe/echarts-gl](https://github.com/ecomfe/echarts-gl)
+
++ `npm install echarts-gl --save`
 
 ## Docs
 
@@ -27,44 +42,71 @@ ECharts is a free, powerful charting and visualization library offering an easy 
 
 ## Resources
 
-### Awesome ECharts 
+
+### Awesome ECharts
 
 [https://github.com/ecomfe/awesome-echarts](https://github.com/ecomfe/awesome-echarts)
 
-### Extensions
+### Official Extensions
 
-+ [百度地图扩展](https://github.com/ecomfe/echarts/tree/master/extension/bmap)
++ [水球图 Liquidfill](https://github.com/ecomfe/echarts-liquidfill)
 
-+ [字符云 wordcloud](https://github.com/ecomfe/echarts-wordcloud)
++ [字符云 Wordcloud](https://github.com/ecomfe/echarts-wordcloud)
 
 + [Graph Modularity](https://github.com/ecomfe/echarts-graph-modularity) Graph modularity extension for community detection
 
++ [百度地图扩展](https://github.com/ecomfe/echarts/tree/master/extension/bmap)
+
++ [vue-echarts](https://github.com/ecomfe/vue-echarts) ECharts component for Vue.js
+
++ [echarts-stat](https://github.com/ecomfe/echarts-stat) Statistics tool for ECharts
+
+
+### Developers Contributions
+
+#### GIS
+
 + [leaflet-echarts](https://github.com/wandergis/leaflet-echarts3) by wandergis
 + [arcgis-echarts](https://github.com/wandergis/arcgis-echarts3) by wandergis
+
++ [echarts-leaflet](https://github.com/gnijuohz/echarts-leaflet) by gnijuohz
+
++ [ol3Echarts](https://github.com/sakitam-fdd/ol3Echarts) by sakitam-fdd
 
 #### AngularJS Binding
 
 + [angular-echarts](https://github.com/wangshijun/angular-echarts) by wangshijun
 + [echarts-ng](https://github.com/bornkiller/echarts-ng) by bornkiller
 + [ng-echarts](https://github.com/liekkas/ng-echarts) by liekkas
++ [ngx-echarts](https://github.com/xieziyu/ngx-echarts) by xieziyu
+
+#### Ember Binding
++ [echarts-ember](https://github.com/bruckwubete/echarts-ember) by [bruck wubete](https://github.com/bruckwubete)
++ [ember-cli-echarts](https://github.com/funnelcloudinc/ember-cli-echarts) by FunnelCloud
 
 #### Vue Component
 
-+ [vue-echarts](https://github.com/Justineo/vue-echarts) by Justineo
 + [vue-echarts](https://github.com/panteng/vue-echarts) by panteng
++ [vue-echarts-v3](https://github.com/xlsdg/vue-echarts-v3) by xlsdg
 
 #### React Component
 
 + [echarts-for-react](https://github.com/hustcc/echarts-for-react) by hustcc
 + [react-echarts](https://github.com/somonus/react-echarts) by somonus
 + [re-echarts](https://github.com/liekkas/re-echarts) by liekkas
++ [react-echarts-v3](https://github.com/xlsdg/react-echarts-v3) by xlsdg
++ [d2recharts](https://github.com/leungwensen/d2recharts) by leungwensen
 
+#### React Native Component
+
++ [react-native-echarts](https://github.com/somonus/react-native-echarts) by somonus
 
 ### Other Languages
 #### Python
 
 + [echarts-python](https://github.com/yufeiminds/echarts-python) by yufeiminds
 + [krisk](https://github.com/napjon/krisk) by napjon
++ [pyecharts](https://github.com/chenjiandongx/pyecharts) by chenjiandong
 
 #### R
 
@@ -96,31 +138,15 @@ ECharts is a free, powerful charting and visualization library offering an easy 
 
 + [Echarts-PHP](https://github.com/hisune/Echarts-PHP) by hisune
 
+#### Node
+
++ [Node-Echarts](https://github.com/suxiaoxin/node-echarts) by suxiaoxin
+
+## Build
+
+Check this tutorial [Create Custom Build of ECharts](https://ecomfe.github.io/echarts-doc/public/en/tutorial.html#Create%20Custom%20Build%20of%20ECharts)
+ please.
 
 ## License
-Copyright (c) 2013, Baidu Inc.
-All rights reserved.
 
-Redistribution and use in source and binary forms, with or without
-modification, are permitted provided that the following conditions are met:
-
-1. Redistributions of source code must retain the above copyright notice, this
-   list of conditions and the following disclaimer.
-2. Redistributions in binary form must reproduce the above copyright notice,
-   this list of conditions and the following disclaimer in the documentation
-   and/or other materials provided with the distribution.
-
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
-ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
-ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
-(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
-LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
-ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
-SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
-The views and conclusions contained in the software and documentation are those
-of the authors and should not be interpreted as representing official policies,
-either expressed or implied, of the FreeBSD Project.
+ECharts is available under the Apache License V2.

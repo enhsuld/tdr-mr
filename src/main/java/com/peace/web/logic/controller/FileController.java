@@ -17,31 +17,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Random;
-import java.util.Set;
-import org.w3c.dom.Element;
-import com.peace.users.model.User;
-import com.peace.users.model.mram.AnnualRegistration;
-import com.peace.users.model.mram.LnkComment;
-import com.peace.users.model.mram.LnkCommentMain;
-import com.peace.users.model.mram.LnkPlanAttachedFiles;
-import com.peace.users.model.mram.LnkPlanNotes;
-import com.peace.users.model.mram.LnkPlanTab;
-import com.peace.users.model.mram.LnkPlanTransition;
-import com.peace.users.model.mram.LnkReportRegBunl;
-import com.peace.users.model.mram.LutDecisions;
-import com.peace.users.model.mram.LutFormNotes;
-import com.peace.users.model.mram.LutFormindicators;
-import com.peace.users.model.mram.LutForms;
 import com.peace.users.model.mram.LutUsers;
-import com.peace.users.model.mram.RegWeeklyMontly;
-import com.peace.users.model.mram.SubLicenses;
-
-import javax.imageio.ImageIO;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FileUtils;
@@ -66,23 +42,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.multipart.MultipartRequest;
-
-import com.google.common.io.Files;
-import com.google.gson.Gson;
-import com.itextpdf.text.pdf.AcroFields;
-import com.itextpdf.text.pdf.PdfReader;
-import com.itextpdf.text.pdf.PdfStamper;
-import com.itextpdf.text.pdf.XfaForm;
 import com.peace.users.dao.UserDao;
 import com.peace.users.model.FileMeta;
-import com.peace.users.model.Tbstudentdetail;
-import com.sun.mail.handlers.multipart_mixed;
-
-import org.w3c.dom.Attr;
-import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 @Controller
 @RequestMapping("/file")

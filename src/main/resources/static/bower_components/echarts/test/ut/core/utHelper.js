@@ -1,3 +1,22 @@
+/*
+* Licensed to the Apache Software Foundation (ASF) under one
+* or more contributor license agreements.  See the NOTICE file
+* distributed with this work for additional information
+* regarding copyright ownership.  The ASF licenses this file
+* to you under the Apache License, Version 2.0 (the
+* "License"); you may not use this file except in compliance
+* with the License.  You may obtain a copy of the License at
+*
+*   http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing,
+* software distributed under the License is distributed on an
+* "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+* KIND, either express or implied.  See the License for the
+* specific language governing permissions and limitations
+* under the License.
+*/
+
 (function (context) {
 
     /**
@@ -69,14 +88,11 @@
                 if (!(requireId instanceof Array)) {
                     requireId = requireId != null ? [] : [requireId];
                 }
-                requireId = ['echarts'].concat(requireId);
+                requireId = ['echarts/src/echarts'].concat(requireId);
 
                 window.it(name, function (done) {
-                    helper.resetPackageLoader(onLoaderReset);
 
-                    function onLoaderReset() {
-                        window.require(requireId, onModuleLoaded);
-                    }
+                    window.requireES(requireId, onModuleLoaded);
 
                     function onModuleLoaded(echarts) {
                         var createResult = createChart(context, echarts);
@@ -150,7 +166,7 @@
                     'right:0'
                 ].join(';');
                 els.push(el);
-                charts.push(echarts.init(el, null, {renderer: 'canvas'}));
+                charts.push(echarts.init(el, null, { }));
             }
             return {charts: charts, els: els};
         }
@@ -273,7 +289,7 @@
      *
      * @public
      */
-    helper.resetPackageLoader = function (then) {
+    helper.resetAMDLoader = function (then) {
         // Clean esl
         var eslEl = helper.g('esl');
         if (eslEl) {
@@ -287,11 +303,18 @@
         context.require = null;
 
         // Import esl.
-        helper.loadScript('../esl.js', 'esl', function () {
-            helper.loadScript('config.js', 'config', function () {
+        helper.loadScript('../lib/esl.js', 'esl', function () {
+            helper.loadScript('lib/config.js', 'config', function () {
                 then();
             });
         });
+    };
+
+    /**
+     * @public
+     */
+    helper.isValueFinite = function (val) {
+        return val != null && val !== '' && isFinite(val);
     };
 
     /**
@@ -300,7 +323,7 @@
      * @param {Array.<Function>} testFnList
      * @param {Function} done All done callback.
      */
-    helper.resetPackageLoaderEachTest = function (deps, testFnList, done) {
+    helper.resetAMDLoaderEachTest = function (deps, testFnList, done) {
         var i = -1;
         next();
 
@@ -311,13 +334,39 @@
                 return;
             }
 
-            helper.resetPackageLoader(function () {
+            helper.resetAMDLoader(function () {
                 window.require(deps, function () {
                     testFnList[i].apply(null, arguments);
                     next();
                 });
             });
         }
+    };
+
+    helper.getGraphicElements = function (chartOrGroup, mainType, index) {
+        if (chartOrGroup.type === 'group') {
+            return chartOrGroup.children();
+        }
+        else {
+            var viewGroup = helper.getViewGroup(chartOrGroup, mainType, index);
+            if (viewGroup) {
+                var list = [viewGroup];
+                viewGroup.traverse(function (el) {
+                    list.push(el);
+                });
+                return list;
+            }
+            else {
+                return [];
+            }
+        }
+    };
+
+    helper.getViewGroup = function (chart, mainType, index) {
+        var component = chart.getModel().getComponent(mainType, index);
+        return component ? chart[
+            mainType === 'series' ? '_chartsMap' : '_componentsMap'
+        ][component.__viewId].group : null;
     };
 
     /**
@@ -332,5 +381,13 @@
         return window.JSON.stringify(result, null, 4);
     };
 
+    /**
+     * @public
+     */
+    helper.print = function (str) {
+        if (typeof console !== 'undefined') {
+            console.log(str);
+        }
+    };
 
 })(window);

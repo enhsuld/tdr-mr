@@ -1,3 +1,25 @@
+/*
+* Licensed to the Apache Software Foundation (ASF) under one
+* or more contributor license agreements.  See the NOTICE file
+* distributed with this work for additional information
+* regarding copyright ownership.  The ASF licenses this file
+* to you under the Apache License, Version 2.0 (the
+* "License"); you may not use this file except in compliance
+* with the License.  You may obtain a copy of the License at
+*
+*   http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing,
+* software distributed under the License is distributed on an
+* "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+* KIND, either express or implied.  See the License for the
+* specific language governing permissions and limitations
+* under the License.
+*/
+
+var CANVAS_WIDTH = 400;
+var CANVAS_HEIGHT = 300;
+
 (function (context) {
 
     var helper = context.uiHelper = {};
@@ -164,8 +186,8 @@
     helper.getRenderedCanvas = function(echarts, operations) {
         // init canvas with echarts
         var canvas = document.createElement('canvas');
-        canvas.width = 400;
-        canvas.height = 300;
+        canvas.width = CANVAS_WIDTH;
+        canvas.height = CANVAS_HEIGHT;
         var myChart = echarts.init(canvas);
 
         // user defined operations
@@ -226,6 +248,10 @@
             describe(suiteName, function() {
                 var start = isTestAll ? 0 : cases.length - 1;
                 for (var cid = start; cid < cases.length; ++cid) {
+                    if (cases[cid].ignore) {
+                        continue;
+                    }
+
                     var name = specName + ' - ' + suiteName + ': '
                         + cases[cid].name;
                     if (cases[cid].cases) {
@@ -236,13 +262,13 @@
                     if (cases[cid].test === 'equalOption') {
                         helper.expectEqualOption(name, cases[cid].option1,
                             cases[cid].option2);
-                        helper.testOption(name + ', same as last version',
-                            cases[cid].option1);
+                        // helper.testOption(name + ', same as last version',
+                        //     cases[cid].option1);
                     } else if (cases[cid].test === 'notEqualOption') {
                         helper.expectNotEqualOption(name, cases[cid].option1,
                             cases[cid].option2);
-                        helper.testOption(name + ', same as last version',
-                            cases[cid].option1);
+                        // helper.testOption(name + ', same as last version',
+                        //     cases[cid].option1);
                     } else {
                         helper.testOption(name, cases[cid].option);
                     }
@@ -278,10 +304,15 @@
         var oldImg = document.createElement('img');
         oldImg.src = oldImgSrc;
         oldImg.setAttribute('title', 'Old Image');
+        oldImg.width = CANVAS_WIDTH;
+        oldImg.height = CANVAS_HEIGHT;
+        group.appendChild(oldImg);
+
         var newImg = document.createElement('img');
         newImg.src = newImgSrc;
         newImg.setAttribute('title', 'New Image');
-        group.appendChild(oldImg);
+        newImg.width = CANVAS_WIDTH;
+        newImg.height = CANVAS_HEIGHT;
         group.appendChild(newImg);
 
         // diff image

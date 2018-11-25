@@ -4,7 +4,7 @@
 
 // theme e
 @app_theme_e_color:         @md-color-blue-grey-500;
-@app_theme_e_colorLight:    @md-color-red-50;
+@app_theme_e_colorLight:    @md-color-blue-grey-50;
 @app_theme_e_colorDark:     @md-color-blue-grey-700;
 @app_theme_e_colorAccent:   @md-color-red-600;
 
@@ -384,5 +384,11 @@
         &_content .chatbox_message.own .chatbox_message_content li > span {
             background: @app_theme_e_color;
         }
+    }
+    .uk-table {
+        tr.row_checked td,
+         &-hover tbody tr:hover {
+             background: @app_theme_e_colorLight;
+         }
     }
 }

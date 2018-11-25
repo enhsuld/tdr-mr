@@ -47,68 +47,31 @@ public class Services {
 		Collection<Object> roleset=null;
 		if(superuser){
 			List<LutMenu> rs=(List<LutMenu>) dao.getHQLResult("from LutMenu t where t.parentid=0 order by t.orderid asc", "list");
-	    	if(rs.size()>0){
-	    		for(int i=0;i<rs.size();i++){
-	        		Map<String,Object> wmap=new HashMap<String, Object>();        	
-	        		wmap.put("id", rs.get(i).getId());
-	        		wmap.put("title", rs.get(i).getNamemn());
-	        		
-	        		wmap.put("icon", rs.get(i).getIcon());	        		
-	        		
-	        		List<Map<String, Object>> childs = new ArrayList<Map<String, Object>>(); 
-	        		
-	        		if(rs.get(i).getChilds().size()>0){
-	        			List<LutMenu> chi=rs.get(i).getChilds();
-	        			
-	        			for(int j=0;j<chi.size();j++){
-	        				LutMenu rsa=chi.get(j);				        				
-	        				
-	        				List<LnkMenuRole> lk=rsa.getLnkMenuRoles();
-	        				int a =lk.size();
-	        				if(lk.size()>1){
-	        					a=1;
-	        				}
-	        				for(int l=0; l<a;l++){
-	        					LnkMenuRole rl=lk.get(l);	
-	        					if(rl.getRread()>0){
-	        						Map<String,Object> child=new HashMap<String, Object>();  	        			
-					        		child.put("title", rsa.getNamemn());
-					        		
-					        		List<LutMenu> third=rsa.getChilds();
-					        		if(third.size()>0){
-					        			List<Map<String, Object>> tchilds = new ArrayList<Map<String, Object>>(); 										        										        			
-					        			for(int t=0; t<third.size(); t++){
-					        				LutMenu tlm=third.get(t);
-					        				Map<String,Object> tchild=new HashMap<String, Object>();		
-					        				tchild.put("title", tlm.getNamemn());
-					        				tchild.put("link",  tlm.getStateurl());	
-					        				tchilds.add(tchild);	
-					        			}
-					        			child.put("submenu",  tchilds);	
-					        		}
-					        		else{
-					        			child.put("link",  rsa.getStateurl());	
-					        		}
-					        		childs.add(child);
-	        					}
-	        					
-	        				}
-	        			/*	if(rsa.getChilds().size()==0){
-	        					Map<String,Object> child=new HashMap<String, Object>();  	        			
-				        		child.put("title", rsa.getNamemn());
-				        		child.put("link",  rsa.getStateurl());		        		
-				        		childs.add(child);
-	        				}*/
-	        			}	        			
-		        		
-	        		}	
-	        		else{
-	        			wmap.put("link", rs.get(i).getStateurl());
-	        		}
-	        		wmap.put("submenu", childs);
-	        		result.put(wmap);      
-	        	}
-	    	}
+			if (rs.size() > 0) {
+				for (int i = 0; i < rs.size(); i++) {
+					Map<String, Object> wmap = new HashMap<String, Object>();
+					wmap.put("id", rs.get(i).getId());
+					wmap.put("title", rs.get(i).getNamemn());
+
+					wmap.put("icon", rs.get(i).getIcon());
+
+					List<Map<String, Object>> childs = new ArrayList<Map<String, Object>>();
+
+					if (rs.get(i).getChilds().size() > 0) {
+						List<LutMenu> chi = rs.get(i).getChilds();
+						for (int j = 0; j < rs.get(i).getChilds().size(); j++) {
+							Map<String, Object> child = new HashMap<String, Object>();
+							child.put("title", chi.get(j).getNamemn());
+							child.put("link", chi.get(j).getStateurl());
+							childs.add(child);
+						}
+					} else {
+						wmap.put("link", rs.get(i).getStateurl());
+					}
+					wmap.put("submenu", childs);
+					result.put(wmap);
+				}
+			}
 	    	JSONArray ulist = new JSONArray();
 			JSONObject wmap = new JSONObject();
     		wmap.put("role", "ROLE_SUPER");			        		
@@ -120,7 +83,7 @@ public class Services {
 		}else{
 			
 			System.out.println("@@@"+roles.substring(1,roles.length()));
-			
+
 			roleset=(Collection<Object>) dao.getHQLResult("select c.id, c.namemn, c.parentid, c.stateurl, c.icon from LutMenu c, LnkMenuRole t where t.roleid ="+roles+" and c.id=t.menuid and t.rread=1 order by c.orderid asc", "list");
 			Iterator<Object> ldata =roleset.iterator(); 
 			while (ldata.hasNext()) {
@@ -197,43 +160,7 @@ public class Services {
 		
 		return robj;
 	}
-	
-	/*public JSONObject getUjson(String roles, boolean superuser,LutUser loguser,UserDetails userdet){
-		System.out.println("Service user processing...");
-	
-		JSONObject robj = new JSONObject();
-		JSONArray result = new JSONArray();
-		Collection<Object> roleset=null;
-		if(superuser){
-	    	JSONArray ulist = new JSONArray();
-			JSONObject wmap = new JSONObject();
-    		//wmap.put("id",loguser.getId());
-    		wmap.put("role", "ROLE_SUPER");			        		
-    		wmap.put("gname", "");
-    		//wmap.put("position",loguser.getPositionid());
-    		wmap.put("username", userdet.getUsername());
-    	//	wmap.put("lpname", loguser.getLutDepartment().getDepartmentname());
-    	//	wmap.put("depid", loguser.getDepartmentid());
-    		ulist.put(wmap);  
-    		robj.put("ujson", ulist);
-    		robj.put("mjson", result);
-		}else{
-			JSONArray ulist = new JSONArray();
-			JSONObject wmap = new JSONObject();
-    		wmap.put("id",loguser.getId());
-    		wmap.put("role", loguser.getLnkUserroles().get(0).getLutRole().getRoleauth());			        		
-    		wmap.put("gname", loguser.getGivenname());
-    		wmap.put("position",loguser.getPositionid());
-    		wmap.put("username", loguser.getFamilyname().substring(0, 1)+"."+loguser.getGivenname());
-    		wmap.put("lpname", loguser.getLutDepartment().getDepartmentname());
-    		wmap.put("depid", loguser.getDepartmentid());
-    		ulist.put(wmap);  
-    		robj.put("ujson", ulist);
-    		robj.put("mjson", result);
-		}
-		
-		return robj;
-	}*/
+
 	@CacheEvict(value = "customers", key = "#id")
 	public void evict(long id){
 	}

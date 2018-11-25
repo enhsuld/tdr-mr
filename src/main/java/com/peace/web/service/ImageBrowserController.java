@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
-import com.peace.users.model.User;
 import com.peace.users.model.mram.LutUsers;
 import com.peace.users.model.mram.PeaceCmsContentImage;
 
@@ -39,8 +38,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.peace.users.dao.UserDao;
-import com.peace.users.model.Tbstudentdetail;
-import com.sun.mail.handlers.multipart_mixed;
 
 @Controller
 @RequestMapping("/imagebrowser")
@@ -402,49 +399,7 @@ public class ImageBrowserController {
 	        return "true";
 		
     }
-	
-	@RequestMapping(value="/withid",method=RequestMethod.POST)
-	public @ResponseBody String withid(@RequestParam final int userid, @RequestParam("files") MultipartFile files, HttpServletRequest req) throws IOException {
-		try{
-			Tbstudentdetail detail = new Tbstudentdetail();
-			User loguser= null;
-			if(userid!=0){
-				loguser=(User) dao.getHQLResult("from User t where t.id='"+userid+"'", "current");
-				MultipartFile mfile =  null;
-			  	mfile = (MultipartFile)files;
-			  	if (mfile != null) { 	
-			  		detail.setUserid(userid);
-			  		String appPath = req.getSession().getServletContext().getRealPath("");
-				 	String SAVE_DIR = "uploads";
-					 	DateFormat dateFormat1 = new SimpleDateFormat("yyyyMMdd");
-						Date date1 = new Date();
-						String special = dateFormat1.format(date1);
-		        	    String savePath = appPath + File.separator + SAVE_DIR+ File.separator +loguser.getUsername();
-		        	    System.out.println("de dir"+special);
-		        	    File logodestination = new File(savePath);
-		        		if(!logodestination.exists()){
-		        			logodestination.mkdir();
-		    				  System.out.println("end"+logodestination);
-		    			}
 
-		        	    String path = appPath + File.separator + SAVE_DIR+ File.separator +loguser.getUsername()+ File.separator + mfile.getOriginalFilename();
-		        		File logoorgpath = new File(path);
-		        		
-		        		detail.setFile(path);
-		        		dao.PeaceCrud(detail, "Tbstudentdetail", "save", (long) 0, 0, 0, null);
-		        		mfile.transferTo(logoorgpath);
-		        		return "true";
-			  	} 
-			}				
-					
-		  	return "false";
-		}
-		catch(Exception e){
-			e.printStackTrace();
-			return null;
-		}
-		
-    }
 	
 	@RequestMapping(value="/delete",method=RequestMethod.POST)
 	public @ResponseBody String destroy( @RequestParam("fileNames") String fileNames, HttpServletRequest req) throws IOException {

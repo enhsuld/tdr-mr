@@ -1,20 +1,31 @@
-const set = (typeof Set === "function") ? new Set() : (function () {
-	const list = [];
+const map = (typeof Map === "function") ? new Map() : (function () {
+	const keys = [];
+	const values = [];
 
 	return {
 		has(key) {
-			return Boolean(list.indexOf(key) > -1);
+			return keys.indexOf(key) > -1;
 		},
-		add(key) {
-			list.push(key);
+		get(key) {
+			return values[keys.indexOf(key)];
+		},
+		set(key, value) {
+			if (keys.indexOf(key) === -1) {
+				keys.push(key);
+				values.push(value);
+			}
 		},
 		delete(key) {
-			list.splice(list.indexOf(key), 1);
+			const index = keys.indexOf(key);
+			if (index > -1) {
+				keys.splice(index, 1);
+				values.splice(index, 1);
+			}
 		},
 	}
 })();
 
-let createEvent = (name)=> new Event(name);
+let createEvent = (name)=> new Event(name, {bubbles: true});
 try {
 	new Event('test');
 } catch(e) {
@@ -27,10 +38,10 @@ try {
 }
 
 function assign(ta) {
-	if (!ta || !ta.nodeName || ta.nodeName !== 'TEXTAREA' || set.has(ta)) return;
+	if (!ta || !ta.nodeName || ta.nodeName !== 'TEXTAREA' || map.has(ta)) return;
 
 	let heightOffset = null;
-	let clientWidth = ta.clientWidth;
+	let clientWidth = null;
 	let cachedHeight = null;
 
 	function init() {
@@ -70,8 +81,6 @@ function assign(ta) {
 		}
 
 		ta.style.overflowY = value;
-
-		resize();
 	}
 
 	function getParentOverflows(el) {
@@ -91,21 +100,16 @@ function assign(ta) {
 	}
 
 	function resize() {
-		const originalHeight = ta.style.height;
-		const overflows = getParentOverflows(ta);
-		const docTop = document.documentElement && document.documentElement.scrollTop; // Needed for Mobile IE (ticket #240)
-
-		ta.style.height = 'auto';
-
-		let endHeight = ta.scrollHeight+heightOffset;
-
 		if (ta.scrollHeight === 0) {
 			// If the scrollHeight is 0, then the element probably has display:none or is detached from the DOM.
-			ta.style.height = originalHeight;
 			return;
 		}
 
-		ta.style.height = endHeight+'px';
+		const overflows = getParentOverflows(ta);
+		const docTop = document.documentElement && document.documentElement.scrollTop; // Needed for Mobile IE (ticket #240)
+
+		ta.style.height = '';
+		ta.style.height = (ta.scrollHeight+heightOffset)+'px';
 
 		// used to check if an update is actually necessary on window.resize
 		clientWidth = ta.clientWidth;
@@ -123,27 +127,38 @@ function assign(ta) {
 	function update() {
 		resize();
 
-		const computed = window.getComputedStyle(ta, null);
-		const computedHeight = Math.round(parseFloat(computed.height));
 		const styleHeight = Math.round(parseFloat(ta.style.height));
+		const computed = window.getComputedStyle(ta, null);
 
-		// The computed height not matching the height set via resize indicates that 
-		// the max-height has been exceeded, in which case the overflow should be set to visible.
-		if (computedHeight !== styleHeight) {
-			if (computed.overflowY !== 'visible') {
-				changeOverflow('visible');
+		// Using offsetHeight as a replacement for computed.height in IE, because IE does not account use of border-box
+		var actualHeight = computed.boxSizing === 'content-box' ? Math.round(parseFloat(computed.height)) : ta.offsetHeight;
+
+		// The actual height not matching the style height (set via the resize method) indicates that 
+		// the max-height has been exceeded, in which case the overflow should be allowed.
+		if (actualHeight < styleHeight) {
+			if (computed.overflowY === 'hidden') {
+				changeOverflow('scroll');
+				resize();
+				actualHeight = computed.boxSizing === 'content-box' ? Math.round(parseFloat(window.getComputedStyle(ta, null).height)) : ta.offsetHeight;
 			}
 		} else {
 			// Normally keep overflow set to hidden, to avoid flash of scrollbar as the textarea expands.
 			if (computed.overflowY !== 'hidden') {
 				changeOverflow('hidden');
+				resize();
+				actualHeight = computed.boxSizing === 'content-box' ? Math.round(parseFloat(window.getComputedStyle(ta, null).height)) : ta.offsetHeight;
 			}
 		}
 
-		if (cachedHeight !== computedHeight) {
-			cachedHeight = computedHeight;
+		if (cachedHeight !== actualHeight) {
+			cachedHeight = actualHeight;
 			const evt = createEvent('autosize:resized');
-			ta.dispatchEvent(evt);
+			try {
+				ta.dispatchEvent(evt);
+			} catch (err) {
+				// Firefox will throw an error on dispatchEvent for a detached element
+				// https://bugzilla.mozilla.org/show_bug.cgi?id=889376
+			}
 		}
 	}
 
@@ -153,18 +168,19 @@ function assign(ta) {
 		}
 	};
 
-	const destroy = style => {
+	const destroy = (style => {
 		window.removeEventListener('resize', pageResize, false);
 		ta.removeEventListener('input', update, false);
 		ta.removeEventListener('keyup', update, false);
 		ta.removeEventListener('autosize:destroy', destroy, false);
 		ta.removeEventListener('autosize:update', update, false);
-		set.delete(ta);
 
 		Object.keys(style).forEach(key => {
 			ta.style[key] = style[key];
 		});
-	}.bind(ta, {
+
+		map.delete(ta);
+	}).bind(ta, {
 		height: ta.style.height,
 		resize: ta.style.resize,
 		overflowY: ta.style.overflowY,
@@ -184,23 +200,29 @@ function assign(ta) {
 	window.addEventListener('resize', pageResize, false);
 	ta.addEventListener('input', update, false);
 	ta.addEventListener('autosize:update', update, false);
-	set.add(ta);
 	ta.style.overflowX = 'hidden';
 	ta.style.wordWrap = 'break-word';
+
+	map.set(ta, {
+		destroy,
+		update,
+	});
 
 	init();
 }
 
 function destroy(ta) {
-	if (!(ta && ta.nodeName && ta.nodeName === 'TEXTAREA')) return;
-	const evt = createEvent('autosize:destroy');
-	ta.dispatchEvent(evt);
+	const methods = map.get(ta);
+	if (methods) {
+		methods.destroy();
+	}
 }
 
 function update(ta) {
-	if (!(ta && ta.nodeName && ta.nodeName === 'TEXTAREA')) return;
-	const evt = createEvent('autosize:update');
-	ta.dispatchEvent(evt);
+	const methods = map.get(ta);
+	if (methods) {
+		methods.update();
+	}
 }
 
 let autosize = null;

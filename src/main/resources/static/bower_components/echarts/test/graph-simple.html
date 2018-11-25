@@ -1,8 +1,8 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <script src="esl.js"></script>
-        <script src="config.js"></script>
+        <script src="lib/esl.js"></script>
+        <script src="lib/config.js"></script>
         <script src="lib/jquery.min.js"></script>
     </head>
     <body>
@@ -13,16 +13,18 @@
                 margin: 0;
             }
         </style>
+        hover node3, edge label should be displayed.
+        节点1 should display value in tooltip.
         <div id="main"></div>
         <script>
 
             require([
                 'echarts',
-                'echarts/chart/graph',
-                'echarts/component/title',
-                'echarts/component/legend',
-                'echarts/component/tooltip',
-                'zrender/vml/vml',
+                // 'echarts/chart/graph',
+                // 'echarts/component/title',
+                // 'echarts/component/legend',
+                // 'echarts/component/tooltip',
+                // 'zrender/vml/vml',
 
                 'theme/vintage'
             ], function (echarts) {
@@ -36,7 +38,7 @@
                     series : [
                         {
                             type: 'graph',
-                            symbolSize: 50,
+                            symbolSize: 20,
                             roam: true,
                             label: {
                                 normal: {
@@ -56,7 +58,8 @@
                             data: [{
                                 name: '节点1',
                                 x: 300,
-                                y: 300
+                                y: 300,
+                                value: 2321
                             }, {
                                 name: '节点2',
                                 x: 800,
@@ -78,6 +81,7 @@
                                 label: {
                                     normal: {
                                         show: true
+                                        // position: 'end'
                                     }
                                 },
                                 lineStyle: {
@@ -99,7 +103,12 @@
                                 }
                             }, {
                                 source: '节点1',
-                                target: '节点3'
+                                target: '节点3',
+                                emphasis: {
+                                    label: {
+                                        show: true
+                                    }
+                                }
                             }, {
                                 source: '节点2',
                                 target: '节点3'

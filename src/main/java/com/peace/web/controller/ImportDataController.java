@@ -6,41 +6,10 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.LockedException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -57,61 +26,19 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
-
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import com.itextpdf.text.pdf.PdfReader;
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.itextpdf.text.pdf.AcroFields;
-import com.peace.users.model.DataSourceResult;
-import com.peace.users.dao.FileBean;
 import com.peace.users.dao.UserDao;
-import com.peace.users.model.AccountList;
-import com.peace.users.model.Excel;
 import com.peace.users.model.FileMeta;
-import com.peace.users.model.PUserRoleRel;
-import com.peace.users.model.PUserRoles;
-import com.peace.users.model.Pmenu;
-import com.peace.users.model.Role;
-import com.peace.users.model.Tbbranches;
-import com.peace.users.model.Tbdepartment;
-import com.peace.users.model.User;
-import com.peace.users.model.Tbuniversities;
-import com.peace.users.model.UserAuthority;
 import com.peace.users.model.mram.AnnualRegistration;
-import com.peace.users.model.mram.LutLicstatus;
-import com.peace.users.model.mram.LutLictype;
-import com.peace.users.model.mram.LutMenu;
 import com.peace.users.model.mram.LutMinerals;
-import com.peace.users.model.mram.LutReporttype;
-import com.peace.users.model.mram.LutRole;
-import com.peace.users.model.mram.LutUsers;
 import com.peace.users.model.mram.SubLegalpersons;
 import com.peace.users.model.mram.SubLicenses;
-import com.peace.users.service.MyUserDetailsService;
-
-import java.io.BufferedInputStream; 
-import java.io.FileInputStream; 
-import java.io.IOException; 
-import java.io.InputStream; 
-import java.util.Iterator; 
-
-import org.apache.poi.poifs.filesystem.POIFSFileSystem; 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.FormulaEvaluator;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.apache.poi.hssf.usermodel.HSSFCell;
-import org.apache.poi.hssf.usermodel.HSSFSheet; 
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.hssf.usermodel.HSSFRow;
 
 @RestController
 @RequestMapping("/user/upload")
@@ -803,7 +730,7 @@ public class ImportDataController {
          }
      }
 	
-	@RequestMapping(value = "/user/upload/data", method = RequestMethod.POST)
+/*	@RequestMapping(value = "/user/upload/data", method = RequestMethod.POST)
     public @ResponseBody String content(@RequestParam MultipartFile files[], HttpServletRequest req) {
 	 
 		System.out.println("assa"+files[0].getOriginalFilename());
@@ -945,6 +872,6 @@ public class ImportDataController {
 			
 	    return null;
    
-    }
+    }*/
 
 }

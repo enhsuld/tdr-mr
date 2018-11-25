@@ -2,6 +2,19 @@
 
 # Update History
 
+### Version 2.1.8. June 19, 2017
+* Issues resolved: #420, #423, #441, #464, #479
+
+### Version 2.1.7. March 26, 2017
+* Issues: #438
+* Reverted: #390
+
+### Version 2.1.6. December 27, 2016
+* Issues: #393, #406, #429, #431, #432
+
+### Version 2.1.5. December 12, 2016
+* Issues: #331, #332, #333, #337, #338, #343, #358, #374, #380, #389, #390, #394, #411, #412, #413
+
 ### Version 2.1.4. April 27, 2016
 * Issues: #330, #369
 

@@ -1,6 +1,6 @@
 /*!
 
-JSZip v3.1.1 - A Javascript class for generating and reading zip files
+JSZip v3.1.5 - A JavaScript class for generating and reading zip files
 <http://stuartk.com/jszip>
 
 (c) 2009-2016 Stuart Knightley <stuart [at] stuartk.com>
@@ -58,7 +58,7 @@ exports.decode = function(input) {
 
     var dataUrlPrefix = "data:";
 
-    if (input.substr(dataUrlPrefix.length) === dataUrlPrefix) {
+    if (input.substr(0, dataUrlPrefix.length) === dataUrlPrefix) {
         // This is a common error: people give a data url
         // (data:image/png;base64,iVBOR...) with a {base64: true} and
         // wonders why things don't work.
@@ -118,7 +118,7 @@ exports.decode = function(input) {
     return output;
 };
 
-},{"./support":27,"./utils":29}],2:[function(require,module,exports){
+},{"./support":30,"./utils":32}],2:[function(require,module,exports){
 'use strict';
 
 var external = require("./external");
@@ -195,7 +195,7 @@ CompressedObject.createWorkerFrom = function (uncompressedWorker, compression, c
 
 module.exports = CompressedObject;
 
-},{"./external":6,"./stream/Crc32Probe":22,"./stream/DataLengthProbe":23,"./stream/DataWorker":24}],3:[function(require,module,exports){
+},{"./external":6,"./stream/Crc32Probe":25,"./stream/DataLengthProbe":26,"./stream/DataWorker":27}],3:[function(require,module,exports){
 'use strict';
 
 var GenericWorker = require("./stream/GenericWorker");
@@ -211,7 +211,7 @@ exports.STORE = {
 };
 exports.DEFLATE = require('./flate');
 
-},{"./flate":7,"./stream/GenericWorker":25}],4:[function(require,module,exports){
+},{"./flate":7,"./stream/GenericWorker":28}],4:[function(require,module,exports){
 'use strict';
 
 var utils = require('./utils');
@@ -289,9 +289,8 @@ module.exports = function crc32wrapper(input, crc) {
         return crc32str(crc|0, input, input.length, 0);
     }
 };
-// vim: set shiftwidth=4 softtabstop=4:
 
-},{"./utils":29}],5:[function(require,module,exports){
+},{"./utils":32}],5:[function(require,module,exports){
 'use strict';
 exports.base64 = false;
 exports.binary = false;
@@ -305,13 +304,18 @@ exports.unixPermissions = null;
 exports.dosPermissions = null;
 
 },{}],6:[function(require,module,exports){
-(function (global){
+/* global Promise */
 'use strict';
 
 // load the global object first:
 // - it should be better integrated in the system (unhandledRejection in node)
 // - the environment may have a custom Promise implementation (see zone.js)
-var ES6Promise = global.Promise || require("lie");
+var ES6Promise = null;
+if (typeof Promise !== "undefined") {
+    ES6Promise = Promise;
+} else {
+    ES6Promise = require("lie");
+}
 
 /**
  * Let the user use/change some implementations.
@@ -320,8 +324,7 @@ module.exports = {
     Promise: ES6Promise
 };
 
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"lie":56}],7:[function(require,module,exports){
+},{"lie":58}],7:[function(require,module,exports){
 'use strict';
 var USE_TYPEDARRAY = (typeof Uint8Array !== 'undefined') && (typeof Uint16Array !== 'undefined') && (typeof Uint32Array !== 'undefined');
 
@@ -342,21 +345,12 @@ exports.magic = "\x08\x00";
 function FlateWorker(action, options) {
     GenericWorker.call(this, "FlateWorker/" + action);
 
-    this._pako = new pako[action]({
-        raw:true,
-        level : options.level || -1 // default compression
-    });
+    this._pako = null;
+    this._pakoAction = action;
+    this._pakoOptions = options;
     // the `meta` object from the last chunk received
     // this allow this worker to pass around metadata
     this.meta = {};
-
-    var self = this;
-    this._pako.onData = function(data) {
-        self.push({
-            data : data,
-            meta : self.meta
-        });
-    };
 }
 
 utils.inherits(FlateWorker, GenericWorker);
@@ -366,6 +360,9 @@ utils.inherits(FlateWorker, GenericWorker);
  */
 FlateWorker.prototype.processChunk = function (chunk) {
     this.meta = chunk.meta;
+    if (this._pako === null) {
+        this._createPako();
+    }
     this._pako.push(utils.transformTo(ARRAY_TYPE, chunk.data), false);
 };
 
@@ -374,6 +371,9 @@ FlateWorker.prototype.processChunk = function (chunk) {
  */
 FlateWorker.prototype.flush = function () {
     GenericWorker.prototype.flush.call(this);
+    if (this._pako === null) {
+        this._createPako();
+    }
     this._pako.push([], true);
 };
 /**
@@ -384,6 +384,26 @@ FlateWorker.prototype.cleanUp = function () {
     this._pako = null;
 };
 
+/**
+ * Create the _pako object.
+ * TODO: lazy-loading this object isn't the best solution but it's the
+ * quickest. The best solution is to lazy-load the worker list. See also the
+ * issue #446.
+ */
+FlateWorker.prototype._createPako = function () {
+    this._pako = new pako[this._pakoAction]({
+        raw: true,
+        level: this._pakoOptions.level || -1 // default compression
+    });
+    var self = this;
+    this._pako.onData = function(data) {
+        self.push({
+            data : data,
+            meta : self.meta
+        });
+    };
+};
+
 exports.compressWorker = function (compressionOptions) {
     return new FlateWorker("Deflate", compressionOptions);
 };
@@ -391,7 +411,7 @@ exports.uncompressWorker = function () {
     return new FlateWorker("Inflate", {});
 };
 
-},{"./stream/GenericWorker":25,"./utils":29,"pako":57}],8:[function(require,module,exports){
+},{"./stream/GenericWorker":28,"./utils":32,"pako":59}],8:[function(require,module,exports){
 'use strict';
 
 var utils = require('../utils');
@@ -508,9 +528,13 @@ var generateZipParts = function(streamInfo, streamedContent, streamingEnded, off
 
     var bitflag = 0;
     if (streamedContent) {
+        // Bit 3: the sizes/crc32 are set to zero in the local header.
+        // The correct values are put in the data descriptor immediately
+        // following the compressed data.
         bitflag |= 0x0008;
     }
     if (!useCustomEncoding && (useUTF8ForFileName || useUTF8ForComment)) {
+        // Bit 11: Language encoding flag (EFS).
         bitflag |= 0x0800;
     }
 
@@ -597,7 +621,6 @@ var generateZipParts = function(streamInfo, streamedContent, streamingEnded, off
     // version needed to extract
     header += "\x0A\x00";
     // general purpose bit flag
-    // set bit 11 if utf8
     header += decToHex(bitflag, 2);
     // compression method
     header += compression.magic;
@@ -777,9 +800,11 @@ ZipFileWorker.prototype.openedSource = function (streamInfo) {
     this.currentSourceOffset = this.bytesWritten;
     this.currentFile = streamInfo['file'].name;
 
+    var streamedContent = this.streamFiles && !streamInfo['file'].dir;
+
     // don't stream folders (because they don't have any content)
-    if(this.streamFiles && !streamInfo['file'].dir) {
-        var record = generateZipParts(streamInfo, this.streamFiles, false, this.currentSourceOffset, this.zipPlatform, this.encodeFileName);
+    if(streamedContent) {
+        var record = generateZipParts(streamInfo, streamedContent, false, this.currentSourceOffset, this.zipPlatform, this.encodeFileName);
         this.push({
             data : record.fileRecord,
             meta : {percent:0}
@@ -796,10 +821,11 @@ ZipFileWorker.prototype.openedSource = function (streamInfo) {
  */
 ZipFileWorker.prototype.closedSource = function (streamInfo) {
     this.accumulate = false;
-    var record = generateZipParts(streamInfo, this.streamFiles, true, this.currentSourceOffset, this.zipPlatform, this.encodeFileName);
+    var streamedContent = this.streamFiles && !streamInfo['file'].dir;
+    var record = generateZipParts(streamInfo, streamedContent, true, this.currentSourceOffset, this.zipPlatform, this.encodeFileName);
 
     this.dirRecords.push(record.dirRecord);
-    if(this.streamFiles && !streamInfo['file'].dir) {
+    if(streamedContent) {
         // after the streamed file, we put data descriptors
         this.push({
             data : generateDataDescriptors(streamInfo),
@@ -927,7 +953,7 @@ ZipFileWorker.prototype.lock = function () {
 
 module.exports = ZipFileWorker;
 
-},{"../crc32":4,"../signature":20,"../stream/GenericWorker":25,"../utf8":28,"../utils":29}],9:[function(require,module,exports){
+},{"../crc32":4,"../signature":23,"../stream/GenericWorker":28,"../utf8":31,"../utils":32}],9:[function(require,module,exports){
 'use strict';
 
 var compressions = require('../compressions');
@@ -1031,7 +1057,7 @@ JSZip.defaults = require('./defaults');
 
 // TODO find a better way to handle this version,
 // a require('package.json').version doesn't work with webpack, see #327
-JSZip.version = "3.1.1";
+JSZip.version = "3.1.5";
 
 JSZip.loadAsync = function (content, options) {
     return new JSZip().loadAsync(content, options);
@@ -1040,7 +1066,7 @@ JSZip.loadAsync = function (content, options) {
 JSZip.external = require("./external");
 module.exports = JSZip;
 
-},{"./defaults":5,"./external":6,"./load":11,"./object":13,"./support":27}],11:[function(require,module,exports){
+},{"./defaults":5,"./external":6,"./load":11,"./object":15,"./support":30}],11:[function(require,module,exports){
 'use strict';
 var utils = require('./utils');
 var external = require("./external");
@@ -1124,8 +1150,127 @@ module.exports = function(data, options) {
     });
 };
 
-},{"./external":6,"./nodejsUtils":12,"./stream/Crc32Probe":22,"./utf8":28,"./utils":29,"./zipEntries":30}],12:[function(require,module,exports){
-(function (Buffer){
+},{"./external":6,"./nodejsUtils":14,"./stream/Crc32Probe":25,"./utf8":31,"./utils":32,"./zipEntries":33}],12:[function(require,module,exports){
+"use strict";
+
+var utils = require('../utils');
+var GenericWorker = require('../stream/GenericWorker');
+
+/**
+ * A worker that use a nodejs stream as source.
+ * @constructor
+ * @param {String} filename the name of the file entry for this stream.
+ * @param {Readable} stream the nodejs stream.
+ */
+function NodejsStreamInputAdapter(filename, stream) {
+    GenericWorker.call(this, "Nodejs stream input adapter for " + filename);
+    this._upstreamEnded = false;
+    this._bindStream(stream);
+}
+
+utils.inherits(NodejsStreamInputAdapter, GenericWorker);
+
+/**
+ * Prepare the stream and bind the callbacks on it.
+ * Do this ASAP on node 0.10 ! A lazy binding doesn't always work.
+ * @param {Stream} stream the nodejs stream to use.
+ */
+NodejsStreamInputAdapter.prototype._bindStream = function (stream) {
+    var self = this;
+    this._stream = stream;
+    stream.pause();
+    stream
+    .on("data", function (chunk) {
+        self.push({
+            data: chunk,
+            meta : {
+                percent : 0
+            }
+        });
+    })
+    .on("error", function (e) {
+        if(self.isPaused) {
+            this.generatedError = e;
+        } else {
+            self.error(e);
+        }
+    })
+    .on("end", function () {
+        if(self.isPaused) {
+            self._upstreamEnded = true;
+        } else {
+            self.end();
+        }
+    });
+};
+NodejsStreamInputAdapter.prototype.pause = function () {
+    if(!GenericWorker.prototype.pause.call(this)) {
+        return false;
+    }
+    this._stream.pause();
+    return true;
+};
+NodejsStreamInputAdapter.prototype.resume = function () {
+    if(!GenericWorker.prototype.resume.call(this)) {
+        return false;
+    }
+
+    if(this._upstreamEnded) {
+        this.end();
+    } else {
+        this._stream.resume();
+    }
+
+    return true;
+};
+
+module.exports = NodejsStreamInputAdapter;
+
+},{"../stream/GenericWorker":28,"../utils":32}],13:[function(require,module,exports){
+'use strict';
+
+var Readable = require('readable-stream').Readable;
+
+var utils = require('../utils');
+utils.inherits(NodejsStreamOutputAdapter, Readable);
+
+/**
+* A nodejs stream using a worker as source.
+* @see the SourceWrapper in http://nodejs.org/api/stream.html
+* @constructor
+* @param {StreamHelper} helper the helper wrapping the worker
+* @param {Object} options the nodejs stream options
+* @param {Function} updateCb the update callback.
+*/
+function NodejsStreamOutputAdapter(helper, options, updateCb) {
+    Readable.call(this, options);
+    this._helper = helper;
+
+    var self = this;
+    helper.on("data", function (data, meta) {
+        if (!self.push(data)) {
+            self._helper.pause();
+        }
+        if(updateCb) {
+            updateCb(meta);
+        }
+    })
+    .on("error", function(e) {
+        self.emit('error', e);
+    })
+    .on("end", function () {
+        self.push(null);
+    });
+}
+
+
+NodejsStreamOutputAdapter.prototype._read = function() {
+    this._helper.resume();
+};
+
+module.exports = NodejsStreamOutputAdapter;
+
+},{"../utils":32,"readable-stream":16}],14:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -1136,13 +1281,31 @@ module.exports = {
      */
     isNode : typeof Buffer !== "undefined",
     /**
-     * Create a new nodejs Buffer.
+     * Create a new nodejs Buffer from an existing content.
      * @param {Object} data the data to pass to the constructor.
      * @param {String} encoding the encoding to use.
      * @return {Buffer} a new Buffer.
      */
-    newBuffer : function(data, encoding){
+    newBufferFrom: function(data, encoding) {
+        // XXX We can't use `Buffer.from` which comes from `Uint8Array.from`
+        // in nodejs v4 (< v.4.5). It's not the expected implementation (and
+        // has a different signature).
+        // see https://github.com/nodejs/node/issues/8053
+        // A condition on nodejs' version won't solve the issue as we don't
+        // control the Buffer polyfills that may or may not be used.
         return new Buffer(data, encoding);
+    },
+    /**
+     * Create a new nodejs Buffer with the specified size.
+     * @param {Integer} size the size of the buffer.
+     * @return {Buffer} a new Buffer.
+     */
+    allocBuffer: function (size) {
+        if (Buffer.alloc) {
+            return Buffer.alloc(size);
+        } else {
+            return new Buffer(size);
+        }
     },
     /**
      * Find out if an object is a Buffer.
@@ -1161,8 +1324,7 @@ module.exports = {
     }
 };
 
-}).call(this,(typeof Buffer !== "undefined" ? Buffer : undefined))
-},{}],13:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 'use strict';
 var utf8 = require('./utf8');
 var utils = require('./utils');
@@ -1181,10 +1343,10 @@ var NodejsStreamInputAdapter = require("./nodejs/NodejsStreamInputAdapter");
  * @private
  * @param {string} name the name of the file
  * @param {String|ArrayBuffer|Uint8Array|Buffer} data the data of the file
- * @param {Object} o the options of the file
+ * @param {Object} originalOptions the options of the file
  * @return {Object} the new file.
  */
-var fileAdd = function(name, data, o) {
+var fileAdd = function(name, data, originalOptions) {
     // be sure sub folders exist
     var dataType = utils.getTypeOf(data),
         parent;
@@ -1194,7 +1356,7 @@ var fileAdd = function(name, data, o) {
      * Correct options.
      */
 
-    o = utils.extend(o || {}, defaults);
+    var o = utils.extend(originalOptions || {}, defaults);
     o.date = o.date || new Date();
     if (o.compression !== null) {
         o.compression = o.compression.toUpperCase();
@@ -1221,7 +1383,9 @@ var fileAdd = function(name, data, o) {
     }
 
     var isUnicodeString = dataType === "string" && o.binary === false && o.base64 === false;
-    o.binary = !isUnicodeString;
+    if (!originalOptions || typeof originalOptions.binary === "undefined") {
+        o.binary = !isUnicodeString;
+    }
 
 
     var isCompressedEmpty = (data instanceof CompressedObject) && data.uncompressedSize === 0;
@@ -1511,15 +1675,15 @@ var out = {
 
           // accept nodejs `process.platform`
           if(
-              options.platform === 'darwin' ||
-              options.platform === 'freebsd' ||
-              options.platform === 'linux' ||
-              options.platform === 'sunos'
+              opts.platform === 'darwin' ||
+              opts.platform === 'freebsd' ||
+              opts.platform === 'linux' ||
+              opts.platform === 'sunos'
           ) {
-              options.platform = "UNIX";
+              opts.platform = "UNIX";
           }
-          if (options.platform === 'win32') {
-              options.platform = "DOS";
+          if (opts.platform === 'win32') {
+              opts.platform = "DOS";
           }
 
           var comment = opts.comment || this.comment || "";
@@ -1551,7 +1715,18 @@ var out = {
 };
 module.exports = out;
 
-},{"./compressedObject":2,"./defaults":5,"./generate":9,"./nodejs/NodejsStreamInputAdapter":33,"./nodejsUtils":12,"./stream/GenericWorker":25,"./stream/StreamHelper":26,"./utf8":28,"./utils":29,"./zipObject":32}],14:[function(require,module,exports){
+},{"./compressedObject":2,"./defaults":5,"./generate":9,"./nodejs/NodejsStreamInputAdapter":12,"./nodejsUtils":14,"./stream/GenericWorker":28,"./stream/StreamHelper":29,"./utf8":31,"./utils":32,"./zipObject":35}],16:[function(require,module,exports){
+/*
+ * This file is used by module bundlers (browserify/webpack/etc) when
+ * including a stream implementation. We use "readable-stream" to get a
+ * consistent behavior between nodejs versions but bundlers often have a shim
+ * for "stream". Using this shim greatly improve the compatibility and greatly
+ * reduce the final size of the bundle (only one stream implementation, not
+ * two).
+ */
+module.exports = require("stream");
+
+},{"stream":undefined}],17:[function(require,module,exports){
 'use strict';
 var DataReader = require('./DataReader');
 var utils = require('../utils');
@@ -1610,7 +1785,7 @@ ArrayReader.prototype.readData = function(size) {
 };
 module.exports = ArrayReader;
 
-},{"../utils":29,"./DataReader":15}],15:[function(require,module,exports){
+},{"../utils":32,"./DataReader":18}],18:[function(require,module,exports){
 'use strict';
 var utils = require('../utils');
 
@@ -1630,7 +1805,7 @@ DataReader.prototype = {
         this.checkIndex(this.index + offset);
     },
     /**
-     * Check that the specifed index will not be too far.
+     * Check that the specified index will not be too far.
      * @param {string} newIndex the index to check.
      * @throws {Error} an Error if the index is out of bounds.
      */
@@ -1728,7 +1903,7 @@ DataReader.prototype = {
 };
 module.exports = DataReader;
 
-},{"../utils":29}],16:[function(require,module,exports){
+},{"../utils":32}],19:[function(require,module,exports){
 'use strict';
 var Uint8ArrayReader = require('./Uint8ArrayReader');
 var utils = require('../utils');
@@ -1749,7 +1924,7 @@ NodeBufferReader.prototype.readData = function(size) {
 };
 module.exports = NodeBufferReader;
 
-},{"../utils":29,"./Uint8ArrayReader":18}],17:[function(require,module,exports){
+},{"../utils":32,"./Uint8ArrayReader":21}],20:[function(require,module,exports){
 'use strict';
 var DataReader = require('./DataReader');
 var utils = require('../utils');
@@ -1789,7 +1964,7 @@ StringReader.prototype.readData = function(size) {
 };
 module.exports = StringReader;
 
-},{"../utils":29,"./DataReader":15}],18:[function(require,module,exports){
+},{"../utils":32,"./DataReader":18}],21:[function(require,module,exports){
 'use strict';
 var ArrayReader = require('./ArrayReader');
 var utils = require('../utils');
@@ -1813,7 +1988,7 @@ Uint8ArrayReader.prototype.readData = function(size) {
 };
 module.exports = Uint8ArrayReader;
 
-},{"../utils":29,"./ArrayReader":14}],19:[function(require,module,exports){
+},{"../utils":32,"./ArrayReader":17}],22:[function(require,module,exports){
 'use strict';
 
 var utils = require('../utils');
@@ -1843,9 +2018,7 @@ module.exports = function (data) {
     return new ArrayReader(utils.transformTo("array", data));
 };
 
-// vim: set shiftwidth=4 softtabstop=4:
-
-},{"../support":27,"../utils":29,"./ArrayReader":14,"./NodeBufferReader":16,"./StringReader":17,"./Uint8ArrayReader":18}],20:[function(require,module,exports){
+},{"../support":30,"../utils":32,"./ArrayReader":17,"./NodeBufferReader":19,"./StringReader":20,"./Uint8ArrayReader":21}],23:[function(require,module,exports){
 'use strict';
 exports.LOCAL_FILE_HEADER = "PK\x03\x04";
 exports.CENTRAL_FILE_HEADER = "PK\x01\x02";
@@ -1854,7 +2027,7 @@ exports.ZIP64_CENTRAL_DIRECTORY_LOCATOR = "PK\x06\x07";
 exports.ZIP64_CENTRAL_DIRECTORY_END = "PK\x06\x06";
 exports.DATA_DESCRIPTOR = "PK\x07\x08";
 
-},{}],21:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 'use strict';
 
 var GenericWorker = require('./GenericWorker');
@@ -1882,7 +2055,7 @@ ConvertWorker.prototype.processChunk = function (chunk) {
 };
 module.exports = ConvertWorker;
 
-},{"../utils":29,"./GenericWorker":25}],22:[function(require,module,exports){
+},{"../utils":32,"./GenericWorker":28}],25:[function(require,module,exports){
 'use strict';
 
 var GenericWorker = require('./GenericWorker');
@@ -1895,6 +2068,7 @@ var utils = require('../utils');
  */
 function Crc32Probe() {
     GenericWorker.call(this, "Crc32Probe");
+    this.withStreamInfo("crc32", 0);
 }
 utils.inherits(Crc32Probe, GenericWorker);
 
@@ -1907,7 +2081,7 @@ Crc32Probe.prototype.processChunk = function (chunk) {
 };
 module.exports = Crc32Probe;
 
-},{"../crc32":4,"../utils":29,"./GenericWorker":25}],23:[function(require,module,exports){
+},{"../crc32":4,"../utils":32,"./GenericWorker":28}],26:[function(require,module,exports){
 'use strict';
 
 var utils = require('../utils');
@@ -1938,7 +2112,7 @@ DataLengthProbe.prototype.processChunk = function (chunk) {
 module.exports = DataLengthProbe;
 
 
-},{"../utils":29,"./GenericWorker":25}],24:[function(require,module,exports){
+},{"../utils":32,"./GenericWorker":28}],27:[function(require,module,exports){
 'use strict';
 
 var utils = require('../utils');
@@ -2056,7 +2230,7 @@ DataWorker.prototype._tick = function() {
 
 module.exports = DataWorker;
 
-},{"../utils":29,"./GenericWorker":25}],25:[function(require,module,exports){
+},{"../utils":32,"./GenericWorker":28}],28:[function(require,module,exports){
 'use strict';
 
 /**
@@ -2321,16 +2495,22 @@ GenericWorker.prototype = {
 
 module.exports = GenericWorker;
 
-},{}],26:[function(require,module,exports){
-(function (Buffer){
+},{}],29:[function(require,module,exports){
 'use strict';
 
 var utils = require('../utils');
 var ConvertWorker = require('./ConvertWorker');
 var GenericWorker = require('./GenericWorker');
 var base64 = require('../base64');
-var NodejsStreamOutputAdapter = require('../nodejs/NodejsStreamOutputAdapter');
+var support = require("../support");
 var external = require("../external");
+
+var NodejsStreamOutputAdapter = null;
+if (support.nodestream) {
+    try {
+        NodejsStreamOutputAdapter = require('../nodejs/NodejsStreamOutputAdapter');
+    } catch(e) {}
+}
 
 /**
  * Apply the final transformation of the data. If the user wants a Blob for
@@ -2529,9 +2709,7 @@ StreamHelper.prototype = {
 
 module.exports = StreamHelper;
 
-}).call(this,(typeof Buffer !== "undefined" ? Buffer : undefined))
-},{"../base64":1,"../external":6,"../nodejs/NodejsStreamOutputAdapter":33,"../utils":29,"./ConvertWorker":21,"./GenericWorker":25}],27:[function(require,module,exports){
-(function (Buffer){
+},{"../base64":1,"../external":6,"../nodejs/NodejsStreamOutputAdapter":13,"../support":30,"../utils":32,"./ConvertWorker":24,"./GenericWorker":28}],30:[function(require,module,exports){
 'use strict';
 
 exports.base64 = true;
@@ -2554,7 +2732,7 @@ else {
     }
     catch (e) {
         try {
-            var Builder = window.BlobBuilder || window.WebKitBlobBuilder || window.MozBlobBuilder || window.MSBlobBuilder;
+            var Builder = self.BlobBuilder || self.WebKitBlobBuilder || self.MozBlobBuilder || self.MSBlobBuilder;
             var builder = new Builder();
             builder.append(buffer);
             exports.blob = builder.getBlob('application/zip').size === 0;
@@ -2565,10 +2743,13 @@ else {
     }
 }
 
-exports.nodestream = !!require("./nodejs/NodejsStreamOutputAdapter").prototype;
+try {
+    exports.nodestream = !!require('readable-stream').Readable;
+} catch(e) {
+    exports.nodestream = false;
+}
 
-}).call(this,(typeof Buffer !== "undefined" ? Buffer : undefined))
-},{"./nodejs/NodejsStreamOutputAdapter":33}],28:[function(require,module,exports){
+},{"readable-stream":16}],31:[function(require,module,exports){
 'use strict';
 
 var utils = require('./utils');
@@ -2739,7 +2920,7 @@ var buf2string = function (buf) {
  */
 exports.utf8encode = function utf8encode(str) {
     if (support.nodebuffer) {
-        return nodejsUtils.newBuffer(str, "utf-8");
+        return nodejsUtils.newBufferFrom(str, "utf-8");
     }
 
     return string2buf(str);
@@ -2845,7 +3026,7 @@ Utf8EncodeWorker.prototype.processChunk = function (chunk) {
 };
 exports.Utf8EncodeWorker = Utf8EncodeWorker;
 
-},{"./nodejsUtils":12,"./stream/GenericWorker":25,"./support":27,"./utils":29}],29:[function(require,module,exports){
+},{"./nodejsUtils":14,"./stream/GenericWorker":28,"./support":30,"./utils":32}],32:[function(require,module,exports){
 'use strict';
 
 var support = require('./support');
@@ -2877,6 +3058,11 @@ function string2binary(str) {
  * @param {String|ArrayBuffer} part the content to put in the blob. DO NOT use
  * an Uint8Array because the stock browser of android 4 won't accept it (it
  * will be silently converted to a string, "[object Uint8Array]").
+ *
+ * Use only ONE part to build the blob to avoid a memory leak in IE11 / Edge:
+ * when a large amount of Array is used to create the Blob, the amount of
+ * memory consumed is nearly 100 times the original data amount.
+ *
  * @param {String} type the mime type of the blob.
  * @return {Blob} the created blob.
  */
@@ -2893,7 +3079,7 @@ exports.newBlob = function(part, type) {
 
         try {
             // deprecated, browser only, old way
-            var Builder = window.BlobBuilder || window.WebKitBlobBuilder || window.MozBlobBuilder || window.MSBlobBuilder;
+            var Builder = self.BlobBuilder || self.WebKitBlobBuilder || self.MozBlobBuilder || self.MSBlobBuilder;
             var builder = new Builder();
             builder.append(part);
             return builder.getBlob(type);
@@ -2991,7 +3177,7 @@ var arrayToStringHelper = {
          */
         nodebuffer : (function () {
             try {
-                return support.nodebuffer && String.fromCharCode.apply(null, nodejsUtils.newBuffer(1)).length === 1;
+                return support.nodebuffer && String.fromCharCode.apply(null, nodejsUtils.allocBuffer(1)).length === 1;
             } catch (e) {
                 return false;
             }
@@ -3071,7 +3257,7 @@ transform["string"] = {
         return stringToArrayLike(input, new Uint8Array(input.length));
     },
     "nodebuffer": function(input) {
-        return stringToArrayLike(input, nodejsUtils.newBuffer(input.length));
+        return stringToArrayLike(input, nodejsUtils.allocBuffer(input.length));
     }
 };
 
@@ -3086,7 +3272,7 @@ transform["array"] = {
         return new Uint8Array(input);
     },
     "nodebuffer": function(input) {
-        return nodejsUtils.newBuffer(input);
+        return nodejsUtils.newBufferFrom(input);
     }
 };
 
@@ -3103,7 +3289,7 @@ transform["arraybuffer"] = {
         return new Uint8Array(input);
     },
     "nodebuffer": function(input) {
-        return nodejsUtils.newBuffer(new Uint8Array(input));
+        return nodejsUtils.newBufferFrom(new Uint8Array(input));
     }
 };
 
@@ -3118,7 +3304,7 @@ transform["uint8array"] = {
     },
     "uint8array": identity,
     "nodebuffer": function(input) {
-        return nodejsUtils.newBuffer(input);
+        return nodejsUtils.newBufferFrom(input);
     }
 };
 
@@ -3268,7 +3454,11 @@ exports.prepareContent = function(name, inputData, isBinary, isOptimizedBinarySt
 
     // if inputData is already a promise, this flatten it.
     var promise = external.Promise.resolve(inputData).then(function(data) {
-        if (support.blob && data instanceof Blob && typeof FileReader !== "undefined") {
+        
+        
+        var isBlob = support.blob && (data instanceof Blob || ['[object File]', '[object Blob]'].indexOf(Object.prototype.toString.call(data)) !== -1);
+
+        if (isBlob && typeof FileReader !== "undefined") {
             return new external.Promise(function (resolve, reject) {
                 var reader = new FileReader();
 
@@ -3290,7 +3480,8 @@ exports.prepareContent = function(name, inputData, isBinary, isOptimizedBinarySt
 
         if (!dataType) {
             return external.Promise.reject(
-                new Error("The data of '" + name + "' is in an unsupported format !")
+                new Error("Can't read the data of '" + name + "'. Is it " +
+                          "in a supported JavaScript type (String, Blob, ArrayBuffer, etc) ?")
             );
         }
         // special case : it's way easier to work with Uint8Array than with ArrayBuffer
@@ -3313,7 +3504,7 @@ exports.prepareContent = function(name, inputData, isBinary, isOptimizedBinarySt
     });
 };
 
-},{"./base64":1,"./external":6,"./nodejsUtils":12,"./support":27,"core-js/library/fn/set-immediate":34}],30:[function(require,module,exports){
+},{"./base64":1,"./external":6,"./nodejsUtils":14,"./support":30,"core-js/library/fn/set-immediate":36}],33:[function(require,module,exports){
 'use strict';
 var readerFor = require('./reader/readerFor');
 var utils = require('./utils');
@@ -3333,7 +3524,7 @@ function ZipEntries(loadOptions) {
 }
 ZipEntries.prototype = {
     /**
-     * Check that the reader is on the speficied signature.
+     * Check that the reader is on the specified signature.
      * @param {string} expectedSignature the expected signature.
      * @throws {Error} if it is an other signature.
      */
@@ -3341,7 +3532,7 @@ ZipEntries.prototype = {
         if (!this.reader.readAndCheckSignature(expectedSignature)) {
             this.reader.index -= 4;
             var signature = this.reader.readString(4);
-            throw new Error("Corrupted zip or bug : unexpected signature " + "(" + utils.pretty(signature) + ", expected " + utils.pretty(expectedSignature) + ")");
+            throw new Error("Corrupted zip or bug: unexpected signature " + "(" + utils.pretty(signature) + ", expected " + utils.pretty(expectedSignature) + ")");
         }
     },
     /**
@@ -3482,9 +3673,9 @@ ZipEntries.prototype = {
 
             if (isGarbage) {
                 throw new Error("Can't find end of central directory : is this a zip file ? " +
-                                "If it is, see http://stuk.github.io/jszip/documentation/howto/read_zip.html");
+                                "If it is, see https://stuk.github.io/jszip/documentation/howto/read_zip.html");
             } else {
-                throw new Error("Corrupted zip : can't find end of central directory");
+                throw new Error("Corrupted zip: can't find end of central directory");
             }
 
         }
@@ -3509,7 +3700,7 @@ ZipEntries.prototype = {
 
             /*
             Warning : the zip64 extension is supported, but ONLY if the 64bits integer read from
-            the zip file can fit into a 32bits integer. This cannot be solved : Javascript represents
+            the zip file can fit into a 32bits integer. This cannot be solved : JavaScript represents
             all numbers as 64-bit double precision IEEE 754 floating point numbers.
             So, we have 53bits for integers and bitwise operations treat everything as 32bits.
             see https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Operators/Bitwise_Operators
@@ -3519,7 +3710,7 @@ ZipEntries.prototype = {
             // should look for a zip64 EOCD locator
             offset = this.reader.lastIndexOfSignature(sig.ZIP64_CENTRAL_DIRECTORY_LOCATOR);
             if (offset < 0) {
-                throw new Error("Corrupted zip : can't find the ZIP64 end of central directory locator");
+                throw new Error("Corrupted zip: can't find the ZIP64 end of central directory locator");
             }
             this.reader.setIndex(offset);
             this.checkSignature(sig.ZIP64_CENTRAL_DIRECTORY_LOCATOR);
@@ -3530,7 +3721,7 @@ ZipEntries.prototype = {
                 // console.warn("ZIP64 end of central directory not where expected.");
                 this.relativeOffsetEndOfZip64CentralDir = this.reader.lastIndexOfSignature(sig.ZIP64_CENTRAL_DIRECTORY_END);
                 if (this.relativeOffsetEndOfZip64CentralDir < 0) {
-                    throw new Error("Corrupted zip : can't find the ZIP64 end of central directory");
+                    throw new Error("Corrupted zip: can't find the ZIP64 end of central directory");
                 }
             }
             this.reader.setIndex(this.relativeOffsetEndOfZip64CentralDir);
@@ -3577,7 +3768,7 @@ ZipEntries.prototype = {
 // }}} end of ZipEntries
 module.exports = ZipEntries;
 
-},{"./reader/readerFor":19,"./signature":20,"./support":27,"./utf8":28,"./utils":29,"./zipEntry":31}],31:[function(require,module,exports){
+},{"./reader/readerFor":22,"./signature":23,"./support":30,"./utf8":31,"./utils":32,"./zipEntry":34}],34:[function(require,module,exports){
 'use strict';
 var readerFor = require('./reader/readerFor');
 var utils = require('./utils');
@@ -3871,7 +4062,7 @@ ZipEntry.prototype = {
 };
 module.exports = ZipEntry;
 
-},{"./compressedObject":2,"./compressions":3,"./crc32":4,"./reader/readerFor":19,"./support":27,"./utf8":28,"./utils":29}],32:[function(require,module,exports){
+},{"./compressedObject":2,"./compressions":3,"./crc32":4,"./reader/readerFor":22,"./support":30,"./utf8":31,"./utils":32}],35:[function(require,module,exports){
 'use strict';
 
 var StreamHelper = require('./stream/StreamHelper');
@@ -3911,20 +4102,29 @@ ZipObject.prototype = {
      * @return StreamHelper the stream.
      */
     internalStream: function (type) {
-        var outputType = type.toLowerCase();
-        var askUnicodeString = outputType === "string" || outputType === "text";
-        if (outputType === "binarystring" || outputType === "text") {
-            outputType = "string";
-        }
-        var result = this._decompressWorker();
+        var result = null, outputType = "string";
+        try {
+            if (!type) {
+                throw new Error("No output type specified.");
+            }
+            outputType = type.toLowerCase();
+            var askUnicodeString = outputType === "string" || outputType === "text";
+            if (outputType === "binarystring" || outputType === "text") {
+                outputType = "string";
+            }
+            result = this._decompressWorker();
 
-        var isUnicodeString = !this._dataBinary;
+            var isUnicodeString = !this._dataBinary;
 
-        if (isUnicodeString && !askUnicodeString) {
-            result = result.pipe(new utf8.Utf8EncodeWorker());
-        }
-        if (!isUnicodeString && askUnicodeString) {
-            result = result.pipe(new utf8.Utf8DecodeWorker());
+            if (isUnicodeString && !askUnicodeString) {
+                result = result.pipe(new utf8.Utf8EncodeWorker());
+            }
+            if (!isUnicodeString && askUnicodeString) {
+                result = result.pipe(new utf8.Utf8DecodeWorker());
+            }
+        } catch (e) {
+            result = new GenericWorker("error");
+            result.error(e);
         }
 
         return new StreamHelper(result, outputType, "");
@@ -3997,32 +4197,30 @@ for(var i = 0; i < removedMethods.length; i++) {
 }
 module.exports = ZipObject;
 
-},{"./compressedObject":2,"./stream/DataWorker":24,"./stream/GenericWorker":25,"./stream/StreamHelper":26,"./utf8":28}],33:[function(require,module,exports){
-
-},{}],34:[function(require,module,exports){
+},{"./compressedObject":2,"./stream/DataWorker":27,"./stream/GenericWorker":28,"./stream/StreamHelper":29,"./utf8":31}],36:[function(require,module,exports){
 require('../modules/web.immediate');
 module.exports = require('../modules/_core').setImmediate;
-},{"../modules/_core":38,"../modules/web.immediate":54}],35:[function(require,module,exports){
+},{"../modules/_core":40,"../modules/web.immediate":56}],37:[function(require,module,exports){
 module.exports = function(it){
   if(typeof it != 'function')throw TypeError(it + ' is not a function!');
   return it;
 };
-},{}],36:[function(require,module,exports){
+},{}],38:[function(require,module,exports){
 var isObject = require('./_is-object');
 module.exports = function(it){
   if(!isObject(it))throw TypeError(it + ' is not an object!');
   return it;
 };
-},{"./_is-object":49}],37:[function(require,module,exports){
+},{"./_is-object":51}],39:[function(require,module,exports){
 var toString = {}.toString;
 
 module.exports = function(it){
   return toString.call(it).slice(8, -1);
 };
-},{}],38:[function(require,module,exports){
+},{}],40:[function(require,module,exports){
 var core = module.exports = {version: '2.3.0'};
 if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
-},{}],39:[function(require,module,exports){
+},{}],41:[function(require,module,exports){
 // optional / simple context binding
 var aFunction = require('./_a-function');
 module.exports = function(fn, that, length){
@@ -4043,12 +4241,12 @@ module.exports = function(fn, that, length){
     return fn.apply(that, arguments);
   };
 };
-},{"./_a-function":35}],40:[function(require,module,exports){
+},{"./_a-function":37}],42:[function(require,module,exports){
 // Thank's IE8 for his funny defineProperty
 module.exports = !require('./_fails')(function(){
   return Object.defineProperty({}, 'a', {get: function(){ return 7; }}).a != 7;
 });
-},{"./_fails":43}],41:[function(require,module,exports){
+},{"./_fails":45}],43:[function(require,module,exports){
 var isObject = require('./_is-object')
   , document = require('./_global').document
   // in old IE typeof document.createElement is 'object'
@@ -4056,7 +4254,7 @@ var isObject = require('./_is-object')
 module.exports = function(it){
   return is ? document.createElement(it) : {};
 };
-},{"./_global":44,"./_is-object":49}],42:[function(require,module,exports){
+},{"./_global":46,"./_is-object":51}],44:[function(require,module,exports){
 var global    = require('./_global')
   , core      = require('./_core')
   , ctx       = require('./_ctx')
@@ -4118,7 +4316,7 @@ $export.W = 32;  // wrap
 $export.U = 64;  // safe
 $export.R = 128; // real proto method for `library` 
 module.exports = $export;
-},{"./_core":38,"./_ctx":39,"./_global":44,"./_hide":45}],43:[function(require,module,exports){
+},{"./_core":40,"./_ctx":41,"./_global":46,"./_hide":47}],45:[function(require,module,exports){
 module.exports = function(exec){
   try {
     return !!exec();
@@ -4126,12 +4324,12 @@ module.exports = function(exec){
     return true;
   }
 };
-},{}],44:[function(require,module,exports){
+},{}],46:[function(require,module,exports){
 // https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
 var global = module.exports = typeof window != 'undefined' && window.Math == Math
   ? window : typeof self != 'undefined' && self.Math == Math ? self : Function('return this')();
 if(typeof __g == 'number')__g = global; // eslint-disable-line no-undef
-},{}],45:[function(require,module,exports){
+},{}],47:[function(require,module,exports){
 var dP         = require('./_object-dp')
   , createDesc = require('./_property-desc');
 module.exports = require('./_descriptors') ? function(object, key, value){
@@ -4140,13 +4338,13 @@ module.exports = require('./_descriptors') ? function(object, key, value){
   object[key] = value;
   return object;
 };
-},{"./_descriptors":40,"./_object-dp":50,"./_property-desc":51}],46:[function(require,module,exports){
+},{"./_descriptors":42,"./_object-dp":52,"./_property-desc":53}],48:[function(require,module,exports){
 module.exports = require('./_global').document && document.documentElement;
-},{"./_global":44}],47:[function(require,module,exports){
+},{"./_global":46}],49:[function(require,module,exports){
 module.exports = !require('./_descriptors') && !require('./_fails')(function(){
   return Object.defineProperty(require('./_dom-create')('div'), 'a', {get: function(){ return 7; }}).a != 7;
 });
-},{"./_descriptors":40,"./_dom-create":41,"./_fails":43}],48:[function(require,module,exports){
+},{"./_descriptors":42,"./_dom-create":43,"./_fails":45}],50:[function(require,module,exports){
 // fast apply, http://jsperf.lnkit.com/fast-apply/5
 module.exports = function(fn, args, that){
   var un = that === undefined;
@@ -4163,11 +4361,11 @@ module.exports = function(fn, args, that){
                       : fn.call(that, args[0], args[1], args[2], args[3]);
   } return              fn.apply(that, args);
 };
-},{}],49:[function(require,module,exports){
+},{}],51:[function(require,module,exports){
 module.exports = function(it){
   return typeof it === 'object' ? it !== null : typeof it === 'function';
 };
-},{}],50:[function(require,module,exports){
+},{}],52:[function(require,module,exports){
 var anObject       = require('./_an-object')
   , IE8_DOM_DEFINE = require('./_ie8-dom-define')
   , toPrimitive    = require('./_to-primitive')
@@ -4184,7 +4382,7 @@ exports.f = require('./_descriptors') ? Object.defineProperty : function defineP
   if('value' in Attributes)O[P] = Attributes.value;
   return O;
 };
-},{"./_an-object":36,"./_descriptors":40,"./_ie8-dom-define":47,"./_to-primitive":53}],51:[function(require,module,exports){
+},{"./_an-object":38,"./_descriptors":42,"./_ie8-dom-define":49,"./_to-primitive":55}],53:[function(require,module,exports){
 module.exports = function(bitmap, value){
   return {
     enumerable  : !(bitmap & 1),
@@ -4193,7 +4391,7 @@ module.exports = function(bitmap, value){
     value       : value
   };
 };
-},{}],52:[function(require,module,exports){
+},{}],54:[function(require,module,exports){
 var ctx                = require('./_ctx')
   , invoke             = require('./_invoke')
   , html               = require('./_html')
@@ -4269,7 +4467,7 @@ module.exports = {
   set:   setTask,
   clear: clearTask
 };
-},{"./_cof":37,"./_ctx":39,"./_dom-create":41,"./_global":44,"./_html":46,"./_invoke":48}],53:[function(require,module,exports){
+},{"./_cof":39,"./_ctx":41,"./_dom-create":43,"./_global":46,"./_html":48,"./_invoke":50}],55:[function(require,module,exports){
 // 7.1.1 ToPrimitive(input [, PreferredType])
 var isObject = require('./_is-object');
 // instead of the ES6 spec version, we didn't implement @@toPrimitive case
@@ -4282,14 +4480,14 @@ module.exports = function(it, S){
   if(!S && typeof (fn = it.toString) == 'function' && !isObject(val = fn.call(it)))return val;
   throw TypeError("Can't convert object to primitive value");
 };
-},{"./_is-object":49}],54:[function(require,module,exports){
+},{"./_is-object":51}],56:[function(require,module,exports){
 var $export = require('./_export')
   , $task   = require('./_task');
 $export($export.G + $export.B, {
   setImmediate:   $task.set,
   clearImmediate: $task.clear
 });
-},{"./_export":42,"./_task":52}],55:[function(require,module,exports){
+},{"./_export":44,"./_task":54}],57:[function(require,module,exports){
 (function (global){
 'use strict';
 var Mutation = global.MutationObserver || global.WebKitMutationObserver;
@@ -4362,7 +4560,7 @@ function immediate(task) {
 }
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],56:[function(require,module,exports){
+},{}],58:[function(require,module,exports){
 'use strict';
 var immediate = require('immediate');
 
@@ -4481,7 +4679,7 @@ handlers.reject = function (self, error) {
 function getThen(obj) {
   // Make sure we only access the accessor once as required by the spec
   var then = obj && obj.then;
-  if (obj && typeof obj === 'object' && typeof then === 'function') {
+  if (obj && (typeof obj === 'object' || typeof obj === 'function') && typeof then === 'function') {
     return function appyThen() {
       then.apply(obj, arguments);
     };
@@ -4617,7 +4815,7 @@ function race(iterable) {
   }
 }
 
-},{"immediate":55}],57:[function(require,module,exports){
+},{"immediate":57}],59:[function(require,module,exports){
 // Top level file is just a mixin of submodules & constants
 'use strict';
 
@@ -4633,7 +4831,7 @@ assign(pako, deflate, inflate, constants);
 
 module.exports = pako;
 
-},{"./lib/deflate":58,"./lib/inflate":59,"./lib/utils/common":60,"./lib/zlib/constants":63}],58:[function(require,module,exports){
+},{"./lib/deflate":60,"./lib/inflate":61,"./lib/utils/common":62,"./lib/zlib/constants":65}],60:[function(require,module,exports){
 'use strict';
 
 
@@ -4994,7 +5192,7 @@ function deflate(input, options) {
   deflator.push(input, true);
 
   // That will never happens, if you don't cheat with options :)
-  if (deflator.err) { throw deflator.msg; }
+  if (deflator.err) { throw deflator.msg || msg[deflator.err]; }
 
   return deflator.result;
 }
@@ -5035,7 +5233,7 @@ exports.deflate = deflate;
 exports.deflateRaw = deflateRaw;
 exports.gzip = gzip;
 
-},{"./utils/common":60,"./utils/strings":61,"./zlib/deflate":65,"./zlib/messages":70,"./zlib/zstream":72}],59:[function(require,module,exports){
+},{"./utils/common":62,"./utils/strings":63,"./zlib/deflate":67,"./zlib/messages":72,"./zlib/zstream":74}],61:[function(require,module,exports){
 'use strict';
 
 
@@ -5419,7 +5617,7 @@ function inflate(input, options) {
   inflator.push(input, true);
 
   // That will never happens, if you don't cheat with options :)
-  if (inflator.err) { throw inflator.msg; }
+  if (inflator.err) { throw inflator.msg || msg[inflator.err]; }
 
   return inflator.result;
 }
@@ -5455,7 +5653,7 @@ exports.inflate = inflate;
 exports.inflateRaw = inflateRaw;
 exports.ungzip  = inflate;
 
-},{"./utils/common":60,"./utils/strings":61,"./zlib/constants":63,"./zlib/gzheader":66,"./zlib/inflate":68,"./zlib/messages":70,"./zlib/zstream":72}],60:[function(require,module,exports){
+},{"./utils/common":62,"./utils/strings":63,"./zlib/constants":65,"./zlib/gzheader":68,"./zlib/inflate":70,"./zlib/messages":72,"./zlib/zstream":74}],62:[function(require,module,exports){
 'use strict';
 
 
@@ -5559,7 +5757,7 @@ exports.setTyped = function (on) {
 
 exports.setTyped(TYPED_OK);
 
-},{}],61:[function(require,module,exports){
+},{}],63:[function(require,module,exports){
 // String encode/decode helpers
 'use strict';
 
@@ -5746,12 +5944,31 @@ exports.utf8border = function (buf, max) {
   return (pos + _utf8len[buf[pos]] > max) ? pos : max;
 };
 
-},{"./common":60}],62:[function(require,module,exports){
+},{"./common":62}],64:[function(require,module,exports){
 'use strict';
 
 // Note: adler32 takes 12% for level 0 and 2% for level 6.
 // It doesn't worth to make additional optimizationa as in original.
 // Small size is preferable.
+
+// (C) 1995-2013 Jean-loup Gailly and Mark Adler
+// (C) 2014-2017 Vitaly Puzrin and Andrey Tupitsin
+//
+// This software is provided 'as-is', without any express or implied
+// warranty. In no event will the authors be held liable for any damages
+// arising from the use of this software.
+//
+// Permission is granted to anyone to use this software for any purpose,
+// including commercial applications, and to alter it and redistribute it
+// freely, subject to the following restrictions:
+//
+// 1. The origin of this software must not be misrepresented; you must not
+//   claim that you wrote the original software. If you use this software
+//   in a product, an acknowledgment in the product documentation would be
+//   appreciated but is not required.
+// 2. Altered source versions must be plainly marked as such, and must not be
+//   misrepresented as being the original software.
+// 3. This notice may not be removed or altered from any source distribution.
 
 function adler32(adler, buf, len, pos) {
   var s1 = (adler & 0xffff) |0,
@@ -5780,9 +5997,27 @@ function adler32(adler, buf, len, pos) {
 
 module.exports = adler32;
 
-},{}],63:[function(require,module,exports){
+},{}],65:[function(require,module,exports){
 'use strict';
 
+// (C) 1995-2013 Jean-loup Gailly and Mark Adler
+// (C) 2014-2017 Vitaly Puzrin and Andrey Tupitsin
+//
+// This software is provided 'as-is', without any express or implied
+// warranty. In no event will the authors be held liable for any damages
+// arising from the use of this software.
+//
+// Permission is granted to anyone to use this software for any purpose,
+// including commercial applications, and to alter it and redistribute it
+// freely, subject to the following restrictions:
+//
+// 1. The origin of this software must not be misrepresented; you must not
+//   claim that you wrote the original software. If you use this software
+//   in a product, an acknowledgment in the product documentation would be
+//   appreciated but is not required.
+// 2. Altered source versions must be plainly marked as such, and must not be
+//   misrepresented as being the original software.
+// 3. This notice may not be removed or altered from any source distribution.
 
 module.exports = {
 
@@ -5832,13 +6067,31 @@ module.exports = {
   //Z_NULL:                 null // Use -1 or null inline, depending on var type
 };
 
-},{}],64:[function(require,module,exports){
+},{}],66:[function(require,module,exports){
 'use strict';
 
 // Note: we can't get significant speed boost here.
 // So write code to minimize size - no pregenerated tables
 // and array tools dependencies.
 
+// (C) 1995-2013 Jean-loup Gailly and Mark Adler
+// (C) 2014-2017 Vitaly Puzrin and Andrey Tupitsin
+//
+// This software is provided 'as-is', without any express or implied
+// warranty. In no event will the authors be held liable for any damages
+// arising from the use of this software.
+//
+// Permission is granted to anyone to use this software for any purpose,
+// including commercial applications, and to alter it and redistribute it
+// freely, subject to the following restrictions:
+//
+// 1. The origin of this software must not be misrepresented; you must not
+//   claim that you wrote the original software. If you use this software
+//   in a product, an acknowledgment in the product documentation would be
+//   appreciated but is not required.
+// 2. Altered source versions must be plainly marked as such, and must not be
+//   misrepresented as being the original software.
+// 3. This notice may not be removed or altered from any source distribution.
 
 // Use ordinary array, since untyped makes no boost here
 function makeTable() {
@@ -5875,8 +6128,27 @@ function crc32(crc, buf, len, pos) {
 
 module.exports = crc32;
 
-},{}],65:[function(require,module,exports){
+},{}],67:[function(require,module,exports){
 'use strict';
+
+// (C) 1995-2013 Jean-loup Gailly and Mark Adler
+// (C) 2014-2017 Vitaly Puzrin and Andrey Tupitsin
+//
+// This software is provided 'as-is', without any express or implied
+// warranty. In no event will the authors be held liable for any damages
+// arising from the use of this software.
+//
+// Permission is granted to anyone to use this software for any purpose,
+// including commercial applications, and to alter it and redistribute it
+// freely, subject to the following restrictions:
+//
+// 1. The origin of this software must not be misrepresented; you must not
+//   claim that you wrote the original software. If you use this software
+//   in a product, an acknowledgment in the product documentation would be
+//   appreciated but is not required.
+// 2. Altered source versions must be plainly marked as such, and must not be
+//   misrepresented as being the original software.
+// 3. This notice may not be removed or altered from any source distribution.
 
 var utils   = require('../utils/common');
 var trees   = require('./trees');
@@ -7732,9 +8004,27 @@ exports.deflatePrime = deflatePrime;
 exports.deflateTune = deflateTune;
 */
 
-},{"../utils/common":60,"./adler32":62,"./crc32":64,"./messages":70,"./trees":71}],66:[function(require,module,exports){
+},{"../utils/common":62,"./adler32":64,"./crc32":66,"./messages":72,"./trees":73}],68:[function(require,module,exports){
 'use strict';
 
+// (C) 1995-2013 Jean-loup Gailly and Mark Adler
+// (C) 2014-2017 Vitaly Puzrin and Andrey Tupitsin
+//
+// This software is provided 'as-is', without any express or implied
+// warranty. In no event will the authors be held liable for any damages
+// arising from the use of this software.
+//
+// Permission is granted to anyone to use this software for any purpose,
+// including commercial applications, and to alter it and redistribute it
+// freely, subject to the following restrictions:
+//
+// 1. The origin of this software must not be misrepresented; you must not
+//   claim that you wrote the original software. If you use this software
+//   in a product, an acknowledgment in the product documentation would be
+//   appreciated but is not required.
+// 2. Altered source versions must be plainly marked as such, and must not be
+//   misrepresented as being the original software.
+// 3. This notice may not be removed or altered from any source distribution.
 
 function GZheader() {
   /* true if compressed data believed to be text */
@@ -7774,8 +8064,27 @@ function GZheader() {
 
 module.exports = GZheader;
 
-},{}],67:[function(require,module,exports){
+},{}],69:[function(require,module,exports){
 'use strict';
+
+// (C) 1995-2013 Jean-loup Gailly and Mark Adler
+// (C) 2014-2017 Vitaly Puzrin and Andrey Tupitsin
+//
+// This software is provided 'as-is', without any express or implied
+// warranty. In no event will the authors be held liable for any damages
+// arising from the use of this software.
+//
+// Permission is granted to anyone to use this software for any purpose,
+// including commercial applications, and to alter it and redistribute it
+// freely, subject to the following restrictions:
+//
+// 1. The origin of this software must not be misrepresented; you must not
+//   claim that you wrote the original software. If you use this software
+//   in a product, an acknowledgment in the product documentation would be
+//   appreciated but is not required.
+// 2. Altered source versions must be plainly marked as such, and must not be
+//   misrepresented as being the original software.
+// 3. This notice may not be removed or altered from any source distribution.
 
 // See state defs from inflate.js
 var BAD = 30;       /* got a data error -- remain here until reset */
@@ -8102,9 +8411,27 @@ module.exports = function inflate_fast(strm, start) {
   return;
 };
 
-},{}],68:[function(require,module,exports){
+},{}],70:[function(require,module,exports){
 'use strict';
 
+// (C) 1995-2013 Jean-loup Gailly and Mark Adler
+// (C) 2014-2017 Vitaly Puzrin and Andrey Tupitsin
+//
+// This software is provided 'as-is', without any express or implied
+// warranty. In no event will the authors be held liable for any damages
+// arising from the use of this software.
+//
+// Permission is granted to anyone to use this software for any purpose,
+// including commercial applications, and to alter it and redistribute it
+// freely, subject to the following restrictions:
+//
+// 1. The origin of this software must not be misrepresented; you must not
+//   claim that you wrote the original software. If you use this software
+//   in a product, an acknowledgment in the product documentation would be
+//   appreciated but is not required.
+// 2. Altered source versions must be plainly marked as such, and must not be
+//   misrepresented as being the original software.
+// 3. This notice may not be removed or altered from any source distribution.
 
 var utils         = require('../utils/common');
 var adler32       = require('./adler32');
@@ -9642,9 +9969,27 @@ exports.inflateSyncPoint = inflateSyncPoint;
 exports.inflateUndermine = inflateUndermine;
 */
 
-},{"../utils/common":60,"./adler32":62,"./crc32":64,"./inffast":67,"./inftrees":69}],69:[function(require,module,exports){
+},{"../utils/common":62,"./adler32":64,"./crc32":66,"./inffast":69,"./inftrees":71}],71:[function(require,module,exports){
 'use strict';
 
+// (C) 1995-2013 Jean-loup Gailly and Mark Adler
+// (C) 2014-2017 Vitaly Puzrin and Andrey Tupitsin
+//
+// This software is provided 'as-is', without any express or implied
+// warranty. In no event will the authors be held liable for any damages
+// arising from the use of this software.
+//
+// Permission is granted to anyone to use this software for any purpose,
+// including commercial applications, and to alter it and redistribute it
+// freely, subject to the following restrictions:
+//
+// 1. The origin of this software must not be misrepresented; you must not
+//   claim that you wrote the original software. If you use this software
+//   in a product, an acknowledgment in the product documentation would be
+//   appreciated but is not required.
+// 2. Altered source versions must be plainly marked as such, and must not be
+//   misrepresented as being the original software.
+// 3. This notice may not be removed or altered from any source distribution.
 
 var utils = require('../utils/common');
 
@@ -9872,10 +10217,8 @@ module.exports = function inflate_table(type, lens, lens_index, codes, table, ta
     return 1;
   }
 
-  var i = 0;
   /* process all codes and make table entries */
   for (;;) {
-    i++;
     /* create table entry */
     here_bits = len - drop;
     if (work[sym] < end) {
@@ -9971,8 +10314,27 @@ module.exports = function inflate_table(type, lens, lens_index, codes, table, ta
   return 0;
 };
 
-},{"../utils/common":60}],70:[function(require,module,exports){
+},{"../utils/common":62}],72:[function(require,module,exports){
 'use strict';
+
+// (C) 1995-2013 Jean-loup Gailly and Mark Adler
+// (C) 2014-2017 Vitaly Puzrin and Andrey Tupitsin
+//
+// This software is provided 'as-is', without any express or implied
+// warranty. In no event will the authors be held liable for any damages
+// arising from the use of this software.
+//
+// Permission is granted to anyone to use this software for any purpose,
+// including commercial applications, and to alter it and redistribute it
+// freely, subject to the following restrictions:
+//
+// 1. The origin of this software must not be misrepresented; you must not
+//   claim that you wrote the original software. If you use this software
+//   in a product, an acknowledgment in the product documentation would be
+//   appreciated but is not required.
+// 2. Altered source versions must be plainly marked as such, and must not be
+//   misrepresented as being the original software.
+// 3. This notice may not be removed or altered from any source distribution.
 
 module.exports = {
   2:      'need dictionary',     /* Z_NEED_DICT       2  */
@@ -9986,9 +10348,27 @@ module.exports = {
   '-6':   'incompatible version' /* Z_VERSION_ERROR (-6) */
 };
 
-},{}],71:[function(require,module,exports){
+},{}],73:[function(require,module,exports){
 'use strict';
 
+// (C) 1995-2013 Jean-loup Gailly and Mark Adler
+// (C) 2014-2017 Vitaly Puzrin and Andrey Tupitsin
+//
+// This software is provided 'as-is', without any express or implied
+// warranty. In no event will the authors be held liable for any damages
+// arising from the use of this software.
+//
+// Permission is granted to anyone to use this software for any purpose,
+// including commercial applications, and to alter it and redistribute it
+// freely, subject to the following restrictions:
+//
+// 1. The origin of this software must not be misrepresented; you must not
+//   claim that you wrote the original software. If you use this software
+//   in a product, an acknowledgment in the product documentation would be
+//   appreciated but is not required.
+// 2. Altered source versions must be plainly marked as such, and must not be
+//   misrepresented as being the original software.
+// 3. This notice may not be removed or altered from any source distribution.
 
 var utils = require('../utils/common');
 
@@ -11190,9 +11570,27 @@ exports._tr_flush_block  = _tr_flush_block;
 exports._tr_tally = _tr_tally;
 exports._tr_align = _tr_align;
 
-},{"../utils/common":60}],72:[function(require,module,exports){
+},{"../utils/common":62}],74:[function(require,module,exports){
 'use strict';
 
+// (C) 1995-2013 Jean-loup Gailly and Mark Adler
+// (C) 2014-2017 Vitaly Puzrin and Andrey Tupitsin
+//
+// This software is provided 'as-is', without any express or implied
+// warranty. In no event will the authors be held liable for any damages
+// arising from the use of this software.
+//
+// Permission is granted to anyone to use this software for any purpose,
+// including commercial applications, and to alter it and redistribute it
+// freely, subject to the following restrictions:
+//
+// 1. The origin of this software must not be misrepresented; you must not
+//   claim that you wrote the original software. If you use this software
+//   in a product, an acknowledgment in the product documentation would be
+//   appreciated but is not required.
+// 2. Altered source versions must be plainly marked as such, and must not be
+//   misrepresented as being the original software.
+// 3. This notice may not be removed or altered from any source distribution.
 
 function ZStream() {
   /* next input byte */

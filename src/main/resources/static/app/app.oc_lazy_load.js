@@ -394,12 +394,13 @@ altairApp
                     {
                         name: 'lazy_KendoUI',
                         files: [
-                             "kendoui/styles/kendo.common-material.min.css",
-							"kendoui/styles/kendo.material.min.css",
-							"kendoui/styles/kendo.dataviz.min.css",
-							"kendoui/styles/kendo.dataviz.material.min.css",
-							"kendoui/js/kendo.all.min.js",
-							"kendoui/js/messages/localeMN.js"
+                            'kendoui/js/kendo.all.min.js',
+                            'kendoui/js/jszip.min.js',
+                            'kendoui/js/pako_deflate.min.js',
+                            'kendoui/js/messages/localeMN.js',
+                            'kendoui/styles/kendo.common-bootstrap.min.css',
+                            'kendoui/styles/kendo.bootstrap.min.css',
+                            'kendoui/styles/kendo.bootstrap.mobile.min.css'
                         ],
                         insertBefore: '#main_stylesheet',
                         serie: true

@@ -1,77 +1,62 @@
-define(function(require) {
+/*
+* Licensed to the Apache Software Foundation (ASF) under one
+* or more contributor license agreements.  See the NOTICE file
+* distributed with this work for additional information
+* regarding copyright ownership.  The ASF licenses this file
+* to you under the Apache License, Version 2.0 (the
+* "License"); you may not use this file except in compliance
+* with the License.  You may obtain a copy of the License at
+*
+*   http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing,
+* software distributed under the License is distributed on an
+* "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+* KIND, either express or implied.  See the License for the
+* specific language governing permissions and limitations
+* under the License.
+*/
 
-    'use strict';
+import * as zrUtil from 'zrender/src/core/util';
 
-    var zrUtil = require('zrender/core/util');
+var coordinateSystemCreators = {};
 
-    /**
-     * Interface of Coordinate System Class
-     *
-     * create:
-     *     @param {module:echarts/model/Global} ecModel
-     *     @param {module:echarts/ExtensionAPI} api
-     *     @return {Object} coordinate system instance
-     *
-     * update:
-     *     @param {module:echarts/model/Global} ecModel
-     *     @param {module:echarts/ExtensionAPI} api
-     *
-     * convertToPixel:
-     * convertFromPixel:
-     *     These two methods is also responsible for determine whether this
-     *     coodinate system is applicable to the given `finder`.
-     *     Each coordinate system will be tried, util one returns none
-     *     null/undefined value.
-     *     @param {module:echarts/model/Global} ecModel
-     *     @param {Object} finder
-     *     @param {Array|number} value
-     *     @return {Array|number} convert result.
-     *
-     * containPoint:
-     *     @param {Array.<number>} point In pixel coordinate system.
-     *     @return {boolean}
-     */
+function CoordinateSystemManager() {
 
-    var coordinateSystemCreators = {};
+    this._coordinateSystems = [];
+}
 
-    function CoordinateSystemManager() {
+CoordinateSystemManager.prototype = {
 
-        this._coordinateSystems = [];
+    constructor: CoordinateSystemManager,
+
+    create: function (ecModel, api) {
+        var coordinateSystems = [];
+        zrUtil.each(coordinateSystemCreators, function (creater, type) {
+            var list = creater.create(ecModel, api);
+            coordinateSystems = coordinateSystems.concat(list || []);
+        });
+
+        this._coordinateSystems = coordinateSystems;
+    },
+
+    update: function (ecModel, api) {
+        zrUtil.each(this._coordinateSystems, function (coordSys) {
+            coordSys.update && coordSys.update(ecModel, api);
+        });
+    },
+
+    getCoordinateSystems: function () {
+        return this._coordinateSystems.slice();
     }
+};
 
-    CoordinateSystemManager.prototype = {
+CoordinateSystemManager.register = function (type, coordinateSystemCreator) {
+    coordinateSystemCreators[type] = coordinateSystemCreator;
+};
 
-        constructor: CoordinateSystemManager,
+CoordinateSystemManager.get = function (type) {
+    return coordinateSystemCreators[type];
+};
 
-        create: function (ecModel, api) {
-            var coordinateSystems = [];
-            zrUtil.each(coordinateSystemCreators, function (creater, type) {
-                var list = creater.create(ecModel, api);
-                coordinateSystems = coordinateSystems.concat(list || []);
-            });
-
-            this._coordinateSystems = coordinateSystems;
-        },
-
-        update: function (ecModel, api) {
-            zrUtil.each(this._coordinateSystems, function (coordSys) {
-                // FIXME MUST have
-                coordSys.update && coordSys.update(ecModel, api);
-            });
-        },
-
-        getCoordinateSystems: function () {
-            return this._coordinateSystems.slice();
-        }
-    };
-
-    CoordinateSystemManager.register = function (type, coordinateSystemCreator) {
-        coordinateSystemCreators[type] = coordinateSystemCreator;
-    };
-
-    CoordinateSystemManager.get = function (type) {
-        return coordinateSystemCreators[type];
-    };
-
-    return CoordinateSystemManager;
-});
+export default CoordinateSystemManager;

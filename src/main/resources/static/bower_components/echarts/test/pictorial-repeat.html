@@ -2,18 +2,16 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <script src="esl.js"></script>
-        <script src="config.js"></script>
+        <script src="lib/esl.js"></script>
+        <script src="lib/config.js"></script>
         <script src="lib/jquery.min.js"></script>
         <script src="lib/facePrint.js"></script>
         <script src="data/symbols.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="stylesheet" href="reset.css">
+        <link rel="stylesheet" href="lib/reset.css">
     </head>
     <body>
         <style>
-            body {
-            }
             .chart {
                 position: relative;
                 height: 500px;
@@ -39,26 +37,26 @@
         <div class="chart" id="symbolSize"></div>
         <h2>horizontal | clip | positive | rotate</h2>
         <div class="chart" id="main2"></div>
-        <h2>horizontal | clip | negative | no animation</h2>
+        <h2>horizontal | clip | negative and positive symbolBoundingData | no animation</h2>
         <div class="chart" id="main3"></div>
         <h2>negative symbolMargin | symbolPosition (check whether overflow)</h2>
         <div class="chart" id="main4"></div>
-        <h2>repeat strategy | dynamic data</h2>
+        <h2>repeat strategy | dynamic data | axisPointer.type 'none' label show</h2>
         <div class="chart" id="dynamic-data"></div>
 
         <script>
 
             function makeChart(id, option, cb) {
                 require([
-                    'echarts',
-                    'echarts/chart/pictorialBar',
-                    'echarts/chart/bar',
-                    'echarts/chart/scatter',
-                    'echarts/component/grid',
-                    'echarts/component/markLine',
-                    'echarts/component/legend',
-                    'echarts/component/tooltip',
-                    'echarts/component/dataZoom'
+                    'echarts'
+                    // 'echarts/chart/pictorialBar',
+                    // 'echarts/chart/bar',
+                    // 'echarts/chart/scatter',
+                    // 'echarts/component/grid',
+                    // 'echarts/component/markLine',
+                    // 'echarts/component/legend',
+                    // 'echarts/component/tooltip',
+                    // 'echarts/component/dataZoom'
                 ], function (echarts) {
                     var main = document.getElementById(id);
                     if (main) {
@@ -115,6 +113,7 @@
                 series: [{
                     name: 'data',
                     type: 'pictorialBar',
+                    cursor: 'move',
                     label: {
                         normal: {
                             show: true,
@@ -477,10 +476,36 @@
                     silent: true,
                     symbolRepeat: 'fixed',
                     symbolClip: false,
+                    symbolBoundingData: 40,
+                    symbolRotate: 30,
+                    z: -1,
+                    data: [-12, -60, 34, '-', 23, -2, 0, -25]
+                }, {
+                    name: 'bg',
+                    type: 'pictorialBar',
+                    symbol: pathSymbols.pumpkin,
+                    itemStyle: {
+                        normal: {
+                            color: '#ddd'
+                        }
+                    },
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'outside',
+                            textStyle: {
+                                color: '#c23531',
+                                fontSize: 20
+                            }
+                        }
+                    },
+                    silent: true,
+                    symbolRepeat: 'fixed',
+                    symbolClip: false,
                     symbolBoundingData: -60,
                     symbolRotate: 30,
                     z: -1,
-                    data: [-12, -60, -54, '-', -23, -2, 0, -25]
+                    data: [-12, -60, 34, '-', 23, -2, 0, -25]
                 }, {
                     name: 'data',
                     type: 'pictorialBar',
@@ -493,18 +518,18 @@
                     symbolRepeat: true,
                     symbolClip: true,
                     symbolRotate: 30,
-                    symbolBoundingData: -60,
-                    data: [-12, -60, -54, '-', -23, -2, 0, -25]
+                    symbolBoundingData: [-60, 40],
+                    data: [-12, -60, 34, '-', 23, -2, 0, -25]
                 }, {
                     name: 'original bar',
                     type: 'bar',
                     color: ['rgba(0,0,0,0.5)'],
-                    data: [-12, -60, -54, '-', -23, -2, 0, -25]
+                    data: [-12, -60, 34, '-', 23, -2, 0, -25]
                 }, {
                     name: 'original bg',
                     type: 'bar',
                     color: ['rgba(0,0,0,0.5)'],
-                    data: [-60, -60, -60, '-', -60, -60, -60, -60]
+                    data: [-60, -60, 40, '-', 40, -60, -60, -60]
                 }]
             });
         </script>
@@ -686,7 +711,13 @@
 
             makeChart('dynamic-data', {
                 backgroundColor: '#0f375f',
-                tooltip: {},
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'none',
+                        label: {show: true}
+                    }
+                },
                 legend: {
                     data: ['all'],
                     textStyle: {color: '#ddd'}

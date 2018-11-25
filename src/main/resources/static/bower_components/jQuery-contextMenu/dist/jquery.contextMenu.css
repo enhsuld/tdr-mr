@@ -2,25 +2,60 @@
 /*!
  * jQuery contextMenu - Plugin for simple contextMenu handling
  *
- * Version: v2.2.4
+ * Version: v2.6.4
  *
  * Authors: Björn Brala (SWIS.nl), Rodney Rehm, Addy Osmani (patches for FF)
  * Web: http://swisnl.github.io/jQuery-contextMenu/
  *
- * Copyright (c) 2011-2016 SWIS BV and contributors
+ * Copyright (c) 2011-2018 SWIS BV and contributors
  *
  * Licensed under
  *   MIT License http://www.opensource.org/licenses/mit-license
  *
- * Date: 2016-08-26T13:44:56.092Z
+ * Date: 2018-03-16T11:13:46.072Z
  */
+@-webkit-keyframes cm-spin {
+  0% {
+    -webkit-transform: translateY(-50%) rotate(0deg);
+            transform: translateY(-50%) rotate(0deg);
+  }
+  100% {
+    -webkit-transform: translateY(-50%) rotate(359deg);
+            transform: translateY(-50%) rotate(359deg);
+  }
+}
+@-o-keyframes cm-spin {
+  0% {
+    -webkit-transform: translateY(-50%) rotate(0deg);
+         -o-transform: translateY(-50%) rotate(0deg);
+            transform: translateY(-50%) rotate(0deg);
+  }
+  100% {
+    -webkit-transform: translateY(-50%) rotate(359deg);
+         -o-transform: translateY(-50%) rotate(359deg);
+            transform: translateY(-50%) rotate(359deg);
+  }
+}
+@keyframes cm-spin {
+  0% {
+    -webkit-transform: translateY(-50%) rotate(0deg);
+         -o-transform: translateY(-50%) rotate(0deg);
+            transform: translateY(-50%) rotate(0deg);
+  }
+  100% {
+    -webkit-transform: translateY(-50%) rotate(359deg);
+         -o-transform: translateY(-50%) rotate(359deg);
+            transform: translateY(-50%) rotate(359deg);
+  }
+}
+
 @font-face {
   font-family: "context-menu-icons";
   font-style: normal; 
   font-weight: normal;
 
-  src: url("font/context-menu-icons.eot?2cl8a");
-  src: url("font/context-menu-icons.eot?2cl8a#iefix") format("embedded-opentype"), url("font/context-menu-icons.woff2?2cl8a") format("woff2"), url("font/context-menu-icons.woff?2cl8a") format("woff"), url("font/context-menu-icons.ttf?2cl8a") format("truetype");
+  src: url("font/context-menu-icons.eot?1s39y");
+  src: url("font/context-menu-icons.eot?1s39y#iefix") format("embedded-opentype"), url("font/context-menu-icons.woff2?1s39y") format("woff2"), url("font/context-menu-icons.woff?1s39y") format("woff"), url("font/context-menu-icons.ttf?1s39y") format("truetype");
 }
 
 .context-menu-icon-add:before {
@@ -43,12 +78,16 @@
   content: "\EA05";
 }
 
-.context-menu-icon-paste:before {
+.context-menu-icon-loading:before {
   content: "\EA06";
 }
 
-.context-menu-icon-quit:before {
+.context-menu-icon-paste:before {
   content: "\EA07";
+}
+
+.context-menu-icon-quit:before {
+  content: "\EA08";
 }
 
 .context-menu-icon::before {
@@ -80,8 +119,16 @@
   color: #bbb;
 }
 
+.context-menu-icon.context-menu-icon-loading:before {
+  -webkit-animation: cm-spin 2s infinite;
+       -o-animation: cm-spin 2s infinite;
+          animation: cm-spin 2s infinite;
+}
+
 .context-menu-icon.context-menu-icon--fa {
   display: list-item;
+  font-family: inherit;
+  line-height: inherit;
 }
 .context-menu-icon.context-menu-icon--fa::before {
   position: absolute;
@@ -129,6 +176,9 @@
 
 .context-menu-item {
   position: relative;
+  -webkit-box-sizing: content-box;
+     -moz-box-sizing: content-box;
+          box-sizing: content-box;
   padding: .2em 2em;
   color: #2f2f2f;
   -webkit-user-select: none;
@@ -165,6 +215,7 @@
 }
 
 .context-menu-input.context-menu-hover {
+  color: #2f2f2f; 
   cursor: default;
 }
 

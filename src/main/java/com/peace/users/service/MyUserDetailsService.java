@@ -22,8 +22,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.filter.CharacterEncodingFilter;
 
 import com.peace.users.dao.UserDao;
-import com.peace.users.model.PUserAuth;
-import com.peace.users.model.UserAuthority;
 import com.peace.users.model.mram.LnkRoleAuth;
 import com.peace.users.model.mram.LutUsers;
 

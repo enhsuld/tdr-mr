@@ -2,6 +2,8 @@
 
 > Simple wrapper for cross-browser usage of the JavaScript [Fullscreen API](https://developer.mozilla.org/en/DOM/Using_full-screen_mode), which lets you bring the page or any element into fullscreen. Smoothens out the browser implementation differences, so you don't have to.
 
+**This package is feature complete. No new changes will be accepted.**
+
 ---
 
 <p align="center"><b>🔥 Want to strengthen your core JavaScript skills and master ES6?</b><br>I would personally recommend this awesome <a href="https://ES6.io/friend/AWESOME">ES6 course</a> by Wes Bos.</p>
@@ -27,6 +29,11 @@ $ npm install --save screenfull
 ```
 
 Also available on [cdnjs](https://cdnjs.com/libraries/screenfull.js).
+
+
+<a target='_blank' rel='nofollow' href='https://app.codesponsor.io/link/tmkVF4Qm7RNE8e9RVwnim6gU/sindresorhus/screenfull.js'>
+  <img alt='Sponsor' width='888' height='68' src='https://app.codesponsor.io/embed/tmkVF4Qm7RNE8e9RVwnim6gU/sindresorhus/screenfull.js.svg' />
+</a>
 
 
 ## Why?
@@ -74,7 +81,6 @@ Safari doesn't support use of the keyboard in fullscreen.
 
 ### Examples
 
-
 #### Fullscreen the page
 
 ```js
@@ -87,19 +93,17 @@ document.getElementById('button').addEventListener('click', () => {
 });
 ```
 
-
 #### Fullscreen an element
 
 ```js
-const elem = document.getElementById('target');
+const el = document.getElementById('target');
 
 document.getElementById('button').addEventListener('click', () => {
 	if (screenfull.enabled) {
-		screenfull.request(elem);
+		screenfull.request(el);
 	}
 });
 ```
-
 
 #### Fullscreen an element with jQuery
 
@@ -113,7 +117,6 @@ $('#button').on('click', () => {
 });
 ```
 
-
 #### Toggle fullscreen on a image with jQuery
 
 ```js
@@ -124,22 +127,27 @@ $('img').on('click', event => {
 });
 ```
 
-
 #### Detect fullscreen change
 
 ```js
 if (screenfull.enabled) {
-	document.addEventListener(screenfull.raw.fullscreenchange, () => {
-		console.log('Am I fullscreen? ' + (screenfull.isFullscreen ? 'Yes' : 'No'));
+	screenfull.on('change', () => {
+		console.log('Am I fullscreen?', screenfull.isFullscreen ? 'Yes' : 'No');
 	});
 }
+```
+
+Remove listeners with:
+
+```js
+screenfull.off('change', callback);
 ```
 
 #### Detect fullscreen error
 
 ```js
 if (screenfull.enabled) {
-	document.addEventListener(screenfull.raw.fullscreenerror, event => {
+	screenfull.on('error', event => {
 		console.error('Failed to enable fullscreen', event);
 	});
 }
@@ -153,9 +161,31 @@ You can use the [Angular.js binding](https://github.com/hrajchert/angular-screen
 
 ```html
 <div ngsf-fullscreen>
-    <p>This is a fullscreen element</p>
-    <button ngsf-toggle-fullscreen>Toggle fullscreen</button>
+	<p>This is a fullscreen element</p>
+	<button ngsf-toggle-fullscreen>Toggle fullscreen</button>
 </div>
+```
+
+#### Fullscreen the page with Angular 2
+
+```typescript
+import {Directive, HostListener} from '@angular/core';
+import * as screenfull from 'screenfull';
+
+@Directive({
+	selector: '[toggleFullscreen]'
+})
+export class ToggleFullscreenDirective {
+	@HostListener('click') onClick() {
+		if (screenfull.enabled) {
+			screenfull.toggle();
+		}
+	}
+}
+```
+
+```html
+<button toggleFullscreen>Toggle fullscreen<button>
 ```
 
 ### Methods
@@ -178,6 +208,23 @@ Brings you out of fullscreen.
 
 Requests fullscreen if not active, otherwise exits.
 
+#### .on(event, function)
+
+Events: `change` `error`
+
+Add a listener for when the browser switches in and out of fullscreen or when there is an error.
+
+#### .off(event, function)
+
+Remove a previously registered event listener.
+
+#### .onchange(function)
+
+Alias for `.on('change', function)`
+
+#### .onerror(function)
+
+Alias for `.on('error', function)`
 
 ### Properties
 
@@ -196,12 +243,6 @@ Returns a boolean whether you are allowed to enter fullscreen. If your page is i
 #### .raw
 
 Exposes the raw properties (prefixed if needed) used internally: `requestFullscreen`, `exitFullscreen`, `fullscreenElement`, `fullscreenEnabled`, `fullscreenchange`, `fullscreenerror`
-
-```js
-$(document).on(screenfull.raw.fullscreenchange, () => {
-	console.log('Fullscreen change');
-});
-```
 
 
 ## FAQ

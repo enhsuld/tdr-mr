@@ -83,6 +83,9 @@
 .app_theme_dark .uk-table tr.row_checked td {
   background: #212121;
 }
+.app_theme_dark .uk-table-hover tbody tr:hover {
+  background: #212121;
+}
 .app_theme_dark .md-list .uk-nestable-list > li {
   border-color: #424242;
 }
@@ -342,9 +345,11 @@
   color: #fefefe;
 }
 .app_theme_dark #top_bar .top_bar_nav > li > a:hover {
+  -webkit-box-shadow: inset 0 -3px 0 #546e7a;
   box-shadow: inset 0 -3px 0 #546e7a;
 }
 .app_theme_dark #top_bar .top_bar_nav > li.uk-active a {
+  -webkit-box-shadow: inset 0 -3px 0 #546e7a;
   box-shadow: inset 0 -3px 0 #546e7a;
 }
 .app_theme_dark .user_heading {
@@ -461,6 +466,7 @@
   color: #727272;
 }
 .app_theme_dark .fc-unthemed .fc-highlight {
+  -webkit-box-shadow: inset 0 0 0 2px #546e7a, inset 0 -1px 0 2px #546e7a;
   box-shadow: inset 0 0 0 2px #546e7a, inset 0 -1px 0 2px #546e7a;
 }
 .app_theme_dark .fc-toolbar .fc-button {
@@ -535,6 +541,9 @@
   color: #fefefe;
   background: #616161;
 }
+.app_theme_dark .selectize-dropdown .ui-select-choices-row:hover {
+  background: #424242;
+}
 .app_theme_dark .selectize-input {
   background: #616161;
   color: #fefefe;
@@ -549,6 +558,40 @@
 .app_theme_dark .selectize-control.multi .selectize-input > div {
   background: #424242;
   color: #fefefe;
+}
+.app_theme_dark .select2-container .select2-selection--single {
+  color: #fefefe;
+  border-color: transparent;
+  background: #616161;
+}
+.app_theme_dark .select2-container .select2-selection--single .select2-selection__rendered,
+.app_theme_dark .select2-container .select2-selection--single .select2-selection__clear:after {
+  color: #fefefe;
+}
+.app_theme_dark .select2-container .select2-selection--multiple {
+  color: #fefefe;
+  border-color: transparent;
+  background: #616161;
+}
+.app_theme_dark .select2-container .select2-selection--multiple .select2-selection__choice {
+  background: #424242;
+  color: #fefefe;
+}
+.app_theme_dark .select2-container.select2-container--open .select2-selection--single .select2-selection__arrow:after {
+  color: #fefefe;
+}
+.app_theme_dark .select2-container .select2-search--dropdown .select2-search__field {
+  background: rgba(255, 255, 255, 0.2);
+}
+.app_theme_dark .select2-container--open .select2-dropdown {
+  color: #fefefe;
+  border-color: transparent;
+  background: #616161;
+}
+.app_theme_dark .select2-drop {
+  color: #fefefe;
+  border-color: transparent;
+  background: #616161;
 }
 .app_theme_dark .chatbox {
   background: #424242;
@@ -565,4 +608,21 @@
 .app_theme_dark .chatbox_footer .message_input {
   background: transparent;
   color: #fff;
+}
+.app_theme_dark .editable-container.editable-popup {
+  background: #757575;
+}
+.app_theme_dark .editable-container.editable-popup .editable-clear-x:after {
+  color: #fff;
+}
+.app_theme_dark .editable-container.editable-popup .select2-container .select2-choice {
+  color: #fefefe;
+  border-color: transparent;
+  background: #616161;
+}
+.app_theme_dark .dropzone {
+  background: #616161;
+}
+.app_theme_dark .dropzone .dz-preview.dz-image-preview {
+  background: #616161;
 }

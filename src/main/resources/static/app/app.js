@@ -25,11 +25,6 @@ altairApp.constant('variables', {
     bez_easing_swiftOut: $.bez([ 0.4,0,0.2,1 ])
 });
 
-altairApp.config(['$httpProvider', function ($httpProvider) {
-	  $httpProvider.defaults.withCredentials = true;
-      $httpProvider.interceptors.push('XSRFInterceptor');
- }]);
-
 altairApp.config(function($sceDelegateProvider) {
     $sceDelegateProvider.resourceUrlWhitelist([
         'self',
@@ -58,14 +53,17 @@ altairApp
         '$http',
         '$window',
         '$timeout',
-        'preloaders',
         'variables',
-        function ($rootScope, $state, $stateParams,$http,$window, $timeout,variables) {
+        '$transitions',
+        '$trace',
+        function ($rootScope, $state, $stateParams,$http,$window, $timeout,variables,$transitions,$trace) {
+
+            $trace.enable('TRANSITION');
 
             $rootScope.$state = $state;
             $rootScope.$stateParams = $stateParams;
 
-            $rootScope.$on('$stateChangeSuccess', function () {
+            $transitions.onSuccess({},function ($transition) {
 
                 // scroll view to top
                 $("html, body").animate({
@@ -110,7 +108,8 @@ altairApp
 
             });
 
-            $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+            $transitions.onStart({},function($transition) {
+
                 // main search
                 $rootScope.mainSearchActive = false;
                 // secondary sidebar
@@ -122,7 +121,9 @@ altairApp
                     $rootScope.primarySidebarActive = false;
                     $rootScope.hide_content_sidebar = false;
                 }
-                if(!toParams.hasOwnProperty('hidePreloader')) {
+
+                var params = $transition.params();
+                if(!params.hasOwnProperty('hidePreloader')) {
                     $rootScope.pageLoading = true;
                     $rootScope.pageLoaded = false;
                 }
@@ -133,7 +134,7 @@ altairApp
             FastClick.attach(document.body);
 
             // get version from package.json
-            $http.get('./package.json').success(function(response) {
+            $http.get('./package.json').then(function onSuccess(response) {
                 $rootScope.appVer = response.version;
             });
 

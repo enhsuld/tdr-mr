@@ -91,6 +91,9 @@
         tr.row_checked td {
             background: @md-color-grey-900;
         }
+        &-hover tbody tr:hover {
+            background: @md-color-grey-900;
+        }
     }
     .md-list .uk-nestable-list > li {
         border-color: @md-color-grey-800;
@@ -767,6 +770,9 @@
             color: @white_alt;
             background: @md-color-grey-700;
         }
+        .ui-select-choices-row:hover {
+            background: @md-color-grey-800;
+        }
     }
     .selectize-input {
         background: @md-color-grey-700;
@@ -782,6 +788,43 @@
     .selectize-control.multi .selectize-input > div {
         background: @md-color-grey-800;
         color: @white_alt;
+    }
+    // select 2
+    .select2-container {
+        .select2-selection--single {
+            color: @white_alt;
+            border-color: transparent;
+            background: @md-color-grey-700;
+            .select2-selection__rendered,
+            .select2-selection__clear:after {
+                color: @white_alt;
+            }
+        }
+        .select2-selection--multiple {
+            color: @white_alt;
+            border-color: transparent;
+            background: @md-color-grey-700;
+            .select2-selection__choice {
+                background: @md-color-grey-800;
+                color: @white_alt;
+            }
+        }
+        &.select2-container--open .select2-selection--single .select2-selection__arrow:after {
+            color: @white_alt;
+        }
+        .select2-search--dropdown .select2-search__field {
+            background: rgba(255,255,255,.2);
+        }
+        &--open .select2-dropdown {
+            color: @white_alt;
+            border-color: transparent;
+            background: @md-color-grey-700;
+        }
+    }
+    .select2-drop {
+        color: @white_alt;
+        border-color: transparent;
+        background: @md-color-grey-700;
     }
     // chatboxes
     .chatbox {
@@ -802,6 +845,24 @@
         &_footer .message_input {
             background: transparent;
             color: @white;
+        }
+    }
+    // xeditable
+    .editable-container.editable-popup {
+        background: @md-color-grey-600;
+        .editable-clear-x:after {
+            color: @white;
+        }
+        .select2-container .select2-choice {
+            color: @white_alt;
+            border-color: transparent;
+            background: @md-color-grey-700;
+        }
+    }
+    .dropzone {
+        background: @md-color-grey-700;
+        .dz-preview.dz-image-preview {
+            background: @md-color-grey-700;
         }
     }
 }

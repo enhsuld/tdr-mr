@@ -182,8 +182,8 @@ public class SubLegalpersons implements java.io.Serializable {
 	public void setLutCountries(LutCountries lutCountries) {
 		this.lutCountries = lutCountries;
 	}*/
-	
-	
+
+
 	@Column(name = "STATEREG")
 	public String getSteteReg() {
 		return steteReg;

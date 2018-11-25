@@ -5,8 +5,10 @@
 	<since>1.0.0</since>
 
 	<requires>
-		* Buttons' _Flash export button_ plug-in **and / or**
-		* Buttons' _HTML5 export button_ plug-in
+		* Buttons' _HTML5 export button_ plug-in (`-button pdfHtml5`) **and / or**
+		* Buttons' _Flash export button_ plug-in (`-button pdfFlash`).
+
+		To ensure that all files required for PDF export are included, the [DataTables download builder](/download) is recommend.
 	</requires>
 
 	<description>
@@ -70,19 +72,27 @@
 	</option>
 
 	<option type="string|function" name="message" default="">`
-		Optional description message that will be shown above the table in the created PDF.
+		Optional description message that will be shown above the table in the created PDF. Please note that this option is now deprecated in favour of the `messageTop` option.
+	</option>
 
-		As well as a string value, a function may also be assigned to the `message` property. This function will be executed when the button needs to display the message and the returned value from the function will be used. The function is passed in three parameters:
+	<option type="string|function" name="messageTop" default="*" since="1.4.0">
+		Message to be shown at the top of the table, or the `-tag caption` tag if displayed at the top of the table.
+	</option>
 
-		* `-type DataTables.Api` - The DataTable API instance
-		* `-type jQuery` - jQuery object for the button node
-		* `-type object` - Configuration object for the button.
+	<option type="string|function" name="messageBottom" default="*" since="1.4.0">
+		Message to be shown at the bottom of the table, or the `-tag caption` tag if displayed at the bottom of the table.
 	</option>
 
 	<option type="function" name="customize" default="null">
-		A function that can be used to customise the PDFMake document definition object for the `b-button pdfHtml5` button. The document object is passed in as the only parameter to this function and should be manipulated as required. A return value is not expected or used.
+		A function that can be used to customise the PDFMake document definition object for the `b-button pdfHtml5` button. The document object is passed in as the first parameter to this function and should be manipulated as required. A return value is not expected or used.
 
 		Please refer to the [PDFMake documentation](http://pdfmake.org/#/gettingstarted) for information on how to manipulate this object and the options available for the generated PDF.
+
+		As of Buttons 1.5.2 this function is passed three parameters:
+
+		1. An object containing the PDFMake document structure.
+		2. The button configuration object
+		3. A DataTables API instance for the table the button belongs to.
 	</option>
 
 
