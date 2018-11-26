@@ -162,7 +162,7 @@ angular
 	                  '<div class="uk-modal-header">' +
 	                      '<h3 class="uk-modal-title">Анхааруулга!</h3>' +
 	                  '</div>' +
-	                  '<p>Системийн аюулгүй байдлын үүднээс идэвхигүй 9 минут болоход анхааруулга идэвхижэж 1 минутын дараа холболтыг автоматаар таслана. </p>' +
+	                  '<p>Системийн аюулгүй байдлын үүднээс идэвхигүй 30 минут болоход анхааруулга идэвхижэж 1 минутын дараа холболтыг автоматаар таслана. </p>' +
 	                  '<p>Холболтоо таслахыг хүсэхгүй байвал үйлдэл хийнэ үү. </p>' +
 	                  '<p>Үлдсэн хугацаа <span class="uk-text-bold md-color-red-500" id="sessionSecondsRemaining"></span> секунт.</p>' +
 	              '</div>' +
@@ -198,7 +198,7 @@ angular
     ])
     .config(function(IdleProvider, KeepaliveProvider) {
         // configure Idle settings
-        IdleProvider.idle(540); // in seconds
+        IdleProvider.idle(1800); // in seconds
         IdleProvider.timeout(60); // in seconds
         IdleProvider.keepalive(false);
     });

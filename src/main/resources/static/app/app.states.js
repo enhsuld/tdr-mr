@@ -3,8 +3,11 @@ altairApp
         '$stateProvider',
         '$urlRouterProvider',
         '$httpProvider',
-        function ($stateProvider, $urlRouterProvider,$httpProvider) {
-        	
+        '$locationProvider',
+        function ($stateProvider, $urlRouterProvider,$httpProvider,$locationProvider) {
+
+            $locationProvider.hashPrefix('');
+
         	$httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
 
              
