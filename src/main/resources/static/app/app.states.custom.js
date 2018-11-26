@@ -1224,7 +1224,7 @@ altairApp
                                 .then(function (data) {
                                     return data.data;
                                 });
-                        },
+                        }
 
                     },
                     data: {
@@ -1247,8 +1247,7 @@ altairApp
                                 .then(function (data) {
                                     return data.data;
                                 });
-                        },
-
+                        }
                     },
                     data: {
                         pageTitle: 'Annual report'
@@ -1363,8 +1362,7 @@ altairApp
                                 .then(function (data) {
                                     return data.data;
                                 });
-                        },
-
+                        }
                     },
                     data: {
                         pageTitle: 'Annual report'

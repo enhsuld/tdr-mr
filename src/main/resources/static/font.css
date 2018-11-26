@@ -84,7 +84,7 @@
 }
 
 .login_page {  
-  background-image: url("assets/img/LoginAudit_back.jpg");
+  background-image: url("assets/img/loginback.jpg");
 }
 .login_page .user_avatar1 {
   width: 296px !important;

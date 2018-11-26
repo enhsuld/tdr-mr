@@ -86,7 +86,7 @@ altairApp
 			                .then(function (data) {                                	
 			                    return data.data;
 			                });
-			        },
+			        }
  	               
  	            },
  	            data: {
