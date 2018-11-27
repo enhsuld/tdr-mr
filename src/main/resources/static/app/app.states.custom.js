@@ -3040,7 +3040,7 @@ altairApp
                 })
 
                 .state("restricted.pages.GovPlanFormA", {
-                    url: "/annual/plan/gov/a/:param/:reqid/:id",
+                    url: "/annual/plan/gov/a/:param/:id",
                     templateUrl: 'app/components/mramLogic/mPlanFormGovView.html',
                     controller: 'annualGOVFormCtrl',
                     resolve: {

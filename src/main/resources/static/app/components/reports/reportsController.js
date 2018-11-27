@@ -87,11 +87,11 @@ angular
 
             };
 
-            $scope.checkTransferRole = function(){
+            $scope.checkTransferRole = function () {
                 return ((user_data.username == 'Лхагвабаатар' || user_data.username == 'Төрмөнх') && user_data.lpreg == 9999999);
             }
 
-            $scope.transferSteps = function(item){
+            $scope.transferSteps = function (item) {
                 if ($scope.checkTransferRole() && item.xtype != 0) {
                     $scope.currentItem = item;
                     UIkit.modal("#transferModal").show();
@@ -101,7 +101,7 @@ angular
             $scope.selectize_config = {
                 plugins: {
                     'disable_options': {
-                        disableOptions: ["c1","c2"]
+                        disableOptions: ["c1", "c2"]
                     }
                 },
                 create: false,
@@ -112,14 +112,14 @@ angular
                 searchField: 'text'
             };
 
-            $scope.transferItemSubmit = function(){
-                mainService.withdata('post','/submit/transfer', $scope.currentItem).then(function(data){
-                    if (data.status == true){
+            $scope.transferItemSubmit = function () {
+                mainService.withdata('post', '/submit/transfer', $scope.currentItem).then(function (data) {
+                    if (data.status == true) {
                         sweet.show('Мэдээлэл', 'Амжилттай хадгаллаа.', 'success');
                         $(".k-grid").data("kendoGrid").dataSource.read();
                         UIkit.modal("#transferModal").hide();
                     }
-                    else{
+                    else {
                         sweet.show('Анхаар', 'Амжилтгүй.', 'warning');
                     }
                 });
@@ -182,16 +182,13 @@ angular
                     allowUnsort: true
                 },
                 scrollable: true,
-                height: function () {
-                    return $(document).height() * 0.7;
-                },
                 resizable: true,
                 pageable: {
                     refresh: true,
                     buttonCount: 3
                 },
                 columns: [
-                    {title: "#", template: "<span class='row-number'></span>", width: "60px"},
+                    {title: "#", template: "<span class='row-number'></span>", width: "50px"},
                     {field: "lpName", title: "Байгууллагын нэр", width: "150px"},
                     {field: "lpReg", title: "Байгууллагын РД", hidden: true, width: "150px"},
                     {field: "licenseXB", title: "Лицензийн дугаар", width: "150px"},
@@ -240,14 +237,17 @@ angular
                     {field: "rejectstep", title: "Буцаасан шат", values: $scope.repsteps, width: "150px"},
                     {field: "submissiondate", title: "Илгээсэн огноо", width: "150px"},
                     {
-                        template: kendo.template($("#main").html()), width: ($scope.checkTransferRole() ? "230px" : "120px")
+                        template: kendo.template($("#main").html()),
+                        width: ($scope.checkTransferRole() ? "230px" : "120px")
                     }],
+                height: function () {
+                    return $(window).height() - 130;
+                },
                 dataBound: function () {
                     var rows = this.items();
                     $(rows).each(function () {
                         var index = $(this).index() + 1
                             + ($(".k-grid").data("kendoGrid").dataSource.pageSize() * ($(".k-grid").data("kendoGrid").dataSource.page() - 1));
-                        ;
                         var rowLabel = $(this).find(".row-number");
                         $(rowLabel).html(index);
                     });
