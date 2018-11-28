@@ -1513,7 +1513,6 @@ altairApp
                     resolve: {
                         deps: ['$ocLazyLoad', function ($ocLazyLoad) {
                             return $ocLazyLoad.load([
-                                'bower_components/angular-resource/angular-resource.min.js',
                                 'lazy_datatables',
                                 'app/components/mramCom/gAnnualPlanController.js'
                             ]);

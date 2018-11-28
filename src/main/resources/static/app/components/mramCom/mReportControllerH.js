@@ -611,13 +611,13 @@ angular
             
             $scope.uploadExcelForm = function(){
             	if ($scope.xslmFile != null && $scope.xslmFile != undefined){
-            		$rootScope.content_preloader_show();
+            		
             		Upload.upload({
             			url: '/import/upload/'+$scope.vid,
             		    data: {files: $scope.xslmFile},
             		}).then(function (response) {
             			if (response.data.status){
-            				$rootScope.content_preloader_hide();
+            				
             				init();
             				//UIkit.modal("#excel_popup").hide();
     	   					sweet.show('Мэдээлэл', 'Амжилттай хадгаллаа.', 'success');
@@ -625,11 +625,11 @@ angular
     	   					$scope.xslmFile = null;
     	   				}
     	   				else{
-    	   					$rootScope.content_preloader_hide();
+    	   					
     	   					sweet.show('Алдаа', 'Алдаа үүслээ.', 'warning');
     	   				}
         			}, function (response) {
-        				$rootScope.content_preloader_hide();
+        				
         				sweet.show('Алдаа', 'Алдаа үүслээ.', 'warning');
         				
         			}, function (evt) {

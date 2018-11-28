@@ -31,13 +31,13 @@ angular
                 text: "Уул уурхайн үйлдвэрлэл, технологийн хэлтэс",
                 value: 1
             }, {text: "Нүүрсний судалгааны хэлтэс", value: 2}, {text: "Геологи, хайгуулын хэлтэс", value: 3}];
-            if (user_data.divisionid == 1) {
+            if (user_data.divisionid === 1) {
                 $scope.mingroups = [{text: "Металл", value: 1}, {text: "Металл бус", value: 2}];
             }
-            else if (user_data.divisionid == 2) {
+            else if (user_data.divisionid === 2) {
                 $scope.mingroups = [{text: "Нүүрс", value: 8}];
             }
-            else if (user_data.divisionid == 3) {
+            else if (user_data.divisionid === 3) {
                 $scope.mingroups = [{text: "Үнэт, өнгөт металл", value: 10}, {
                     text: "ЦИМ, ГХЭ, хар ховор металл",
                     value: 11
@@ -47,7 +47,7 @@ angular
                 }, {text: "Нүүрс,  уламжлалт бус газрын тос", value: 13}];
             }
 
-            if (user_data.divisionid == 1 || user_data.divisionid == 2) {
+            if (user_data.divisionid === 1 || user_data.divisionid === 2) {
                 $scope.repsteps = [{text: "Хүлээн авах хэсэг", value: 1}, {
                     text: "Нөөцийн хэсэг",
                     value: 2
@@ -56,7 +56,7 @@ angular
                     value: 4
                 }, {text: "Эдийн засгийн хэсэг", value: 5}, {text: "Эцсийн шийдвэр", value: 6}];
             }
-            else if (user_data.divisionid == 3) {
+            else if (user_data.divisionid === 3) {
                 $scope.repsteps = [{text: "Хүлээн авах хэсэг", value: 1}, {
                     text: "Геологийн хэсэг",
                     value: 8
@@ -68,8 +68,9 @@ angular
             $scope.repsteps.unshift({text: "Хоосон", value: 0})
 
             $scope.loadOnCheck = function (item) {
-                if (item.reporttype == 3) {
-                    if (item.lictype == 1) {
+                console.log(item);
+                if (item.reporttype === 3) {
+                    if (item.lictype === 1) {
                         $state.go('restricted.pages.GovPlanFormH', {param: item.id, id: item.repstepid});
                     }
                     else {
@@ -77,11 +78,11 @@ angular
                     }
                 }
                 else {
-                    if (item.lictype == 1) {
+                    if (item.lictype === 1) {
                         $state.go('restricted.pages.GovReportFormH', {param: item.id, groupid: item.groupid});
                     }
                     else {
-                        $state.go('restricted.pages.GovReportFormA', {param: item.id, groupid: item.groupid});
+                        $state.go('restricted.pages.GovReportFormA', {param: item.id, id: item.groupid});
                     }
                 }
 
