@@ -247,7 +247,7 @@ angular
 		                    serverFiltering: true,
 		                    serverSorting: true
 		                },
-		                groupable: true,
+
 		                filterable: true,
 		                sortable: true,
 		                language: "English",

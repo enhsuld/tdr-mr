@@ -66,7 +66,7 @@ angular
 	                     }
 	                  
 	                },
-	                groupable: true,
+
 	                filterable: {
                         mode: "row"
                     },

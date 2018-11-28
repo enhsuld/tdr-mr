@@ -515,8 +515,11 @@ public class UserDaoImpl implements UserDao {
 
             System.out.println("query " + query);
 
+
+
             if (isspecial.isEmpty()) {
                 Query hql = sessionFactory.getCurrentSession().createQuery(query);
+                System.out.println(hql.toString());
                 hql.setFirstResult(skip);
                 hql.setMaxResults(take);
                 List<Object> rlist = hql.list();
@@ -525,6 +528,7 @@ public class UserDaoImpl implements UserDao {
                 return rlist;
             } else {
                 Query nquery = sessionFactory.getCurrentSession().createSQLQuery(isspecial);
+                System.out.println(nquery.toString());
                 List<Object> nlist = nquery.list();
 
                 return nlist;

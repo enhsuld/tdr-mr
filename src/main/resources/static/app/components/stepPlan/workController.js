@@ -9,22 +9,22 @@ angular
         'sweet',
         'officers',
         function ($scope, $rootScope, $state, utils, mainService, sweet, officers) {
-
             $scope.loadOnCheck = function (item) {
-                if (item.reporttype === 3) {
-                    if (item.lictype === 1) {
-                        $state.go('restricted.pages.GovPlanFormH', {param: item.id});
+                console.log(item);
+                if (item.annualRegistration.reporttype === 3) {
+                    if (item.annualRegistration.lictype === 1) {
+                        $state.go('restricted.pages.GovPlanFormH', {param: item.annualRegistration.id});
                     }
                     else {
-                        $state.go('restricted.pages.GovPlanFormA', {param: item.id, id: item.repstepid});
+                        $state.go('restricted.pages.GovPlanFormA', {param: item.annualRegistration.id, id: item.annualRegistration.repstepid});
                     }
                 }
                 else {
-                    if (item.lictype === 1) {
-                        $state.go('restricted.pages.GovReportFormH', {param: item.id});
+                    if (item.annualRegistration.lictype === 1) {
+                        $state.go('restricted.pages.GovReportFormH', {param: item.annualRegistration.id});
                     }
                     else {
-                        $state.go('restricted.pages.GovReportFormA', {param: item.id});
+                        $state.go('restricted.pages.GovReportFormA', {param: item.annualRegistration.id, id: item.annualRegistration.repstepid});
                     }
                 }
 
@@ -43,6 +43,7 @@ angular
                         read: {
                             url: "/user/step/1/3/worklist",
                             contentType: "application/json; charset=UTF-8",
+                            data: {sort: [{"field": "id", "dir": "desc"}]},
                             type: "POST"
                         },
                         parameterMap: function (options) {
@@ -56,10 +57,16 @@ angular
                             id: "id"
                         }
                     },
-                    pageSize: 10,
+                    pageSize: 15,
                     serverPaging: true,
                     serverFiltering: true,
                     serverSorting: true
+                },
+                toolbar: ["excel"],
+                excel: {
+                    allPages: true,
+                    fileName: "Export.xlsx",
+                    filterable: true
                 },
                 filterable: {
                     mode: "row"
@@ -75,18 +82,18 @@ angular
                 },
                 columns: [
                     {title: "#", template: "<span class='row-number'></span>", width: "50px"},
-                    {field: "lpName", title: "<span data-translate='Company name'></span>"},
-                    {field: "licensenum", title: "<span data-translate='License number'></span>"},
-                    {field: "licenseXB", title: "<span data-translate='License number'></span>"},
-                    {field: "reportyear", title: "<span data-translate='Report year'></span>"},
+                    {field: "annualRegistration.lpName", title: "<span data-translate='Company name'></span>"},
+                    {field: "annualRegistration.licensenum", title: "<span data-translate='License number'></span>"},
+                    {field: "annualRegistration.licenseXB", title: "<span data-translate='License number'></span>"},
+                    {field: "annualRegistration.reportyear", title: "<span data-translate='Report year'></span>"},
+                    /* {
+                         template: kendo.template($("#status").html()), title: "<span data-translate='Status'></span>"
+                     },*/
+                    {field: "annualRegistration.submissiondate", title: "<span data-translate='Submitted date'></span>"},
+                    {field: "annualRegistration.officerid", title: "<span data-translate='Officer name'></span>", values: officers},
+                    {field: "annualRegistration.approveddate", title: "<span data-translate='Received date'></span>"},
                     {
-                        template: kendo.template($("#status").html()), title: "<span data-translate='Status'></span>"
-                    },
-                    {field: "submissiondate", title: "<span data-translate='Submitted date'></span>"},
-                    {field: "officerid", title: "<span data-translate='Officer name'></span>", values: officers},
-                    {field: "approveddate", title: "<span data-translate='Received date'></span>"},
-                    {
-                        template: kendo.template($("#main").html()), width: "90px"
+                        template: kendo.template($("#detMain").html()), width: "90px"
                     }],
                 dataBound: function () {
                     var rows = this.items();

@@ -41,7 +41,7 @@ angular
 		                    serverFiltering: true,
 		                    serverSorting: true
 		                },
-		                groupable: true,
+
 		                filterable: {
 	                        mode: "row"
 	                    },

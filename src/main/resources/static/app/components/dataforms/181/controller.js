@@ -53,7 +53,7 @@ angular
       filterable: false,
       sortable: true,
       resizable: true,
-      groupable: true,
+
       pageable: {
         refresh: true,
         pageSizes: false,

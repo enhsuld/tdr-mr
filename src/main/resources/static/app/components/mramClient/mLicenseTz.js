@@ -74,7 +74,7 @@ angular
 	    	   	
 	            $scope.licensetz = {
 	                dataSource: {	
-	                	pageSize: 10,
+	                	pageSize: 15,
 	                	serverPaging: true,
 	                    serverSorting: true,
 	                    serverFiltering: true,
@@ -134,17 +134,22 @@ angular
                         mode: "multiple",
                         allowUnsort: true
                     },
+                    toolbar: ["excel"],
                     excel: {
-                        allPages: true
+                        allPages: true,
+                        fileName: "Export.xlsx",
+                        filterable: true
                     },
-                    toolbar: ["excel","pdf"],
+                    height: function () {
+                        return $(window).height() - 175;
+                    },
 	                pageable: {
 	                    refresh: true,
 	                    pageSizes: true,
 	                    buttonCount: 5
 	                },
 	                columns: [
-	                		  {title: "#",template: "<span class='row-number'></span>", width:"60px"},
+	                		  {title: "#",template: "<span class='row-number'></span>", width:"50px"},
 	                          { field:"licenseNum", title: "<span data-translate='License number'></span>" },	 
 	                          { field:"licenseXB", title: "<span data-translate='License number'></span>"},		   
 	                          { field:"areaNameMon", title: "<span data-translate='Area name'></span>" },		

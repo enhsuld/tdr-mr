@@ -562,19 +562,12 @@ public class MainController {
 				}
 				
 				if(domain.equalsIgnoreCase("worklist")){
-					domain="AnnualRegistration";
+					domain="LnkComment";
 					JSONObject jsonObj = new JSONObject(request);
-					domain="AnnualRegistration";
-					List<LnkComment> lc=(List<LnkComment>) dao.getHQLResult("from LnkComment t where t.officerid="+loguser.getId()+"", "list");
-					
-					String str="";
-					 
-					for(int i=0;i<lc.size();i++){
-						 str=str+","+lc.get(i).getPlanid();
-					}
-					 
-					jsonObj.put("custom", "where  id in ("+str.substring(1)+") and repstatusid!=0");
-					//jsonObj.put("custom", "where repstatusid!=0 ");	
+					//domain="select t from AnnualRegistration t, LnkComment c";
+					System.out.println(request);
+					//jsonObj.put("customJoins", "select t, (select) from AnnualRegistration t, LnkComment c  where c.planid=t.id and c.officerid = "+loguser.getId()+" and t.repstatusid!=0 group by t.id");
+					jsonObj.put("custom", "where officerid = "+loguser.getId()+"");
 					rs= dao.kendojson(jsonObj.toString(), domain);
 					count=dao.resulsetcount(jsonObj.toString(), domain);
 					result.setData(rs);

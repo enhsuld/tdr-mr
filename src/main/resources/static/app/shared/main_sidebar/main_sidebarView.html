@@ -5,7 +5,7 @@
                 <a ui-sref="restricted.dashboard" ng-show="!miniSidebarActive"><img ng-src="assets/img/mram_logo.png" width="71" alt="" add-image-prop /></a>
                 <a ui-sref="restricted.dashboard" ng-show="miniSidebarActive"><img ng-src="assets/img/logo_main_small.png" alt="" add-image-prop /></a>
             </div>
-            <div style="margin-top:-20px;" class="sidebar_actions">
+            <div style="margin-top:-20px;" class="sidebar_actions" data-ng-controller="LangCtrl" >
                 <selectize id="lang_switcher" name="lang_switcher" config='langSwitcherConfig' options='langSwitcherOptions' ng-model="langSwitcherModel"></selectize>
             </div>
         </div>

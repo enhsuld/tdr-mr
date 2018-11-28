@@ -165,7 +165,7 @@ angular
 		                    serverFiltering: true,
 		                    serverSorting: true
 		                },
-		                groupable: true,
+
 		                filterable: {
 	                        mode: "row"
 	                    },
@@ -230,7 +230,7 @@ angular
 		                    serverPaging: true,
 		                    serverSorting: true
 		                },
-		                groupable: true,
+
 		                filterable: {
 	                        mode: "row"
 	                    },

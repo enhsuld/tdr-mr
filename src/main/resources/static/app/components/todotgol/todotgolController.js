@@ -76,12 +76,20 @@ angular
                             id: "id"
                         }
                     },
-                    pageSize: 10,
+                    pageSize: 15,
                     serverPaging: true,
                     serverFiltering: true,
                     serverSorting: true
                 },
-                groupable: true,
+                toolbar: ["excel"],
+                excel: {
+                    allPages: true,
+                    fileName: "Export.xlsx",
+                    filterable: true
+                },
+                height: function () {
+                    return $(window).height() - 130;
+                },
                 filterable: {
                     mode:"row"
                 },
@@ -95,7 +103,7 @@ angular
                     buttonCount: 10
                 },
                 columns: [
-                    {title: "#", template: "<span class='row-number'></span>", width: "60px"},
+                    {title: "#", template: "<span class='row-number'></span>", width: "50px"},
                     {field: "lpName", title: "Байгууллагын нэр", width: "150px"},
                     {field: "lpReg", title: "Байгууллагын РД", hidden: true, width: "150px"},
                     {field: "licenseXB", title: "Лицензийн дугаар", width: "150px"},
@@ -117,12 +125,6 @@ angular
                         values: lic_type
                     },
                     {field: "reporttype", title: "Төрөл", values: rep_type, width: "150px"},
-                    /*{
-                        field: "xtype",
-                        title: "X эсэх",
-                        template: "# if(xtype != 0) { # Энгийн #} else {# Х #}#",
-                        width: "150px"
-                    },*/
                     {field: "reportyear", title: "Он", width: "150px"},
                     {field: "groupid", title: "АМ-ын ангилал", values: $scope.mingroups, width: "150px"},
                     {field: "minid", title: "АМ-ын нэр", values: mineralData, width: "150px"},
@@ -148,7 +150,6 @@ angular
                     $(rows).each(function () {
                         var index = $(this).index() + 1
                             + ($(".k-grid").data("kendoGrid").dataSource.pageSize() * ($(".k-grid").data("kendoGrid").dataSource.page() - 1));
-                        ;
                         var rowLabel = $(this).find(".row-number");
                         $(rowLabel).html(index);
                     });

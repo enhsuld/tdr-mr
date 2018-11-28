@@ -180,7 +180,7 @@ angular
             $scope.listGrid = {
                 dataSource: dataSource,
                 columnMenu:true,
-                groupable: true,
+
                 filterable: {
                     mode:"row"
                 },

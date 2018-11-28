@@ -57,7 +57,7 @@ angular
 		                    serverSorting: true
 		                },
 		                filterable:true,
-		                groupable: true,
+
 		                sortable: {
 	                        mode: "multiple",
 	                        allowUnsort: true

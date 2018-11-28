@@ -277,7 +277,7 @@ angular
                     height: function () {
                         return $(document).height() * 0.7;
                     },
-                    groupable: true,
+
                     resizable: true,
                     pageable: {
                         refresh: true,

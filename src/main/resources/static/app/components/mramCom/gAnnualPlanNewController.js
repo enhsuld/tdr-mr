@@ -504,7 +504,7 @@ angular
 		                    serverPaging: true,
 		                    serverSorting: true
 		                },
-		                groupable: true,
+
 		                filterable: true,
 		                sortable: true,
 		                resizable: true,

@@ -56,7 +56,7 @@ angular
 		                    serverSorting: true
 		                },
 		               // toolbar:kendo.template($("#export").html()),
-		                groupable: true,
+
 		                filterable: {
 		                	mode:"row"
 		                },

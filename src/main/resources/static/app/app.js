@@ -33,6 +33,24 @@ altairApp.config(function($sceDelegateProvider) {
     ]);
 });
 
+altairApp.factory('asyncLoader', function ($q, $timeout,$http) {
+
+    return function (options) {
+        var deferred = $q.defer(),
+            translations;
+
+        $http({
+            method:'GET',
+            url:'/api/lang/' + options.key
+        }).then(function (response) {
+            deferred.resolve(response.data);
+        });
+
+        return deferred.promise;
+
+    };
+});
+
 // breadcrumbs
 altairApp.config(function($breadcrumbProvider) {
     $breadcrumbProvider.setOptions({
