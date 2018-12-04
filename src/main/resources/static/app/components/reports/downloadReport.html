@@ -136,7 +136,8 @@
                                 <tr>
                                     <td>Маягт 11-ын мэдээ</td>
                                     <td>
-                                        <a href="/export/stat/excel/9" download
+                                        <a ng-if="yearSelected.value!=null"
+                                           href="/export/stat/excel/{{yearSelected.value}}/9" download
                                            class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon"
                                            onclick="$(this).addClass('disabled');$(this).prop('disabled',true);$(this).html('&lt;i class=&quot;uk-icon-spinner uk-icon-spin&quot;&gt;&lt;/i&gt;Түр хүлээнэ үү…');$(this).click();"><i
                                                 class="uk-icon-cloud-download"></i>Татах</a>
@@ -145,13 +146,13 @@
                                 <tr>
                                     <td>Маягт 12-ын мэдээ</td>
                                     <td>
-                                        <a href="/export/stat/excel/10" download
+                                        <a ng-if="yearSelected.value!=null"
+                                           href="/export/stat/excel/{{yearSelected.value}}/10" download
                                            class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon"
                                            onclick="$(this).addClass('disabled');$(this).prop('disabled',true);$(this).html('&lt;i class=&quot;uk-icon-spinner uk-icon-spin&quot;&gt;&lt;/i&gt;Түр хүлээнэ үү…');$(this).click();"><i
                                                 class="uk-icon-cloud-download"></i>Татах</a>
                                     </td>
                                 </tr>
-
                                 <tr>
                                     <td>Тайлангийн Маягт 14-ын мэдээ</td>
                                     <td>

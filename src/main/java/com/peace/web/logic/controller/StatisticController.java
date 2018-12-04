@@ -1300,7 +1300,7 @@ public class StatisticController {
                         }
                     }
 
-                    sqlQuery = sqlQuery + " FROM ANNUAL_REGISTRATION A WHERE A.ISTODOTGOL = 0 AND A .REPSTATUSID IN (1,2,7) AND A .REPORTTYPE = 4 AND A .REPORTYEAR = "+reportyear+" AND A .XTYPE != 0 AND A .DIVISIONID = 1 ORDER BY A.LPNAME ASC, A.REPSTATUSID DESC";
+                    sqlQuery = sqlQuery + " FROM ANNUAL_REGISTRATION A WHERE A.ISTODOTGOL = 0 AND A .REPSTATUSID IN (1,2,7) AND A .REPORTTYPE = 4 AND A .REPORTYEAR = "+year+" AND A .XTYPE != 0 AND A .DIVISIONID = 1 ORDER BY A.LPNAME ASC, A.REPSTATUSID DESC";
                     List<Object[]> resultObj = dao.getNativeSQLResult(sqlQuery, "list");
 
                     if (resultObj != null && resultObj.size() > 0){
@@ -1322,7 +1322,7 @@ public class StatisticController {
                     Date date1 = new Date();
                     String special = dateFormat1.format(date1);
                     setCellData(sheet, 1,2,special,null,"string");
-                    setCellData(sheet, 1,7,reportyear,null,"number");
+                    setCellData(sheet, 1,7,year,null,"number");
                     String xname = ("Mayagt11" + " - " + currentdate).trim();
                     xname = URLEncoder.encode(xname, "UTF-8");
                     try (ServletOutputStream outputStream = response.getOutputStream()) {
@@ -1354,7 +1354,7 @@ public class StatisticController {
                 font.setFontName("Arial");
                 style.setFont(font);
 
-                int reportyear = 2016;
+                Long reportyear = year;
 
                 Sheet sheet = workbook.getSheet("SGT");
                 if (sheet != null) {
