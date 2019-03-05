@@ -6,10 +6,13 @@ angular
         '$interval',
         '$window',
         '$timeout',
+        'user_data',
         'stats',
         'variables',
-        function ($rootScope,$scope,$interval,$window,$timeout,stats,variables) {
+        function ($rootScope,$scope,$interval,$window,$timeout,user_data,stats,variables) {
         // statistics
+            $scope.user=user_data;
+            console.log($scope.user);
             $scope.dynamicStats = [
                 {
                     id: '1',

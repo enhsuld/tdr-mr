@@ -297,7 +297,12 @@ altairApp
                                 'app/components/mramGov/dashboardController.js'
                             ], {serie: true});
                         }],
-
+                        user_data: function ($http) {
+                            return $http({method: 'GET', url: '/user/service/ujson'})
+                                .then(function (data) {
+                                    return data.data;
+                                });
+                        },
                         stats: function ($http) {
                             return $http({method: 'GET', url: '/user/service/custom/data/stats'})
                                 .then(function (data) {
