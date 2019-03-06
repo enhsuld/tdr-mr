@@ -281,7 +281,7 @@ altairApp
                 .state("restricted.pages.statistics", {
                     url: "/statistics",
                     templateUrl: 'app/components/mramGov/dashboardView.html',
-                    controller: 'statisticCtrl',
+                    controller: 'statisticNewCtrl',
                     resolve: {
                         deps: ['$ocLazyLoad', function ($ocLazyLoad) {
                             return $ocLazyLoad.load([

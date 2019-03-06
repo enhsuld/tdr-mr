@@ -205,7 +205,6 @@ angular
                     help: note.help,
                     comm:note.comment,
                     isform: note.isform,
-                    decision:note.decision,
                     issaved:note.issaved,
                     size: note.size,
                     images: note.images,

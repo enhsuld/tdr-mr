@@ -1,6 +1,6 @@
 angular
     .module('altairApp')
-    .controller('statisticCtrl', [
+    .controller('statisticNewCtrl', [
         '$rootScope',
         '$scope',
         '$interval',
@@ -31,29 +31,6 @@ angular
                     title: 'Жилийн тайлан илгээх тусгай зөвшөөрөл',
                     count: '0',
                     chart_data: [ 5,3,9,6,5,9,7,3,5,2 ],
-                    chart_options: {
-                        height: 28,
-                        width: 64,
-                        fill: "#d1e4f6",
-                        stroke: "#0288d1"
-                    }
-                },
-                {
-                    id: '3',
-                    title: 'Х төлөвлөгөө ирүүлсэн',
-                    count: '0',
-                    chart_data: [ '64/100' ],
-                    chart_options: {
-                        height: 24,
-                        width: 24,
-                        fill: ["#8bc34a", "#eee"]
-                    }
-                },
-                {
-                    id: '4',
-                    title: 'Х тайлан ирүүлсэн',
-                    count: '1',
-                    chart_data: [ 5,3,9,6,5,9,7,3,5,2,5,3,9,6,5,9,7,3,5,2 ],
                     chart_options: {
                         height: 28,
                         width: 64,
@@ -351,6 +328,31 @@ angular
                 }
             ];
             
+            if($scope.user.positionid!==3){
+                $scope.dynamicStats.push( {
+                    id: '3',
+                    title: 'Х төлөвлөгөө ирүүлсэн',
+                    count: '0',
+                    chart_data: [ '64/100' ],
+                    chart_options: {
+                        height: 24,
+                        width: 24,
+                        fill: ["#8bc34a", "#eee"]
+                    }
+                });
+                $scope.dynamicStats.push(  {
+                    id: '4',
+                    title: 'Х тайлан ирүүлсэн',
+                    count: '1',
+                    chart_data: [ 5,3,9,6,5,9,7,3,5,2,5,3,9,6,5,9,7,3,5,2 ],
+                    chart_options: {
+                        height: 28,
+                        width: 64,
+                        fill: "#d1e4f6",
+                        stroke: "#0288d1"
+                    }
+                });
+            }
 
             // countUp update
                 $scope.$on('onLastRepeat', function (scope, element, attrs) {

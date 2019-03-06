@@ -6803,7 +6803,7 @@ public class PlanReportController {
 				System.out.println("des"+des.size());
 
 				if(obj.getLong("notesize")==des.size()+mdes.size() && des.size()+mdes.size()>0){	
-					ar.setOfficerid(loguser.getId());
+			/*		ar.setOfficerid(loguser.getId());
 					ar.setRejectstep((long) 0);
 					ar.setReject(0);
 					ar.setRepstepid((long) nt.getInptype());
@@ -6848,7 +6848,7 @@ public class PlanReportController {
 					}
 
 
-					jo1.put("step",true);
+					jo1.put("step",true);*/
 				}
 				else{
 

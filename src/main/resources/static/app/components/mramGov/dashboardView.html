@@ -9,7 +9,7 @@
                             <div class="uk-float-right uk-margin-top uk-margin-small-right">
                                 <peity-bar-chart data="stat.chart_data" options="stat.chart_options" ng-if="stat.id == '1'" ></peity-bar-chart>
                                 <peity-line-chart data="stat.chart_data" options="stat.chart_options" ng-if="stat.id == '2'"></peity-line-chart>
-                                <div ng-if="user.divisionid!=3">
+                                <div ng-if="user.divisionid!='3'">
                                     <peity-donut-chart data="stat.chart_data" options="stat.chart_options" ng-if="stat.id == '3'&& user.divisionid!=3"></peity-donut-chart>
                                     <peity-line-chart data="stat.chart_data" options="stat.chart_options" ng-if="stat.id == '4' && user.divisionid!=3"></peity-line-chart>
                                 </div>
