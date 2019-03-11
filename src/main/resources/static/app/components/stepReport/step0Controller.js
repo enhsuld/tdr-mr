@@ -86,7 +86,10 @@ angular
                     {field: "reportyear", title: "Он"},
 
                     {field: "submissiondate", title: "Илгээсэн огноо"},
-                    {field: "approveddate", title: "Хүлээн авсан огноо"},
+                    {
+                        template: kendo.template($("#status").html()), title: "<span data-translate='Status'></span>"
+                    },
+                  /*  {field: "approveddate", title: "Хүлээн авсан огноо"},*/
                     {
                         template: kendo.template($("#main").html()), width: "90px"
                     }

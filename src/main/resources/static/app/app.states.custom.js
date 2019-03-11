@@ -1208,6 +1208,34 @@ altairApp
                         pageTitle: 'Annual report'
                     }
                 })
+                .state("restricted.pages.reportstep8", {
+                    url: "/annual/gov/R/step/8",
+                    templateUrl: 'app/components/stepReport/vstep1View.html',
+                    controller: 'annualReportStep8CtrlGov',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'app/components/stepReport/step8Controller.js'
+                            ]);
+                        }],
+                        p_deposit: function ($http) {
+                            return $http({method: 'GET', url: '/user/service/resourse/LutDeposit'})
+                                .then(function (data) {
+                                    return data.data;
+                                });
+                        },
+                        lic_type: function ($http) {
+                            return $http({method: 'GET', url: '/user/service/resourse/LutLictype'})
+                                .then(function (data) {
+                                    return data.data;
+                                });
+                        }
+
+                    },
+                    data: {
+                        pageTitle: 'Annual report'
+                    }
+                })
                 .state("restricted.pages.reportstepx", {
                     url: "/annual/gov/report/x",
                     templateUrl: 'app/components/stepReport/step0View.html',

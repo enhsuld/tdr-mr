@@ -543,13 +543,30 @@ public class MainController {
 				if(domain.equalsIgnoreCase("AnnualRegistrationPlanConfirmed")){
 					domain="AnnualRegistration";
 					JSONObject jsonObj = new JSONObject(request);
-					System.out.println("oyutnii medeelel alga"); 
+					boolean xtype=false;
+					String str="";
+					if(jsonObj.has("filter")){
+						JSONArray jar=jsonObj.getJSONObject("filter").getJSONArray("filters");
+						for(int i=0;i<jar.length();i++){
+							JSONObject bo = (JSONObject) jar.get(i);
+							if(bo.getString("field").equalsIgnoreCase("xtype")){
+								if(bo.getInt("value")==0){
+									xtype=true;
+									str="and xtype=0";
+								}
+								else{
+									str="and xtype!=0";
+								}
+								jar.remove(i);
+							}
+						}
+					}
 					domain="AnnualRegistration";
 					if(loguser.getDivisionid()==3){
 						jsonObj.put("custom", "where istodotgol = 0 and repstatusid =1 and groupid=1 and divisionid=3 and  lictype=1 and reporttype="+type+"");
 					}
 					else if(loguser.getDivisionid()==2){
-						jsonObj.put("custom", "where istodotgol = 0 and repstatusid =1 and divisionid=2 and reporttype="+type+" and minid=5");
+						jsonObj.put("custom", "where istodotgol = 0 "+str+" and repstatusid =1 and divisionid=2 and reporttype="+type+" and minid=5");
 					}
 					else if(loguser.getDivisionid()==1){
 						jsonObj.put("custom", "where istodotgol = 0 and repstatusid =1 and divisionid=1 and reporttype="+type+"  and minid!=5");
@@ -560,7 +577,26 @@ public class MainController {
 					result.setData(rs);
 					result.setTotal(count);
 				}
-				
+				if(domain.equalsIgnoreCase("AnnualRegistrationPlanXConfirmed")){
+					domain="AnnualRegistration";
+					JSONObject jsonObj = new JSONObject(request);
+					System.out.println("oyutnii medeelel alga");
+					domain="AnnualRegistration";
+					if(loguser.getDivisionid()==3){
+						jsonObj.put("custom", "where istodotgol = 0 and repstatusid =1 and groupid=1 and divisionid=3 and  lictype=1 and reporttype="+type+"");
+					}
+					else if(loguser.getDivisionid()==2){
+						jsonObj.put("custom", "where istodotgol = 0 and xtype=0 and repstatusid =1 and divisionid=2 and reporttype="+type+" and minid=5");
+					}
+					else if(loguser.getDivisionid()==1){
+						jsonObj.put("custom", "where istodotgol = 0 and repstatusid =1 and divisionid=1 and reporttype="+type+"  and minid!=5");
+					}
+					//jsonObj.put("custom", "where repstatusid!=0 ");
+					rs= dao.kendojson(jsonObj.toString(), domain);
+					count=dao.resulsetcount(jsonObj.toString(), domain);
+					result.setData(rs);
+					result.setTotal(count);
+				}
 				if(domain.equalsIgnoreCase("worklist")){
 					domain="LnkComment";
 					JSONObject jsonObj = new JSONObject(request);

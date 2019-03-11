@@ -42,8 +42,8 @@ angular
 
                     transport: {
                         read: {
-                            url: "/user/step/7/4/AnnualRegistrationPlanConfirmed",
-                            data: {"custom": "where reporttype=4 and xtype!=0 "},
+                            url: "/user/step/7/4/AnnualRegistrationPlanXConfirmed",
+                            data: {"custom": "where reporttype=4 and xtype=0"},
                             contentType: "application/json; charset=UTF-8",
                             type: "POST"
                         },
@@ -81,7 +81,6 @@ angular
                     {field: "depositid", title: "АМ-ын төрөл", values: p_deposit},
                     {field: "licenseXB", title: "<span data-translate='License number'></span>"},
                     {field: "reportyear", title: "<span data-translate='Report year'></span>"},
-                    {field: "xtype",template:"#if(xtype==0){# <span>Х</span> #}else{# <span>Энгийн</span> #}#",values:[{"text":"X","value":0},{"text":"Энгийн","value":30}], title: "Төрөл"},
                     {
                         field: "repstatusid",
                         values: [{text: "Хадгалсан", value: "0"}, {

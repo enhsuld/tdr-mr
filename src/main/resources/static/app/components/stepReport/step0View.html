@@ -12,7 +12,29 @@
     </div>
 </div>
 <a href="" id="downloadJS" style="display:none;">Download</a>
-
+<script type="text/x-kendo-template" id="status">
+	#if (repstatusid == 0)  { #
+	<span class="uk-badge uk-badge-primary" data-translate="Saved"></span>
+	# }  else if (repstatusid == 7) {#
+	<span class="uk-badge uk-badge-warning" data-translate="Submitted"></span>
+	#if (rejectstep == repstepid)  { # <span class="uk-badge uk-badge-danger" data-uk-tooltip="{pos:'right'}" title="Засварлагдан" style="margin-top:-25px;"><i class="material-icons">mode_edit</i></span> #}#
+	# } else if (repstatusid == 2) {#
+	<span class="uk-badge uk-badge-danger" data-translate="Back to edit"></span>
+	# } else if (repstatusid == 1) {#
+	<span class="uk-badge uk-badge-success" data-translate="Confirmed"></span>
+	#} else if (repstatusid == 5) {#
+	<span class="uk-badge uk-badge-success" data-translate="Finalized"></span>
+	#}#
+</script>
+<script type="text/x-kendo-template" id="template">
+	<div class="refreshBtnContainer">
+		<a href="\\#" class="k-pager-refresh k-link k-button k-button-icon" title="Refresh"><span class="k-icon k-i-reload"></span></a>
+	</div>
+	<div class="toolbar">
+		<label class="category-label" for="category">Show products by category:</label>
+		<input type="search" id="category" style="width: 150px"/>
+	</div>
+</script>
 <script type="text/x-kendo-template" id="main">
 		#if (repstatusid == 7 || repstatusid == 8)  { #
 			#if (xtype == 0)  { #
