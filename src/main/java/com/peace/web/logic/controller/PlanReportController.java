@@ -6725,12 +6725,192 @@ public class PlanReportController {
 	@RequestMapping(value="/submitReportConfirm",method=RequestMethod.PUT,produces={"application/json; charset=UTF-8"})
 	public @ResponseBody String ajaxReportConfirm(@RequestBody String jsonString, HttpServletRequest req) throws Exception {
 		JSONObject obj = new JSONObject(jsonString);
+		UserDetails userDetail = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		LutUsers loguser=(LutUsers) dao.getHQLResult("from LutUsers t where t.username='"+userDetail.getUsername()+"'", "current");
 		AnnualRegistration ar=(AnnualRegistration) dao.getHQLResult("from AnnualRegistration t where t.id="+obj.getLong("planid")+" ", "current");
-		ar.setRepstatusid(obj.getLong("stepId"));
+		LutFormNotes nt=(LutFormNotes) dao.getHQLResult("from LutFormNotes t where t.id="+obj.getInt("id")+"", "current");
+		ar.setOfficerid(loguser.getId());
+		ar.setRejectstep((long) 0);
+		ar.setReject(0);
+		ar.setRepstepid((long) nt.getInptype());
+		if(nt.getInptype()==10){
+			ar.setRepstatusid((long) 1);
+		}
+
 		dao.PeaceCrud(ar, "AnnualRegistration", "update", (long) ar.getId(), 0, 0, null);
 		return "true";
 	}
-	
+
+	@RequestMapping(value="/submitReportNewComment",method=RequestMethod.PUT,produces={"application/json; charset=UTF-8"})
+	public @ResponseBody String ajaxReportCommentNew(@RequestBody String jsonString, HttpServletRequest req) throws DocumentException, Exception {
+		System.out.println(jsonString);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (!(auth instanceof AnonymousAuthenticationToken)) {
+			DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm");
+			Date date1 = new Date();
+			String special = dateFormat.format(date1);
+			JSONObject obj= new JSONObject(jsonString);
+
+
+			UserDetails userDetail = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			LutUsers loguser=(LutUsers) dao.getHQLResult("from LutUsers t where t.username='"+userDetail.getUsername()+"'", "current");
+
+			LnkComment com=new LnkComment();
+			com.setPlanid(obj.getInt("planid"));
+			com.setOfficerid(loguser.getId());
+			com.setComdate(special);
+			if(obj.has("comment")){
+				com.setComnote(obj.getString("comment"));
+			}
+			com.setNoteid(obj.getLong("id"));
+			com.setDesicionid(obj.getInt("desicion"));
+			com.setOfficername(loguser.getGivnamemon());
+			dao.PeaceCrud(com, "LnkComment", "save", (long) 0, 0, 0, null);
+
+			LutFormNotes nt=(LutFormNotes) dao.getHQLResult("from LutFormNotes t where t.id="+obj.getInt("id")+"", "current");
+
+			LutDecisions an=(LutDecisions) dao.getHQLResult("from LutDecisions t where t.id="+obj.getInt("desicion")+"", "current");
+			AnnualRegistration ar=(AnnualRegistration) dao.getHQLResult("from AnnualRegistration t where t.id="+obj.getLong("planid")+" ", "current");
+
+			JSONArray arr = new JSONArray();
+			JSONObject jo1 = new JSONObject();
+			jo1.put("user_id", com.getOfficerid());
+			jo1.put("user_name", com.getOfficername());
+			JSONArray content = new JSONArray();
+			content.put(com.getComnote());
+
+			jo1.put("content",content);
+			jo1.put("date", com.getComdate());
+			jo1.put("des", an.getDecisionNameMon());
+			jo1.put("destext", com.getComnote());
+			jo1.put("desicion", com.getDesicionid());
+			JSONObject jo = new JSONObject();
+
+			if(loguser.getPositionid()>0){
+
+				LnkPlanTransition tz=(LnkPlanTransition) dao.getHQLResult("from LnkPlanTransition t where t.noteid="+obj.getInt("id")+" and t.planid="+obj.getInt("planid")+"", "current");
+
+				if (tz != null){
+					if(loguser.getStepid()==6){
+						tz.setMdecisionid(obj.getInt("desicion"));
+					}
+					else{
+						tz.setDecisionid(obj.getInt("desicion"));
+					}
+
+					tz.setOffposition(loguser.getPositionid());
+					dao.PeaceCrud(tz, "LnkPlanTransition", "update", (long) tz.getId(), 0, 0, null);
+				}
+				else{
+					tz = new LnkPlanTransition();
+					tz.setNoteid(obj.getLong("id"));
+					tz.setPlanid(obj.getLong("planid"));
+					tz.setTabid(obj.getInt("tabid"));
+					tz.setDecisionid(obj.getInt("desicion"));
+					tz.setOffposition(loguser.getPositionid());
+					dao.PeaceCrud(tz, "LnkPlanTransition", "save", (long) 0, 0, 0, null);
+				}
+
+
+				List<LnkPlanTransition> des= (List<LnkPlanTransition>) dao.getHQLResult("from LnkPlanTransition t where t.planid="+obj.getInt("planid")+" and t.decisionid=1 and t.tabid="+nt.getInptype()+"", "list");
+				List<LnkPlanTransition> mdes= (List<LnkPlanTransition>) dao.getHQLResult("from LnkPlanTransition t where t.planid="+obj.getInt("planid")+" and t.mdecisionid=1 and t.tabid="+nt.getInptype()+"", "list");
+
+				System.out.println("tabid"+nt.getInptype());
+				System.out.println("tzc"+obj.getLong("notesize"));
+				System.out.println("des"+des.size());
+
+				if(obj.getLong("notesize")==des.size()+mdes.size() && des.size()+mdes.size()>0){	
+
+					List<LnkPlanTab> nz=(List<LnkPlanTab>) dao.getHQLResult("from LnkPlanTab t where t.planid="+obj.getLong("planid")+" and t.tabid="+nt.getInptype()+"", "list");
+					if(nz.size()>0){
+						dao.PeaceCrud(null, "LnkPlanTab", "delete", (long) nz.get(0).getId(), 0, 0, null);
+					}
+					jo1.put("tabid",nt.getInptype());
+					LnkPlanTab tb= new LnkPlanTab();
+					tb.setPlanid(obj.getLong("planid"));
+					tb.setTabid(nt.getInptype());
+					dao.PeaceCrud(tb, "LnkPlanTab", "save", (long) 0, 0, 0, null);
+
+
+					System.out.println("trans"+nt.getTransid());
+					if(nt.getTransid()!=null){
+						if(nt.getTransid()==2){
+							LnkPlanTab tbc= new LnkPlanTab();
+							tbc.setPlanid(obj.getLong("planid"));
+							tbc.setTabid(4);
+							dao.PeaceCrud(tbc, "LnkPlanTab", "save", (long) 0, 0, 0, null);
+						}
+						if(nt.getTransid()==0){
+							LnkPlanTab tbc= new LnkPlanTab();
+							tbc.setPlanid(obj.getLong("planid"));
+							tbc.setTabid(3);
+							dao.PeaceCrud(tbc, "LnkPlanTab", "save", (long) 0, 0, 0, null);
+						}
+						if(nt.getTransid()==3){
+							LnkPlanTab tbc= new LnkPlanTab();
+							tbc.setPlanid(obj.getLong("planid"));
+							tbc.setTabid(4);
+							dao.PeaceCrud(tbc, "LnkPlanTab", "save", (long) 0, 0, 0, null);
+						}
+					}
+
+
+					jo1.put("step",true);
+				}
+				else{
+					if(obj.getInt("desicion")==2){
+						ar.setOfficerid(loguser.getId());
+						ar.setRejectstep(obj.getLong("tabid"));
+						ar.setReject(2);
+						ar.setRepstatusid((long) 2);
+						dao.PeaceCrud(ar, "AnnualRegistration", "update", (long) ar.getId(), 0, 0, null);
+
+						Date d1 = new Date();
+						SimpleDateFormat df = new SimpleDateFormat("MM/dd/YYYY HH:mm a");
+						String formattedDate = df.format(d1);
+
+						LnkCommentMain cm= new LnkCommentMain();
+						cm.setUsername(loguser.getUsername());
+						cm.setUserid(loguser.getId());
+						cm.setPlanid(ar.getId());
+						cm.setMcomment(obj.getString("comment"));
+						cm.setDesid((long) ar.getRejectstep());
+						cm.setCreatedDate(formattedDate);
+						dao.PeaceCrud(cm, "LnkCommentMain", "save", (long) 0, 0, 0, null);
+					}
+					if(obj.getInt("desicion")==3){
+						ar.setOfficerid(loguser.getId());
+						ar.setRejectstep(obj.getLong("tabid"));
+						ar.setReject(3);
+						ar.setRepstatusid((long) 2);
+						dao.PeaceCrud(ar, "AnnualRegistration", "update", (long) ar.getId(), 0, 0, null);
+
+						Date d1 = new Date();
+						SimpleDateFormat df = new SimpleDateFormat("MM/dd/YYYY HH:mm a");
+						String formattedDate = df.format(d1);
+
+						LnkCommentMain cm= new LnkCommentMain();
+						cm.setUsername(loguser.getUsername());
+						cm.setUserid(loguser.getId());
+						cm.setPlanid(ar.getId());
+						cm.setMcomment(obj.getString("comment"));
+						cm.setDesid((long) ar.getRejectstep());
+						cm.setCreatedDate(formattedDate);
+						dao.PeaceCrud(cm, "LnkCommentMain", "save", (long) 0, 0, 0, null);
+					}
+
+				}
+			}
+
+			arr.put(jo1);
+
+			jo.put("comdata", arr);
+
+			return jo.toString();
+		}
+		return null;
+	}
+
 	@RequestMapping(value="/submitReportComment",method=RequestMethod.PUT,produces={"application/json; charset=UTF-8"})
 	public @ResponseBody String ajaxReportComment(@RequestBody String jsonString, HttpServletRequest req) throws DocumentException, Exception {
 		System.out.println(jsonString);
@@ -6810,7 +6990,6 @@ public class PlanReportController {
 				System.out.println("des"+des.size());
 
 				if(obj.getLong("notesize")==des.size()+mdes.size() && des.size()+mdes.size()>0){
-					if(loguser.getDivisionid()!=3){
 						ar.setOfficerid(loguser.getId());
 						ar.setRejectstep((long) 0);
 						ar.setReject(0);
@@ -6857,7 +7036,6 @@ public class PlanReportController {
 
 
 						jo1.put("step",true);
-					}
 				}
 				else{
 					if(obj.getInt("desicion")==2){

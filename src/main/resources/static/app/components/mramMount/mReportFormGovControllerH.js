@@ -228,10 +228,10 @@ angular
                 desicion = $scope.noteForm.desicion;
                 comment = $scope.noteForm.comment;
                 tabid = $scope.userStep;
-                var data = JSON.stringify($scope.note_form, null, 2);
+                var dt = JSON.stringify($scope.note_form, null, 2);
                 if ($scope.note_form.desicion != 1 && ($scope.note_form.comment != null && $scope.note_form.comment != "")) {
 
-                    mainService.withdata('put', '/logic/submitReportComment', data)
+                    mainService.withdata('put', '/logic/submitReportNewComment', dt)
                         .then(function (data) {
                             $scope.notes_data[0].notes[$scope.note_form.index].decision = $scope.note_form.desicion;
                             $scope.note_form.desicion = $scope.noteForm.desicion;
@@ -242,9 +242,36 @@ angular
                             var tabid = data.comdata[0].tabid;
                             $('#submit_message').parent().removeClass('md-input-filled');
                             if (data.comdata[0].step) {
-                                sweet.show('Анхаар', 'Дараагийн шатанд шилжлээ.', 'success');
+
+                                swal({
+                                        title: "Анхааруулга!!!",
+                                        text: "Дараагийн шатанд шилжүүлэх үү?",
+                                        type: "warning",
+                                        showCancelButton: true,
+                                        confirmButtonColor: "#DD6B55",confirmButtonText: "Тийм!",
+                                        cancelButtonText: "Үгүй!",
+                                        closeOnConfirm: false,
+                                        closeOnCancel: false,
+                                        showLoaderOnConfirm: true
+                                    },
+                                    function(isConfirm){
+                                        if (!isConfirm) {
+                                            swal("Татгалзсан", "Шилжсэнгүй", "error");
+                                        }else{
+                                            mainService.withdata('put', '/logic/submitReportConfirm', $scope.confirmData)
+                                                .then(function (data) {
+                                                    if(data){
+                                                        sweet.show('Анхаар', 'Дараагийн шатанд шилжлээ.', 'success');
+                                                        $state.go($rootScope.previousState.name);
+                                                    }
+                                                });
+                                        }
+                                    });
+
+                             /*   sweet.show('Анхаар', 'Дараагийн шатанд шилжлээ.', 'success');
+                                $state.go($rootScope.previousState.name);*/
                                 var stp = data.comdata[0].tabid - 1;
-                                $state.go($rootScope.previousState.name);
+
                             }
                             else {
                                 sweet.show('Анхаар', 'ААН-рүү засварт буцлаа', 'success');
@@ -255,7 +282,7 @@ angular
                 }
                 else {
                     if ($scope.note_form.desicion == 1) {
-                        mainService.withdata('put', '/logic/submitReportComment', data)
+                        mainService.withdata('put', '/logic/submitReportNewComment', dt)
                             .then(function (data) {
                                 $scope.notes_data[0].notes[$scope.note_form.index].decision = $scope.note_form.desicion;
                                 $scope.note_form.desicion = $scope.noteForm.desicion;
@@ -265,9 +292,34 @@ angular
                                 var tabid = data.comdata[0].tabid;
                                 $('#submit_message').parent().removeClass('md-input-filled');
                                 if (data.comdata[0].step) {
-                                    sweet.show('Анхаар', 'Дараагийн шатанд шилжлээ.', 'success');
+
+                                    swal({
+                                            title: "Анхааруулга!!!",
+                                            text: "Дараагийн шатанд шилжүүлэх үү?",
+                                            type: "warning",
+                                            showCancelButton: true,
+                                            confirmButtonColor: "#DD6B55",confirmButtonText: "Тийм!",
+                                            cancelButtonText: "Үгүй!",
+                                            closeOnConfirm: false,
+                                            closeOnCancel: false,
+                                            showLoaderOnConfirm: true
+                                        },
+                                        function(isConfirm){
+                                            if (!isConfirm) {
+                                                swal("Татгалзсан", "Шилжсэнгүй", "error");
+                                            }else{
+                                                mainService.withdata('put', '/logic/submitReportConfirm', dt)
+                                                    .then(function (data) {
+                                                        if(data){
+                                                            sweet.show('Анхаар', 'Дараагийн шатанд шилжлээ.', 'success');
+                                                            $state.go($rootScope.previousState.name);
+                                                        }
+                                                    });
+                                            }
+                                        });
+                                   /* sweet.show('Анхаар', 'Дараагийн шатанд шилжлээ.', 'success');
                                     var stp = data.comdata[0].tabid - 1;
-                                    $state.go($rootScope.previousState.name);
+                                    $state.go($rootScope.previousState.name);*/
                                 }
                                 //init();
                             });

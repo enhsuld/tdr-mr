@@ -1079,33 +1079,6 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="uk-width-1-1"
-                                                             ng-if="geoplan== false  && item.tabid==userStep"
-                                                             ng-show="zardal">
-                                                            <div class="md-card-toolbar uk-margin-bottom"
-                                                                 ng-if="note_form.decision==undefined || note_form.decision==1 || note_form.decision==0"
-                                                                 style="padding:0px;">
-                                                                <h3 class="md-card-toolbar-heading-text large">
-                                                                    <span class="uk-text-muted">Баталгаажуулах</span>
-                                                                </h3>
-                                                            </div>
-                                                            <div class="uk-grid" data-uk-grid-margin>
-                                                                <div class="uk-width-large-1-2 uk-width-medium-1-2 uk-push-1-2">
-                                                                    <div class="uk-input-group">
-                                                                        <input type="text" ng-model="confirmData.stepId"
-                                                                               class="md-input"
-                                                                               placeholder="Сонгоно уу..."
-                                                                               position="bottom"
-                                                                               config="selectize_a_config"
-                                                                               options="selectize_a_confirm"
-                                                                               name="isactive" selectize/>
-                                                                        <span class="uk-input-group-addon"><button
-                                                                                class="md-btn"
-                                                                                ng-click="saveConfirm($event,noteForm.id)">Хадгалах</button></span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
                                                     </div>
                                                     <div class="uk-grid"
                                                          ng-if="sgt.repstatusid==7 || sgt.repstatusid==2">
