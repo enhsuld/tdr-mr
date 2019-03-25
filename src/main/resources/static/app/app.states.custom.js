@@ -358,7 +358,6 @@ altairApp
                     resolve: {
                         deps: ['$ocLazyLoad', function ($ocLazyLoad) {
                             return $ocLazyLoad.load([
-                                'lazy_echarts',
                                 'app/components/reports/downloadReport.js'
                             ], {serie: true});
                         }]

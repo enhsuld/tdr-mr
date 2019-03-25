@@ -7,18 +7,30 @@ angular
         '$window',
         '$timeout',
         'variables',
+        'mainService',
         'sweet',
         '$http',
         'user_data',
-        function ($rootScope,$scope,$interval,$window,$timeout,variables,sweet,$http, user_data) {
+        function ($rootScope,$scope,$interval,$window,$timeout,variables,mainService,sweet,$http, user_data) {
             $scope.user_data = user_data;
-        	$scope.downloadReport = function(event){
-                $(event.currentTarget).addClass("disabled");
-                $(event.currentTarget).prop('disabled',true);
-                $(event.currentTarget).text('Түр хүлээнэ үү…');
-                $(event.currentTarget).parent().children("a").click();
+            var modalLoading = UIkit.modal("#modalLoading", {
+                modal: false,
+                keyboard: false,
+                bgclose: false,
+                center: false
+            });
+        	$scope.downloadReport = function(reportType,id,fname){
+                var link = document.createElement('a');
+                link.href = '/api/excel/download/' + reportType+'/'+id+'/'+$scope.yearSelected.value+'/'+fname;
+                link.download = "Filename";
+                link.click();
             };
-
+            $scope.downloadPlan = function(reportType,id,fname){
+                var link = document.createElement('a');
+                link.href = '/api/excel/download/' + reportType+'/'+id+'/'+$scope.yearSelected.value+'/'+fname;
+                link.download = "Filename";
+                link.click();
+            };
         }
     ])
 
