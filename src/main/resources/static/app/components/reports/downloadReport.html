@@ -8,6 +8,7 @@
                             <h3>Тайлан татаж авах хэсэг
                                 <span>
                                 <select kendo-drop-down-list k-ng-model="yearSelected">
+                                    <option>2019</option>
                                     <option>2018</option>
                                     <option>2017</option>
                                     <option>2016</option>
@@ -59,7 +60,7 @@
                                         <tr>
                                             <td>Маягт 1.2-ын мэдээлэл</td>
                                             <td>
-                                                <button ng-if="yearSelected.value!=null" ng-click="downloadPlan(2)" class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon">
+                                                <button ng-if="yearSelected.value!=null" ng-click="downloadPlan(3,2,'form1.2')" class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon">
                                                     <i class="uk-icon-cloud-download"></i>Татах
                                                 </button>
                                             </td>
@@ -67,7 +68,7 @@
                                         <tr>
                                             <td>Маягт 2.1-ын мэдээлэл</td>
                                             <td>
-                                                <button ng-if="yearSelected.value!=null" ng-click="downloadPlan(3)" class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon">
+                                                <button ng-if="yearSelected.value!=null" ng-click="downloadPlan(3,3,'form2.1')" class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon">
                                                     <i class="uk-icon-cloud-download"></i>Татах
                                                 </button>
                                             </td>
@@ -75,7 +76,7 @@
                                         <tr>
                                             <td>Маягт 2.2-ын мэдээлэл</td>
                                             <td>
-                                                <button ng-if="yearSelected.value!=null" ng-click="downloadPlan(4)" class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon">
+                                                <button ng-if="yearSelected.value!=null" ng-click="downloadPlan(3,4,'form2.2')"  class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon">
                                                     <i class="uk-icon-cloud-download"></i>Татах
                                                 </button>
                                             </td>

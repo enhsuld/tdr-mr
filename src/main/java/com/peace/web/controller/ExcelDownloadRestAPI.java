@@ -30,10 +30,6 @@ public class ExcelDownloadRestAPI {
     @Autowired
     private UserDao dao;
 
-
-    @Autowired
-    DataSource datasource;
-
     @GetMapping(value = "/download/{reportType}/{formId}/{planYr}/{formName}")
     public ResponseEntity<InputStreamResource> excelReport(@PathVariable int reportType, HttpServletRequest req, @PathVariable int formId, @PathVariable int planYr,@PathVariable String formName) throws IOException {
         String appPath = req.getServletContext().getRealPath("");
