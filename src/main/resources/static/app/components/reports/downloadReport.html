@@ -5,7 +5,7 @@
                 <div class="md-card">
                     <div class="md-card-content">
                         <div class="uk-overflow-container">
-                            <h3>Тайлан татаж авах хэсэг
+                            <h3>Төлөвлөгөө, тайлангийн огноо
                                 <span>
                                 <select kendo-drop-down-list k-ng-model="yearSelected">
                                     <option>2019</option>
@@ -222,17 +222,9 @@
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td>Маягт 2.1-ын мэдээлэл</td>
+                                                <td>Маягт 2-ын мэдээлэл</td>
                                                 <td>
-                                                    <button ng-if="yearSelected.value!=null" ng-click="downloadReport(1)" class="md-btn disabled md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon">
-                                                        <i class="uk-icon-cloud-download"></i>Татах
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Маягт 2.2-ын мэдээлэл</td>
-                                                <td>
-                                                    <button ng-if="yearSelected.value!=null" ng-click="downloadReport(2)" class="md-btn disabled md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon">
+                                                    <button ng-if="yearSelected.value!=null" ng-click="downloadPlan(4,1,'form2')" class="md-btn  md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon">
                                                         <i class="uk-icon-cloud-download"></i>Татах
                                                     </button>
                                                 </td>
@@ -240,7 +232,7 @@
                                             <tr>
                                                 <td>Маягт 3а-ын мэдээлэл</td>
                                                 <td>
-                                                    <button ng-if="yearSelected.value!=null" ng-click="downloadReport(3)" class="md-btn disabled md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon">
+                                                    <button ng-if="yearSelected.value!=null" ng-click="downloadPlan(4,2,'form3a')" class="md-btn disabled md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon">
                                                         <i class="uk-icon-cloud-download"></i>Татах
                                                     </button>
                                                 </td>
@@ -248,7 +240,7 @@
                                             <tr>
                                                 <td>Маягт 3б-ын мэдээлэл</td>
                                                 <td>
-                                                    <button ng-if="yearSelected.value!=null" ng-click="downloadReport(4)" class="md-btn disabled md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon">
+                                                    <button ng-if="yearSelected.value!=null" ng-click="downloadPlan(4,3,'form3b')" class="md-btn  md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon">
                                                         <i class="uk-icon-cloud-download"></i>Татах
                                                     </button>
                                                 </td>
@@ -256,7 +248,7 @@
                                             <tr>
                                                 <td>Маягт 4.1-ын мэдээлэл</td>
                                                 <td>
-                                                    <button ng-if="yearSelected.value!=null" ng-click="downloadReport(5)" class="md-btn disabled md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon">
+                                                    <button ng-if="yearSelected.value!=null" ng-click="downloadPlan(4,4,'form4.1')" class="md-btn  md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon">
                                                         <i class="uk-icon-cloud-download"></i>Татах
                                                     </button>
                                                 </td>
@@ -264,7 +256,7 @@
                                             <tr>
                                                 <td>Маягт 4.2-ын мэдээлэл</td>
                                                 <td>
-                                                    <button ng-if="yearSelected.value!=null" ng-click="downloadReport(6)" class="md-btn disabled md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon">
+                                                    <button ng-if="yearSelected.value!=null" ng-click="downloadPlan(4,5,'form4.2')" class="md-btn  md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon">
                                                         <i class="uk-icon-cloud-download"></i>Татах
                                                     </button>
                                                 </td>
@@ -272,7 +264,7 @@
                                             <tr>
                                                 <td>Маягт 5-ын мэдээлэл</td>
                                                 <td>
-                                                    <button ng-if="yearSelected.value!=null" ng-click="downloadReport(7)" class="md-btn disabled md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon">
+                                                    <button ng-if="yearSelected.value!=null" ng-click="downloadPlan(4,6,'form5')" class="md-btn  disabled md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon">
                                                         <i class="uk-icon-cloud-download"></i>Татах
                                                     </button>
                                                 </td>
@@ -280,7 +272,7 @@
                                             <tr>
                                                 <td>Маягт 6.1-ын мэдээлэл</td>
                                                 <td>
-                                                    <button ng-if="yearSelected.value!=null" ng-click="downloadReport(8)" class="md-btn disabled md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon">
+                                                    <button ng-if="yearSelected.value!=null" ng-click="downloadPlan(4,7,'form6.1')" class="md-btn  disabled md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon">
                                                         <i class="uk-icon-cloud-download"></i>Татах
                                                     </button>
                                                 </td>
@@ -288,7 +280,7 @@
                                             <tr>
                                                 <td>Маягт 6.2-ын мэдээлэл</td>
                                                 <td>
-                                                    <button ng-if="yearSelected.value!=null" ng-click="downloadReport(9)" class="md-btn disabled md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon">
+                                                    <button ng-if="yearSelected.value!=null" ng-click="downloadPlan(4,8,'form6.2')" class="md-btn disabled md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon">
                                                         <i class="uk-icon-cloud-download"></i>Татах
                                                     </button>
                                                 </td>
@@ -296,7 +288,7 @@
                                             <tr>
                                                 <td>Маягт 7-ын мэдээлэл</td>
                                                 <td>
-                                                    <button ng-if="yearSelected.value!=null" ng-click="downloadReport(10)" class="md-btn disabled md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon">
+                                                    <button ng-if="yearSelected.value!=null" ng-click="downloadPlan(4,9,'form7')" class="md-btn  md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon">
                                                         <i class="uk-icon-cloud-download"></i>Татах
                                                     </button>
                                                 </td>
@@ -304,7 +296,7 @@
                                             <tr>
                                                 <td>Маягт 8-ын мэдээлэл</td>
                                                 <td>
-                                                    <button ng-if="yearSelected.value!=null" ng-click="downloadReport(11)" class="md-btn disabled md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon">
+                                                    <button ng-if="yearSelected.value!=null" ng-click="downloadPlan(4,10,'form8')" class="md-btn disabled md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon">
                                                         <i class="uk-icon-cloud-download"></i>Татах
                                                     </button>
                                                 </td>
@@ -312,7 +304,7 @@
                                             <tr>
                                                 <td>Маягт 9-ын мэдээлэл</td>
                                                 <td>
-                                                    <button ng-if="yearSelected.value!=null" ng-click="downloadReport(12)" class="md-btn disabled md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon">
+                                                    <button ng-if="yearSelected.value!=null" ng-click="downloadPlan(4,11,'form9')" class="md-btn disabled md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon">
                                                         <i class="uk-icon-cloud-download"></i>Татах
                                                     </button>
                                                 </td>
@@ -320,7 +312,7 @@
                                             <tr>
                                                 <td>Маягт 10-ын мэдээлэл</td>
                                                 <td>
-                                                    <button ng-if="yearSelected.value!=null" ng-click="downloadReport(12)" class="md-btn disabled md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon">
+                                                    <button ng-if="yearSelected.value!=null" ng-click="downloadPlan(4,12,'form10')" class="md-btn disabled md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon">
                                                         <i class="uk-icon-cloud-download"></i>Татах
                                                     </button>
                                                 </td>
@@ -328,7 +320,7 @@
                                             <tr>
                                                 <td>Маягт 11-ын мэдээлэл</td>
                                                 <td>
-                                                    <button ng-if="yearSelected.value!=null" ng-click="downloadReport(13)" class="md-btn disabled md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon">
+                                                    <button ng-if="yearSelected.value!=null" ng-click="downloadPlan(4,13,'form11')" class="md-btn disabled md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon">
                                                         <i class="uk-icon-cloud-download"></i>Татах
                                                     </button>
                                                 </td>
@@ -336,7 +328,7 @@
                                             <tr>
                                                 <td>Маягт 12-ын мэдээлэл</td>
                                                 <td>
-                                                    <button ng-if="yearSelected.value!=null" ng-click="downloadReport(14)" class="md-btn disabled md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon">
+                                                    <button ng-if="yearSelected.value!=null" ng-click="downloadPlan(4,14,'form12')" class="md-btn disabled md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon">
                                                         <i class="uk-icon-cloud-download"></i>Татах
                                                     </button>
                                                 </td>
@@ -344,7 +336,7 @@
                                             <tr>
                                                 <td>Маягт 13-ын мэдээлэл</td>
                                                 <td>
-                                                    <button ng-if="yearSelected.value!=null" ng-click="downloadReport(15)" class="md-btn disabled md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon">
+                                                    <button ng-if="yearSelected.value!=null" ng-click="downloadPlan(4,15,'form13')" class="md-btn  md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon">
                                                         <i class="uk-icon-cloud-download"></i>Татах
                                                     </button>
                                                 </td>
@@ -352,7 +344,7 @@
                                             <tr>
                                                 <td>Маягт 14-ын мэдээлэл</td>
                                                 <td>
-                                                    <button ng-if="yearSelected.value!=null" ng-click="downloadReport(16)" class="md-btn disabled md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon">
+                                                    <button ng-if="yearSelected.value!=null" ng-click="downloadPlan(4,16,'form14')" class="md-btn disabled md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon">
                                                         <i class="uk-icon-cloud-download"></i>Татах
                                                     </button>
                                                 </td>
@@ -360,7 +352,7 @@
                                             <tr>
                                                 <td>Маягт 15-ын мэдээлэл</td>
                                                 <td>
-                                                    <button ng-if="yearSelected.value!=null" ng-click="downloadReport(17)" class="md-btn  md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon">
+                                                    <button ng-if="yearSelected.value!=null" ng-click="downloadPlan(4,17,'form15')" class="md-btn  disabled md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon">
                                                         <i class="uk-icon-cloud-download"></i>Татах
                                                     </button>
                                                 </td>
@@ -368,7 +360,7 @@
                                             <tr>
                                                 <td>Маягт 16-ын мэдээлэл</td>
                                                 <td>
-                                                    <button ng-if="yearSelected.value!=null" ng-click="downloadReport(18)" class="md-btn disabled md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon">
+                                                    <button ng-if="yearSelected.value!=null" ng-click="downloadPlan(4,18,'form16')" class="md-btn  md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon">
                                                         <i class="uk-icon-cloud-download"></i>Татах
                                                     </button>
                                                 </td>
@@ -376,7 +368,7 @@
                                             <tr>
                                                 <td>Маягт 17-ын мэдээлэл</td>
                                                 <td>
-                                                    <button ng-if="yearSelected.value!=null" ng-click="downloadReport(19)" class="md-btn disabled md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon">
+                                                    <button ng-if="yearSelected.value!=null" ng-click="downloadPlan(4,19,'form17')" class="md-btn  md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon">
                                                         <i class="uk-icon-cloud-download"></i>Татах
                                                     </button>
                                                 </td>
@@ -384,7 +376,7 @@
                                             <tr>
                                                 <td>Маягт 18-ын мэдээлэл</td>
                                                 <td>
-                                                    <button ng-if="yearSelected.value!=null" ng-click="downloadReport(20)" class="md-btn disabled md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon">
+                                                    <button ng-if="yearSelected.value!=null" ng-click="downloadPlan(4,20,'form18')" class="md-btn disabled md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon">
                                                         <i class="uk-icon-cloud-download"></i>Татах
                                                     </button>
                                                 </td>
@@ -392,7 +384,7 @@
                                             <tr>
                                                 <td>Маягт 19-ын мэдээлэл</td>
                                                 <td>
-                                                    <button ng-if="yearSelected.value!=null" ng-click="downloadReport(21)" class="md-btn disabled md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon">
+                                                    <button ng-if="yearSelected.value!=null" ng-click="downloadPlan(4,21,'form19')" class="md-btn disabled md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon">
                                                         <i class="uk-icon-cloud-download"></i>Татах
                                                     </button>
                                                 </td>
