@@ -3,6 +3,7 @@ package com.peace.web.logic.controller;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.nio.charset.Charset;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -7937,8 +7938,10 @@ public class PlanReportController {
 
 			UserDetails userDetail = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			LutUsers loguser=(LutUsers) dao.getHQLResult("from LutUsers t where t.username='"+userDetail.getUsername()+"'", "current");
-			List<LnkPlanAttachedFiles> rs=(List<LnkPlanAttachedFiles>) dao.getHQLResult("from LnkPlanAttachedFiles t ", "list");;
-
+			//List<LnkPlanAttachedFiles> rs=(List<LnkPlanAttachedFiles>) dao.getHQLResult("from LnkPlanAttachedFiles t ", "list");;
+			byte[] array = new byte[7]; // length is bounded by 7
+			new Random().nextBytes(array);
+			int random = (int )(Math.random() * 50 + 1);
 
 			String path = appPath + "/" + SAVE_DIR+ "/"  +loguser.getLpreg()+ "/" +folderDate;
 
@@ -7948,7 +7951,7 @@ public class PlanReportController {
 			}
 
 
-			String fpath = appPath + "/"+SAVE_DIR+ "/" +loguser.getLpreg()+ "/" +folderDate+ "/" +"("+rs.size()+")"+mfile.getOriginalFilename();
+			String fpath = appPath + "/"+SAVE_DIR+ "/" +loguser.getLpreg()+ "/" +folderDate+ "/" +"("+random+")"+mfile.getOriginalFilename();
 			File logoorgpath = new File(fpath);
 
 			if(!logoorgpath.exists()){
@@ -7958,7 +7961,7 @@ public class PlanReportController {
 				jo.put("return", "false");
 			}
 
-			String path1 = "/" + SAVE_DIR+ "/" +loguser.getLpreg()+ "/" +folderDate+ "/" +"("+rs.size()+")"+mfile.getOriginalFilename();
+			String path1 = "/" + SAVE_DIR+ "/" +loguser.getLpreg()+ "/" +folderDate+ "/" +"("+random+")"+mfile.getOriginalFilename();
 
 			String ext = FilenameUtils.getExtension(path1);
 			System.out.println("EXT ================ " + ext);
