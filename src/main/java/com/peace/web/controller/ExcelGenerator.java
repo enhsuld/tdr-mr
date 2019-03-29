@@ -54,17 +54,17 @@ public class ExcelGenerator {
         SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
         String DateToStr1 = format1.format(curDate);
 
-        if(reportType == 3 && formId == 1){
+        if (reportType == 3 && formId == 1) {
             FileInputStream fis = null;
-            File files = new File(appPath+"/assets/excel/plan/Mining_Plan_1_1.xlsx");
+            File files = new File(appPath + "/assets/excel/plan/Mining_Plan_1_1.xlsx");
             fis = new FileInputStream(files);
             workbook = new XSSFWorkbook(fis);
 
             CellStyle cellStyle = workbook.createCellStyle();
-            cellStyle.setBorderBottom((short)1);
-            cellStyle.setBorderLeft((short)1);
-            cellStyle.setBorderRight((short)1);
-            cellStyle.setBorderTop((short)1);
+            cellStyle.setBorderBottom((short) 1);
+            cellStyle.setBorderLeft((short) 1);
+            cellStyle.setBorderRight((short) 1);
+            cellStyle.setBorderTop((short) 1);
             cellStyle.setWrapText(true);
             cellStyle.setAlignment(cellStyle.ALIGN_CENTER);
             cellStyle.setVerticalAlignment(cellStyle.VERTICAL_CENTER);
@@ -76,7 +76,7 @@ public class ExcelGenerator {
             Row row1 = sheet.getRow(2);
             Cell cel2 = row1.createCell(2);
             cel2.setCellValue(DateToStr1);
-            String queryStr="SELECT\n" +
+            String queryStr = "SELECT\n" +
                     "MRAM.ANNUAL_REGISTRATION.LICENSENUM AS Дугаар,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LPNAME AS Эзэмшигч,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LP_REG AS Регистер,\n" +
@@ -110,12 +110,12 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_MIN_PLAN_1 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_MIN_PLAN_1.PLANID\n" +
                     "\n" +
                     "WHERE\n" +
-                    "   MRAM.ANNUAL_REGISTRATION.REPORTYEAR = "+planYr+" \n" +
+                    "   MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\t and MRAM.LUT_DEPOSIT.MINERALTYPE=1 \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_MIN_PLAN_1.\"ID\"";
-            List<Object[]> objects=dao.getNativeSQLResult(queryStr,"list");
-            int rowCount=7;
-            for(Object[] obj:objects){
+            List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
+            int rowCount = 7;
+            for (Object[] obj : objects) {
                 row = sheet.createRow(rowCount);
                 Cell cell1 = row.createCell(0);
                 cell1.setCellValue(Double.parseDouble(obj[0].toString()));
@@ -146,60 +146,60 @@ public class ExcelGenerator {
                 Cell cell114 = row.createCell(13);
                 cell114.setCellValue(Double.parseDouble(obj[13].toString()));
                 Cell cell15 = row.createCell(14);
-                if(obj[14]!=null){
+                if (obj[14] != null) {
                     cell15.setCellValue(obj[14].toString());
                 }
                 Cell cell16 = row.createCell(15);
-                if(obj[15]!=null) {
+                if (obj[15] != null) {
                     cell16.setCellValue(obj[15].toString());
                 }
                 Cell cell17 = row.createCell(16);
-                if(obj[16]!=null) {
+                if (obj[16] != null) {
                     cell17.setCellValue(Double.parseDouble(obj[16].toString()));
                 }
                 Cell cell18 = row.createCell(17);
-                if(obj[17]!=null) {
+                if (obj[17] != null) {
                     cell18.setCellValue(Double.parseDouble(obj[17].toString()));
                 }
                 Cell cell19 = row.createCell(18);
-                if(obj[18]!=null){
+                if (obj[18] != null) {
                     cell19.setCellValue(obj[18].toString());
                 }
                 Cell cell20 = row.createCell(19);
-                if(obj[19]!=null){
+                if (obj[19] != null) {
                     cell20.setCellValue(obj[19].toString());
                 }
                 Cell cell21 = row.createCell(20);
-                if(obj[20]!=null) {
+                if (obj[20] != null) {
                     cell21.setCellValue(Double.parseDouble(obj[20].toString()));
                 }
                 Cell cell22 = row.createCell(21);
-                if(obj[21]!=null){
+                if (obj[21] != null) {
                     cell22.setCellValue(obj[21].toString());
                 }
                 Cell cell23 = row.createCell(22);
-                if(obj[22]!=null) {
+                if (obj[22] != null) {
                     cell23.setCellValue(Double.parseDouble(obj[22].toString()));
                 }
                 Cell cell24 = row.createCell(23);
-                if(obj[23]!=null) {
+                if (obj[23] != null) {
                     cell24.setCellValue(Double.parseDouble(obj[23].toString()));
                 }
                 rowCount++;
             }
         }
 
-        if(reportType == 3 && formId == 2){
+        if (reportType == 3 && formId == 2) {
             FileInputStream fis = null;
-            File files = new File(appPath+"/assets/excel/plan/Mining_Plan_1_2.xlsx");
+            File files = new File(appPath + "/assets/excel/plan/Mining_Plan_1_2.xlsx");
             fis = new FileInputStream(files);
             workbook = new XSSFWorkbook(fis);
 
             CellStyle cellStyle = workbook.createCellStyle();
-            cellStyle.setBorderBottom((short)1);
-            cellStyle.setBorderLeft((short)1);
-            cellStyle.setBorderRight((short)1);
-            cellStyle.setBorderTop((short)1);
+            cellStyle.setBorderBottom((short) 1);
+            cellStyle.setBorderLeft((short) 1);
+            cellStyle.setBorderRight((short) 1);
+            cellStyle.setBorderTop((short) 1);
             cellStyle.setWrapText(true);
             cellStyle.setAlignment(cellStyle.ALIGN_CENTER);
             cellStyle.setVerticalAlignment(cellStyle.VERTICAL_CENTER);
@@ -211,7 +211,7 @@ public class ExcelGenerator {
             Row row1 = sheet.getRow(2);
             Cell cel2 = row1.createCell(2);
             cel2.setCellValue(DateToStr1);
-            String queryStr="SELECT\n" +
+            String queryStr = "SELECT\n" +
                     "MRAM.ANNUAL_REGISTRATION.LICENSENUM AS Дугаар,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LPNAME AS Эзэмшигч,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LP_REG AS Регистер,\n" +
@@ -243,12 +243,12 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_MIN_PLAN_1 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_MIN_PLAN_1.PLANID\n" +
                     "\n" +
                     "WHERE\n" +
-                    "   MRAM.ANNUAL_REGISTRATION.REPORTYEAR  in ("+planYr+") \n" +
+                    "   MRAM.ANNUAL_REGISTRATION.REPORTYEAR  in (" + planYr + ") \n" +
                     "\t and MRAM.LUT_DEPOSIT.MINERALTYPE=2\n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_MIN_PLAN_1.\"ID\"";
-            List<Object[]> objects=dao.getNativeSQLResult(queryStr,"list");
-            int rowCount=7;
-            for(Object[] obj:objects){
+            List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
+            int rowCount = 7;
+            for (Object[] obj : objects) {
                 row = sheet.createRow(rowCount);
                 Cell cell1 = row.createCell(0);
                 cell1.setCellValue(Double.parseDouble(obj[0].toString()));
@@ -280,40 +280,40 @@ public class ExcelGenerator {
                 cell114.setCellValue(Double.parseDouble(obj[13].toString()));
 
                 Cell cell15 = row.createCell(14);
-                if(obj[14]!=null){
+                if (obj[14] != null) {
                     cell15.setCellValue(obj[14].toString());
                 }
                 Cell cell16 = row.createCell(15);
-                if(obj[15]!=null){
+                if (obj[15] != null) {
                     cell16.setCellValue(obj[15].toString());
                 }
                 Cell cell17 = row.createCell(16);
-                if(obj[16]!=null){
+                if (obj[16] != null) {
                     cell17.setCellValue(Double.parseDouble(obj[16].toString()));
                 }
                 Cell cell18 = row.createCell(17);
-                if(obj[17]!=null){
+                if (obj[17] != null) {
                     cell18.setCellValue(obj[17].toString());
                 }
                 Cell cell19 = row.createCell(17);
-                if(obj[17]!=null){
+                if (obj[17] != null) {
                     cell19.setCellValue(Double.parseDouble(obj[17].toString()));
                 }
 
                 rowCount++;
             }
         }
-        if(reportType == 3 && formId == 3){
+        if (reportType == 3 && formId == 3) {
             FileInputStream fis = null;
-            File files = new File(appPath+"/assets/excel/plan/Mining_Plan_2_1.xlsx");
+            File files = new File(appPath + "/assets/excel/plan/Mining_Plan_2_1.xlsx");
             fis = new FileInputStream(files);
             workbook = new XSSFWorkbook(fis);
 
             CellStyle cellStyle = workbook.createCellStyle();
-            cellStyle.setBorderBottom((short)1);
-            cellStyle.setBorderLeft((short)1);
-            cellStyle.setBorderRight((short)1);
-            cellStyle.setBorderTop((short)1);
+            cellStyle.setBorderBottom((short) 1);
+            cellStyle.setBorderLeft((short) 1);
+            cellStyle.setBorderRight((short) 1);
+            cellStyle.setBorderTop((short) 1);
             cellStyle.setWrapText(true);
             cellStyle.setAlignment(cellStyle.ALIGN_CENTER);
             cellStyle.setVerticalAlignment(cellStyle.VERTICAL_CENTER);
@@ -325,7 +325,7 @@ public class ExcelGenerator {
             Row row1 = sheet.getRow(2);
             Cell cel2 = row1.createCell(2);
             cel2.setCellValue(DateToStr1);
-            String queryStr="SELECT\n" +
+            String queryStr = "SELECT\n" +
                     "MRAM.ANNUAL_REGISTRATION.LICENSENUM AS Дугаар,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LPNAME AS Эзэмшигч,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LP_REG AS Регистер,\n" +
@@ -367,12 +367,12 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.REG_REPORT_REQ on MRAM.REG_REPORT_REQ.\"ID\"=MRAM.ANNUAL_REGISTRATION.REQID \n" +
                     "INNER JOIN MRAM.DATA_MIN_PLAN_2_1 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_MIN_PLAN_2_1.PLANID\n" +
                     "WHERE\n" +
-                    "   MRAM.ANNUAL_REGISTRATION.REPORTYEAR  = "+planYr+" \n" +
+                    "   MRAM.ANNUAL_REGISTRATION.REPORTYEAR  = " + planYr + " \n" +
                     "    and TYPE=1 \n" +
                     "\t\torder by  MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_MIN_PLAN_2_1.\"ID\"";
-            List<Object[]> objects=dao.getNativeSQLResult(queryStr,"list");
-            int rowCount=7;
-            for(Object[] obj:objects){
+            List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
+            int rowCount = 7;
+            for (Object[] obj : objects) {
                 row = sheet.createRow(rowCount);
                 Cell cell1 = row.createCell(0);
                 cell1.setCellValue(Double.parseDouble(obj[0].toString()));
@@ -402,108 +402,108 @@ public class ExcelGenerator {
                 cell13.setCellValue(obj[12].toString());
 
                 Cell cell114 = row.createCell(13);
-                if(obj[13]!=null){
+                if (obj[13] != null) {
                     cell114.setCellValue(Double.parseDouble(obj[13].toString()));
                 }
 
                 Cell cell15 = row.createCell(14);
-                if(obj[14]!=null){
+                if (obj[14] != null) {
                     cell15.setCellValue(obj[14].toString());
                 }
                 Cell cell16 = row.createCell(15);
-                if(obj[15]!=null){
+                if (obj[15] != null) {
                     cell16.setCellValue(obj[15].toString());
                 }
                 Cell cell17 = row.createCell(16);
-                if(obj[16]!=null){
+                if (obj[16] != null) {
                     cell17.setCellValue(obj[16].toString());
                 }
                 Cell cell18 = row.createCell(17);
-                if(obj[17]!=null){
+                if (obj[17] != null) {
                     cell18.setCellValue(obj[17].toString());
                 }
                 Cell cell19 = row.createCell(18);
-                if(obj[18]!=null){
+                if (obj[18] != null) {
                     cell19.setCellValue(Double.parseDouble(obj[18].toString()));
                 }
                 Cell cell20 = row.createCell(19);
-                if(obj[19]!=null){
+                if (obj[19] != null) {
                     cell20.setCellValue(Double.parseDouble(obj[19].toString()));
                 }
                 Cell cell21 = row.createCell(20);
-                if(obj[20]!=null){
+                if (obj[20] != null) {
                     cell21.setCellValue(obj[20].toString());
                 }
                 Cell cell22 = row.createCell(21);
-                if(obj[21]!=null){
+                if (obj[21] != null) {
                     cell22.setCellValue(Double.parseDouble(obj[21].toString()));
                 }
                 Cell cell23 = row.createCell(22);
-                if(obj[22]!=null){
+                if (obj[22] != null) {
                     cell23.setCellValue(obj[22].toString());
                 }
                 Cell cell24 = row.createCell(23);
-                if(obj[23]!=null){
+                if (obj[23] != null) {
                     cell24.setCellValue(Double.parseDouble(obj[23].toString()));
                 }
                 Cell cell25 = row.createCell(24);
-                if(obj[24]!=null){
+                if (obj[24] != null) {
                     cell25.setCellValue(obj[24].toString());
                 }
                 Cell cell26 = row.createCell(25);
-                if(obj[25]!=null){
+                if (obj[25] != null) {
                     cell26.setCellValue(obj[25].toString());
                 }
                 Cell cell27 = row.createCell(26);
-                if(obj[26]!=null){
+                if (obj[26] != null) {
                     cell27.setCellValue(Double.parseDouble(obj[26].toString()));
                 }
                 Cell cell28 = row.createCell(27);
-                if(obj[27]!=null){
+                if (obj[27] != null) {
                     cell28.setCellValue(obj[27].toString());
                 }
                 Cell cell29 = row.createCell(28);
-                if(obj[28]!=null){
+                if (obj[28] != null) {
                     cell29.setCellValue(Double.parseDouble(obj[28].toString()));
                 }
                 Cell cell30 = row.createCell(29);
-                if(obj[29]!=null){
+                if (obj[29] != null) {
                     cell30.setCellValue(Double.parseDouble(obj[29].toString()));
                 }
                 Cell cell31 = row.createCell(30);
-                if(obj[30]!=null){
+                if (obj[30] != null) {
                     cell31.setCellValue(obj[30].toString());
                 }
                 Cell cell32 = row.createCell(31);
-                if(obj[31]!=null){
+                if (obj[31] != null) {
                     cell32.setCellValue(Double.parseDouble(obj[31].toString()));
                 }
                 Cell cell33 = row.createCell(32);
-                if(obj[32]!=null){
+                if (obj[32] != null) {
                     cell33.setCellValue(obj[32].toString());
                 }
                 Cell cell34 = row.createCell(33);
-                if(obj[33]!=null){
+                if (obj[33] != null) {
                     cell34.setCellValue(Double.parseDouble(obj[33].toString()));
                 }
                 Cell cell35 = row.createCell(34);
-                if(obj[34]!=null){
+                if (obj[34] != null) {
                     cell35.setCellValue(obj[34].toString());
                 }
                 Cell cell36 = row.createCell(35);
-                if(obj[35]!=null){
+                if (obj[35] != null) {
                     cell36.setCellValue(Double.parseDouble(obj[35].toString()));
                 }
                 Cell cell37 = row.createCell(36);
-                if(obj[36]!=null){
+                if (obj[36] != null) {
                     cell37.setCellValue(obj[36].toString());
                 }
                 Cell cell38 = row.createCell(37);
-                if(obj[37]!=null){
+                if (obj[37] != null) {
                     cell38.setCellValue(Double.parseDouble(obj[37].toString()));
                 }
                 Cell cell39 = row.createCell(38);
-                if(obj[38]!=null){
+                if (obj[38] != null) {
                     cell39.setCellValue(Double.parseDouble(obj[38].toString()));
                 }
 
@@ -512,13 +512,13 @@ public class ExcelGenerator {
             }
 
             Sheet sheet1 = workbook.getSheetAt(1);
-            Row rowS1= sheet1.getRow(1);
+            Row rowS1 = sheet1.getRow(1);
             Cell cel2l = rowS1.createCell(2);
             cel2l.setCellValue(planYr);
             Row rowS2 = sheet1.getRow(2);
             Cell cels2 = rowS2.createCell(2);
             cels2.setCellValue(DateToStr1);
-            String queryStr2="SELECT\n" +
+            String queryStr2 = "SELECT\n" +
                     "MRAM.ANNUAL_REGISTRATION.LICENSENUM AS Дугаар,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LPNAME AS Эзэмшигч,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LP_REG AS Регистер,\n" +
@@ -560,12 +560,12 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_MIN_PLAN_2_1 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_MIN_PLAN_2_1.PLANID\n" +
                     "\n" +
                     "WHERE\n" +
-                    "   MRAM.ANNUAL_REGISTRATION.REPORTYEAR = "+planYr+" \n" +
+                    "   MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\t  and TYPE=5\n" +
                     "\t\torder by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_MIN_PLAN_2_1.\"ID\",TYPE";
-            List<Object[]> objectSheets=dao.getNativeSQLResult(queryStr2,"list");
-            int rowCountSheets=7;
-            for(Object[] obj:objectSheets){
+            List<Object[]> objectSheets = dao.getNativeSQLResult(queryStr2, "list");
+            int rowCountSheets = 7;
+            for (Object[] obj : objectSheets) {
                 rowS1 = sheet1.createRow(rowCountSheets);
                 Cell cell1 = rowS1.createCell(0);
                 cell1.setCellValue(Double.parseDouble(obj[0].toString()));
@@ -595,84 +595,84 @@ public class ExcelGenerator {
                 cell13.setCellValue(obj[12].toString());
 
                 Cell cell114 = rowS1.createCell(13);
-                if(obj[13]!=null){
+                if (obj[13] != null) {
                     cell114.setCellValue(Double.parseDouble(obj[13].toString()));
                 }
 
                 Cell cell15 = rowS1.createCell(14);
-                if(obj[14]!=null){
+                if (obj[14] != null) {
                     cell15.setCellValue(obj[14].toString());
                 }
                 Cell cell16 = rowS1.createCell(15);
-                if(obj[15]!=null){
+                if (obj[15] != null) {
                     cell16.setCellValue(obj[15].toString());
                 }
                 Cell cell17 = rowS1.createCell(16);
-                if(obj[16]!=null){
+                if (obj[16] != null) {
                     cell17.setCellValue(obj[16].toString());
                 }
                 Cell cell18 = rowS1.createCell(17);
-                if(obj[17]!=null){
+                if (obj[17] != null) {
                     cell18.setCellValue(obj[17].toString());
                 }
                 Cell cell19 = rowS1.createCell(18);
-                if(obj[18]!=null){
+                if (obj[18] != null) {
                     cell19.setCellValue(obj[18].toString());
                 }
                 Cell cell20 = rowS1.createCell(19);
-                if(obj[19]!=null){
+                if (obj[19] != null) {
                     cell20.setCellValue(obj[19].toString());
                 }
                 Cell cell21 = rowS1.createCell(20);
-                if(obj[20]!=null){
+                if (obj[20] != null) {
                     cell21.setCellValue(obj[20].toString());
                 }
                 Cell cell22 = rowS1.createCell(21);
-                if(obj[21]!=null){
+                if (obj[21] != null) {
                     cell22.setCellValue(obj[21].toString());
                 }
                 Cell cell23 = rowS1.createCell(22);
-                if(obj[22]!=null){
+                if (obj[22] != null) {
                     cell23.setCellValue(obj[22].toString());
                 }
                 Cell cell24 = rowS1.createCell(23);
-                if(obj[23]!=null){
+                if (obj[23] != null) {
                     cell24.setCellValue(obj[23].toString());
                 }
                 Cell cell25 = rowS1.createCell(24);
-                if(obj[24]!=null){
+                if (obj[24] != null) {
                     cell25.setCellValue(obj[24].toString());
                 }
                 Cell cell26 = rowS1.createCell(25);
-                if(obj[25]!=null){
+                if (obj[25] != null) {
                     cell26.setCellValue(obj[25].toString());
                 }
                 Cell cell27 = rowS1.createCell(26);
-                if(obj[26]!=null){
+                if (obj[26] != null) {
                     cell27.setCellValue(obj[26].toString());
                 }
                 Cell cell28 = rowS1.createCell(27);
-                if(obj[27]!=null){
+                if (obj[27] != null) {
                     cell28.setCellValue(obj[27].toString());
                 }
                 Cell cell29 = row.createCell(28);
-                if(obj[28]!=null){
+                if (obj[28] != null) {
                     cell29.setCellValue(Double.parseDouble(obj[28].toString()));
                 }
                 rowCountSheets++;
             }
         }
-        if(reportType == 3 && formId == 4){
+        if (reportType == 3 && formId == 4) {
             FileInputStream fis = null;
-            File files = new File(appPath+"/assets/excel/plan/Mining_Plan_2_2.xlsx");
+            File files = new File(appPath + "/assets/excel/plan/Mining_Plan_2_2.xlsx");
             fis = new FileInputStream(files);
             workbook = new XSSFWorkbook(fis);
 
             CellStyle cellStyle = workbook.createCellStyle();
-            cellStyle.setBorderBottom((short)1);
-            cellStyle.setBorderLeft((short)1);
-            cellStyle.setBorderRight((short)1);
-            cellStyle.setBorderTop((short)1);
+            cellStyle.setBorderBottom((short) 1);
+            cellStyle.setBorderLeft((short) 1);
+            cellStyle.setBorderRight((short) 1);
+            cellStyle.setBorderTop((short) 1);
             cellStyle.setWrapText(true);
             cellStyle.setAlignment(cellStyle.ALIGN_CENTER);
             cellStyle.setVerticalAlignment(cellStyle.VERTICAL_CENTER);
@@ -684,7 +684,7 @@ public class ExcelGenerator {
             Row row1 = sheet.getRow(2);
             Cell cel2 = row1.createCell(2);
             cel2.setCellValue(DateToStr1);
-            String queryStr="SELECT\n" +
+            String queryStr = "SELECT\n" +
                     "MRAM.ANNUAL_REGISTRATION.LICENSENUM AS Дугаар,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LPNAME AS Эзэмшигч,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LP_REG AS Регистер,\n" +
@@ -729,13 +729,13 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_MIN_PLAN_2_2 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_MIN_PLAN_2_2.PLANID\n" +
                     "\n" +
                     "WHERE\n" +
-                    "   MRAM.ANNUAL_REGISTRATION.REPORTYEAR = "+planYr +" \n" +
+                    "   MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_MIN_PLAN_2_2.ID,\n" +
                     "      \t\tMRAM.DATA_MIN_PLAN_2_2.DATAINDEX";
-            List<Object[]> objects=dao.getNativeSQLResult(queryStr,"list");
-            int rowCount=7;
-            for(Object[] obj:objects){
+            List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
+            int rowCount = 7;
+            for (Object[] obj : objects) {
                 row = sheet.createRow(rowCount);
                 Cell cell1 = row.createCell(0);
                 cell1.setCellValue(Double.parseDouble(obj[0].toString()));
@@ -764,124 +764,124 @@ public class ExcelGenerator {
                 Cell cell13 = row.createCell(12);
                 cell13.setCellValue(obj[12].toString());
                 Cell cell114 = row.createCell(13);
-                if(obj[13]!=null){
+                if (obj[13] != null) {
                     cell114.setCellValue(Double.parseDouble(obj[13].toString()));
                 }
 
                 Cell cell15 = row.createCell(14);
-                if(obj[14]!=null){
+                if (obj[14] != null) {
                     cell15.setCellValue(obj[14].toString());
                 }
                 Cell cell16 = row.createCell(15);
-                if(obj[15]!=null){
+                if (obj[15] != null) {
                     cell16.setCellValue(obj[15].toString());
                 }
                 Cell cell17 = row.createCell(16);
-                if(obj[16]!=null){
+                if (obj[16] != null) {
                     cell17.setCellValue(obj[16].toString());
                 }
                 Cell cell18 = row.createCell(17);
-                if(obj[17]!=null){
+                if (obj[17] != null) {
                     cell18.setCellValue(obj[17].toString());
                 }
                 Cell cell19 = row.createCell(18);
-                if(obj[18]!=null){
+                if (obj[18] != null) {
                     cell19.setCellValue(Double.parseDouble(obj[18].toString()));
                 }
                 Cell cell20 = row.createCell(19);
-                if(obj[19]!=null){
+                if (obj[19] != null) {
                     cell20.setCellValue(Double.parseDouble(obj[19].toString()));
                 }
                 Cell cell21 = row.createCell(20);
-                if(obj[20]!=null){
+                if (obj[20] != null) {
                     cell21.setCellValue(Double.parseDouble(obj[20].toString()));
                 }
                 Cell cell22 = row.createCell(21);
-                if(obj[21]!=null){
+                if (obj[21] != null) {
                     cell22.setCellValue(Double.parseDouble(obj[21].toString()));
                 }
                 Cell cell23 = row.createCell(22);
-                if(obj[22]!=null){
+                if (obj[22] != null) {
                     cell23.setCellValue(Double.parseDouble(obj[22].toString()));
                 }
                 Cell cell24 = row.createCell(23);
-                if(obj[23]!=null){
+                if (obj[23] != null) {
                     cell24.setCellValue(Double.parseDouble(obj[23].toString()));
                 }
                 Cell cell25 = row.createCell(24);
-                if(obj[24]!=null){
+                if (obj[24] != null) {
                     cell25.setCellValue(obj[24].toString());
                 }
                 Cell cell26 = row.createCell(25);
-                if(obj[25]!=null){
+                if (obj[25] != null) {
                     cell26.setCellValue(Double.parseDouble(obj[25].toString()));
                 }
                 Cell cell27 = row.createCell(26);
-                if(obj[26]!=null){
+                if (obj[26] != null) {
                     cell27.setCellValue(obj[26].toString());
                 }
                 Cell cell28 = row.createCell(27);
-                if(obj[27]!=null){
+                if (obj[27] != null) {
                     cell28.setCellValue(obj[27].toString());
                 }
                 Cell cell29 = row.createCell(28);
-                if(obj[28]!=null){
+                if (obj[28] != null) {
                     cell29.setCellValue(Double.parseDouble(obj[28].toString()));
                 }
                 Cell cell30 = row.createCell(29);
-                if(obj[29]!=null){
+                if (obj[29] != null) {
                     cell30.setCellValue(Double.parseDouble(obj[29].toString()));
                 }
                 Cell cell31 = row.createCell(30);
-                if(obj[30]!=null){
+                if (obj[30] != null) {
                     cell31.setCellValue(obj[30].toString());
                 }
                 Cell cell32 = row.createCell(31);
-                if(obj[31]!=null){
+                if (obj[31] != null) {
                     cell32.setCellValue(Double.parseDouble(obj[31].toString()));
                 }
                 Cell cell33 = row.createCell(32);
-                if(obj[32]!=null){
+                if (obj[32] != null) {
                     cell33.setCellValue(obj[32].toString());
                 }
                 Cell cell34 = row.createCell(33);
-                if(obj[33]!=null){
+                if (obj[33] != null) {
                     cell34.setCellValue(Double.parseDouble(obj[33].toString()));
                 }
                 Cell cell35 = row.createCell(34);
-                if(obj[34]!=null){
+                if (obj[34] != null) {
                     cell35.setCellValue(obj[34].toString());
                 }
                 Cell cell36 = row.createCell(35);
-                if(obj[35]!=null){
+                if (obj[35] != null) {
                     cell36.setCellValue(Double.parseDouble(obj[35].toString()));
                 }
                 Cell cell37 = row.createCell(36);
-                if(obj[36]!=null){
+                if (obj[36] != null) {
                     cell37.setCellValue(obj[36].toString());
                 }
                 Cell cell38 = row.createCell(37);
-                if(obj[37]!=null){
+                if (obj[37] != null) {
                     cell38.setCellValue(Double.parseDouble(obj[37].toString()));
                 }
                 Cell cell39 = row.createCell(38);
-                if(obj[38]!=null){
+                if (obj[38] != null) {
                     cell39.setCellValue(Double.parseDouble(obj[38].toString()));
                 }
                 rowCount++;
             }
         }
-        if(reportType == 3 && formId == 5){
+        if (reportType == 3 && formId == 5) {
             FileInputStream fis = null;
-            File files = new File(appPath+"/assets/excel/plan/Mining_Plan_3.xlsx");
+            File files = new File(appPath + "/assets/excel/plan/Mining_Plan_3.xlsx");
             fis = new FileInputStream(files);
             workbook = new XSSFWorkbook(fis);
 
             CellStyle cellStyle = workbook.createCellStyle();
-            cellStyle.setBorderBottom((short)1);
-            cellStyle.setBorderLeft((short)1);
-            cellStyle.setBorderRight((short)1);
-            cellStyle.setBorderTop((short)1);
+            cellStyle.setBorderBottom((short) 1);
+            cellStyle.setBorderLeft((short) 1);
+            cellStyle.setBorderRight((short) 1);
+            cellStyle.setBorderTop((short) 1);
             cellStyle.setWrapText(true);
             cellStyle.setAlignment(cellStyle.ALIGN_CENTER);
             cellStyle.setVerticalAlignment(cellStyle.VERTICAL_CENTER);
@@ -893,7 +893,7 @@ public class ExcelGenerator {
             Row row1 = sheet.getRow(2);
             Cell cel2 = row1.createCell(2);
             cel2.setCellValue(DateToStr1);
-            String queryStr="SELECT\n" +
+            String queryStr = "SELECT\n" +
                     "MRAM.ANNUAL_REGISTRATION.LICENSENUM AS Дугаар,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LPNAME AS Эзэмшигч,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LP_REG AS Регистер,\n" +
@@ -927,12 +927,12 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_MIN_PLAN_3 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_MIN_PLAN_3.PLANID\n" +
                     "\n" +
                     "WHERE\n" +
-                    "   MRAM.ANNUAL_REGISTRATION.REPORTYEAR = "+ planYr +" \n" +
+                    "   MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\t \t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_MIN_PLAN_3.\"ID\"";
-            List<Object[]> objects=dao.getNativeSQLResult(queryStr,"list");
-            int rowCount=7;
-            for(Object[] obj:objects){
+            List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
+            int rowCount = 7;
+            for (Object[] obj : objects) {
                 row = sheet.createRow(rowCount);
                 Cell cell1 = row.createCell(0);
                 cell1.setCellValue(Double.parseDouble(obj[0].toString()));
@@ -964,100 +964,100 @@ public class ExcelGenerator {
                 cell114.setCellValue(Double.parseDouble(obj[13].toString()));
 
                 Cell cell15 = row.createCell(14);
-                if(obj[14]!=null){
+                if (obj[14] != null) {
                     cell15.setCellValue(obj[14].toString());
                 }
                 Cell cell16 = row.createCell(15);
-                if(obj[15]!=null){
+                if (obj[15] != null) {
                     cell16.setCellValue(obj[15].toString());
                 }
                 Cell cell17 = row.createCell(16);
-                if(obj[16]!=null){
+                if (obj[16] != null) {
                     cell17.setCellValue(Double.parseDouble(obj[16].toString()));
                 }
                 Cell cell18 = row.createCell(17);
-                if(obj[17]!=null){
+                if (obj[17] != null) {
                     cell18.setCellValue(Double.parseDouble(obj[17].toString()));
                 }
                 Cell cell19 = row.createCell(18);
-                if(obj[18]!=null){
+                if (obj[18] != null) {
                     cell19.setCellValue(Double.parseDouble(obj[18].toString()));
                 }
                 Cell cell20 = row.createCell(19);
-                if(obj[19]!=null){
+                if (obj[19] != null) {
                     cell20.setCellValue(Double.parseDouble(obj[19].toString()));
                 }
                 Cell cell21 = row.createCell(20);
-                if(obj[20]!=null){
+                if (obj[20] != null) {
                     cell21.setCellValue(Double.parseDouble(obj[20].toString()));
                 }
                 Cell cell22 = row.createCell(21);
-                if(obj[21]!=null){
+                if (obj[21] != null) {
                     cell22.setCellValue(Double.parseDouble(obj[21].toString()));
                 }
                 Cell cell23 = row.createCell(22);
-                if(obj[22]!=null){
+                if (obj[22] != null) {
                     cell23.setCellValue(Double.parseDouble(obj[22].toString()));
                 }
                 Cell cell24 = row.createCell(23);
-                if(obj[23]!=null){
+                if (obj[23] != null) {
                     cell24.setCellValue(Double.parseDouble(obj[23].toString()));
                 }
                 Cell cell25 = row.createCell(24);
-                if(obj[24]!=null){
+                if (obj[24] != null) {
                     cell25.setCellValue(Double.parseDouble(obj[24].toString()));
                 }
                 Cell cell26 = row.createCell(25);
-                if(obj[25]!=null){
+                if (obj[25] != null) {
                     cell26.setCellValue(Double.parseDouble(obj[25].toString()));
                 }
                 Cell cell27 = row.createCell(26);
-                if(obj[26]!=null){
+                if (obj[26] != null) {
                     cell27.setCellValue(Double.parseDouble(obj[26].toString()));
                 }
                 Cell cell28 = row.createCell(27);
-                if(obj[27]!=null){
+                if (obj[27] != null) {
                     cell28.setCellValue(Double.parseDouble(obj[27].toString()));
                 }
                 Cell cell29 = row.createCell(28);
-                if(obj[28]!=null){
+                if (obj[28] != null) {
                     cell29.setCellValue(Double.parseDouble(obj[28].toString()));
                 }
                 Cell cell30 = row.createCell(29);
-                if(obj[29]!=null){
+                if (obj[29] != null) {
                     cell30.setCellValue(Double.parseDouble(obj[29].toString()));
                 }
                 Cell cell31 = row.createCell(30);
-                if(obj[30]!=null){
+                if (obj[30] != null) {
                     cell31.setCellValue(Double.parseDouble(obj[30].toString()));
                 }
                 Cell cell32 = row.createCell(31);
-                if(obj[31]!=null){
+                if (obj[31] != null) {
                     cell32.setCellValue(Double.parseDouble(obj[31].toString()));
                 }
                 Cell cell33 = row.createCell(32);
-                if(obj[32]!=null){
+                if (obj[32] != null) {
                     cell33.setCellValue(Double.parseDouble(obj[32].toString()));
                 }
                 Cell cell34 = row.createCell(33);
-                if(obj[33]!=null){
+                if (obj[33] != null) {
                     cell34.setCellValue(Double.parseDouble(obj[33].toString()));
                 }
 
                 rowCount++;
             }
         }
-        if(reportType == 3 && formId == 6){
+        if (reportType == 3 && formId == 6) {
             FileInputStream fis = null;
-            File files = new File(appPath+"/assets/excel/plan/Mining_Plan_4_1.xlsx");
+            File files = new File(appPath + "/assets/excel/plan/Mining_Plan_4_1.xlsx");
             fis = new FileInputStream(files);
             workbook = new XSSFWorkbook(fis);
 
             CellStyle cellStyle = workbook.createCellStyle();
-            cellStyle.setBorderBottom((short)1);
-            cellStyle.setBorderLeft((short)1);
-            cellStyle.setBorderRight((short)1);
-            cellStyle.setBorderTop((short)1);
+            cellStyle.setBorderBottom((short) 1);
+            cellStyle.setBorderLeft((short) 1);
+            cellStyle.setBorderRight((short) 1);
+            cellStyle.setBorderTop((short) 1);
             cellStyle.setWrapText(true);
             cellStyle.setAlignment(cellStyle.ALIGN_CENTER);
             cellStyle.setVerticalAlignment(cellStyle.VERTICAL_CENTER);
@@ -1069,7 +1069,7 @@ public class ExcelGenerator {
             Row row1 = sheet.getRow(2);
             Cell cel2 = row1.createCell(2);
             cel2.setCellValue(DateToStr1);
-            String queryStr="SELECT\n" +
+            String queryStr = "SELECT\n" +
                     "MRAM.ANNUAL_REGISTRATION.LICENSENUM AS Дугаар,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LPNAME AS Эзэмшигч,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LP_REG AS Регистер,\n" +
@@ -1102,11 +1102,11 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.REG_REPORT_REQ on MRAM.REG_REPORT_REQ.\"ID\"=MRAM.ANNUAL_REGISTRATION.REQID \n" +
                     "INNER JOIN MRAM.DATA_MIN_PLAN_4_1 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_MIN_PLAN_4_1.PLANID\n" +
                     "where \n" +
-                    "   MRAM.ANNUAL_REGISTRATION.REPORTYEAR  ="+planYr+"\n" +
+                    "   MRAM.ANNUAL_REGISTRATION.REPORTYEAR  =" + planYr + "\n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_MIN_PLAN_4_1.\"ID\"";
-            List<Object[]> objects=dao.getNativeSQLResult(queryStr,"list");
-            int rowCount=7;
-            for(Object[] obj:objects){
+            List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
+            int rowCount = 7;
+            for (Object[] obj : objects) {
                 row = sheet.createRow(rowCount);
                 Cell cell1 = row.createCell(0);
                 cell1.setCellValue(Double.parseDouble(obj[0].toString()));
@@ -1138,79 +1138,79 @@ public class ExcelGenerator {
                 cell114.setCellValue(Double.parseDouble(obj[13].toString()));
 
                 Cell cell15 = row.createCell(14);
-                if(obj[14]!=null){
+                if (obj[14] != null) {
                     cell15.setCellValue(obj[14].toString());
                 }
                 Cell cell16 = row.createCell(15);
-                if(obj[15]!=null){
+                if (obj[15] != null) {
                     cell16.setCellValue(obj[15].toString());
                 }
                 Cell cell17 = row.createCell(16);
-                if(obj[16]!=null){
+                if (obj[16] != null) {
                     cell17.setCellValue(Double.parseDouble(obj[16].toString()));
                 }
                 Cell cell18 = row.createCell(17);
-                if(obj[17]!=null){
+                if (obj[17] != null) {
                     cell18.setCellValue(Double.parseDouble(obj[17].toString()));
                 }
                 Cell cell19 = row.createCell(18);
-                if(obj[18]!=null){
+                if (obj[18] != null) {
                     cell19.setCellValue(obj[18].toString());
                 }
                 Cell cell20 = row.createCell(19);
-                if(obj[19]!=null){
+                if (obj[19] != null) {
                     cell20.setCellValue(obj[19].toString());
                 }
                 Cell cell21 = row.createCell(20);
-                if(obj[20]!=null){
+                if (obj[20] != null) {
                     cell21.setCellValue(Double.parseDouble(obj[20].toString()));
                 }
                 Cell cell22 = row.createCell(21);
-                if(obj[21]!=null){
+                if (obj[21] != null) {
                     cell22.setCellValue(obj[21].toString());
                 }
                 Cell cell23 = row.createCell(22);
-                if(obj[22]!=null){
+                if (obj[22] != null) {
                     cell23.setCellValue(Double.parseDouble(obj[22].toString()));
                 }
                 Cell cell24 = row.createCell(23);
-                if(obj[23]!=null){
+                if (obj[23] != null) {
                     cell24.setCellValue(obj[23].toString());
                 }
                 Cell cell25 = row.createCell(24);
-                if(obj[24]!=null){
+                if (obj[24] != null) {
                     cell25.setCellValue(Double.parseDouble(obj[24].toString()));
                 }
                 Cell cell26 = row.createCell(25);
-                if(obj[25]!=null){
+                if (obj[25] != null) {
                     cell26.setCellValue(obj[25].toString());
                 }
                 Cell cell27 = row.createCell(26);
-                if(obj[26]!=null){
+                if (obj[26] != null) {
                     cell27.setCellValue(Double.parseDouble(obj[26].toString()));
                 }
                 Cell cell28 = row.createCell(27);
-                if(obj[27]!=null){
+                if (obj[27] != null) {
                     cell28.setCellValue(obj[27].toString());
                 }
                 Cell cell29 = row.createCell(28);
-                if(obj[28]!=null){
+                if (obj[28] != null) {
                     cell29.setCellValue(Double.parseDouble(obj[28].toString()));
                 }
                 rowCount++;
             }
         }
-        if(reportType == 3 && formId == 7){
+        if (reportType == 3 && formId == 7) {
             FileInputStream fis = null;
-            File files = new File(appPath+"/assets/excel/plan/Mining_Plan_4_2.xlsx");
+            File files = new File(appPath + "/assets/excel/plan/Mining_Plan_4_2.xlsx");
             fis = new FileInputStream(files);
             workbook = new XSSFWorkbook(fis);
 
             CellStyle cellStyle = workbook.createCellStyle();
-            cellStyle.setBorderBottom((short)1);
-            cellStyle.setBorderLeft((short)1);
-            cellStyle.setBorderRight((short)1);
-            cellStyle.setBorderTop((short)1);
+            cellStyle.setBorderBottom((short) 1);
+            cellStyle.setBorderLeft((short) 1);
+            cellStyle.setBorderRight((short) 1);
+            cellStyle.setBorderTop((short) 1);
             cellStyle.setWrapText(true);
             cellStyle.setAlignment(cellStyle.ALIGN_CENTER);
             cellStyle.setVerticalAlignment(cellStyle.VERTICAL_CENTER);
@@ -1222,7 +1222,7 @@ public class ExcelGenerator {
             Row row1 = sheet.getRow(2);
             Cell cel2 = row1.createCell(2);
             cel2.setCellValue(DateToStr1);
-            String queryStr="SELECT\n" +
+            String queryStr = "SELECT\n" +
                     "MRAM.ANNUAL_REGISTRATION.LICENSENUM AS Дугаар,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LPNAME AS Эзэмшигч,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LP_REG AS Регистер,\n" +
@@ -1255,11 +1255,11 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_MIN_PLAN_4_2 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_MIN_PLAN_4_2.PLANID\n" +
                     "\n" +
                     "WHERE\n" +
-                    "   MRAM.ANNUAL_REGISTRATION.REPORTYEAR= "+planYr+" \n" +
+                    "   MRAM.ANNUAL_REGISTRATION.REPORTYEAR= " + planYr + " \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_MIN_PLAN_4_2.\"ID\"";
-            List<Object[]> objects=dao.getNativeSQLResult(queryStr,"list");
-            int rowCount=7;
-            for(Object[] obj:objects){
+            List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
+            int rowCount = 7;
+            for (Object[] obj : objects) {
                 row = sheet.createRow(rowCount);
                 Cell cell1 = row.createCell(0);
                 cell1.setCellValue(Double.parseDouble(obj[0].toString()));
@@ -1291,48 +1291,48 @@ public class ExcelGenerator {
                 cell114.setCellValue(Double.parseDouble(obj[13].toString()));
 
                 Cell cell15 = row.createCell(14);
-                if(obj[14]!=null){
+                if (obj[14] != null) {
                     cell15.setCellValue(obj[14].toString());
                 }
                 Cell cell16 = row.createCell(15);
-                if(obj[15]!=null){
+                if (obj[15] != null) {
                     cell16.setCellValue(obj[15].toString());
                 }
                 Cell cell17 = row.createCell(16);
-                if(obj[16]!=null){
+                if (obj[16] != null) {
                     cell17.setCellValue(Double.parseDouble(obj[16].toString()));
                 }
                 Cell cell18 = row.createCell(17);
-                if(obj[17]!=null){
+                if (obj[17] != null) {
                     cell18.setCellValue(obj[17].toString());
                 }
                 Cell cell19 = row.createCell(18);
-                if(obj[18]!=null){
+                if (obj[18] != null) {
                     cell19.setCellValue(Double.parseDouble(obj[18].toString()));
                 }
                 Cell cell20 = row.createCell(19);
-                if(obj[19]!=null){
+                if (obj[19] != null) {
                     cell20.setCellValue(obj[19].toString());
                 }
                 Cell cell21 = row.createCell(20);
-                if(obj[20]!=null){
+                if (obj[20] != null) {
                     cell21.setCellValue(Double.parseDouble(obj[20].toString()));
                 }
 
                 rowCount++;
             }
         }
-        if(reportType == 3 && formId == 8){
+        if (reportType == 3 && formId == 8) {
             FileInputStream fis = null;
-            File files = new File(appPath+"/assets/excel/plan/Mining_Plan_5.xlsx");
+            File files = new File(appPath + "/assets/excel/plan/Mining_Plan_5.xlsx");
             fis = new FileInputStream(files);
             workbook = new XSSFWorkbook(fis);
 
             CellStyle cellStyle = workbook.createCellStyle();
-            cellStyle.setBorderBottom((short)1);
-            cellStyle.setBorderLeft((short)1);
-            cellStyle.setBorderRight((short)1);
-            cellStyle.setBorderTop((short)1);
+            cellStyle.setBorderBottom((short) 1);
+            cellStyle.setBorderLeft((short) 1);
+            cellStyle.setBorderRight((short) 1);
+            cellStyle.setBorderTop((short) 1);
             cellStyle.setWrapText(true);
             cellStyle.setAlignment(cellStyle.ALIGN_CENTER);
             cellStyle.setVerticalAlignment(cellStyle.VERTICAL_CENTER);
@@ -1344,7 +1344,7 @@ public class ExcelGenerator {
             Row row1 = sheet.getRow(2);
             Cell cel2 = row1.createCell(2);
             cel2.setCellValue(DateToStr1);
-            String queryStr="SELECT\n" +
+            String queryStr = "SELECT\n" +
                     "MRAM.ANNUAL_REGISTRATION.LICENSENUM AS Дугаар,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LPNAME AS Эзэмшигч,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LP_REG AS Регистер,\n" +
@@ -1447,12 +1447,12 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_MIN_PLAN_5 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_MIN_PLAN_5.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = "+planYr+" \n" +
+                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_MIN_PLAN_5.ID";
-            List<Object[]> objects=dao.getNativeSQLResult(queryStr,"list");
-            int rowCount=7;
-            for(Object[] obj:objects){
+            List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
+            int rowCount = 7;
+            for (Object[] obj : objects) {
                 row = sheet.createRow(rowCount);
                 Cell cell1 = row.createCell(0);
                 cell1.setCellValue(Double.parseDouble(obj[0].toString()));
@@ -1482,61 +1482,61 @@ public class ExcelGenerator {
                 cell13.setCellValue(obj[12].toString());
 
                 Cell cell114 = row.createCell(13);
-                if(obj[13]!=null){
+                if (obj[13] != null) {
                     cell114.setCellValue(Double.parseDouble(obj[13].toString()));
                 }
 
                 Cell cell15 = row.createCell(14);
-                if(obj[14]!=null){
+                if (obj[14] != null) {
                     cell15.setCellValue(obj[14].toString());
                 }
                 Cell cell16 = row.createCell(15);
-                if(obj[15]!=null){
+                if (obj[15] != null) {
                     cell16.setCellValue(obj[15].toString());
                 }
                 Cell cell17 = row.createCell(16);
-                if(obj[16]!=null){
+                if (obj[16] != null) {
                     cell17.setCellValue(obj[16].toString());
                 }
                 Cell cell18 = row.createCell(17);
-                if(obj[17]!=null){
+                if (obj[17] != null) {
                     cell18.setCellValue(obj[17].toString());
                 }
                 Cell cell19 = row.createCell(18);
-                if(obj[18]!=null){
+                if (obj[18] != null) {
                     cell19.setCellValue(Double.parseDouble(obj[18].toString()));
                 }
                 Cell cell20 = row.createCell(19);
-                if(obj[19]!=null){
+                if (obj[19] != null) {
                     cell20.setCellValue(obj[19].toString());
                 }
                 Cell cell21 = row.createCell(20);
-                if(obj[20]!=null){
+                if (obj[20] != null) {
                     cell21.setCellValue(Double.parseDouble(obj[20].toString()));
                 }
                 Cell cell22 = row.createCell(21);
-                if(obj[21]!=null){
+                if (obj[21] != null) {
                     cell22.setCellValue(obj[21].toString());
                 }
                 Cell cell23 = row.createCell(22);
-                if(obj[22]!=null){
+                if (obj[22] != null) {
                     cell23.setCellValue(Double.parseDouble(obj[22].toString()));
                 }
 
                 rowCount++;
             }
         }
-        if(reportType == 3 && formId == 9){
+        if (reportType == 3 && formId == 9) {
             FileInputStream fis = null;
-            File files = new File(appPath+"/assets/excel/plan/Mining_Plan_6_1.xlsx");
+            File files = new File(appPath + "/assets/excel/plan/Mining_Plan_6_1.xlsx");
             fis = new FileInputStream(files);
             workbook = new XSSFWorkbook(fis);
 
             CellStyle cellStyle = workbook.createCellStyle();
-            cellStyle.setBorderBottom((short)1);
-            cellStyle.setBorderLeft((short)1);
-            cellStyle.setBorderRight((short)1);
-            cellStyle.setBorderTop((short)1);
+            cellStyle.setBorderBottom((short) 1);
+            cellStyle.setBorderLeft((short) 1);
+            cellStyle.setBorderRight((short) 1);
+            cellStyle.setBorderTop((short) 1);
             cellStyle.setWrapText(true);
             cellStyle.setAlignment(cellStyle.ALIGN_CENTER);
             cellStyle.setVerticalAlignment(cellStyle.VERTICAL_CENTER);
@@ -1548,7 +1548,7 @@ public class ExcelGenerator {
             Row row1 = sheet.getRow(2);
             Cell cel2 = row1.createCell(2);
             cel2.setCellValue(DateToStr1);
-            String queryStr="SELECT\n" +
+            String queryStr = "SELECT\n" +
                     "MRAM.ANNUAL_REGISTRATION.LICENSENUM AS Дугаар,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LPNAME AS Эзэмшигч,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LP_REG AS Регистер,\n" +
@@ -1585,12 +1585,12 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_MIN_PLAN_6_1 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_MIN_PLAN_6_1.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = "+planYr+" \n" +
+                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_MIN_PLAN_6_1.ID";
-            List<Object[]> objects=dao.getNativeSQLResult(queryStr,"list");
-            int rowCount=7;
-            for(Object[] obj:objects){
+            List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
+            int rowCount = 7;
+            for (Object[] obj : objects) {
                 row = sheet.createRow(rowCount);
                 Cell cell1 = row.createCell(0);
                 cell1.setCellValue(Double.parseDouble(obj[0].toString()));
@@ -1620,49 +1620,49 @@ public class ExcelGenerator {
                 cell13.setCellValue(obj[12].toString());
 
                 Cell cell114 = row.createCell(13);
-                if(obj[13]!=null){
+                if (obj[13] != null) {
                     cell114.setCellValue(obj[13].toString());
                 }
 
                 Cell cell15 = row.createCell(14);
-                if(obj[14]!=null){
+                if (obj[14] != null) {
                     cell15.setCellValue(Double.parseDouble(obj[14].toString()));
                 }
                 Cell cell16 = row.createCell(15);
-                if(obj[15]!=null){
+                if (obj[15] != null) {
                     cell16.setCellValue(obj[15].toString());
                 }
                 Cell cell17 = row.createCell(16);
-                if(obj[16]!=null){
+                if (obj[16] != null) {
                     cell17.setCellValue(obj[16].toString());
                 }
                 Cell cell18 = row.createCell(17);
-                if(obj[17]!=null){
+                if (obj[17] != null) {
                     cell18.setCellValue(Double.parseDouble(obj[17].toString()));
                 }
                 Cell cell19 = row.createCell(18);
-                if(obj[18]!=null){
+                if (obj[18] != null) {
                     cell19.setCellValue(obj[18].toString());
                 }
                 Cell cell20 = row.createCell(19);
-                if(obj[19]!=null){
+                if (obj[19] != null) {
                     cell20.setCellValue(Double.parseDouble(obj[19].toString()));
                 }
 
                 rowCount++;
             }
         }
-        if(reportType == 3 && formId == 10){
+        if (reportType == 3 && formId == 10) {
             FileInputStream fis = null;
-            File files = new File(appPath+"/assets/excel/plan/Mining_Plan_6_2.xlsx");
+            File files = new File(appPath + "/assets/excel/plan/Mining_Plan_6_2.xlsx");
             fis = new FileInputStream(files);
             workbook = new XSSFWorkbook(fis);
 
             CellStyle cellStyle = workbook.createCellStyle();
-            cellStyle.setBorderBottom((short)1);
-            cellStyle.setBorderLeft((short)1);
-            cellStyle.setBorderRight((short)1);
-            cellStyle.setBorderTop((short)1);
+            cellStyle.setBorderBottom((short) 1);
+            cellStyle.setBorderLeft((short) 1);
+            cellStyle.setBorderRight((short) 1);
+            cellStyle.setBorderTop((short) 1);
             cellStyle.setWrapText(true);
             cellStyle.setAlignment(cellStyle.ALIGN_CENTER);
             cellStyle.setVerticalAlignment(cellStyle.VERTICAL_CENTER);
@@ -1674,7 +1674,7 @@ public class ExcelGenerator {
             Row row1 = sheet.getRow(2);
             Cell cel2 = row1.createCell(2);
             cel2.setCellValue(DateToStr1);
-            String queryStr="SELECT\n" +
+            String queryStr = "SELECT\n" +
                     "MRAM.ANNUAL_REGISTRATION.LICENSENUM AS Дугаар,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LPNAME AS Эзэмшигч,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LP_REG AS Регистер,\n" +
@@ -1718,9 +1718,9 @@ public class ExcelGenerator {
                     "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = 2019 \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_MIN_PLAN_6_2.ID";
-            List<Object[]> objects=dao.getNativeSQLResult(queryStr,"list");
-            int rowCount=7;
-            for(Object[] obj:objects){
+            List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
+            int rowCount = 7;
+            for (Object[] obj : objects) {
                 row = sheet.createRow(rowCount);
                 Cell cell1 = row.createCell(0);
                 cell1.setCellValue(Double.parseDouble(obj[0].toString()));
@@ -1750,44 +1750,44 @@ public class ExcelGenerator {
                 cell13.setCellValue(obj[12].toString());
 
                 Cell cell114 = row.createCell(13);
-                if(obj[13]!=null){
+                if (obj[13] != null) {
                     cell114.setCellValue(obj[13].toString());
                 }
 
                 Cell cell15 = row.createCell(14);
-                if(obj[14]!=null){
+                if (obj[14] != null) {
                     cell15.setCellValue(Double.parseDouble(obj[14].toString()));
                 }
                 Cell cell16 = row.createCell(15);
-                if(obj[15]!=null){
+                if (obj[15] != null) {
                     cell16.setCellValue(obj[15].toString());
                 }
                 Cell cell17 = row.createCell(16);
-                if(obj[16]!=null){
+                if (obj[16] != null) {
                     cell17.setCellValue(obj[16].toString());
                 }
                 Cell cell18 = row.createCell(17);
-                if(obj[17]!=null){
+                if (obj[17] != null) {
                     cell18.setCellValue(obj[17].toString());
                 }
                 Cell cell19 = row.createCell(18);
-                if(obj[18]!=null){
+                if (obj[18] != null) {
                     cell19.setCellValue(Double.parseDouble(obj[18].toString()));
                 }
                 Cell cell20 = row.createCell(19);
-                if(obj[19]!=null){
+                if (obj[19] != null) {
                     cell20.setCellValue(Double.parseDouble(obj[19].toString()));
                 }
                 Cell cell21 = row.createCell(20);
-                if(obj[20]!=null){
+                if (obj[20] != null) {
                     cell21.setCellValue(Double.parseDouble(obj[20].toString()));
                 }
                 Cell cell22 = row.createCell(21);
-                if(obj[21]!=null){
+                if (obj[21] != null) {
                     cell22.setCellValue(obj[21].toString());
                 }
                 Cell cell23 = row.createCell(22);
-                if(obj[22]!=null){
+                if (obj[22] != null) {
                     cell23.setCellValue(Double.parseDouble(obj[22].toString()));
                 }
 
@@ -1795,17 +1795,17 @@ public class ExcelGenerator {
             }
         }
 
-        if(reportType == 3 && formId == 11){
+        if (reportType == 3 && formId == 11) {
             FileInputStream fis = null;
-            File files = new File(appPath+"/assets/excel/plan/Mining_Plan_7.xlsx");
+            File files = new File(appPath + "/assets/excel/plan/Mining_Plan_7.xlsx");
             fis = new FileInputStream(files);
             workbook = new XSSFWorkbook(fis);
 
             CellStyle cellStyle = workbook.createCellStyle();
-            cellStyle.setBorderBottom((short)1);
-            cellStyle.setBorderLeft((short)1);
-            cellStyle.setBorderRight((short)1);
-            cellStyle.setBorderTop((short)1);
+            cellStyle.setBorderBottom((short) 1);
+            cellStyle.setBorderLeft((short) 1);
+            cellStyle.setBorderRight((short) 1);
+            cellStyle.setBorderTop((short) 1);
             cellStyle.setWrapText(true);
             cellStyle.setAlignment(cellStyle.ALIGN_CENTER);
             cellStyle.setVerticalAlignment(cellStyle.VERTICAL_CENTER);
@@ -1817,7 +1817,7 @@ public class ExcelGenerator {
             Row row1 = sheet.getRow(2);
             Cell cel2 = row1.createCell(2);
             cel2.setCellValue(DateToStr1);
-            String queryStr="SELECT\n" +
+            String queryStr = "SELECT\n" +
                     "MRAM.ANNUAL_REGISTRATION.LICENSENUM AS Дугаар,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LPNAME AS Эзэмшигч,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LP_REG AS Регистер,\n" +
@@ -1850,11 +1850,11 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_MIN_PLAN_7 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_MIN_PLAN_7.PLANID\n" +
                     "\n" +
                     "WHERE\n" +
-                    "   MRAM.ANNUAL_REGISTRATION.REPORTYEAR = "+planYr+" \n" +
+                    "   MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_MIN_PLAN_7.\"ID\"";
-            List<Object[]> objects=dao.getNativeSQLResult(queryStr,"list");
-            int rowCount=7;
-            for(Object[] obj:objects){
+            List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
+            int rowCount = 7;
+            for (Object[] obj : objects) {
                 row = sheet.createRow(rowCount);
                 Cell cell1 = row.createCell(0);
                 cell1.setCellValue(Double.parseDouble(obj[0].toString()));
@@ -1886,79 +1886,79 @@ public class ExcelGenerator {
                 cell114.setCellValue(Double.parseDouble(obj[13].toString()));
 
                 Cell cell15 = row.createCell(14);
-                if(obj[14]!=null){
+                if (obj[14] != null) {
                     cell15.setCellValue(obj[14].toString());
                 }
                 Cell cell16 = row.createCell(15);
-                if(obj[15]!=null){
+                if (obj[15] != null) {
                     cell16.setCellValue(obj[15].toString());
                 }
                 Cell cell17 = row.createCell(16);
-                if(obj[16]!=null){
+                if (obj[16] != null) {
                     cell17.setCellValue(obj[16].toString());
                 }
                 Cell cell18 = row.createCell(17);
-                if(obj[17]!=null){
+                if (obj[17] != null) {
                     cell18.setCellValue(obj[17].toString());
                 }
                 Cell cell19 = row.createCell(18);
-                if(obj[18]!=null){
+                if (obj[18] != null) {
                     cell19.setCellValue(obj[18].toString());
                 }
                 Cell cell20 = row.createCell(19);
-                if(obj[19]!=null){
+                if (obj[19] != null) {
                     cell20.setCellValue(Double.parseDouble(obj[19].toString()));
                 }
                 Cell cell21 = row.createCell(20);
-                if(obj[20]!=null){
+                if (obj[20] != null) {
                     cell21.setCellValue(Double.parseDouble(obj[20].toString()));
                 }
                 Cell cell22 = row.createCell(21);
-                if(obj[21]!=null){
+                if (obj[21] != null) {
                     cell22.setCellValue(Double.parseDouble(obj[21].toString()));
                 }
                 Cell cell23 = row.createCell(22);
-                if(obj[22]!=null){
+                if (obj[22] != null) {
                     cell23.setCellValue(Double.parseDouble(obj[22].toString()));
                 }
                 Cell cell24 = row.createCell(23);
-                if(obj[23]!=null){
+                if (obj[23] != null) {
                     cell24.setCellValue(Double.parseDouble(obj[23].toString()));
                 }
                 Cell cell25 = row.createCell(24);
-                if(obj[24]!=null){
+                if (obj[24] != null) {
                     cell25.setCellValue(obj[24].toString());
                 }
                 Cell cell26 = row.createCell(25);
-                if(obj[25]!=null){
+                if (obj[25] != null) {
                     cell26.setCellValue(Double.parseDouble(obj[25].toString()));
                 }
                 Cell cell27 = row.createCell(26);
-                if(obj[26]!=null){
+                if (obj[26] != null) {
                     cell27.setCellValue(Double.parseDouble(obj[26].toString()));
                 }
                 Cell cell28 = row.createCell(27);
-                if(obj[27]!=null){
+                if (obj[27] != null) {
                     cell28.setCellValue(obj[27].toString());
                 }
                 Cell cell29 = row.createCell(28);
-                if(obj[28]!=null){
+                if (obj[28] != null) {
                     cell29.setCellValue(Double.parseDouble(obj[28].toString()));
                 }
                 rowCount++;
             }
         }
-        if(reportType == 3 && formId == 12){
+        if (reportType == 3 && formId == 12) {
             FileInputStream fis = null;
-            File files = new File(appPath+"/assets/excel/plan/Mining_Plan_8.xlsx");
+            File files = new File(appPath + "/assets/excel/plan/Mining_Plan_8.xlsx");
             fis = new FileInputStream(files);
             workbook = new XSSFWorkbook(fis);
 
             CellStyle cellStyle = workbook.createCellStyle();
-            cellStyle.setBorderBottom((short)1);
-            cellStyle.setBorderLeft((short)1);
-            cellStyle.setBorderRight((short)1);
-            cellStyle.setBorderTop((short)1);
+            cellStyle.setBorderBottom((short) 1);
+            cellStyle.setBorderLeft((short) 1);
+            cellStyle.setBorderRight((short) 1);
+            cellStyle.setBorderTop((short) 1);
             cellStyle.setWrapText(true);
             cellStyle.setAlignment(cellStyle.ALIGN_CENTER);
             cellStyle.setVerticalAlignment(cellStyle.VERTICAL_CENTER);
@@ -1970,7 +1970,7 @@ public class ExcelGenerator {
             Row row1 = sheet.getRow(2);
             Cell cel2 = row1.createCell(2);
             cel2.setCellValue(DateToStr1);
-            String queryStr="SELECT\n" +
+            String queryStr = "SELECT\n" +
                     "MRAM.ANNUAL_REGISTRATION.LICENSENUM AS Дугаар,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LPNAME AS Эзэмшигч,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LP_REG AS Регистер,\n" +
@@ -2032,11 +2032,11 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_MIN_PLAN_8 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_MIN_PLAN_8.PLANID\n" +
                     "\n" +
                     "WHERE\n" +
-                    "   MRAM.ANNUAL_REGISTRATION.REPORTYEAR="+planYr+"\n" +
+                    "   MRAM.ANNUAL_REGISTRATION.REPORTYEAR=" + planYr + "\n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_MIN_PLAN_8.\"ID\"";
-            List<Object[]> objects=dao.getNativeSQLResult(queryStr,"list");
-            int rowCount=7;
-            for(Object[] obj:objects){
+            List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
+            int rowCount = 7;
+            for (Object[] obj : objects) {
                 row = sheet.createRow(rowCount);
                 Cell cell1 = row.createCell(0);
                 cell1.setCellValue(Double.parseDouble(obj[0].toString()));
@@ -2068,87 +2068,87 @@ public class ExcelGenerator {
                 cell114.setCellValue(Double.parseDouble(obj[13].toString()));
 
                 Cell cell15 = row.createCell(14);
-                if(obj[14]!=null){
+                if (obj[14] != null) {
                     cell15.setCellValue(obj[14].toString());
                 }
                 Cell cell16 = row.createCell(15);
-                if(obj[15]!=null){
+                if (obj[15] != null) {
                     cell16.setCellValue(obj[15].toString());
                 }
                 Cell cell17 = row.createCell(16);
-                if(obj[16]!=null){
+                if (obj[16] != null) {
                     cell17.setCellValue(obj[16].toString());
                 }
                 Cell cell18 = row.createCell(17);
-                if(obj[17]!=null){
+                if (obj[17] != null) {
                     cell18.setCellValue(obj[17].toString());
                 }
                 Cell cell19 = row.createCell(18);
-                if(obj[18]!=null){
+                if (obj[18] != null) {
                     cell19.setCellValue(obj[18].toString());
                 }
                 Cell cell20 = row.createCell(19);
-                if(obj[19]!=null){
+                if (obj[19] != null) {
                     cell20.setCellValue(Double.parseDouble(obj[19].toString()));
                 }
                 Cell cell21 = row.createCell(20);
-                if(obj[20]!=null){
+                if (obj[20] != null) {
                     cell21.setCellValue(Double.parseDouble(obj[20].toString()));
                 }
                 Cell cell22 = row.createCell(21);
-                if(obj[21]!=null){
+                if (obj[21] != null) {
                     cell22.setCellValue(Double.parseDouble(obj[21].toString()));
                 }
                 Cell cell23 = row.createCell(22);
-                if(obj[22]!=null){
+                if (obj[22] != null) {
                     cell23.setCellValue(Double.parseDouble(obj[22].toString()));
                 }
                 Cell cell24 = row.createCell(23);
-                if(obj[23]!=null){
+                if (obj[23] != null) {
                     cell24.setCellValue(Double.parseDouble(obj[23].toString()));
                 }
                 Cell cell25 = row.createCell(24);
-                if(obj[24]!=null){
+                if (obj[24] != null) {
                     cell25.setCellValue(obj[24].toString());
                 }
                 Cell cell26 = row.createCell(25);
-                if(obj[25]!=null){
+                if (obj[25] != null) {
                     cell26.setCellValue(Double.parseDouble(obj[25].toString()));
                 }
                 Cell cell27 = row.createCell(26);
-                if(obj[26]!=null){
+                if (obj[26] != null) {
                     cell27.setCellValue(Double.parseDouble(obj[26].toString()));
                 }
                 Cell cell28 = row.createCell(27);
-                if(obj[27]!=null){
+                if (obj[27] != null) {
                     cell28.setCellValue(Double.parseDouble(obj[27].toString()));
                 }
                 Cell cell29 = row.createCell(28);
-                if(obj[28]!=null){
+                if (obj[28] != null) {
                     cell29.setCellValue(obj[28].toString());
                 }
                 Cell cell30 = row.createCell(29);
-                if(obj[29]!=null){
+                if (obj[29] != null) {
                     cell30.setCellValue(obj[29].toString());
                 }
                 Cell cell31 = row.createCell(30);
-                if(obj[30]!=null){
+                if (obj[30] != null) {
                     cell31.setCellValue(Double.parseDouble(obj[30].toString()));
                 }
                 rowCount++;
             }
         }
-        if(reportType == 3 && formId == 14){
+        if (reportType == 3 && formId == 14) {
             FileInputStream fis = null;
-            File files = new File(appPath+"/assets/excel/plan/Mining_Plan_10.xlsx");
+            File files = new File(appPath + "/assets/excel/plan/Mining_Plan_10.xlsx");
             fis = new FileInputStream(files);
             workbook = new XSSFWorkbook(fis);
 
             CellStyle cellStyle = workbook.createCellStyle();
-            cellStyle.setBorderBottom((short)1);
-            cellStyle.setBorderLeft((short)1);
-            cellStyle.setBorderRight((short)1);
-            cellStyle.setBorderTop((short)1);
+            cellStyle.setBorderBottom((short) 1);
+            cellStyle.setBorderLeft((short) 1);
+            cellStyle.setBorderRight((short) 1);
+            cellStyle.setBorderTop((short) 1);
             cellStyle.setWrapText(true);
             cellStyle.setAlignment(cellStyle.ALIGN_CENTER);
             cellStyle.setVerticalAlignment(cellStyle.VERTICAL_CENTER);
@@ -2160,7 +2160,7 @@ public class ExcelGenerator {
             Row row1 = sheet.getRow(2);
             Cell cel2 = row1.createCell(2);
             cel2.setCellValue(DateToStr1);
-            String queryStr="SELECT\n" +
+            String queryStr = "SELECT\n" +
                     "MRAM.ANNUAL_REGISTRATION.LICENSENUM AS Дугаар,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LPNAME AS Эзэмшигч,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LP_REG AS Регистер,\n" +
@@ -2202,11 +2202,11 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_MIN_PLAN_10 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_MIN_PLAN_10.PLANID\n" +
                     "\n" +
                     "WHERE\n" +
-                    "   MRAM.ANNUAL_REGISTRATION.REPORTYEAR  = "+planYr+"  and (DATAINDEX=1)\n" +
+                    "   MRAM.ANNUAL_REGISTRATION.REPORTYEAR  = " + planYr + "  and (DATAINDEX=1)\n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_MIN_PLAN_10.\"ID\"";
-            List<Object[]> objects=dao.getNativeSQLResult(queryStr,"list");
-            int rowCount=7;
-            for(Object[] obj:objects){
+            List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
+            int rowCount = 7;
+            for (Object[] obj : objects) {
                 row = sheet.createRow(rowCount);
                 Cell cell1 = row.createCell(0);
                 cell1.setCellValue(Double.parseDouble(obj[0].toString()));
@@ -2238,39 +2238,39 @@ public class ExcelGenerator {
                 cell114.setCellValue(Double.parseDouble(obj[13].toString()));
 
                 Cell cell15 = row.createCell(14);
-                if(obj[14]!=null){
+                if (obj[14] != null) {
                     cell15.setCellValue(obj[14].toString());
                 }
                 Cell cell16 = row.createCell(15);
-                if(obj[15]!=null){
+                if (obj[15] != null) {
                     cell16.setCellValue(obj[15].toString());
                 }
                 Cell cell17 = row.createCell(16);
-                if(obj[16]!=null){
+                if (obj[16] != null) {
                     cell17.setCellValue(Double.parseDouble(obj[16].toString()));
                 }
                 Cell cell18 = row.createCell(17);
-                if(obj[17]!=null){
+                if (obj[17] != null) {
                     cell18.setCellValue(obj[17].toString());
                 }
                 Cell cell19 = row.createCell(18);
-                if(obj[18]!=null){
+                if (obj[18] != null) {
                     cell19.setCellValue(Double.parseDouble(obj[18].toString()));
                 }
                 Cell cell20 = row.createCell(19);
-                if(obj[19]!=null){
+                if (obj[19] != null) {
                     cell20.setCellValue(obj[19].toString());
                 }
                 Cell cell21 = row.createCell(20);
-                if(obj[20]!=null){
+                if (obj[20] != null) {
                     cell21.setCellValue(Double.parseDouble(obj[20].toString()));
                 }
                 Cell cell22 = row.createCell(21);
-                if(obj[21]!=null){
+                if (obj[21] != null) {
                     cell22.setCellValue(obj[21].toString());
                 }
                 Cell cell23 = row.createCell(22);
-                if(obj[22]!=null){
+                if (obj[22] != null) {
                     cell23.setCellValue(Double.parseDouble(obj[22].toString()));
                 }
 
@@ -2278,17 +2278,17 @@ public class ExcelGenerator {
             }
         }
 
-        if(reportType == 3 && formId == 15){
+        if (reportType == 3 && formId == 15) {
             FileInputStream fis = null;
-            File files = new File(appPath+"/assets/excel/plan/Mining_Plan_11.xlsx");
+            File files = new File(appPath + "/assets/excel/plan/Mining_Plan_11.xlsx");
             fis = new FileInputStream(files);
             workbook = new XSSFWorkbook(fis);
 
             CellStyle cellStyle = workbook.createCellStyle();
-            cellStyle.setBorderBottom((short)1);
-            cellStyle.setBorderLeft((short)1);
-            cellStyle.setBorderRight((short)1);
-            cellStyle.setBorderTop((short)1);
+            cellStyle.setBorderBottom((short) 1);
+            cellStyle.setBorderLeft((short) 1);
+            cellStyle.setBorderRight((short) 1);
+            cellStyle.setBorderTop((short) 1);
             cellStyle.setWrapText(true);
             cellStyle.setAlignment(cellStyle.ALIGN_CENTER);
             cellStyle.setVerticalAlignment(cellStyle.VERTICAL_CENTER);
@@ -2300,7 +2300,7 @@ public class ExcelGenerator {
             Row row1 = sheet.getRow(2);
             Cell cel2 = row1.createCell(2);
             cel2.setCellValue(DateToStr1);
-            String queryStr="SELECT\n" +
+            String queryStr = "SELECT\n" +
                     "MRAM.ANNUAL_REGISTRATION.LICENSENUM AS Дугаар,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LPNAME AS Эзэмшигч,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LP_REG AS Регистер,\n" +
@@ -2338,12 +2338,12 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_MIN_PLAN_11 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_MIN_PLAN_11.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = "+planYr+" and DATA2<>'Нийт'\n" +
+                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " and DATA2<>'Нийт'\n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_MIN_PLAN_11.ID";
-            List<Object[]> objects=dao.getNativeSQLResult(queryStr,"list");
-            int rowCount=7;
-            for(Object[] obj:objects){
+            List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
+            int rowCount = 7;
+            for (Object[] obj : objects) {
                 row = sheet.createRow(rowCount);
                 Cell cell1 = row.createCell(0);
                 cell1.setCellValue(Double.parseDouble(obj[0].toString()));
@@ -2375,48 +2375,48 @@ public class ExcelGenerator {
                 cell114.setCellValue(Double.parseDouble(obj[13].toString()));
 
                 Cell cell15 = row.createCell(14);
-                if(obj[14]!=null){
+                if (obj[14] != null) {
                     cell15.setCellValue(obj[14].toString());
                 }
                 Cell cell16 = row.createCell(15);
-                if(obj[15]!=null){
+                if (obj[15] != null) {
                     cell16.setCellValue(obj[15].toString());
                 }
                 Cell cell17 = row.createCell(16);
-                if(obj[16]!=null){
+                if (obj[16] != null) {
                     cell17.setCellValue(Double.parseDouble(obj[16].toString()));
                 }
                 Cell cell18 = row.createCell(17);
-                if(obj[17]!=null){
+                if (obj[17] != null) {
                     cell18.setCellValue(obj[17].toString());
                 }
                 Cell cell19 = row.createCell(18);
-                if(obj[18]!=null){
+                if (obj[18] != null) {
                     cell19.setCellValue(obj[18].toString());
                 }
                 Cell cell20 = row.createCell(19);
-                if(obj[19]!=null){
+                if (obj[19] != null) {
                     cell20.setCellValue(Double.parseDouble(obj[19].toString()));
                 }
                 Cell cell21 = row.createCell(20);
-                if(obj[20]!=null){
+                if (obj[20] != null) {
                     cell21.setCellValue(Double.parseDouble(obj[20].toString()));
                 }
 
                 rowCount++;
             }
         }
-        if(reportType == 3 && formId == 16){
+        if (reportType == 3 && formId == 16) {
             FileInputStream fis = null;
-            File files = new File(appPath+"/assets/excel/plan/Mining_Plan_12.xlsx");
+            File files = new File(appPath + "/assets/excel/plan/Mining_Plan_12.xlsx");
             fis = new FileInputStream(files);
             workbook = new XSSFWorkbook(fis);
 
             CellStyle cellStyle = workbook.createCellStyle();
-            cellStyle.setBorderBottom((short)1);
-            cellStyle.setBorderLeft((short)1);
-            cellStyle.setBorderRight((short)1);
-            cellStyle.setBorderTop((short)1);
+            cellStyle.setBorderBottom((short) 1);
+            cellStyle.setBorderLeft((short) 1);
+            cellStyle.setBorderRight((short) 1);
+            cellStyle.setBorderTop((short) 1);
             cellStyle.setWrapText(true);
             cellStyle.setAlignment(cellStyle.ALIGN_CENTER);
             cellStyle.setVerticalAlignment(cellStyle.VERTICAL_CENTER);
@@ -2428,7 +2428,7 @@ public class ExcelGenerator {
             Row row1 = sheet.getRow(2);
             Cell cel2 = row1.createCell(2);
             cel2.setCellValue(DateToStr1);
-            String queryStr="SELECT\n" +
+            String queryStr = "SELECT\n" +
                     "MRAM.ANNUAL_REGISTRATION.LICENSENUM AS Дугаар,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LPNAME AS Эзэмшигч,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LP_REG AS Регистер,\n" +
@@ -2465,12 +2465,12 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_MIN_PLAN_12 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_MIN_PLAN_12.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = "+planYr+" \n" +
+                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_MIN_PLAN_12.ID";
-            List<Object[]> objects=dao.getNativeSQLResult(queryStr,"list");
-            int rowCount=7;
-            for(Object[] obj:objects){
+            List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
+            int rowCount = 7;
+            for (Object[] obj : objects) {
                 row = sheet.createRow(rowCount);
                 Cell cell1 = row.createCell(0);
                 cell1.setCellValue(Double.parseDouble(obj[0].toString()));
@@ -2500,49 +2500,49 @@ public class ExcelGenerator {
                 cell13.setCellValue(obj[12].toString());
 
                 Cell cell114 = row.createCell(13);
-                if(obj[13]!=null){
+                if (obj[13] != null) {
                     cell114.setCellValue(obj[13].toString());
                 }
 
                 Cell cell15 = row.createCell(14);
-                if(obj[14]!=null){
+                if (obj[14] != null) {
                     cell15.setCellValue(obj[14].toString());
                 }
                 Cell cell16 = row.createCell(15);
-                if(obj[15]!=null){
+                if (obj[15] != null) {
                     cell16.setCellValue(obj[15].toString());
                 }
                 Cell cell17 = row.createCell(16);
-                if(obj[16]!=null){
+                if (obj[16] != null) {
                     cell17.setCellValue(Double.parseDouble(obj[16].toString()));
                 }
                 Cell cell18 = row.createCell(17);
-                if(obj[17]!=null){
+                if (obj[17] != null) {
                     cell18.setCellValue(Double.parseDouble(obj[17].toString()));
                 }
                 Cell cell19 = row.createCell(18);
-                if(obj[18]!=null){
+                if (obj[18] != null) {
                     cell19.setCellValue(obj[18].toString());
                 }
                 Cell cell20 = row.createCell(19);
-                if(obj[19]!=null){
+                if (obj[19] != null) {
                     cell20.setCellValue(Double.parseDouble(obj[19].toString()));
                 }
 
                 rowCount++;
             }
         }
-        if(reportType == 3 && formId == 17){
+        if (reportType == 3 && formId == 17) {
             FileInputStream fis = null;
-            File files = new File(appPath+"/assets/excel/plan/Mining_Plan_14.xlsx");
+            File files = new File(appPath + "/assets/excel/plan/Mining_Plan_14.xlsx");
             fis = new FileInputStream(files);
             workbook = new XSSFWorkbook(fis);
 
             CellStyle cellStyle = workbook.createCellStyle();
-            cellStyle.setBorderBottom((short)1);
-            cellStyle.setBorderLeft((short)1);
-            cellStyle.setBorderRight((short)1);
-            cellStyle.setBorderTop((short)1);
+            cellStyle.setBorderBottom((short) 1);
+            cellStyle.setBorderLeft((short) 1);
+            cellStyle.setBorderRight((short) 1);
+            cellStyle.setBorderTop((short) 1);
             cellStyle.setWrapText(true);
             cellStyle.setAlignment(cellStyle.ALIGN_CENTER);
             cellStyle.setVerticalAlignment(cellStyle.VERTICAL_CENTER);
@@ -2554,7 +2554,7 @@ public class ExcelGenerator {
             Row row1 = sheet.getRow(2);
             Cell cel2 = row1.createCell(2);
             cel2.setCellValue(DateToStr1);
-            String queryStr="SELECT\n" +
+            String queryStr = "SELECT\n" +
                     "MRAM.ANNUAL_REGISTRATION.LICENSENUM AS Дугаар,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LPNAME AS Эзэмшигч,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LP_REG AS Регистер,\n" +
@@ -2591,12 +2591,12 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_MIN_PLAN_14 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_MIN_PLAN_14.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = "+planYr+" \n" +
+                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_MIN_PLAN_14.ID";
-            List<Object[]> objects=dao.getNativeSQLResult(queryStr,"list");
-            int rowCount=7;
-            for(Object[] obj:objects){
+            List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
+            int rowCount = 7;
+            for (Object[] obj : objects) {
                 row = sheet.createRow(rowCount);
                 Cell cell1 = row.createCell(0);
                 cell1.setCellValue(Double.parseDouble(obj[0].toString()));
@@ -2628,40 +2628,40 @@ public class ExcelGenerator {
                 cell114.setCellValue(Double.parseDouble(obj[13].toString()));
 
                 Cell cell15 = row.createCell(14);
-                if(obj[14]!=null){
+                if (obj[14] != null) {
                     cell15.setCellValue(obj[14].toString());
                 }
                 Cell cell16 = row.createCell(15);
-                if(obj[15]!=null){
+                if (obj[15] != null) {
                     cell16.setCellValue(obj[15].toString());
                 }
                 Cell cell17 = row.createCell(16);
-                if(obj[16]!=null){
+                if (obj[16] != null) {
                     cell17.setCellValue(Double.parseDouble(obj[16].toString()));
                 }
                 Cell cell18 = row.createCell(17);
-                if(obj[17]!=null){
+                if (obj[17] != null) {
                     cell18.setCellValue(obj[17].toString());
                 }
                 Cell cell19 = row.createCell(18);
-                if(obj[18]!=null){
+                if (obj[18] != null) {
                     cell19.setCellValue(Double.parseDouble(obj[18].toString()));
                 }
 
                 rowCount++;
             }
         }
-        if(reportType == 3 && formId == 18){
+        if (reportType == 3 && formId == 18) {
             FileInputStream fis = null;
-            File files = new File(appPath+"/assets/excel/plan/Mining_Plan_15.xlsx");
+            File files = new File(appPath + "/assets/excel/plan/Mining_Plan_15.xlsx");
             fis = new FileInputStream(files);
             workbook = new XSSFWorkbook(fis);
 
             CellStyle cellStyle = workbook.createCellStyle();
-            cellStyle.setBorderBottom((short)1);
-            cellStyle.setBorderLeft((short)1);
-            cellStyle.setBorderRight((short)1);
-            cellStyle.setBorderTop((short)1);
+            cellStyle.setBorderBottom((short) 1);
+            cellStyle.setBorderLeft((short) 1);
+            cellStyle.setBorderRight((short) 1);
+            cellStyle.setBorderTop((short) 1);
             cellStyle.setWrapText(true);
             cellStyle.setAlignment(cellStyle.ALIGN_CENTER);
             cellStyle.setVerticalAlignment(cellStyle.VERTICAL_CENTER);
@@ -2673,7 +2673,7 @@ public class ExcelGenerator {
             Row row1 = sheet.getRow(2);
             Cell cel2 = row1.createCell(2);
             cel2.setCellValue(DateToStr1);
-            String queryStr="SELECT\n" +
+            String queryStr = "SELECT\n" +
                     "MRAM.ANNUAL_REGISTRATION.LICENSENUM AS Дугаар,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LPNAME AS Эзэмшигч,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LP_REG AS Регистер,\n" +
@@ -2709,12 +2709,12 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_MIN_PLAN_15 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_MIN_PLAN_15.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = "+planYr+" \n" +
+                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_MIN_PLAN_15.ID";
-            List<Object[]> objects=dao.getNativeSQLResult(queryStr,"list");
-            int rowCount=7;
-            for(Object[] obj:objects){
+            List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
+            int rowCount = 7;
+            for (Object[] obj : objects) {
                 row = sheet.createRow(rowCount);
                 Cell cell1 = row.createCell(0);
                 cell1.setCellValue(Double.parseDouble(obj[0].toString()));
@@ -2746,40 +2746,40 @@ public class ExcelGenerator {
                 cell114.setCellValue(Double.parseDouble(obj[13].toString()));
 
                 Cell cell15 = row.createCell(14);
-                if(obj[14]!=null){
+                if (obj[14] != null) {
                     cell15.setCellValue(obj[14].toString());
                 }
                 Cell cell16 = row.createCell(15);
-                if(obj[15]!=null){
+                if (obj[15] != null) {
                     cell16.setCellValue(obj[15].toString());
                 }
                 Cell cell17 = row.createCell(16);
-                if(obj[16]!=null){
+                if (obj[16] != null) {
                     cell17.setCellValue(Double.parseDouble(obj[16].toString()));
                 }
                 Cell cell18 = row.createCell(17);
-                if(obj[17]!=null){
+                if (obj[17] != null) {
                     cell18.setCellValue(obj[17].toString());
                 }
                 Cell cell19 = row.createCell(18);
-                if(obj[18]!=null){
+                if (obj[18] != null) {
                     cell19.setCellValue(Double.parseDouble(obj[18].toString()));
                 }
 
                 rowCount++;
             }
         }
-        if(reportType == 3 && formId == 20){
+        if (reportType == 3 && formId == 20) {
             FileInputStream fis = null;
-            File files = new File(appPath+"/assets/excel/plan/Mining_Plan_17.xlsx");
+            File files = new File(appPath + "/assets/excel/plan/Mining_Plan_17.xlsx");
             fis = new FileInputStream(files);
             workbook = new XSSFWorkbook(fis);
 
             CellStyle cellStyle = workbook.createCellStyle();
-            cellStyle.setBorderBottom((short)1);
-            cellStyle.setBorderLeft((short)1);
-            cellStyle.setBorderRight((short)1);
-            cellStyle.setBorderTop((short)1);
+            cellStyle.setBorderBottom((short) 1);
+            cellStyle.setBorderLeft((short) 1);
+            cellStyle.setBorderRight((short) 1);
+            cellStyle.setBorderTop((short) 1);
             cellStyle.setWrapText(true);
             cellStyle.setAlignment(cellStyle.ALIGN_CENTER);
             cellStyle.setVerticalAlignment(cellStyle.VERTICAL_CENTER);
@@ -2791,7 +2791,7 @@ public class ExcelGenerator {
             Row row1 = sheet.getRow(2);
             Cell cel2 = row1.createCell(2);
             cel2.setCellValue(DateToStr1);
-            String queryStr="SELECT\n" +
+            String queryStr = "SELECT\n" +
                     "MRAM.ANNUAL_REGISTRATION.LICENSENUM AS Дугаар,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LPNAME AS Эзэмшигч,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LP_REG AS Регистер,\n" +
@@ -2830,12 +2830,12 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_MIN_PLAN_17 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_MIN_PLAN_17.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = "+planYr+" \n" +
+                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_MIN_PLAN_17.ID";
-            List<Object[]> objects=dao.getNativeSQLResult(queryStr,"list");
-            int rowCount=7;
-            for(Object[] obj:objects){
+            List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
+            int rowCount = 7;
+            for (Object[] obj : objects) {
                 row = sheet.createRow(rowCount);
                 Cell cell1 = row.createCell(0);
                 cell1.setCellValue(Double.parseDouble(obj[0].toString()));
@@ -2865,57 +2865,57 @@ public class ExcelGenerator {
                 cell13.setCellValue(obj[12].toString());
 
                 Cell cell14 = row.createCell(13);
-                if(obj[13]!=null){
+                if (obj[13] != null) {
                     cell14.setCellValue(obj[13].toString());
                 }
 
                 Cell cell15 = row.createCell(14);
-                if(obj[14]!=null){
+                if (obj[14] != null) {
                     cell15.setCellValue(obj[14].toString());
                 }
                 Cell cell16 = row.createCell(15);
-                if(obj[15]!=null){
+                if (obj[15] != null) {
                     cell16.setCellValue(obj[15].toString());
                 }
                 Cell cell17 = row.createCell(16);
-                if(obj[16]!=null){
+                if (obj[16] != null) {
                     cell17.setCellValue(obj[16].toString());
                 }
                 Cell cell18 = row.createCell(17);
-                if(obj[17]!=null){
+                if (obj[17] != null) {
                     cell18.setCellValue(Double.parseDouble(obj[17].toString()));
                 }
                 Cell cell19 = row.createCell(18);
-                if(obj[18]!=null){
+                if (obj[18] != null) {
                     cell19.setCellValue(obj[18].toString());
                 }
                 Cell cell20 = row.createCell(19);
-                if(obj[19]!=null){
+                if (obj[19] != null) {
                     cell20.setCellValue(Double.parseDouble(obj[19].toString()));
                 }
                 Cell cell21 = row.createCell(20);
-                if(obj[20]!=null){
+                if (obj[20] != null) {
                     cell21.setCellValue(obj[20].toString());
                 }
                 Cell cell22 = row.createCell(21);
-                if(obj[21]!=null){
+                if (obj[21] != null) {
                     cell22.setCellValue(Double.parseDouble(obj[21].toString()));
                 }
 
                 rowCount++;
             }
         }
-        if(reportType == 4 && formId == 1){
+        if (reportType == 4 && formId == 1) {
             FileInputStream fis = null;
-            File files = new File(appPath+"/assets/excel/plan/Mining_Report_2.xlsx");
+            File files = new File(appPath + "/assets/excel/plan/Mining_Report_2.xlsx");
             fis = new FileInputStream(files);
             workbook = new XSSFWorkbook(fis);
 
             CellStyle cellStyle = workbook.createCellStyle();
-            cellStyle.setBorderBottom((short)1);
-            cellStyle.setBorderLeft((short)1);
-            cellStyle.setBorderRight((short)1);
-            cellStyle.setBorderTop((short)1);
+            cellStyle.setBorderBottom((short) 1);
+            cellStyle.setBorderLeft((short) 1);
+            cellStyle.setBorderRight((short) 1);
+            cellStyle.setBorderTop((short) 1);
             cellStyle.setWrapText(true);
             cellStyle.setAlignment(cellStyle.ALIGN_CENTER);
             cellStyle.setVerticalAlignment(cellStyle.VERTICAL_CENTER);
@@ -2927,7 +2927,7 @@ public class ExcelGenerator {
             Row row1 = sheet.getRow(2);
             Cell cel2 = row1.createCell(2);
             cel2.setCellValue(DateToStr1);
-            String queryStr="SELECT\n" +
+            String queryStr = "SELECT\n" +
                     "MRAM.ANNUAL_REGISTRATION.LICENSENUM AS Дугаар,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LPNAME AS Эзэмшигч,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LP_REG AS Регистер,\n" +
@@ -2961,12 +2961,12 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_EXCEL_MINREP2 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_MINREP2.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = "+planYr+"\n" +
+                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + "\n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_MINREP2.ID";
-            List<Object[]> objects=dao.getNativeSQLResult(queryStr,"list");
-            int rowCount=7;
-            for(Object[] obj:objects){
+            List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
+            int rowCount = 7;
+            for (Object[] obj : objects) {
                 row = sheet.createRow(rowCount);
                 Cell cell1 = row.createCell(0);
                 cell1.setCellValue(Double.parseDouble(obj[0].toString()));
@@ -2996,57 +2996,57 @@ public class ExcelGenerator {
                 cell13.setCellValue(obj[12].toString());
 
                 Cell cell14 = row.createCell(13);
-                if(obj[13]!=null){
+                if (obj[13] != null) {
                     cell14.setCellValue(obj[13].toString());
                 }
 
                 Cell cell15 = row.createCell(14);
-                if(obj[14]!=null){
+                if (obj[14] != null) {
                     cell15.setCellValue(obj[14].toString());
                 }
                 Cell cell16 = row.createCell(15);
-                if(obj[15]!=null){
+                if (obj[15] != null) {
                     cell16.setCellValue(obj[15].toString());
                 }
                 Cell cell17 = row.createCell(16);
-                if(obj[16]!=null){
+                if (obj[16] != null) {
                     cell17.setCellValue(obj[16].toString());
                 }
                 Cell cell18 = row.createCell(17);
-                if(obj[17]!=null){
+                if (obj[17] != null) {
                     cell18.setCellValue(obj[17].toString());
                 }
                 Cell cell19 = row.createCell(18);
-                if(obj[18]!=null){
+                if (obj[18] != null) {
                     cell19.setCellValue(Double.parseDouble(obj[18].toString()));
                 }
                 Cell cell20 = row.createCell(19);
-                if(obj[19]!=null){
+                if (obj[19] != null) {
                     cell20.setCellValue(Double.parseDouble(obj[19].toString()));
                 }
                 Cell cell21 = row.createCell(20);
-                if(obj[20]!=null){
+                if (obj[20] != null) {
                     cell21.setCellValue(obj[20].toString());
                 }
                 Cell cell22 = row.createCell(21);
-                if(obj[21]!=null){
+                if (obj[21] != null) {
                     cell22.setCellValue(Double.parseDouble(obj[21].toString()));
                 }
 
                 rowCount++;
             }
         }
-        if(reportType == 4 && formId == 3){
+        if (reportType == 4 && formId == 3) {
             FileInputStream fis = null;
-            File files = new File(appPath+"/assets/excel/plan/Mining_Report_3b.xlsx");
+            File files = new File(appPath + "/assets/excel/plan/Mining_Report_3b.xlsx");
             fis = new FileInputStream(files);
             workbook = new XSSFWorkbook(fis);
 
             CellStyle cellStyle = workbook.createCellStyle();
-            cellStyle.setBorderBottom((short)1);
-            cellStyle.setBorderLeft((short)1);
-            cellStyle.setBorderRight((short)1);
-            cellStyle.setBorderTop((short)1);
+            cellStyle.setBorderBottom((short) 1);
+            cellStyle.setBorderLeft((short) 1);
+            cellStyle.setBorderRight((short) 1);
+            cellStyle.setBorderTop((short) 1);
             cellStyle.setWrapText(true);
             cellStyle.setAlignment(cellStyle.ALIGN_CENTER);
             cellStyle.setVerticalAlignment(cellStyle.VERTICAL_CENTER);
@@ -3058,7 +3058,7 @@ public class ExcelGenerator {
             Row row1 = sheet.getRow(2);
             Cell cel2 = row1.createCell(2);
             cel2.setCellValue(DateToStr1);
-            String queryStr="SELECT\n" +
+            String queryStr = "SELECT\n" +
                     "MRAM.ANNUAL_REGISTRATION.LICENSENUM AS Дугаар,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LPNAME AS Эзэмшигч,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LP_REG AS Регистер,\n" +
@@ -3096,12 +3096,12 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_EXCEL_MINREP3B ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_MINREP3B.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = "+planYr+" \n" +
+                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_MINREP3B.ID";
-            List<Object[]> objects=dao.getNativeSQLResult(queryStr,"list");
-            int rowCount=7;
-            for(Object[] obj:objects){
+            List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
+            int rowCount = 7;
+            for (Object[] obj : objects) {
                 row = sheet.createRow(rowCount);
                 Cell cell1 = row.createCell(0);
                 cell1.setCellValue(Double.parseDouble(obj[0].toString()));
@@ -3131,220 +3131,220 @@ public class ExcelGenerator {
                 cell13.setCellValue(obj[12].toString());
 
                 Cell cell14 = row.createCell(13);
-                if(obj[13]!=null){
+                if (obj[13] != null) {
                     cell14.setCellValue(Double.parseDouble(obj[13].toString()));
                 }
 
                 Cell cell15 = row.createCell(14);
-                if(obj[14]!=null){
+                if (obj[14] != null) {
                     cell15.setCellValue(obj[14].toString());
                 }
                 Cell cell16 = row.createCell(15);
-                if(obj[15]!=null){
+                if (obj[15] != null) {
                     cell16.setCellValue(Double.parseDouble(obj[15].toString()));
                 }
                 Cell cell17 = row.createCell(16);
-                if(obj[16]!=null){
+                if (obj[16] != null) {
                     cell17.setCellValue(obj[16].toString());
                 }
                 Cell cell18 = row.createCell(17);
-                if(obj[17]!=null){
+                if (obj[17] != null) {
                     cell18.setCellValue(Double.parseDouble(obj[17].toString()));
                 }
                 Cell cell19 = row.createCell(18);
-                if(obj[18]!=null){
+                if (obj[18] != null) {
                     cell19.setCellValue(obj[18].toString());
                 }
                 Cell cell20 = row.createCell(19);
-                if(obj[19]!=null){
+                if (obj[19] != null) {
                     cell20.setCellValue(Double.parseDouble(obj[19].toString()));
                 }
                 Cell cell21 = row.createCell(20);
-                if(obj[20]!=null){
+                if (obj[20] != null) {
                     cell21.setCellValue(obj[20].toString());
                 }
                 Cell cell22 = row.createCell(21);
-                if(obj[21]!=null){
+                if (obj[21] != null) {
                     cell22.setCellValue(obj[21].toString());
 
                 }
                 Cell cell23 = row.createCell(22);
-                if(obj[22]!=null){
+                if (obj[22] != null) {
                     cell23.setCellValue(obj[22].toString());
 
                 }
                 Cell cell24 = row.createCell(23);
-                if(obj[23]!=null){
+                if (obj[23] != null) {
                     cell24.setCellValue(obj[23].toString());
                 }
                 Cell cell25 = row.createCell(24);
-                if(obj[24]!=null){
+                if (obj[24] != null) {
                     cell25.setCellValue(obj[24].toString());
 
                 }
                 Cell cell26 = row.createCell(25);
-                if(obj[25]!=null){
+                if (obj[25] != null) {
                     cell26.setCellValue(obj[25].toString());
                 }
                 Cell cell27 = row.createCell(26);
-                if(obj[26]!=null){
+                if (obj[26] != null) {
                     cell27.setCellValue(obj[26].toString());
                 }
                 Cell cell28 = row.createCell(27);
-                if(obj[27]!=null){
+                if (obj[27] != null) {
                     cell28.setCellValue(obj[27].toString());
                 }
                 Cell cell29 = row.createCell(28);
-                if(obj[28]!=null){
+                if (obj[28] != null) {
                     cell29.setCellValue(obj[28].toString());
                 }
                 Cell cell30 = row.createCell(29);
-                if(obj[29]!=null){
+                if (obj[29] != null) {
                     cell30.setCellValue(obj[29].toString());
                 }
                 Cell cell31 = row.createCell(30);
-                if(obj[30]!=null){
+                if (obj[30] != null) {
                     cell31.setCellValue(obj[30].toString());
                 }
                 Cell cell32 = row.createCell(31);
-                if(obj[31]!=null){
+                if (obj[31] != null) {
                     cell32.setCellValue(obj[31].toString());
                 }
                 Cell cell33 = row.createCell(32);
-                if(obj[32]!=null){
+                if (obj[32] != null) {
                     cell33.setCellValue(obj[32].toString());
                 }
                 Cell cell34 = row.createCell(33);
-                if(obj[33]!=null){
+                if (obj[33] != null) {
                     cell34.setCellValue(obj[33].toString());
                 }
                 Cell cell35 = row.createCell(34);
-                if(obj[34]!=null){
+                if (obj[34] != null) {
                     cell35.setCellValue(obj[34].toString());
                 }
                 Cell cell36 = row.createCell(35);
-                if(obj[35]!=null){
+                if (obj[35] != null) {
                     cell36.setCellValue(obj[35].toString());
                 }
                 Cell cell37 = row.createCell(36);
-                if(obj[36]!=null){
+                if (obj[36] != null) {
                     cell37.setCellValue(obj[36].toString());
                 }
                 Cell cell38 = row.createCell(37);
-                if(obj[37]!=null){
+                if (obj[37] != null) {
                     cell38.setCellValue(obj[37].toString());
                 }
                 Cell cell39 = row.createCell(38);
-                if(obj[38]!=null){
+                if (obj[38] != null) {
                     cell39.setCellValue(obj[38].toString());
                 }
                 Cell cell40 = row.createCell(39);
-                if(obj[39]!=null){
+                if (obj[39] != null) {
                     cell40.setCellValue(obj[39].toString());
                 }
                 Cell cell41 = row.createCell(40);
-                if(obj[40]!=null){
+                if (obj[40] != null) {
                     cell41.setCellValue(obj[40].toString());
                 }
                 Cell cell42 = row.createCell(41);
-                if(obj[41]!=null){
+                if (obj[41] != null) {
                     cell42.setCellValue(obj[41].toString());
                 }
                 Cell cell43 = row.createCell(42);
-                if(obj[42]!=null){
+                if (obj[42] != null) {
                     cell43.setCellValue(obj[42].toString());
                 }
                 Cell cell44 = row.createCell(43);
-                if(obj[43]!=null){
+                if (obj[43] != null) {
                     cell44.setCellValue(obj[43].toString());
                 }
                 Cell cell45 = row.createCell(44);
-                if(obj[44]!=null){
+                if (obj[44] != null) {
                     cell45.setCellValue(obj[44].toString());
                 }
                 Cell cell46 = row.createCell(45);
-                if(obj[45]!=null){
+                if (obj[45] != null) {
                     cell46.setCellValue(obj[45].toString());
                 }
                 Cell cell47 = row.createCell(46);
-                if(obj[46]!=null){
+                if (obj[46] != null) {
                     cell47.setCellValue(obj[46].toString());
                 }
                 Cell cell48 = row.createCell(47);
-                if(obj[47]!=null){
+                if (obj[47] != null) {
                     cell48.setCellValue(obj[47].toString());
                 }
                 Cell cell49 = row.createCell(48);
-                if(obj[48]!=null){
+                if (obj[48] != null) {
                     cell49.setCellValue(obj[48].toString());
                 }
                 Cell cell50 = row.createCell(49);
-                if(obj[49]!=null){
+                if (obj[49] != null) {
                     cell50.setCellValue(obj[49].toString());
                 }
                 Cell cell51 = row.createCell(50);
-                if(obj[50]!=null){
+                if (obj[50] != null) {
                     cell51.setCellValue(obj[50].toString());
                 }
                 Cell cell52 = row.createCell(51);
-                if(obj[51]!=null){
+                if (obj[51] != null) {
                     cell52.setCellValue(obj[51].toString());
                 }
                 Cell cell53 = row.createCell(52);
-                if(obj[52]!=null){
+                if (obj[52] != null) {
                     cell53.setCellValue(obj[52].toString());
                 }
                 Cell cell54 = row.createCell(53);
-                if(obj[53]!=null){
+                if (obj[53] != null) {
                     cell54.setCellValue(obj[53].toString());
                 }
                 Cell cell55 = row.createCell(54);
-                if(obj[54]!=null){
+                if (obj[54] != null) {
                     cell55.setCellValue(obj[54].toString());
                 }
                 Cell cell56 = row.createCell(55);
-                if(obj[55]!=null){
+                if (obj[55] != null) {
                     cell56.setCellValue(obj[55].toString());
                 }
                 Cell cell57 = row.createCell(56);
-                if(obj[56]!=null){
+                if (obj[56] != null) {
                     cell57.setCellValue(obj[56].toString());
                 }
                 Cell cell58 = row.createCell(57);
-                if(obj[57]!=null){
+                if (obj[57] != null) {
                     cell58.setCellValue(obj[57].toString());
                 }
                 Cell cell59 = row.createCell(58);
-                if(obj[58]!=null){
+                if (obj[58] != null) {
                     cell59.setCellValue(obj[58].toString());
                 }
                 Cell cell60 = row.createCell(59);
-                if(obj[59]!=null){
+                if (obj[59] != null) {
                     cell60.setCellValue(obj[59].toString());
                 }
                 Cell cell61 = row.createCell(60);
-                if(obj[60]!=null){
+                if (obj[60] != null) {
                     cell61.setCellValue(obj[60].toString());
                 }
                 Cell cell62 = row.createCell(61);
-                if(obj[61]!=null){
+                if (obj[61] != null) {
                     cell62.setCellValue(Double.parseDouble(obj[61].toString()));
                 }
 
                 rowCount++;
             }
         }
-        if(reportType == 4 && formId == 4){
+        if (reportType == 4 && formId == 4) {
             FileInputStream fis = null;
-            File files = new File(appPath+"/assets/excel/plan/Mining_Report_4_1.xlsx");
+            File files = new File(appPath + "/assets/excel/plan/Mining_Report_4_1.xlsx");
             fis = new FileInputStream(files);
             workbook = new XSSFWorkbook(fis);
 
             CellStyle cellStyle = workbook.createCellStyle();
-            cellStyle.setBorderBottom((short)1);
-            cellStyle.setBorderLeft((short)1);
-            cellStyle.setBorderRight((short)1);
-            cellStyle.setBorderTop((short)1);
+            cellStyle.setBorderBottom((short) 1);
+            cellStyle.setBorderLeft((short) 1);
+            cellStyle.setBorderRight((short) 1);
+            cellStyle.setBorderTop((short) 1);
             cellStyle.setWrapText(true);
             cellStyle.setAlignment(cellStyle.ALIGN_CENTER);
             cellStyle.setVerticalAlignment(cellStyle.VERTICAL_CENTER);
@@ -3356,7 +3356,7 @@ public class ExcelGenerator {
             Row row1 = sheet.getRow(2);
             Cell cel2 = row1.createCell(2);
             cel2.setCellValue(DateToStr1);
-            String queryStr="SELECT\n" +
+            String queryStr = "SELECT\n" +
                     "MRAM.ANNUAL_REGISTRATION.LICENSENUM AS Дугаар,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LPNAME AS Эзэмшигч,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LP_REG AS Регистер,\n" +
@@ -3391,12 +3391,12 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_EXCEL_MINREP4_1 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_MINREP4_1.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = "+planYr+" \n" +
+                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_MINREP4_1.ID";
-            List<Object[]> objects=dao.getNativeSQLResult(queryStr,"list");
-            int rowCount=7;
-            for(Object[] obj:objects){
+            List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
+            int rowCount = 7;
+            for (Object[] obj : objects) {
                 row = sheet.createRow(rowCount);
                 Cell cell1 = row.createCell(0);
                 cell1.setCellValue(Double.parseDouble(obj[0].toString()));
@@ -3426,96 +3426,96 @@ public class ExcelGenerator {
                 cell13.setCellValue(obj[12].toString());
 
                 Cell cell14 = row.createCell(13);
-                if(obj[13]!=null){
+                if (obj[13] != null) {
                     cell14.setCellValue(Double.parseDouble(obj[13].toString()));
                 }
 
                 Cell cell15 = row.createCell(14);
-                if(obj[14]!=null){
+                if (obj[14] != null) {
                     cell15.setCellValue(obj[14].toString());
                 }
                 Cell cell16 = row.createCell(15);
-                if(obj[15]!=null){
+                if (obj[15] != null) {
                     cell16.setCellValue(obj[15].toString());
                 }
                 Cell cell17 = row.createCell(16);
-                if(obj[16]!=null){
+                if (obj[16] != null) {
                     cell17.setCellValue(obj[16].toString());
                 }
                 Cell cell18 = row.createCell(17);
-                if(obj[17]!=null){
+                if (obj[17] != null) {
                     cell18.setCellValue(obj[17].toString());
                 }
                 Cell cell19 = row.createCell(18);
-                if(obj[18]!=null){
+                if (obj[18] != null) {
                     cell19.setCellValue(Double.parseDouble(obj[18].toString()));
                 }
                 Cell cell20 = row.createCell(19);
-                if(obj[19]!=null){
+                if (obj[19] != null) {
                     cell20.setCellValue(Double.parseDouble(obj[19].toString()));
                 }
                 Cell cell21 = row.createCell(20);
-                if(obj[20]!=null){
+                if (obj[20] != null) {
                     cell21.setCellValue(Double.parseDouble(obj[20].toString()));
                 }
                 Cell cell22 = row.createCell(21);
-                if(obj[21]!=null){
+                if (obj[21] != null) {
                     cell22.setCellValue(obj[21].toString());
                 }
                 Cell cell23 = row.createCell(22);
-                if(obj[22]!=null){
+                if (obj[22] != null) {
                     cell23.setCellValue(obj[22].toString());
                 }
                 Cell cell24 = row.createCell(23);
-                if(obj[23]!=null){
+                if (obj[23] != null) {
                     cell24.setCellValue(Double.parseDouble(obj[23].toString()));
                 }
                 Cell cell25 = row.createCell(24);
-                if(obj[24]!=null){
+                if (obj[24] != null) {
                     cell25.setCellValue(Double.parseDouble(obj[24].toString()));
                 }
                 Cell cell26 = row.createCell(25);
-                if(obj[25]!=null){
+                if (obj[25] != null) {
                     cell26.setCellValue(obj[25].toString());
                 }
                 Cell cell27 = row.createCell(26);
-                if(obj[26]!=null){
+                if (obj[26] != null) {
                     cell27.setCellValue(Double.parseDouble(obj[26].toString()));
                 }
                 Cell cell28 = row.createCell(27);
-                if(obj[27]!=null){
+                if (obj[27] != null) {
                     cell28.setCellValue(Double.parseDouble(obj[27].toString()));
                 }
                 Cell cell29 = row.createCell(28);
-                if(obj[28]!=null){
+                if (obj[28] != null) {
                     cell29.setCellValue(obj[28].toString());
                 }
                 Cell cell30 = row.createCell(29);
-                if(obj[29]!=null){
+                if (obj[29] != null) {
                     cell30.setCellValue(Double.parseDouble(obj[29].toString()));
                 }
                 Cell cell31 = row.createCell(30);
-                if(obj[30]!=null){
+                if (obj[30] != null) {
                     cell31.setCellValue(Double.parseDouble(obj[30].toString()));
                 }
                 Cell cell32 = row.createCell(31);
-                if(obj[31]!=null){
+                if (obj[31] != null) {
                     cell32.setCellValue(obj[31].toString());
                 }
                 Cell cell33 = row.createCell(32);
-                if(obj[32]!=null){
+                if (obj[32] != null) {
                     cell33.setCellValue(Double.parseDouble(obj[32].toString()));
                 }
                 Cell cell34 = row.createCell(33);
-                if(obj[33]!=null){
+                if (obj[33] != null) {
                     cell34.setCellValue(Double.parseDouble(obj[33].toString()));
                 }
                 Cell cell35 = row.createCell(34);
-                if(obj[34]!=null){
+                if (obj[34] != null) {
                     cell35.setCellValue(obj[34].toString());
                 }
                 Cell cell36 = row.createCell(35);
-                if(obj[35]!=null){
+                if (obj[35] != null) {
                     cell36.setCellValue(Double.parseDouble(obj[35].toString()));
                 }
 
@@ -3523,17 +3523,17 @@ public class ExcelGenerator {
             }
         }
 
-        if(reportType == 4 && formId == 5){
+        if (reportType == 4 && formId == 5) {
             FileInputStream fis = null;
-            File files = new File(appPath+"/assets/excel/plan/Mining_Report_4_2.xlsx");
+            File files = new File(appPath + "/assets/excel/plan/Mining_Report_4_2.xlsx");
             fis = new FileInputStream(files);
             workbook = new XSSFWorkbook(fis);
 
             CellStyle cellStyle = workbook.createCellStyle();
-            cellStyle.setBorderBottom((short)1);
-            cellStyle.setBorderLeft((short)1);
-            cellStyle.setBorderRight((short)1);
-            cellStyle.setBorderTop((short)1);
+            cellStyle.setBorderBottom((short) 1);
+            cellStyle.setBorderLeft((short) 1);
+            cellStyle.setBorderRight((short) 1);
+            cellStyle.setBorderTop((short) 1);
             cellStyle.setWrapText(true);
             cellStyle.setAlignment(cellStyle.ALIGN_CENTER);
             cellStyle.setVerticalAlignment(cellStyle.VERTICAL_CENTER);
@@ -3545,7 +3545,7 @@ public class ExcelGenerator {
             Row row1 = sheet.getRow(2);
             Cell cel2 = row1.createCell(2);
             cel2.setCellValue(DateToStr1);
-            String queryStr="SELECT\n" +
+            String queryStr = "SELECT\n" +
                     "MRAM.ANNUAL_REGISTRATION.LICENSENUM AS Дугаар,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LPNAME AS Эзэмшигч,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LP_REG AS Регистер,\n" +
@@ -3579,12 +3579,12 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_EXCEL_MINREP4_2 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_MINREP4_2.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = "+planYr+" \n" +
+                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_MINREP4_2.ID";
-            List<Object[]> objects=dao.getNativeSQLResult(queryStr,"list");
-            int rowCount=7;
-            for(Object[] obj:objects){
+            List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
+            int rowCount = 7;
+            for (Object[] obj : objects) {
                 row = sheet.createRow(rowCount);
                 Cell cell1 = row.createCell(0);
                 cell1.setCellValue(Double.parseDouble(obj[0].toString()));
@@ -3614,69 +3614,69 @@ public class ExcelGenerator {
                 cell13.setCellValue(obj[12].toString());
 
                 Cell cell14 = row.createCell(13);
-                if(obj[13]!=null){
+                if (obj[13] != null) {
                     cell14.setCellValue(Double.parseDouble(obj[13].toString()));
                 }
 
                 Cell cell15 = row.createCell(14);
-                if(obj[14]!=null){
+                if (obj[14] != null) {
                     cell15.setCellValue(obj[14].toString());
                 }
                 Cell cell16 = row.createCell(15);
-                if(obj[15]!=null){
+                if (obj[15] != null) {
                     cell16.setCellValue(Double.parseDouble(obj[15].toString()));
                 }
                 Cell cell17 = row.createCell(16);
-                if(obj[16]!=null){
+                if (obj[16] != null) {
                     cell17.setCellValue(obj[16].toString());
                 }
                 Cell cell18 = row.createCell(17);
-                if(obj[17]!=null){
+                if (obj[17] != null) {
                     cell18.setCellValue(obj[17].toString());
                 }
                 Cell cell19 = row.createCell(18);
-                if(obj[18]!=null){
+                if (obj[18] != null) {
                     cell19.setCellValue(Double.parseDouble(obj[18].toString()));
                 }
                 Cell cell20 = row.createCell(19);
-                if(obj[19]!=null){
+                if (obj[19] != null) {
                     cell20.setCellValue(Double.parseDouble(obj[19].toString()));
                 }
                 Cell cell21 = row.createCell(20);
-                if(obj[20]!=null){
+                if (obj[20] != null) {
                     cell21.setCellValue(obj[20].toString());
                 }
                 Cell cell22 = row.createCell(21);
-                if(obj[21]!=null){
+                if (obj[21] != null) {
                     cell22.setCellValue(Double.parseDouble(obj[21].toString()));
                 }
                 Cell cell23 = row.createCell(22);
-                if(obj[22]!=null){
+                if (obj[22] != null) {
                     cell23.setCellValue(Double.parseDouble(obj[22].toString()));
                 }
                 Cell cell24 = row.createCell(23);
-                if(obj[23]!=null){
+                if (obj[23] != null) {
                     cell24.setCellValue(obj[23].toString());
                 }
                 Cell cell25 = row.createCell(24);
-                if(obj[24]!=null){
+                if (obj[24] != null) {
                     cell25.setCellValue(Double.parseDouble(obj[24].toString()));
                 }
 
                 rowCount++;
             }
         }
-        if(reportType == 4 && formId == 6){
+        if (reportType == 4 && formId == 6) {
             FileInputStream fis = null;
-            File files = new File(appPath+"/assets/excel/plan/Mining_Report_5.xlsx");
+            File files = new File(appPath + "/assets/excel/plan/Mining_Report_5.xlsx");
             fis = new FileInputStream(files);
             workbook = new XSSFWorkbook(fis);
 
             CellStyle cellStyle = workbook.createCellStyle();
-            cellStyle.setBorderBottom((short)1);
-            cellStyle.setBorderLeft((short)1);
-            cellStyle.setBorderRight((short)1);
-            cellStyle.setBorderTop((short)1);
+            cellStyle.setBorderBottom((short) 1);
+            cellStyle.setBorderLeft((short) 1);
+            cellStyle.setBorderRight((short) 1);
+            cellStyle.setBorderTop((short) 1);
             cellStyle.setWrapText(true);
             cellStyle.setAlignment(cellStyle.ALIGN_CENTER);
             cellStyle.setVerticalAlignment(cellStyle.VERTICAL_CENTER);
@@ -3688,7 +3688,7 @@ public class ExcelGenerator {
             Row row1 = sheet.getRow(2);
             Cell cel2 = row1.createCell(2);
             cel2.setCellValue(DateToStr1);
-            String queryStr="SELECT\n" +
+            String queryStr = "SELECT\n" +
                     "MRAM.ANNUAL_REGISTRATION.LICENSENUM AS Дугаар,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LPNAME AS Эзэмшигч,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LP_REG AS Регистер,\n" +
@@ -3721,12 +3721,12 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_EXCEL_MINREP5 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_MINREP5.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = "+planYr+" \n" +
+                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_MINREP5.ID";
-            List<Object[]> objects=dao.getNativeSQLResult(queryStr,"list");
-            int rowCount=7;
-            for(Object[] obj:objects){
+            List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
+            int rowCount = 7;
+            for (Object[] obj : objects) {
                 row = sheet.createRow(rowCount);
                 Cell cell1 = row.createCell(0);
                 cell1.setCellValue(Double.parseDouble(obj[0].toString()));
@@ -3756,52 +3756,52 @@ public class ExcelGenerator {
                 cell13.setCellValue(obj[12].toString());
 
                 Cell cell14 = row.createCell(13);
-                if(obj[13]!=null){
+                if (obj[13] != null) {
                     cell14.setCellValue(Double.parseDouble(obj[13].toString()));
                 }
 
                 Cell cell15 = row.createCell(14);
-                if(obj[14]!=null){
+                if (obj[14] != null) {
                     cell15.setCellValue(obj[14].toString());
                 }
                 Cell cell16 = row.createCell(15);
-                if(obj[15]!=null){
+                if (obj[15] != null) {
                     cell16.setCellValue(obj[15].toString());
                 }
                 Cell cell17 = row.createCell(16);
-                if(obj[16]!=null){
+                if (obj[16] != null) {
                     cell17.setCellValue(obj[16].toString());
                 }
                 Cell cell18 = row.createCell(17);
-                if(obj[17]!=null){
+                if (obj[17] != null) {
                     cell18.setCellValue(obj[17].toString());
                 }
                 Cell cell19 = row.createCell(18);
-                if(obj[18]!=null){
+                if (obj[18] != null) {
                     cell19.setCellValue(Double.parseDouble(obj[18].toString()));
                 }
                 Cell cell20 = row.createCell(19);
-                if(obj[19]!=null){
+                if (obj[19] != null) {
                     cell20.setCellValue(Double.parseDouble(obj[19].toString()));
                 }
                 Cell cell21 = row.createCell(20);
-                if(obj[20]!=null){
+                if (obj[20] != null) {
                     cell21.setCellValue(obj[20].toString());
                 }
                 Cell cell22 = row.createCell(21);
-                if(obj[21]!=null){
+                if (obj[21] != null) {
                     cell22.setCellValue(Double.parseDouble(obj[21].toString()));
                 }
                 Cell cell23 = row.createCell(22);
-                if(obj[22]!=null){
+                if (obj[22] != null) {
                     cell23.setCellValue(Double.parseDouble(obj[22].toString()));
                 }
                 Cell cell24 = row.createCell(23);
-                if(obj[23]!=null){
+                if (obj[23] != null) {
                     cell24.setCellValue(obj[23].toString());
                 }
                 Cell cell25 = row.createCell(24);
-                if(obj[24]!=null){
+                if (obj[24] != null) {
                     cell25.setCellValue(Double.parseDouble(obj[24].toString()));
                 }
 
@@ -3809,17 +3809,17 @@ public class ExcelGenerator {
                 rowCount++;
             }
         }
-        if(reportType == 4 && formId == 7){
+        if (reportType == 4 && formId == 7) {
             FileInputStream fis = null;
-            File files = new File(appPath+"/assets/excel/plan/Mining_Report_6_1.xlsx");
+            File files = new File(appPath + "/assets/excel/plan/Mining_Report_6_1.xlsx");
             fis = new FileInputStream(files);
             workbook = new XSSFWorkbook(fis);
 
             CellStyle cellStyle = workbook.createCellStyle();
-            cellStyle.setBorderBottom((short)1);
-            cellStyle.setBorderLeft((short)1);
-            cellStyle.setBorderRight((short)1);
-            cellStyle.setBorderTop((short)1);
+            cellStyle.setBorderBottom((short) 1);
+            cellStyle.setBorderLeft((short) 1);
+            cellStyle.setBorderRight((short) 1);
+            cellStyle.setBorderTop((short) 1);
             cellStyle.setWrapText(true);
             cellStyle.setAlignment(cellStyle.ALIGN_CENTER);
             cellStyle.setVerticalAlignment(cellStyle.VERTICAL_CENTER);
@@ -3831,7 +3831,7 @@ public class ExcelGenerator {
             Row row1 = sheet.getRow(2);
             Cell cel2 = row1.createCell(2);
             cel2.setCellValue(DateToStr1);
-            String queryStr="SELECT\n" +
+            String queryStr = "SELECT\n" +
                     "MRAM.ANNUAL_REGISTRATION.LICENSENUM AS Дугаар,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LPNAME AS Эзэмшигч,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LP_REG AS Регистер,\n" +
@@ -3864,12 +3864,12 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_EXCEL_MINREP6_1 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_MINREP6_1.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = "+planYr+" \n" +
+                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_MINREP6_1.ID";
-            List<Object[]> objects=dao.getNativeSQLResult(queryStr,"list");
-            int rowCount=7;
-            for(Object[] obj:objects){
+            List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
+            int rowCount = 7;
+            for (Object[] obj : objects) {
                 row = sheet.createRow(rowCount);
                 Cell cell1 = row.createCell(0);
                 cell1.setCellValue(Double.parseDouble(obj[0].toString()));
@@ -3899,49 +3899,49 @@ public class ExcelGenerator {
                 cell13.setCellValue(obj[12].toString());
 
                 Cell cell14 = row.createCell(13);
-                if(obj[13]!=null){
+                if (obj[13] != null) {
                     cell14.setCellValue(Double.parseDouble(obj[13].toString()));
                 }
 
                 Cell cell15 = row.createCell(14);
-                if(obj[14]!=null){
+                if (obj[14] != null) {
                     cell15.setCellValue(obj[14].toString());
                 }
                 Cell cell16 = row.createCell(15);
-                if(obj[15]!=null){
+                if (obj[15] != null) {
                     cell16.setCellValue(obj[15].toString());
                 }
                 Cell cell17 = row.createCell(16);
-                if(obj[16]!=null){
+                if (obj[16] != null) {
                     cell17.setCellValue(Double.parseDouble(obj[16].toString()));
                 }
                 Cell cell18 = row.createCell(17);
-                if(obj[17]!=null){
+                if (obj[17] != null) {
                     cell18.setCellValue(Double.parseDouble(obj[17].toString()));
                 }
                 Cell cell19 = row.createCell(18);
-                if(obj[18]!=null){
+                if (obj[18] != null) {
                     cell19.setCellValue(obj[18].toString());
                 }
                 Cell cell20 = row.createCell(19);
-                if(obj[19]!=null){
+                if (obj[19] != null) {
                     cell20.setCellValue(Double.parseDouble(obj[19].toString()));
                 }
 
                 rowCount++;
             }
         }
-        if(reportType == 4 && formId == 8){
+        if (reportType == 4 && formId == 8) {
             FileInputStream fis = null;
-            File files = new File(appPath+"/assets/excel/plan/Mining_Report_6_2.xlsx");
+            File files = new File(appPath + "/assets/excel/plan/Mining_Report_6_2.xlsx");
             fis = new FileInputStream(files);
             workbook = new XSSFWorkbook(fis);
 
             CellStyle cellStyle = workbook.createCellStyle();
-            cellStyle.setBorderBottom((short)1);
-            cellStyle.setBorderLeft((short)1);
-            cellStyle.setBorderRight((short)1);
-            cellStyle.setBorderTop((short)1);
+            cellStyle.setBorderBottom((short) 1);
+            cellStyle.setBorderLeft((short) 1);
+            cellStyle.setBorderRight((short) 1);
+            cellStyle.setBorderTop((short) 1);
             cellStyle.setWrapText(true);
             cellStyle.setAlignment(cellStyle.ALIGN_CENTER);
             cellStyle.setVerticalAlignment(cellStyle.VERTICAL_CENTER);
@@ -3953,7 +3953,7 @@ public class ExcelGenerator {
             Row row1 = sheet.getRow(2);
             Cell cel2 = row1.createCell(2);
             cel2.setCellValue(DateToStr1);
-            String queryStr="SELECT\n" +
+            String queryStr = "SELECT\n" +
                     "MRAM.ANNUAL_REGISTRATION.LICENSENUM AS Дугаар,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LPNAME AS Эзэмшигч,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LP_REG AS Регистер,\n" +
@@ -3986,12 +3986,12 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_EXCEL_MINREP6_2 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_MINREP6_2.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = "+planYr+" \n" +
+                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_MINREP6_2.ID";
-            List<Object[]> objects=dao.getNativeSQLResult(queryStr,"list");
-            int rowCount=7;
-            for(Object[] obj:objects){
+            List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
+            int rowCount = 7;
+            for (Object[] obj : objects) {
                 row = sheet.createRow(rowCount);
                 Cell cell1 = row.createCell(0);
                 cell1.setCellValue(Double.parseDouble(obj[0].toString()));
@@ -4021,73 +4021,73 @@ public class ExcelGenerator {
                 cell13.setCellValue(obj[12].toString());
 
                 Cell cell14 = row.createCell(13);
-                if(obj[13]!=null){
+                if (obj[13] != null) {
                     cell14.setCellValue(Double.parseDouble(obj[13].toString()));
                 }
 
                 Cell cell15 = row.createCell(14);
-                if(obj[14]!=null){
+                if (obj[14] != null) {
                     cell15.setCellValue(obj[14].toString());
                 }
                 Cell cell16 = row.createCell(15);
-                if(obj[15]!=null){
+                if (obj[15] != null) {
                     cell16.setCellValue(obj[15].toString());
                 }
                 Cell cell17 = row.createCell(16);
-                if(obj[16]!=null){
+                if (obj[16] != null) {
                     cell17.setCellValue(obj[16].toString());
                 }
                 Cell cell18 = row.createCell(17);
-                if(obj[17]!=null){
+                if (obj[17] != null) {
                     cell18.setCellValue(obj[17].toString());
                 }
                 Cell cell19 = row.createCell(18);
-                if(obj[18]!=null){
+                if (obj[18] != null) {
                     cell19.setCellValue(Double.parseDouble(obj[18].toString()));
                 }
                 Cell cell20 = row.createCell(19);
-                if(obj[19]!=null){
+                if (obj[19] != null) {
                     cell20.setCellValue(Double.parseDouble(obj[19].toString()));
                 }
                 Cell cell21 = row.createCell(20);
-                if(obj[20]!=null){
+                if (obj[20] != null) {
                     cell21.setCellValue(Double.parseDouble(obj[20].toString()));
                 }
                 Cell cell22 = row.createCell(21);
-                if(obj[21]!=null){
+                if (obj[21] != null) {
                     cell22.setCellValue(Double.parseDouble(obj[21].toString()));
                 }
                 Cell cell23 = row.createCell(22);
-                if(obj[22]!=null){
+                if (obj[22] != null) {
                     cell23.setCellValue(Double.parseDouble(obj[22].toString()));
                 }
                 Cell cell24 = row.createCell(23);
-                if(obj[23]!=null){
+                if (obj[23] != null) {
                     cell24.setCellValue(Double.parseDouble(obj[23].toString()));
                 }
                 Cell cell25 = row.createCell(24);
-                if(obj[24]!=null){
+                if (obj[24] != null) {
                     cell25.setCellValue(obj[24].toString());
                 }
                 Cell cell26 = row.createCell(25);
-                if(obj[25]!=null){
+                if (obj[25] != null) {
                     cell26.setCellValue(Double.parseDouble(obj[25].toString()));
                 }
 
                 rowCount++;
             }
         }
-        if(reportType == 4 && formId == 9){
+        if (reportType == 4 && formId == 9) {
             FileInputStream fis = null;
-            File files = new File(appPath+"/assets/excel/plan/Mining_Report_7.xlsx");
+            File files = new File(appPath + "/assets/excel/plan/Mining_Report_7.xlsx");
             fis = new FileInputStream(files);
             workbook = new XSSFWorkbook(fis);
 
             CellStyle cellStyle = workbook.createCellStyle();
-            cellStyle.setBorderBottom((short)1);
-            cellStyle.setBorderLeft((short)1);
-            cellStyle.setBorderRight((short)1);
-            cellStyle.setBorderTop((short)1);
+            cellStyle.setBorderBottom((short) 1);
+            cellStyle.setBorderLeft((short) 1);
+            cellStyle.setBorderRight((short) 1);
+            cellStyle.setBorderTop((short) 1);
             cellStyle.setWrapText(true);
             cellStyle.setAlignment(cellStyle.ALIGN_CENTER);
             cellStyle.setVerticalAlignment(cellStyle.VERTICAL_CENTER);
@@ -4099,7 +4099,7 @@ public class ExcelGenerator {
             Row row1 = sheet.getRow(2);
             Cell cel2 = row1.createCell(2);
             cel2.setCellValue(DateToStr1);
-            String queryStr="SELECT\n" +
+            String queryStr = "SELECT\n" +
                     "MRAM.ANNUAL_REGISTRATION.LICENSENUM AS Дугаар,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LPNAME AS Эзэмшигч,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LP_REG AS Регистер,\n" +
@@ -4133,12 +4133,12 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_EXCEL_MINREP7 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_MINREP7.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = "+planYr+" \n" +
+                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_MINREP7.ID";
-            List<Object[]> objects=dao.getNativeSQLResult(queryStr,"list");
-            int rowCount=7;
-            for(Object[] obj:objects){
+            List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
+            int rowCount = 7;
+            for (Object[] obj : objects) {
                 row = sheet.createRow(rowCount);
                 Cell cell1 = row.createCell(0);
                 cell1.setCellValue(Double.parseDouble(obj[0].toString()));
@@ -4168,85 +4168,85 @@ public class ExcelGenerator {
                 cell13.setCellValue(obj[12].toString());
 
                 Cell cell14 = row.createCell(13);
-                if(obj[13]!=null){
+                if (obj[13] != null) {
                     cell14.setCellValue(obj[13].toString());
                 }
 
                 Cell cell15 = row.createCell(14);
-                if(obj[14]!=null){
+                if (obj[14] != null) {
                     cell15.setCellValue(obj[14].toString());
                 }
                 Cell cell16 = row.createCell(15);
-                if(obj[15]!=null){
+                if (obj[15] != null) {
                     cell16.setCellValue(obj[15].toString());
                 }
                 Cell cell17 = row.createCell(16);
-                if(obj[16]!=null){
+                if (obj[16] != null) {
                     cell17.setCellValue(obj[16].toString());
                 }
                 Cell cell18 = row.createCell(17);
-                if(obj[17]!=null){
+                if (obj[17] != null) {
                     cell18.setCellValue(obj[17].toString());
                 }
                 Cell cell19 = row.createCell(18);
-                if(obj[18]!=null){
+                if (obj[18] != null) {
                     cell19.setCellValue(obj[18].toString());
                 }
                 Cell cell20 = row.createCell(19);
-                if(obj[19]!=null){
+                if (obj[19] != null) {
                     cell20.setCellValue(Double.parseDouble(obj[19].toString()));
                 }
                 Cell cell21 = row.createCell(20);
-                if(obj[20]!=null){
+                if (obj[20] != null) {
                     cell21.setCellValue(Double.parseDouble(obj[20].toString()));
                 }
                 Cell cell22 = row.createCell(21);
-                if(obj[21]!=null){
+                if (obj[21] != null) {
                     cell22.setCellValue(Double.parseDouble(obj[21].toString()));
                 }
                 Cell cell23 = row.createCell(22);
-                if(obj[22]!=null){
+                if (obj[22] != null) {
                     cell23.setCellValue(Double.parseDouble(obj[22].toString()));
                 }
                 Cell cell24 = row.createCell(23);
-                if(obj[23]!=null){
+                if (obj[23] != null) {
                     cell24.setCellValue(obj[23].toString());
                 }
                 Cell cell25 = row.createCell(24);
-                if(obj[24]!=null){
+                if (obj[24] != null) {
                     cell25.setCellValue(obj[24].toString());
                 }
                 Cell cell26 = row.createCell(25);
-                if(obj[25]!=null){
+                if (obj[25] != null) {
                     cell26.setCellValue(Double.parseDouble(obj[25].toString()));
                 }
                 Cell cell27 = row.createCell(26);
-                if(obj[26]!=null){
+                if (obj[26] != null) {
                     cell27.setCellValue(Double.parseDouble(obj[26].toString()));
                 }
                 Cell cell28 = row.createCell(27);
-                if(obj[27]!=null){
+                if (obj[27] != null) {
                     cell28.setCellValue(obj[27].toString());
                 }
                 Cell cell29 = row.createCell(28);
-                if(obj[28]!=null){
+                if (obj[28] != null) {
                     cell29.setCellValue(Double.parseDouble(obj[28].toString()));
                 }
 
                 rowCount++;
             }
         }
-        if(reportType == 4 && formId == 10){
+        if (reportType == 4 && formId == 10) {
             FileInputStream fis = null;
-            File files = new File(appPath+"/assets/excel/plan/Mining_Report_8.xlsx");
+            File files = new File(appPath + "/assets/excel/plan/Mining_Report_8.xlsx");
             fis = new FileInputStream(files);
             workbook = new XSSFWorkbook(fis);
 
             CellStyle cellStyle = workbook.createCellStyle();
-            cellStyle.setBorderBottom((short)1);
-            cellStyle.setBorderLeft((short)1);
-            cellStyle.setBorderRight((short)1);
-            cellStyle.setBorderTop((short)1);
+            cellStyle.setBorderBottom((short) 1);
+            cellStyle.setBorderLeft((short) 1);
+            cellStyle.setBorderRight((short) 1);
+            cellStyle.setBorderTop((short) 1);
             cellStyle.setWrapText(true);
             cellStyle.setAlignment(cellStyle.ALIGN_CENTER);
             cellStyle.setVerticalAlignment(cellStyle.VERTICAL_CENTER);
@@ -4258,7 +4258,7 @@ public class ExcelGenerator {
             Row row1 = sheet.getRow(2);
             Cell cel2 = row1.createCell(2);
             cel2.setCellValue(DateToStr1);
-            String queryStr="SELECT\n" +
+            String queryStr = "SELECT\n" +
                     "MRAM.ANNUAL_REGISTRATION.LICENSENUM AS Дугаар,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LPNAME AS Эзэмшигч,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LP_REG AS Регистер,\n" +
@@ -4291,12 +4291,12 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_EXCEL_MINREP8_1 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_MINREP8_1.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = "+planYr+" \n" +
+                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_MINREP8_1.ID";
-            List<Object[]> objects=dao.getNativeSQLResult(queryStr,"list");
-            int rowCount=7;
-            for(Object[] obj:objects){
+            List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
+            int rowCount = 7;
+            for (Object[] obj : objects) {
                 row = sheet.createRow(rowCount);
                 Cell cell1 = row.createCell(0);
                 cell1.setCellValue(Double.parseDouble(obj[0].toString()));
@@ -4326,96 +4326,96 @@ public class ExcelGenerator {
                 cell13.setCellValue(obj[12].toString());
 
                 Cell cell14 = row.createCell(13);
-                if(obj[13]!=null){
+                if (obj[13] != null) {
                     cell14.setCellValue(Double.parseDouble(obj[13].toString()));
                 }
 
                 Cell cell15 = row.createCell(14);
-                if(obj[14]!=null){
+                if (obj[14] != null) {
                     cell15.setCellValue(obj[14].toString());
                 }
                 Cell cell16 = row.createCell(15);
-                if(obj[15]!=null){
+                if (obj[15] != null) {
                     cell16.setCellValue(obj[15].toString());
                 }
                 Cell cell17 = row.createCell(16);
-                if(obj[16]!=null){
+                if (obj[16] != null) {
                     cell17.setCellValue(obj[16].toString());
                 }
                 Cell cell18 = row.createCell(17);
-                if(obj[17]!=null){
+                if (obj[17] != null) {
                     cell18.setCellValue(obj[17].toString());
                 }
                 Cell cell19 = row.createCell(18);
-                if(obj[18]!=null){
+                if (obj[18] != null) {
                     cell19.setCellValue(obj[18].toString());
                 }
                 Cell cell20 = row.createCell(19);
-                if(obj[19]!=null){
+                if (obj[19] != null) {
                     cell20.setCellValue(Double.parseDouble(obj[19].toString()));
                 }
                 Cell cell21 = row.createCell(20);
-                if(obj[20]!=null){
+                if (obj[20] != null) {
                     cell21.setCellValue(Double.parseDouble(obj[20].toString()));
                 }
                 Cell cell22 = row.createCell(21);
-                if(obj[21]!=null){
+                if (obj[21] != null) {
                     cell22.setCellValue(Double.parseDouble(obj[21].toString()));
                 }
                 Cell cell23 = row.createCell(22);
-                if(obj[22]!=null){
+                if (obj[22] != null) {
                     cell23.setCellValue(Double.parseDouble(obj[22].toString()));
                 }
                 Cell cell24 = row.createCell(23);
-                if(obj[23]!=null){
+                if (obj[23] != null) {
                     cell24.setCellValue(Double.parseDouble(obj[23].toString()));
                 }
                 Cell cell25 = row.createCell(24);
-                if(obj[24]!=null){
+                if (obj[24] != null) {
                     cell25.setCellValue(obj[24].toString());
                 }
                 Cell cell26 = row.createCell(25);
-                if(obj[25]!=null){
+                if (obj[25] != null) {
                     cell26.setCellValue(obj[25].toString());
                 }
                 Cell cell27 = row.createCell(26);
-                if(obj[26]!=null){
+                if (obj[26] != null) {
                     cell27.setCellValue(Double.parseDouble(obj[26].toString()));
                 }
                 Cell cell28 = row.createCell(27);
-                if(obj[27]!=null){
+                if (obj[27] != null) {
                     cell28.setCellValue(Double.parseDouble(obj[27].toString()));
                 }
                 Cell cell29 = row.createCell(28);
-                if(obj[28]!=null){
+                if (obj[28] != null) {
                     cell29.setCellValue(obj[28].toString());
                 }
                 Cell cell30 = row.createCell(29);
-                if(obj[29]!=null){
+                if (obj[29] != null) {
                     cell30.setCellValue(obj[29].toString());
                 }
                 Cell cell31 = row.createCell(30);
-                if(obj[30]!=null){
+                if (obj[30] != null) {
                     cell31.setCellValue(Double.parseDouble(obj[30].toString()));
                 }
                 Cell cell32 = row.createCell(31);
-                if(obj[31]!=null){
+                if (obj[31] != null) {
                     cell32.setCellValue(obj[31].toString());
                 }
                 Cell cell33 = row.createCell(32);
-                if(obj[32]!=null){
+                if (obj[32] != null) {
                     cell33.setCellValue(obj[32].toString());
                 }
                 Cell cell34 = row.createCell(33);
-                if(obj[33]!=null){
+                if (obj[33] != null) {
                     cell34.setCellValue(obj[33].toString());
                 }
                 Cell cell35 = row.createCell(34);
-                if(obj[34]!=null){
+                if (obj[34] != null) {
                     cell35.setCellValue(obj[34].toString());
                 }
                 Cell cell36 = row.createCell(35);
-                if(obj[35]!=null){
+                if (obj[35] != null) {
                     cell36.setCellValue(Double.parseDouble(obj[35].toString()));
                 }
 
@@ -4423,17 +4423,17 @@ public class ExcelGenerator {
                 rowCount++;
             }
         }
-        if(reportType == 4 && formId == 11){
+        if (reportType == 4 && formId == 11) {
             FileInputStream fis = null;
-            File files = new File(appPath+"/assets/excel/plan/Mining_Report_9.xlsx");
+            File files = new File(appPath + "/assets/excel/plan/Mining_Report_9.xlsx");
             fis = new FileInputStream(files);
             workbook = new XSSFWorkbook(fis);
 
             CellStyle cellStyle = workbook.createCellStyle();
-            cellStyle.setBorderBottom((short)1);
-            cellStyle.setBorderLeft((short)1);
-            cellStyle.setBorderRight((short)1);
-            cellStyle.setBorderTop((short)1);
+            cellStyle.setBorderBottom((short) 1);
+            cellStyle.setBorderLeft((short) 1);
+            cellStyle.setBorderRight((short) 1);
+            cellStyle.setBorderTop((short) 1);
             cellStyle.setWrapText(true);
             cellStyle.setAlignment(cellStyle.ALIGN_CENTER);
             cellStyle.setVerticalAlignment(cellStyle.VERTICAL_CENTER);
@@ -4445,7 +4445,7 @@ public class ExcelGenerator {
             Row row1 = sheet.getRow(2);
             Cell cel2 = row1.createCell(2);
             cel2.setCellValue(DateToStr1);
-            String queryStr="SELECT\n" +
+            String queryStr = "SELECT\n" +
                     "MRAM.ANNUAL_REGISTRATION.LICENSENUM AS Дугаар,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LPNAME AS Эзэмшигч,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LP_REG AS Регистер,\n" +
@@ -4478,12 +4478,12 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_EXCEL_MINREP9 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_MINREP9.PLANID\n" +
                     "WHERE\n" +
                     "    MRAM.ANNUAL_REGISTRATION.REPSTATUSID=1 \n" +
-                    "    and TYPE=1 and  MRAM.ANNUAL_REGISTRATION.REPORTYEAR="+planYr+"\n" +
+                    "    and TYPE=1 and  MRAM.ANNUAL_REGISTRATION.REPORTYEAR=" + planYr + "\n" +
                     "\t  and (DATA1 is not  NULL)\n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_MINREP9.ID";
-            List<Object[]> objects=dao.getNativeSQLResult(queryStr,"list");
-            int rowCount=7;
-            for(Object[] obj:objects){
+            List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
+            int rowCount = 7;
+            for (Object[] obj : objects) {
                 row = sheet.createRow(rowCount);
                 Cell cell1 = row.createCell(0);
                 cell1.setCellValue(Double.parseDouble(obj[0].toString()));
@@ -4513,68 +4513,68 @@ public class ExcelGenerator {
                 cell13.setCellValue(obj[12].toString());
 
                 Cell cell114 = row.createCell(13);
-                if(obj[13]!=null){
+                if (obj[13] != null) {
                     cell114.setCellValue(Double.parseDouble(obj[13].toString()));
                 }
 
                 Cell cell15 = row.createCell(14);
-                if(obj[14]!=null){
+                if (obj[14] != null) {
                     cell15.setCellValue(obj[14].toString());
                 }
                 Cell cell16 = row.createCell(15);
-                if(obj[15]!=null){
+                if (obj[15] != null) {
                     cell16.setCellValue(obj[15].toString());
                 }
                 Cell cell17 = row.createCell(16);
-                if(obj[16]!=null){
+                if (obj[16] != null) {
                     cell17.setCellValue(Double.parseDouble(obj[16].toString()));
                 }
                 Cell cell18 = row.createCell(17);
-                if(obj[17]!=null){
+                if (obj[17] != null) {
                     cell18.setCellValue(Double.parseDouble(obj[17].toString()));
                 }
                 Cell cell19 = row.createCell(18);
-                if(obj[18]!=null){
+                if (obj[18] != null) {
                     cell19.setCellValue(Double.parseDouble(obj[18].toString()));
                 }
                 Cell cell20 = row.createCell(19);
-                if(obj[19]!=null){
+                if (obj[19] != null) {
                     cell20.setCellValue(Double.parseDouble(obj[19].toString()));
                 }
                 Cell cell21 = row.createCell(20);
-                if(obj[20]!=null){
+                if (obj[20] != null) {
                     cell21.setCellValue(Double.parseDouble(obj[20].toString()));
                 }
                 Cell cell22 = row.createCell(21);
-                if(obj[21]!=null){
+                if (obj[21] != null) {
                     cell22.setCellValue(Double.parseDouble(obj[21].toString()));
                 }
                 Cell cell23 = row.createCell(22);
-                if(obj[22]!=null){
+                if (obj[22] != null) {
                     cell23.setCellValue(Double.parseDouble(obj[22].toString()));
                 }
                 Cell cell24 = row.createCell(23);
-                if(obj[23]!=null){
+                if (obj[23] != null) {
                     cell24.setCellValue(Double.parseDouble(obj[23].toString()));
                 }
                 Cell cell25 = row.createCell(24);
-                if(obj[24]!=null){
+                if (obj[24] != null) {
                     cell25.setCellValue(obj[24].toString());
                 }
                 Cell cell26 = row.createCell(25);
-                if(obj[25]!=null){
+                if (obj[25] != null) {
                     cell26.setCellValue(obj[25].toString());
                 }
                 Cell cell27 = row.createCell(26);
-                if(obj[26]!=null){
+                if (obj[26] != null) {
                     cell27.setCellValue(Double.parseDouble(obj[26].toString()));
                 }
                 Cell cell28 = row.createCell(27);
-                if(obj[27]!=null){
+                if (obj[27] != null) {
                     cell28.setCellValue(Double.parseDouble(obj[27].toString()));
                 }
                 Cell cell29 = row.createCell(28);
-                if(obj[28]!=null){
+                if (obj[28] != null) {
                     cell29.setCellValue(Double.parseDouble(obj[28].toString()));
                 }
 
@@ -4583,13 +4583,13 @@ public class ExcelGenerator {
             }
 
             Sheet sheet1 = workbook.getSheetAt(1);
-            Row rowS1= sheet1.getRow(1);
+            Row rowS1 = sheet1.getRow(1);
             Cell cel21 = rowS1.createCell(2);
             cel21.setCellValue(planYr);
             Row rowS12 = sheet1.getRow(2);
             Cell cels2 = rowS12.createCell(2);
             cels2.setCellValue(DateToStr1);
-            String queryStr2="SELECT\n" +
+            String queryStr2 = "SELECT\n" +
                     "MRAM.ANNUAL_REGISTRATION.LICENSENUM AS Дугаар,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LPNAME AS Эзэмшигч,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LP_REG AS Регистер,\n" +
@@ -4625,13 +4625,13 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_EXCEL_MINREP9 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_MINREP9.PLANID\n" +
                     " \n" +
                     "WHERE\n" +
-                    "   MRAM.DATA_EXCEL_MINREP9.TYPE = 2 and MRAM.ANNUAL_REGISTRATION.REPORTYEAR="+planYr+"\n" +
+                    "   MRAM.DATA_EXCEL_MINREP9.TYPE = 2 and MRAM.ANNUAL_REGISTRATION.REPORTYEAR=" + planYr + "\n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_MINREP9.ID\n" +
                     "\n" +
                     "\n";
-            List<Object[]> objectSheets=dao.getNativeSQLResult(queryStr2,"list");
-            int rowCountSheets=7;
-            for(Object[] obj:objectSheets){
+            List<Object[]> objectSheets = dao.getNativeSQLResult(queryStr2, "list");
+            int rowCountSheets = 7;
+            for (Object[] obj : objectSheets) {
                 rowS1 = sheet1.createRow(rowCountSheets);
                 Cell cell1 = rowS1.createCell(0);
                 cell1.setCellValue(Double.parseDouble(obj[0].toString()));
@@ -4661,36 +4661,36 @@ public class ExcelGenerator {
                 cell13.setCellValue(obj[12].toString());
 
                 Cell cell114 = rowS1.createCell(13);
-                if(obj[13]!=null){
+                if (obj[13] != null) {
                     cell114.setCellValue(Double.parseDouble(obj[13].toString()));
                 }
 
                 Cell cell15 = rowS1.createCell(14);
-                if(obj[14]!=null){
+                if (obj[14] != null) {
                     cell15.setCellValue(obj[14].toString());
                 }
                 Cell cell16 = rowS1.createCell(15);
-                if(obj[15]!=null){
+                if (obj[15] != null) {
                     cell16.setCellValue(obj[15].toString());
                 }
                 Cell cell17 = rowS1.createCell(16);
-                if(obj[16]!=null){
+                if (obj[16] != null) {
                     cell17.setCellValue(Double.parseDouble(obj[16].toString()));
                 }
                 Cell cell18 = rowS1.createCell(17);
-                if(obj[17]!=null){
+                if (obj[17] != null) {
                     cell18.setCellValue(Double.parseDouble(obj[17].toString()));
                 }
                 Cell cell19 = rowS1.createCell(18);
-                if(obj[18]!=null){
+                if (obj[18] != null) {
                     cell19.setCellValue(Double.parseDouble(obj[18].toString()));
                 }
                 Cell cell20 = rowS1.createCell(19);
-                if(obj[19]!=null){
+                if (obj[19] != null) {
                     cell20.setCellValue(Double.parseDouble(obj[19].toString()));
                 }
                 Cell cell21 = rowS1.createCell(20);
-                if(obj[20]!=null){
+                if (obj[20] != null) {
                     cell21.setCellValue(Double.parseDouble(obj[20].toString()));
                 }
 
@@ -4698,13 +4698,13 @@ public class ExcelGenerator {
             }
 
             Sheet sheet2 = workbook.getSheetAt(2);
-            Row rowSS1= sheet2.getRow(1);
+            Row rowSS1 = sheet2.getRow(1);
             Cell cel3l = rowSS1.createCell(2);
             cel3l.setCellValue(planYr);
             Row rowSS12 = sheet2.getRow(2);
             Cell cel32 = rowSS12.createCell(2);
             cel32.setCellValue(DateToStr1);
-            String queryStr3="SELECT\n" +
+            String queryStr3 = "SELECT\n" +
                     "MRAM.ANNUAL_REGISTRATION.LICENSENUM AS Дугаар,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LPNAME AS Эзэмшигч,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LP_REG AS Регистер,\n" +
@@ -4738,14 +4738,14 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_EXCEL_MINREP9 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_MINREP9.PLANID\n" +
                     " \n" +
                     "WHERE\n" +
-                    "   MRAM.DATA_EXCEL_MINREP9.TYPE = 3 and MRAM.ANNUAL_REGISTRATION.REPORTYEAR="+planYr+"\n" +
+                    "   MRAM.DATA_EXCEL_MINREP9.TYPE = 3 and MRAM.ANNUAL_REGISTRATION.REPORTYEAR=" + planYr + "\n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_MINREP9.ID\n" +
                     "\n" +
                     "\n" +
                     "\n";
-            List<Object[]> objectSheets1=dao.getNativeSQLResult(queryStr3,"list");
-            int rowCountSheets1=7;
-            for(Object[] obj:objectSheets1){
+            List<Object[]> objectSheets1 = dao.getNativeSQLResult(queryStr3, "list");
+            int rowCountSheets1 = 7;
+            for (Object[] obj : objectSheets1) {
                 rowSS1 = sheet2.createRow(rowCountSheets1);
                 Cell cell1 = rowSS1.createCell(0);
                 cell1.setCellValue(Double.parseDouble(obj[0].toString()));
@@ -4775,28 +4775,28 @@ public class ExcelGenerator {
                 cell13.setCellValue(obj[12].toString());
 
                 Cell cell114 = rowSS1.createCell(13);
-                if(obj[13]!=null){
+                if (obj[13] != null) {
                     cell114.setCellValue(Double.parseDouble(obj[13].toString()));
                 }
 
                 Cell cell15 = rowSS1.createCell(14);
-                if(obj[14]!=null){
+                if (obj[14] != null) {
                     cell15.setCellValue(obj[14].toString());
                 }
                 Cell cell16 = rowSS1.createCell(15);
-                if(obj[15]!=null){
+                if (obj[15] != null) {
                     cell16.setCellValue(obj[15].toString());
                 }
                 Cell cell17 = rowSS1.createCell(16);
-                if(obj[16]!=null){
+                if (obj[16] != null) {
                     cell17.setCellValue(obj[16].toString());
                 }
                 Cell cell18 = rowSS1.createCell(17);
-                if(obj[17]!=null){
+                if (obj[17] != null) {
                     cell18.setCellValue(obj[17].toString());
                 }
                 Cell cell19 = rowSS1.createCell(18);
-                if(obj[18]!=null){
+                if (obj[18] != null) {
                     cell19.setCellValue(Double.parseDouble(obj[18].toString()));
                 }
 
@@ -4804,17 +4804,17 @@ public class ExcelGenerator {
             }
         }
 
-        if(reportType == 4 && formId == 12){
+        if (reportType == 4 && formId == 12) {
             FileInputStream fis = null;
-            File files = new File(appPath+"/assets/excel/plan/miningStat10.xlsx");
+            File files = new File(appPath + "/assets/excel/plan/miningStat10.xlsx");
             fis = new FileInputStream(files);
             workbook = new XSSFWorkbook(fis);
 
             CellStyle cellStyle = workbook.createCellStyle();
-            cellStyle.setBorderBottom((short)1);
-            cellStyle.setBorderLeft((short)1);
-            cellStyle.setBorderRight((short)1);
-            cellStyle.setBorderTop((short)1);
+            cellStyle.setBorderBottom((short) 1);
+            cellStyle.setBorderLeft((short) 1);
+            cellStyle.setBorderRight((short) 1);
+            cellStyle.setBorderTop((short) 1);
             cellStyle.setWrapText(true);
             cellStyle.setAlignment(cellStyle.ALIGN_CENTER);
             cellStyle.setVerticalAlignment(cellStyle.VERTICAL_CENTER);
@@ -4843,14 +4843,14 @@ public class ExcelGenerator {
             };
             String sqlQuery = "SELECT A.ID, A.LPNAME,A.LP_REG,A.LICENSEXB,(SELECT LUT_APPSTATUS.STATUSNAMEMON FROM LUT_APPSTATUS WHERE LUT_APPSTATUS.STATUSID = A.REPSTATUSID AND ROWNUM=1), (SELECT REQ.ADD_BUNLICENSENUM FROM REG_REPORT_REQ REQ WHERE REQ. ID = A .REQID AND ROWNUM = 1),(SELECT M.MINERALNAMEMON FROM LUT_MINERALS M WHERE M.MINERALID = A.MINID AND ROWNUM = 1),(SELECT D.DEPOSITNAMEMON FROM LUT_DEPOSIT D WHERE D.DEPOSITID = A.DEPOSITID AND ROWNUM = 1),(SELECT SUB_LICENSES.LOCATIONAIMAG FROM SUB_LICENSES WHERE SUB_LICENSES.LICENSEXM = A.LICENSEXB AND ROWNUM = 1),(SELECT SUB_LICENSES.LOCATIONSOUM FROM SUB_LICENSES WHERE SUB_LICENSES.LICENSEXM = A.LICENSEXB AND ROWNUM = 1),(SELECT SUB_LICENSES.AREANAMEMON FROM SUB_LICENSES WHERE SUB_LICENSES.LICENSEXM = A.LICENSEXB AND ROWNUM = 1),(SELECT SUB_LICENSES.AREASIZE FROM SUB_LICENSES WHERE SUB_LICENSES.LICENSEXM = A.LICENSEXB AND ROWNUM = 1),";
 
-            for(String v : vals){
+            for (String v : vals) {
                 sqlQuery = sqlQuery + "(SELECT DD.DATA4 FROM DATA_EXCEL_MINREP10 DD WHERE DD.PLANID = A.ID AND DD.DATA2 " + v + " AND ROWNUM = 1),";
                 sqlQuery = sqlQuery + "(SELECT DD.DATA5 FROM DATA_EXCEL_MINREP10 DD WHERE DD.PLANID = A.ID AND DD.DATA2 " + v + " AND ROWNUM = 1),";
                 sqlQuery = sqlQuery + "(SELECT DD.DATA7 FROM DATA_EXCEL_MINREP10 DD WHERE DD.PLANID = A.ID AND DD.DATA2 " + v + " AND ROWNUM = 1),";
                 sqlQuery = sqlQuery + "(SELECT DD.DATA8 FROM DATA_EXCEL_MINREP10 DD WHERE DD.PLANID = A.ID AND DD.DATA2 " + v + " AND ROWNUM = 1),";
                 sqlQuery = sqlQuery + "(SELECT DD.DATA10 FROM DATA_EXCEL_MINREP10 DD WHERE DD.PLANID = A.ID AND DD.DATA2 " + v + " AND ROWNUM = 1),";
                 sqlQuery = sqlQuery + "(SELECT DD.DATA11 FROM DATA_EXCEL_MINREP10 DD WHERE DD.PLANID = A.ID AND DD.DATA2 " + v + " AND ROWNUM = 1)";
-                if (!v.equalsIgnoreCase(vals[vals.length-1])){
+                if (!v.equalsIgnoreCase(vals[vals.length - 1])) {
                     sqlQuery = sqlQuery + ",";
                 }
             }
@@ -4862,32 +4862,32 @@ public class ExcelGenerator {
             style.setWrapText(true);
 
 
-            sqlQuery = sqlQuery + " FROM ANNUAL_REGISTRATION A WHERE A.ISTODOTGOL = 0 AND A .REPSTATUSID IN (1,2,7) AND A .REPORTTYPE = 4 AND A .REPORTYEAR = "+planYr+" AND A .XTYPE != 0 AND A .DIVISIONID = 1 ORDER BY A.LPNAME ASC, A.REPSTATUSID DESC";
-            List<Object[]> objects=dao.getNativeSQLResult(sqlQuery,"list");
-            int rowCount=7;
+            sqlQuery = sqlQuery + " FROM ANNUAL_REGISTRATION A WHERE A.ISTODOTGOL = 0 AND A .REPSTATUSID IN (1,2,7) AND A .REPORTTYPE = 4 AND A .REPORTYEAR = " + planYr + " AND A .XTYPE != 0 AND A .DIVISIONID = 1 ORDER BY A.LPNAME ASC, A.REPSTATUSID DESC";
+            List<Object[]> objects = dao.getNativeSQLResult(sqlQuery, "list");
+            int rowCount = 7;
 
-            if (objects != null && objects.size() > 0){
-                for(int iterator=0;iterator<objects.size();iterator++){
+            if (objects != null && objects.size() > 0) {
+                for (int iterator = 0; iterator < objects.size(); iterator++) {
                     Object[] o = objects.get(iterator);
-                    setCellData(sheet, iterator+6,0,iterator+1,style,"number");
-                    for(int cellIterator = 1; cellIterator < o.length; cellIterator++){
-                        setCellData(sheet, iterator+6,cellIterator,o[cellIterator],style,(cellIterator > 10) ? "float" : "string");
+                    setCellData(sheet, iterator + 6, 0, iterator + 1, style, "number");
+                    for (int cellIterator = 1; cellIterator < o.length; cellIterator++) {
+                        setCellData(sheet, iterator + 6, cellIterator, o[cellIterator], style, (cellIterator > 10) ? "float" : "string");
                     }
                 }
             }
 
         }
-        if(reportType == 4 && formId == 13){
+        if (reportType == 4 && formId == 13) {
             FileInputStream fis = null;
-            File files = new File(appPath+"/assets/excel/plan/miningStat11.xlsx");
+            File files = new File(appPath + "/assets/excel/plan/miningStat11.xlsx");
             fis = new FileInputStream(files);
             workbook = new XSSFWorkbook(fis);
 
             CellStyle cellStyle = workbook.createCellStyle();
-            cellStyle.setBorderBottom((short)1);
-            cellStyle.setBorderLeft((short)1);
-            cellStyle.setBorderRight((short)1);
-            cellStyle.setBorderTop((short)1);
+            cellStyle.setBorderBottom((short) 1);
+            cellStyle.setBorderLeft((short) 1);
+            cellStyle.setBorderRight((short) 1);
+            cellStyle.setBorderTop((short) 1);
             cellStyle.setWrapText(true);
             cellStyle.setAlignment(cellStyle.ALIGN_CENTER);
             cellStyle.setVerticalAlignment(cellStyle.VERTICAL_CENTER);
@@ -4912,19 +4912,19 @@ public class ExcelGenerator {
             };
             String sqlQuery = "SELECT A.ID, A.LPNAME,A.LP_REG,A.LICENSEXB,(SELECT LUT_APPSTATUS.STATUSNAMEMON FROM LUT_APPSTATUS WHERE LUT_APPSTATUS.STATUSID = A.REPSTATUSID AND ROWNUM=1), (SELECT REQ.ADD_BUNLICENSENUM FROM REG_REPORT_REQ REQ WHERE REQ. ID = A .REQID AND ROWNUM = 1),(SELECT M.MINERALNAMEMON FROM LUT_MINERALS M WHERE M.MINERALID = A.MINID AND ROWNUM = 1),(SELECT D.DEPOSITNAMEMON FROM LUT_DEPOSIT D WHERE D.DEPOSITID = A.DEPOSITID AND ROWNUM = 1),(SELECT SUB_LICENSES.LOCATIONAIMAG FROM SUB_LICENSES WHERE SUB_LICENSES.LICENSEXM = A.LICENSEXB AND ROWNUM = 1),(SELECT SUB_LICENSES.LOCATIONSOUM FROM SUB_LICENSES WHERE SUB_LICENSES.LICENSEXM = A.LICENSEXB AND ROWNUM = 1),(SELECT SUB_LICENSES.AREANAMEMON FROM SUB_LICENSES WHERE SUB_LICENSES.LICENSEXM = A.LICENSEXB AND ROWNUM = 1),(SELECT SUB_LICENSES.AREASIZE FROM SUB_LICENSES WHERE SUB_LICENSES.LICENSEXM = A.LICENSEXB AND ROWNUM = 1),";
 
-            for(String v : vals){
+            for (String v : vals) {
                 sqlQuery = sqlQuery + "(SELECT DD.DATA4 FROM DATA_EXCEL_MINREP11 DD WHERE DD.PLANID = A.ID AND DD.DATA2 " + v + " AND ROWNUM = 1),";
                 sqlQuery = sqlQuery + "(SELECT DD.DATA5 FROM DATA_EXCEL_MINREP11 DD WHERE DD.PLANID = A.ID AND DD.DATA2 " + v + " AND ROWNUM = 1),";
                 sqlQuery = sqlQuery + "(SELECT DD.DATA6 FROM DATA_EXCEL_MINREP11 DD WHERE DD.PLANID = A.ID AND DD.DATA2 " + v + " AND ROWNUM = 1),";
                 sqlQuery = sqlQuery + "(SELECT DD.DATA8 FROM DATA_EXCEL_MINREP11 DD WHERE DD.PLANID = A.ID AND DD.DATA2 " + v + " AND ROWNUM = 1),";
                 sqlQuery = sqlQuery + "(SELECT DD.DATA9 FROM DATA_EXCEL_MINREP11 DD WHERE DD.PLANID = A.ID AND DD.DATA2 " + v + " AND ROWNUM = 1),";
                 sqlQuery = sqlQuery + "(SELECT DD.DATA10 FROM DATA_EXCEL_MINREP11 DD WHERE DD.PLANID = A.ID AND DD.DATA2 " + v + " AND ROWNUM = 1)";
-                if (!v.equalsIgnoreCase(vals[vals.length-1])){
+                if (!v.equalsIgnoreCase(vals[vals.length - 1])) {
                     sqlQuery = sqlQuery + ",";
                 }
             }
 
-            sqlQuery = sqlQuery + " FROM ANNUAL_REGISTRATION A WHERE A.ISTODOTGOL = 0 AND A .REPSTATUSID IN (1,2,7) AND A .REPORTTYPE = 4 AND A .REPORTYEAR = "+planYr+" AND A .XTYPE != 0 AND A .DIVISIONID = 1 ORDER BY A.LPNAME ASC, A.REPSTATUSID DESC";
+            sqlQuery = sqlQuery + " FROM ANNUAL_REGISTRATION A WHERE A.ISTODOTGOL = 0 AND A .REPSTATUSID IN (1,2,7) AND A .REPORTTYPE = 4 AND A .REPORTYEAR = " + planYr + " AND A .XTYPE != 0 AND A .DIVISIONID = 1 ORDER BY A.LPNAME ASC, A.REPSTATUSID DESC";
             List<Object[]> resultObj = dao.getNativeSQLResult(sqlQuery, "list");
             CellStyle style = workbook.createCellStyle();
             style.setBorderBottom(HSSFCellStyle.BORDER_THIN);
@@ -4932,33 +4932,32 @@ public class ExcelGenerator {
             style.setBorderRight(HSSFCellStyle.BORDER_THIN);
             style.setBorderLeft(HSSFCellStyle.BORDER_THIN);
             style.setWrapText(true);
-            if (resultObj != null && resultObj.size() > 0){
-                for(int iterator=0;iterator<resultObj.size();iterator++){
+            if (resultObj != null && resultObj.size() > 0) {
+                for (int iterator = 0; iterator < resultObj.size(); iterator++) {
                     Object[] o = resultObj.get(iterator);
-                    setCellData(sheet, iterator+6,0,iterator+1,style,"number");
-                    for(int cellIterator = 1; cellIterator < o.length; cellIterator++){
-                        if (o[cellIterator] instanceof String){
-                            setCellData(sheet, iterator+6,cellIterator,o[cellIterator],style,"string");
-                        }
-                        else{
-                            setCellData(sheet, iterator+6,cellIterator,o[cellIterator],style,"float");
+                    setCellData(sheet, iterator + 6, 0, iterator + 1, style, "number");
+                    for (int cellIterator = 1; cellIterator < o.length; cellIterator++) {
+                        if (o[cellIterator] instanceof String) {
+                            setCellData(sheet, iterator + 6, cellIterator, o[cellIterator], style, "string");
+                        } else {
+                            setCellData(sheet, iterator + 6, cellIterator, o[cellIterator], style, "float");
                         }
                     }
                 }
             }
 
         }
-        if(reportType == 4 && formId == 14){
+        if (reportType == 4 && formId == 14) {
             FileInputStream fis = null;
-            File files = new File(appPath+"/assets/excel/plan/miningStat12.xlsx");
+            File files = new File(appPath + "/assets/excel/plan/miningStat12.xlsx");
             fis = new FileInputStream(files);
             workbook = new XSSFWorkbook(fis);
 
             CellStyle cellStyle = workbook.createCellStyle();
-            cellStyle.setBorderBottom((short)1);
-            cellStyle.setBorderLeft((short)1);
-            cellStyle.setBorderRight((short)1);
-            cellStyle.setBorderTop((short)1);
+            cellStyle.setBorderBottom((short) 1);
+            cellStyle.setBorderLeft((short) 1);
+            cellStyle.setBorderRight((short) 1);
+            cellStyle.setBorderTop((short) 1);
             cellStyle.setWrapText(true);
             cellStyle.setAlignment(cellStyle.ALIGN_CENTER);
             cellStyle.setVerticalAlignment(cellStyle.VERTICAL_CENTER);
@@ -4980,18 +4979,18 @@ public class ExcelGenerator {
                     "(SELECT SUB_LICENSES.AREANAMEMON FROM SUB_LICENSES WHERE SUB_LICENSES.LICENSEXM = A.LICENSEXB AND ROWNUM = 1)," +
                     "(SELECT SUB_LICENSES.AREASIZE FROM SUB_LICENSES WHERE SUB_LICENSES.LICENSEXM = A.LICENSEXB AND ROWNUM = 1),";
 
-            for(int iterator = 1;iterator <=57;iterator++){
+            for (int iterator = 1; iterator <= 57; iterator++) {
                 sqlQuery = sqlQuery + "(SELECT DD.DATA4 FROM DATA_EXCEL_MINREP12 DD WHERE DD.PLANID = A.ID AND DD.ORDERNUMBER = " + iterator + " AND ROWNUM = 1),";
                 sqlQuery = sqlQuery + "(SELECT DD.DATA5 FROM DATA_EXCEL_MINREP12 DD WHERE DD.PLANID = A.ID AND DD.ORDERNUMBER = " + iterator + " AND ROWNUM = 1),";
                 sqlQuery = sqlQuery + "(SELECT DD.DATA6 FROM DATA_EXCEL_MINREP12 DD WHERE DD.PLANID = A.ID AND DD.ORDERNUMBER = " + iterator + " AND ROWNUM = 1),";
                 sqlQuery = sqlQuery + "(SELECT DD.DATA7 FROM DATA_EXCEL_MINREP12 DD WHERE DD.PLANID = A.ID AND DD.ORDERNUMBER = " + iterator + " AND ROWNUM = 1),";
                 sqlQuery = sqlQuery + "(SELECT DD.DATA8 FROM DATA_EXCEL_MINREP12 DD WHERE DD.PLANID = A.ID AND DD.ORDERNUMBER = " + iterator + " AND ROWNUM = 1)";
-                if (iterator!=57){
+                if (iterator != 57) {
                     sqlQuery = sqlQuery + ",";
                 }
             }
 
-            sqlQuery = sqlQuery + " FROM ANNUAL_REGISTRATION A WHERE A.ISTODOTGOL = 0 AND A .REPSTATUSID IN (1,2,7) AND A .REPORTTYPE = 4 AND A .REPORTYEAR = "+planYr+" AND A .XTYPE != 0 AND A .DIVISIONID = 1 ORDER BY A.LPNAME ASC, A.REPSTATUSID DESC";
+            sqlQuery = sqlQuery + " FROM ANNUAL_REGISTRATION A WHERE A.ISTODOTGOL = 0 AND A .REPSTATUSID IN (1,2,7) AND A .REPORTTYPE = 4 AND A .REPORTYEAR = " + planYr + " AND A .XTYPE != 0 AND A .DIVISIONID = 1 ORDER BY A.LPNAME ASC, A.REPSTATUSID DESC";
             List<Object[]> resultObj = dao.getNativeSQLResult(sqlQuery, "list");
             CellStyle style = workbook.createCellStyle();
             style.setBorderBottom(HSSFCellStyle.BORDER_THIN);
@@ -4999,33 +4998,32 @@ public class ExcelGenerator {
             style.setBorderRight(HSSFCellStyle.BORDER_THIN);
             style.setBorderLeft(HSSFCellStyle.BORDER_THIN);
             style.setWrapText(true);
-            if (resultObj != null && resultObj.size() > 0){
-                for(int iterator=0;iterator<resultObj.size();iterator++){
+            if (resultObj != null && resultObj.size() > 0) {
+                for (int iterator = 0; iterator < resultObj.size(); iterator++) {
                     Object[] o = resultObj.get(iterator);
-                    setCellData(sheet, iterator+6,0,iterator+1,style,"number");
-                    for(int cellIterator = 1; cellIterator < o.length; cellIterator++){
-                        if (o[cellIterator] instanceof String){
-                            setCellData(sheet, iterator+6,cellIterator,o[cellIterator],style,"string");
-                        }
-                        else{
-                            setCellData(sheet, iterator+6,cellIterator,o[cellIterator],style,"float");
+                    setCellData(sheet, iterator + 6, 0, iterator + 1, style, "number");
+                    for (int cellIterator = 1; cellIterator < o.length; cellIterator++) {
+                        if (o[cellIterator] instanceof String) {
+                            setCellData(sheet, iterator + 6, cellIterator, o[cellIterator], style, "string");
+                        } else {
+                            setCellData(sheet, iterator + 6, cellIterator, o[cellIterator], style, "float");
                         }
                     }
                 }
             }
 
         }
-        if(reportType == 4 && formId == 15){
+        if (reportType == 4 && formId == 15) {
             FileInputStream fis = null;
-            File files = new File(appPath+"/assets/excel/plan/Mining_Report_13.xlsx");
+            File files = new File(appPath + "/assets/excel/plan/Mining_Report_13.xlsx");
             fis = new FileInputStream(files);
             workbook = new XSSFWorkbook(fis);
 
             CellStyle cellStyle = workbook.createCellStyle();
-            cellStyle.setBorderBottom((short)1);
-            cellStyle.setBorderLeft((short)1);
-            cellStyle.setBorderRight((short)1);
-            cellStyle.setBorderTop((short)1);
+            cellStyle.setBorderBottom((short) 1);
+            cellStyle.setBorderLeft((short) 1);
+            cellStyle.setBorderRight((short) 1);
+            cellStyle.setBorderTop((short) 1);
             cellStyle.setWrapText(true);
             cellStyle.setAlignment(cellStyle.ALIGN_CENTER);
             cellStyle.setVerticalAlignment(cellStyle.VERTICAL_CENTER);
@@ -5037,7 +5035,7 @@ public class ExcelGenerator {
             Row row1 = sheet.getRow(2);
             Cell cel2 = row1.createCell(2);
             cel2.setCellValue(DateToStr1);
-            String queryStr="SELECT\n" +
+            String queryStr = "SELECT\n" +
                     "MRAM.ANNUAL_REGISTRATION.LICENSENUM AS Дугаар,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LPNAME AS Эзэмшигч,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LP_REG AS Регистер,\n" +
@@ -5071,12 +5069,12 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_EXCEL_MINREP13 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_MINREP13.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = "+planYr+" \n" +
+                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_MINREP13.ID";
-            List<Object[]> objects=dao.getNativeSQLResult(queryStr,"list");
-            int rowCount=7;
-            for(Object[] obj:objects){
+            List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
+            int rowCount = 7;
+            for (Object[] obj : objects) {
                 row = sheet.createRow(rowCount);
                 Cell cell1 = row.createCell(0);
                 cell1.setCellValue(Double.parseDouble(obj[0].toString()));
@@ -5106,45 +5104,45 @@ public class ExcelGenerator {
                 cell13.setCellValue(obj[12].toString());
 
                 Cell cell14 = row.createCell(13);
-                if(obj[13]!=null){
+                if (obj[13] != null) {
                     cell14.setCellValue(Double.parseDouble(obj[13].toString()));
                 }
 
                 Cell cell15 = row.createCell(14);
-                if(obj[14]!=null){
+                if (obj[14] != null) {
                     cell15.setCellValue(obj[14].toString());
                 }
                 Cell cell16 = row.createCell(15);
-                if(obj[15]!=null){
+                if (obj[15] != null) {
                     cell16.setCellValue(obj[15].toString());
                 }
                 Cell cell17 = row.createCell(16);
-                if(obj[16]!=null){
+                if (obj[16] != null) {
                     cell17.setCellValue(Double.parseDouble(obj[16].toString()));
                 }
                 Cell cell18 = row.createCell(17);
-                if(obj[17]!=null){
+                if (obj[17] != null) {
                     cell18.setCellValue(obj[17].toString());
                 }
                 Cell cell19 = row.createCell(18);
-                if(obj[18]!=null){
+                if (obj[18] != null) {
                     cell19.setCellValue(Double.parseDouble(obj[18].toString()));
                 }
 
                 rowCount++;
             }
         }
-        if(reportType == 4 && formId == 18){
+        if (reportType == 4 && formId == 18) {
             FileInputStream fis = null;
-            File files = new File(appPath+"/assets/excel/plan/Mining_Report_16.xlsx");
+            File files = new File(appPath + "/assets/excel/plan/Mining_Report_16.xlsx");
             fis = new FileInputStream(files);
             workbook = new XSSFWorkbook(fis);
 
             CellStyle cellStyle = workbook.createCellStyle();
-            cellStyle.setBorderBottom((short)1);
-            cellStyle.setBorderLeft((short)1);
-            cellStyle.setBorderRight((short)1);
-            cellStyle.setBorderTop((short)1);
+            cellStyle.setBorderBottom((short) 1);
+            cellStyle.setBorderLeft((short) 1);
+            cellStyle.setBorderRight((short) 1);
+            cellStyle.setBorderTop((short) 1);
             cellStyle.setWrapText(true);
             cellStyle.setAlignment(cellStyle.ALIGN_CENTER);
             cellStyle.setVerticalAlignment(cellStyle.VERTICAL_CENTER);
@@ -5156,7 +5154,7 @@ public class ExcelGenerator {
             Row row1 = sheet.getRow(2);
             Cell cel2 = row1.createCell(2);
             cel2.setCellValue(DateToStr1);
-            String queryStr="SELECT\n" +
+            String queryStr = "SELECT\n" +
                     "MRAM.ANNUAL_REGISTRATION.LICENSENUM AS Дугаар,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LPNAME AS Эзэмшигч,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LP_REG AS Регистер,\n" +
@@ -5190,12 +5188,12 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_EXCEL_MINREP16 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_MINREP16.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = "+planYr+" \n" +
+                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_MINREP16.ID";
-            List<Object[]> objects=dao.getNativeSQLResult(queryStr,"list");
-            int rowCount=7;
-            for(Object[] obj:objects){
+            List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
+            int rowCount = 7;
+            for (Object[] obj : objects) {
                 row = sheet.createRow(rowCount);
                 Cell cell1 = row.createCell(0);
                 cell1.setCellValue(Double.parseDouble(obj[0].toString()));
@@ -5225,52 +5223,52 @@ public class ExcelGenerator {
                 cell13.setCellValue(obj[12].toString());
 
                 Cell cell14 = row.createCell(13);
-                if(obj[13]!=null){
+                if (obj[13] != null) {
                     cell14.setCellValue(Double.parseDouble(obj[13].toString()));
                 }
 
                 Cell cell15 = row.createCell(14);
-                if(obj[14]!=null){
+                if (obj[14] != null) {
                     cell15.setCellValue(Double.parseDouble(obj[14].toString()));
                 }
                 Cell cell16 = row.createCell(15);
-                if(obj[15]!=null){
+                if (obj[15] != null) {
                     cell16.setCellValue(obj[15].toString());
                 }
                 Cell cell17 = row.createCell(16);
-                if(obj[16]!=null){
+                if (obj[16] != null) {
                     cell17.setCellValue(obj[16].toString());
                 }
                 Cell cell18 = row.createCell(17);
-                if(obj[17]!=null){
+                if (obj[17] != null) {
                     cell18.setCellValue(Double.parseDouble(obj[17].toString()));
                 }
                 Cell cell19 = row.createCell(18);
-                if(obj[18]!=null){
+                if (obj[18] != null) {
                     cell19.setCellValue(Double.parseDouble(obj[18].toString()));
                 }
                 Cell cell20 = row.createCell(19);
-                if(obj[19]!=null){
+                if (obj[19] != null) {
                     cell20.setCellValue(obj[19].toString());
                 }
                 Cell cell21 = row.createCell(20);
-                if(obj[20]!=null){
+                if (obj[20] != null) {
                     cell21.setCellValue(Double.parseDouble(obj[20].toString()));
                 }
                 rowCount++;
             }
         }
-        if(reportType == 4 && formId == 19){
+        if (reportType == 4 && formId == 19) {
             FileInputStream fis = null;
-            File files = new File(appPath+"/assets/excel/plan/Mining_Report_17.xlsx");
+            File files = new File(appPath + "/assets/excel/plan/Mining_Report_17.xlsx");
             fis = new FileInputStream(files);
             workbook = new XSSFWorkbook(fis);
 
             CellStyle cellStyle = workbook.createCellStyle();
-            cellStyle.setBorderBottom((short)1);
-            cellStyle.setBorderLeft((short)1);
-            cellStyle.setBorderRight((short)1);
-            cellStyle.setBorderTop((short)1);
+            cellStyle.setBorderBottom((short) 1);
+            cellStyle.setBorderLeft((short) 1);
+            cellStyle.setBorderRight((short) 1);
+            cellStyle.setBorderTop((short) 1);
             cellStyle.setWrapText(true);
             cellStyle.setAlignment(cellStyle.ALIGN_CENTER);
             cellStyle.setVerticalAlignment(cellStyle.VERTICAL_CENTER);
@@ -5282,7 +5280,7 @@ public class ExcelGenerator {
             Row row1 = sheet.getRow(2);
             Cell cel2 = row1.createCell(2);
             cel2.setCellValue(DateToStr1);
-            String queryStr="SELECT\n" +
+            String queryStr = "SELECT\n" +
                     "MRAM.ANNUAL_REGISTRATION.LICENSENUM AS Дугаар,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LPNAME AS Эзэмшигч,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LP_REG AS Регистер,\n" +
@@ -5318,12 +5316,12 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_EXCEL_MINREP17 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_MINREP17.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = "+planYr+" \n" +
+                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_MINREP17.ID";
-            List<Object[]> objects=dao.getNativeSQLResult(queryStr,"list");
-            int rowCount=7;
-            for(Object[] obj:objects){
+            List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
+            int rowCount = 7;
+            for (Object[] obj : objects) {
                 row = sheet.createRow(rowCount);
                 Cell cell1 = row.createCell(0);
                 cell1.setCellValue(Double.parseDouble(obj[0].toString()));
@@ -5353,97 +5351,97 @@ public class ExcelGenerator {
                 cell13.setCellValue(obj[12].toString());
 
                 Cell cell14 = row.createCell(13);
-                if(obj[13]!=null){
+                if (obj[13] != null) {
                     cell14.setCellValue(Double.parseDouble(obj[13].toString()));
                 }
 
                 Cell cell15 = row.createCell(14);
-                if(obj[14]!=null){
+                if (obj[14] != null) {
                     cell15.setCellValue(obj[14].toString());
                 }
                 Cell cell16 = row.createCell(15);
-                if(obj[15]!=null){
+                if (obj[15] != null) {
                     cell16.setCellValue(obj[15].toString());
                 }
                 Cell cell17 = row.createCell(16);
-                if(obj[16]!=null){
+                if (obj[16] != null) {
                     cell17.setCellValue(obj[16].toString());
                 }
                 Cell cell18 = row.createCell(17);
-                if(obj[17]!=null){
+                if (obj[17] != null) {
                     cell18.setCellValue(obj[17].toString());
                 }
                 Cell cell19 = row.createCell(18);
-                if(obj[18]!=null){
+                if (obj[18] != null) {
                     cell19.setCellValue(obj[18].toString());
                 }
                 Cell cell20 = row.createCell(19);
-                if(obj[19]!=null){
+                if (obj[19] != null) {
                     cell20.setCellValue(obj[19].toString());
                 }
                 Cell cell21 = row.createCell(20);
-                if(obj[20]!=null){
+                if (obj[20] != null) {
                     cell21.setCellValue(obj[20].toString());
                 }
                 Cell cell22 = row.createCell(21);
-                if(obj[21]!=null){
+                if (obj[21] != null) {
                     cell22.setCellValue(obj[21].toString());
                 }
                 Cell cell23 = row.createCell(22);
-                if(obj[22]!=null){
+                if (obj[22] != null) {
                     cell23.setCellValue(Double.parseDouble(obj[22].toString()));
                 }
                 Cell cell24 = row.createCell(23);
-                if(obj[23]!=null){
+                if (obj[23] != null) {
                     cell24.setCellValue(obj[23].toString());
                 }
                 Cell cell25 = row.createCell(24);
-                if(obj[24]!=null){
+                if (obj[24] != null) {
                     cell25.setCellValue(Double.parseDouble(obj[24].toString()));
                 }
                 Cell cell26 = row.createCell(25);
-                if(obj[25]!=null){
+                if (obj[25] != null) {
                     cell26.setCellValue(Double.parseDouble(obj[25].toString()));
                 }
                 Cell cell27 = row.createCell(26);
-                if(obj[26]!=null){
+                if (obj[26] != null) {
                     cell27.setCellValue(obj[26].toString());
                 }
                 Cell cell28 = row.createCell(27);
-                if(obj[27]!=null){
+                if (obj[27] != null) {
                     cell28.setCellValue(obj[27].toString());
                 }
                 Cell cell29 = row.createCell(28);
-                if(obj[28]!=null){
+                if (obj[28] != null) {
                     cell29.setCellValue(Double.parseDouble(obj[28].toString()));
                 }
                 Cell cell30 = row.createCell(29);
-                if(obj[29]!=null){
+                if (obj[29] != null) {
                     cell30.setCellValue(Double.parseDouble(obj[29].toString()));
                 }
                 Cell cell31 = row.createCell(30);
-                if(obj[30]!=null){
+                if (obj[30] != null) {
                     cell31.setCellValue(obj[30].toString());
                 }
                 Cell cell32 = row.createCell(31);
-                if(obj[31]!=null){
+                if (obj[31] != null) {
                     cell32.setCellValue(Double.parseDouble(obj[31].toString()));
                 }
 
                 rowCount++;
             }
         }
-        if(reportType == 4 && formId == 20){
+        if (reportType == 4 && formId == 20) {
             FileInputStream fis = null;
-            File files = new File(appPath+"/assets/excel/plan/Mining_Report_18.xlsx");
+            File files = new File(appPath + "/assets/excel/plan/Mining_Report_18.xlsx");
             fis = new FileInputStream(files);
             workbook = new XSSFWorkbook(fis);
 
             CellStyle cellStyle = workbook.createCellStyle();
-            cellStyle.setBorderBottom((short)1);
-            cellStyle.setBorderLeft((short)1);
-            cellStyle.setBorderRight((short)1);
-            cellStyle.setBorderTop((short)1);
+            cellStyle.setBorderBottom((short) 1);
+            cellStyle.setBorderLeft((short) 1);
+            cellStyle.setBorderRight((short) 1);
+            cellStyle.setBorderTop((short) 1);
             cellStyle.setWrapText(true);
             cellStyle.setAlignment(cellStyle.ALIGN_CENTER);
             cellStyle.setVerticalAlignment(cellStyle.VERTICAL_CENTER);
@@ -5455,7 +5453,7 @@ public class ExcelGenerator {
             Row row1 = sheet.getRow(2);
             Cell cel2 = row1.createCell(2);
             cel2.setCellValue(DateToStr1);
-            String queryStr="SELECT\n" +
+            String queryStr = "SELECT\n" +
                     "MRAM.ANNUAL_REGISTRATION.LICENSENUM AS Дугаар,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LPNAME AS Эзэмшигч,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LP_REG AS Регистер,\n" +
@@ -5488,12 +5486,12 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_EXCEL_MINREP18 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_MINREP18.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = "+planYr+" \n" +
+                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_MINREP18.ID";
-            List<Object[]> objects=dao.getNativeSQLResult(queryStr,"list");
-            int rowCount=7;
-            for(Object[] obj:objects){
+            List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
+            int rowCount = 7;
+            for (Object[] obj : objects) {
                 row = sheet.createRow(rowCount);
                 Cell cell1 = row.createCell(0);
                 cell1.setCellValue(Double.parseDouble(obj[0].toString()));
@@ -5523,64 +5521,64 @@ public class ExcelGenerator {
                 cell13.setCellValue(obj[12].toString());
 
                 Cell cell14 = row.createCell(13);
-                if(obj[13]!=null){
+                if (obj[13] != null) {
                     cell14.setCellValue(Double.parseDouble(obj[13].toString()));
                 }
 
                 Cell cell15 = row.createCell(14);
-                if(obj[14]!=null){
+                if (obj[14] != null) {
                     cell15.setCellValue(obj[14].toString());
                 }
                 Cell cell16 = row.createCell(15);
-                if(obj[15]!=null){
+                if (obj[15] != null) {
                     cell16.setCellValue(obj[15].toString());
                 }
                 Cell cell17 = row.createCell(16);
-                if(obj[16]!=null){
+                if (obj[16] != null) {
                     cell17.setCellValue(Double.parseDouble(obj[16].toString()));
                 }
                 Cell cell18 = row.createCell(17);
-                if(obj[17]!=null){
+                if (obj[17] != null) {
                     cell18.setCellValue(obj[17].toString());
                 }
                 Cell cell19 = row.createCell(18);
-                if(obj[18]!=null){
+                if (obj[18] != null) {
                     cell19.setCellValue(obj[18].toString());
                 }
                 Cell cell20 = row.createCell(19);
-                if(obj[19]!=null){
+                if (obj[19] != null) {
                     cell20.setCellValue(obj[19].toString());
                 }
                 Cell cell21 = row.createCell(20);
-                if(obj[20]!=null){
+                if (obj[20] != null) {
                     cell21.setCellValue(Double.parseDouble(obj[20].toString()));
                 }
                 Cell cell22 = row.createCell(21);
-                if(obj[21]!=null){
+                if (obj[21] != null) {
                     cell22.setCellValue(Double.parseDouble(obj[21].toString()));
                 }
                 Cell cell23 = row.createCell(22);
-                if(obj[22]!=null){
+                if (obj[22] != null) {
                     cell23.setCellValue(obj[22].toString());
                 }
                 Cell cell24 = row.createCell(23);
-                if(obj[23]!=null){
+                if (obj[23] != null) {
                     cell24.setCellValue(Double.parseDouble(obj[23].toString()));
                 }
                 rowCount++;
             }
         }
-        if(reportType == 4 && formId == 21){
+        if (reportType == 4 && formId == 21) {
             FileInputStream fis = null;
-            File files = new File(appPath+"/assets/excel/plan/Mining_Report_19.xlsx");
+            File files = new File(appPath + "/assets/excel/plan/Mining_Report_19.xlsx");
             fis = new FileInputStream(files);
             workbook = new XSSFWorkbook(fis);
 
             CellStyle cellStyle = workbook.createCellStyle();
-            cellStyle.setBorderBottom((short)1);
-            cellStyle.setBorderLeft((short)1);
-            cellStyle.setBorderRight((short)1);
-            cellStyle.setBorderTop((short)1);
+            cellStyle.setBorderBottom((short) 1);
+            cellStyle.setBorderLeft((short) 1);
+            cellStyle.setBorderRight((short) 1);
+            cellStyle.setBorderTop((short) 1);
             cellStyle.setWrapText(true);
             cellStyle.setAlignment(cellStyle.ALIGN_CENTER);
             cellStyle.setVerticalAlignment(cellStyle.VERTICAL_CENTER);
@@ -5592,7 +5590,7 @@ public class ExcelGenerator {
             Row row1 = sheet.getRow(2);
             Cell cel2 = row1.createCell(2);
             cel2.setCellValue(DateToStr1);
-            String queryStr="SELECT\n" +
+            String queryStr = "SELECT\n" +
                     "MRAM.ANNUAL_REGISTRATION.LICENSENUM AS Дугаар,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LPNAME AS Эзэмшигч,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LP_REG AS Регистер,\n" +
@@ -5635,12 +5633,12 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_EXCEL_MINREP19 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_MINREP19.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR="+planYr+" \n" +
+                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR=" + planYr + " \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_MINREP19.ID";
-            List<Object[]> objects=dao.getNativeSQLResult(queryStr,"list");
-            int rowCount=7;
-            for(Object[] obj:objects){
+            List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
+            int rowCount = 7;
+            for (Object[] obj : objects) {
                 row = sheet.createRow(rowCount);
                 Cell cell1 = row.createCell(0);
                 cell1.setCellValue(Double.parseDouble(obj[0].toString()));
@@ -5670,60 +5668,60 @@ public class ExcelGenerator {
                 cell13.setCellValue(obj[12].toString());
 
                 Cell cell14 = row.createCell(13);
-                if(obj[13]!=null){
+                if (obj[13] != null) {
                     cell14.setCellValue(obj[13].toString());
                 }
 
                 Cell cell15 = row.createCell(14);
-                if(obj[14]!=null){
+                if (obj[14] != null) {
                     cell15.setCellValue(obj[14].toString());
                 }
                 Cell cell16 = row.createCell(15);
-                if(obj[15]!=null){
+                if (obj[15] != null) {
                     cell16.setCellValue(obj[15].toString());
                 }
                 Cell cell17 = row.createCell(16);
-                if(obj[16]!=null){
+                if (obj[16] != null) {
                     cell17.setCellValue(Double.parseDouble(obj[16].toString()));
                 }
                 Cell cell18 = row.createCell(17);
-                if(obj[17]!=null){
+                if (obj[17] != null) {
                     cell18.setCellValue(Double.parseDouble(obj[17].toString()));
                 }
                 Cell cell19 = row.createCell(18);
-                if(obj[18]!=null){
+                if (obj[18] != null) {
                     cell19.setCellValue(Double.parseDouble(obj[18].toString()));
                 }
                 Cell cell20 = row.createCell(19);
-                if(obj[19]!=null){
+                if (obj[19] != null) {
                     cell20.setCellValue(Double.parseDouble(obj[19].toString()));
                 }
                 Cell cell21 = row.createCell(20);
-                if(obj[20]!=null){
+                if (obj[20] != null) {
                     cell21.setCellValue(Double.parseDouble(obj[20].toString()));
                 }
                 Cell cell22 = row.createCell(21);
-                if(obj[21]!=null){
+                if (obj[21] != null) {
                     cell22.setCellValue(Double.parseDouble(obj[21].toString()));
                 }
                 Cell cell23 = row.createCell(22);
-                if(obj[22]!=null){
+                if (obj[22] != null) {
                     cell23.setCellValue(Double.parseDouble(obj[22].toString()));
                 }
                 Cell cell24 = row.createCell(23);
-                if(obj[23]!=null){
+                if (obj[23] != null) {
                     cell24.setCellValue(Double.parseDouble(obj[23].toString()));
                 }
                 Cell cell25 = row.createCell(24);
-                if(obj[24]!=null){
+                if (obj[24] != null) {
                     cell25.setCellValue(Double.parseDouble(obj[24].toString()));
                 }
                 Cell cell26 = row.createCell(25);
-                if(obj[25]!=null){
+                if (obj[25] != null) {
                     cell26.setCellValue(obj[25].toString());
                 }
                 Cell cell27 = row.createCell(26);
-                if(obj[26]!=null){
+                if (obj[26] != null) {
                     cell27.setCellValue(Double.parseDouble(obj[26].toString()));
                 }
 
@@ -5731,17 +5729,17 @@ public class ExcelGenerator {
             }
         }
 
-        if(reportType == 7 && formId == 1){
+        if (reportType == 7 && formId == 1) {
             FileInputStream fis = null;
-            File files = new File(appPath+"/assets/excel/plan/Geo_Plan_1.xlsx");
+            File files = new File(appPath + "/assets/excel/plan/Geo_Plan_1.xlsx");
             fis = new FileInputStream(files);
             workbook = new XSSFWorkbook(fis);
 
             CellStyle cellStyle = workbook.createCellStyle();
-            cellStyle.setBorderBottom((short)1);
-            cellStyle.setBorderLeft((short)1);
-            cellStyle.setBorderRight((short)1);
-            cellStyle.setBorderTop((short)1);
+            cellStyle.setBorderBottom((short) 1);
+            cellStyle.setBorderLeft((short) 1);
+            cellStyle.setBorderRight((short) 1);
+            cellStyle.setBorderTop((short) 1);
             cellStyle.setWrapText(true);
             cellStyle.setAlignment(cellStyle.ALIGN_CENTER);
             cellStyle.setVerticalAlignment(cellStyle.VERTICAL_CENTER);
@@ -5753,7 +5751,7 @@ public class ExcelGenerator {
             Row row1 = sheet.getRow(2);
             Cell cel2 = row1.createCell(2);
             cel2.setCellValue(DateToStr1);
-            String queryStr="SELECT\n" +
+            String queryStr = "SELECT\n" +
                     "MRAM.ANNUAL_REGISTRATION.LICENSENUM AS Дугаар,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LPNAME AS Эзэмшигч,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LP_REG AS Регистер,\n" +
@@ -5787,12 +5785,12 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.REG_REPORT_REQ on MRAM.REG_REPORT_REQ.\"ID\"=MRAM.ANNUAL_REGISTRATION.REQID \n" +
                     "INNER JOIN MRAM.DATA_EXCEL_GEOPLAN1 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_GEOPLAN1.PLANID\n" +
                     "\tWHERE\n" +
-                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = "+planYr+" \n" +
+                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_GEOPLAN1.ID";
-            List<Object[]> objects=dao.getNativeSQLResult(queryStr,"list");
-            int rowCount=7;
-            for(Object[] obj:objects){
+            List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
+            int rowCount = 7;
+            for (Object[] obj : objects) {
                 row = sheet.createRow(rowCount);
                 Cell cell1 = row.createCell(0);
                 cell1.setCellValue(Double.parseDouble(obj[0].toString()));
@@ -5803,7 +5801,7 @@ public class ExcelGenerator {
                 Cell cell4 = row.createCell(3);
                 cell4.setCellValue(obj[3].toString());
                 Cell cell5 = row.createCell(4);
-                if(obj[4]!=null){
+                if (obj[4] != null) {
                     cell5.setCellValue(obj[4].toString());
                 }
                 Cell cell6 = row.createCell(5);
@@ -5822,52 +5820,52 @@ public class ExcelGenerator {
                 cell12.setCellValue(obj[11].toString());
 
                 Cell cell13 = row.createCell(12);
-                if(obj[12]!=null){
-                cell13.setCellValue(obj[12].toString());
+                if (obj[12] != null) {
+                    cell13.setCellValue(obj[12].toString());
                 }
                 Cell cell14 = row.createCell(13);
-                if(obj[13]!=null){
+                if (obj[13] != null) {
                     cell14.setCellValue(obj[13].toString());
                 }
 
                 Cell cell15 = row.createCell(14);
-                if(obj[14]!=null){
+                if (obj[14] != null) {
                     cell15.setCellValue(obj[14].toString());
                 }
                 Cell cell16 = row.createCell(15);
-                if(obj[15]!=null){
+                if (obj[15] != null) {
                     cell16.setCellValue(obj[15].toString());
                 }
                 Cell cell17 = row.createCell(16);
-                if(obj[16]!=null){
+                if (obj[16] != null) {
                     cell17.setCellValue(Double.parseDouble(obj[16].toString()));
                 }
                 Cell cell18 = row.createCell(17);
-                if(obj[17]!=null){
+                if (obj[17] != null) {
                     cell18.setCellValue(Double.parseDouble(obj[17].toString()));
                 }
                 Cell cell19 = row.createCell(18);
-                if(obj[18]!=null){
+                if (obj[18] != null) {
                     cell19.setCellValue(Double.parseDouble(obj[18].toString()));
                 }
                 Cell cell20 = row.createCell(19);
-                if(obj[19]!=null){
+                if (obj[19] != null) {
                     cell20.setCellValue(Double.parseDouble(obj[19].toString()));
                 }
                 rowCount++;
             }
         }
-        if(reportType == 8 && formId == 1){
+        if (reportType == 8 && formId == 1) {
             FileInputStream fis = null;
-            File files = new File(appPath+"/assets/excel/plan/Geo_Report_1.xlsx");
+            File files = new File(appPath + "/assets/excel/plan/Geo_Report_1.xlsx");
             fis = new FileInputStream(files);
             workbook = new XSSFWorkbook(fis);
 
             CellStyle cellStyle = workbook.createCellStyle();
-            cellStyle.setBorderBottom((short)1);
-            cellStyle.setBorderLeft((short)1);
-            cellStyle.setBorderRight((short)1);
-            cellStyle.setBorderTop((short)1);
+            cellStyle.setBorderBottom((short) 1);
+            cellStyle.setBorderLeft((short) 1);
+            cellStyle.setBorderRight((short) 1);
+            cellStyle.setBorderTop((short) 1);
             cellStyle.setWrapText(true);
             cellStyle.setAlignment(cellStyle.ALIGN_CENTER);
             cellStyle.setVerticalAlignment(cellStyle.VERTICAL_CENTER);
@@ -5879,7 +5877,7 @@ public class ExcelGenerator {
             Row row1 = sheet.getRow(2);
             Cell cel2 = row1.createCell(2);
             cel2.setCellValue(DateToStr1);
-            String queryStr="SELECT\n" +
+            String queryStr = "SELECT\n" +
                     "MRAM.ANNUAL_REGISTRATION.LICENSENUM AS Дугаар,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LPNAME AS Эзэмшигч,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LP_REG AS Регистер,\n" +
@@ -5915,12 +5913,12 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.REG_REPORT_REQ on MRAM.REG_REPORT_REQ.\"ID\"=MRAM.ANNUAL_REGISTRATION.REQID \n" +
                     "INNER JOIN MRAM.DATA_EXCEL_GEOREP1 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_GEOREP1.PLANID\n" +
                     "\tWHERE\n" +
-                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = "+planYr+" \n" +
+                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_GEOREP1.ID";
-            List<Object[]> objects=dao.getNativeSQLResult(queryStr,"list");
-            int rowCount=7;
-            for(Object[] obj:objects){
+            List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
+            int rowCount = 7;
+            for (Object[] obj : objects) {
                 row = sheet.createRow(rowCount);
                 Cell cell1 = row.createCell(0);
                 cell1.setCellValue(Double.parseDouble(obj[0].toString()));
@@ -5931,7 +5929,7 @@ public class ExcelGenerator {
                 Cell cell4 = row.createCell(3);
                 cell4.setCellValue(obj[3].toString());
                 Cell cell5 = row.createCell(4);
-                if(obj[4]!=null){
+                if (obj[4] != null) {
                     cell5.setCellValue(obj[4].toString());
                 }
                 Cell cell6 = row.createCell(5);
@@ -5950,60 +5948,60 @@ public class ExcelGenerator {
                 cell12.setCellValue(obj[11].toString());
 
                 Cell cell13 = row.createCell(12);
-                if(obj[12]!=null){
+                if (obj[12] != null) {
                     cell13.setCellValue(obj[12].toString());
                 }
                 Cell cell14 = row.createCell(13);
-                if(obj[13]!=null){
+                if (obj[13] != null) {
                     cell14.setCellValue(obj[13].toString());
                 }
 
                 Cell cell15 = row.createCell(14);
-                if(obj[14]!=null){
+                if (obj[14] != null) {
                     cell15.setCellValue(obj[14].toString());
                 }
                 Cell cell16 = row.createCell(15);
-                if(obj[15]!=null){
+                if (obj[15] != null) {
                     cell16.setCellValue(obj[15].toString());
                 }
                 Cell cell17 = row.createCell(16);
-                if(obj[16]!=null){
+                if (obj[16] != null) {
                     cell17.setCellValue(Double.parseDouble(obj[16].toString()));
                 }
                 Cell cell18 = row.createCell(17);
-                if(obj[17]!=null){
+                if (obj[17] != null) {
                     cell18.setCellValue(Double.parseDouble(obj[17].toString()));
                 }
                 Cell cell19 = row.createCell(18);
-                if(obj[18]!=null){
+                if (obj[18] != null) {
                     cell19.setCellValue(Double.parseDouble(obj[18].toString()));
                 }
                 Cell cell20 = row.createCell(19);
-                if(obj[19]!=null){
+                if (obj[19] != null) {
                     cell20.setCellValue(Double.parseDouble(obj[19].toString()));
                 }
                 Cell cell21 = row.createCell(20);
-                if(obj[20]!=null){
+                if (obj[20] != null) {
                     cell21.setCellValue(Double.parseDouble(obj[20].toString()));
                 }
                 Cell cell22 = row.createCell(21);
-                if(obj[21]!=null){
+                if (obj[21] != null) {
                     cell22.setCellValue(Double.parseDouble(obj[21].toString()));
                 }
                 rowCount++;
             }
         }
-        if(reportType == 8 && formId == 2){
+        if (reportType == 8 && formId == 2) {
             FileInputStream fis = null;
-            File files = new File(appPath+"/assets/excel/plan/Geo_Report_2.xlsx");
+            File files = new File(appPath + "/assets/excel/plan/Geo_Report_2.xlsx");
             fis = new FileInputStream(files);
             workbook = new XSSFWorkbook(fis);
 
             CellStyle cellStyle = workbook.createCellStyle();
-            cellStyle.setBorderBottom((short)1);
-            cellStyle.setBorderLeft((short)1);
-            cellStyle.setBorderRight((short)1);
-            cellStyle.setBorderTop((short)1);
+            cellStyle.setBorderBottom((short) 1);
+            cellStyle.setBorderLeft((short) 1);
+            cellStyle.setBorderRight((short) 1);
+            cellStyle.setBorderTop((short) 1);
             cellStyle.setWrapText(true);
             cellStyle.setAlignment(cellStyle.ALIGN_CENTER);
             cellStyle.setVerticalAlignment(cellStyle.VERTICAL_CENTER);
@@ -6015,7 +6013,7 @@ public class ExcelGenerator {
             Row row1 = sheet.getRow(2);
             Cell cel2 = row1.createCell(2);
             cel2.setCellValue(DateToStr1);
-            String queryStr="SELECT\n" +
+            String queryStr = "SELECT\n" +
                     "MRAM.ANNUAL_REGISTRATION.LICENSENUM AS Дугаар,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LPNAME AS Эзэмшигч,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LP_REG AS Регистер,\n" +
@@ -6061,12 +6059,12 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.REG_REPORT_REQ on MRAM.REG_REPORT_REQ.\"ID\"=MRAM.ANNUAL_REGISTRATION.REQID \n" +
                     "INNER JOIN MRAM.DATA_EXCEL_GEOREP2 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_GEOREP2.PLANID\n" +
                     "\tWHERE\n" +
-                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = "+planYr+" \n" +
+                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_GEOREP2.ID";
-            List<Object[]> objects=dao.getNativeSQLResult(queryStr,"list");
-            int rowCount=7;
-            for(Object[] obj:objects){
+            List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
+            int rowCount = 7;
+            for (Object[] obj : objects) {
                 row = sheet.createRow(rowCount);
                 Cell cell1 = row.createCell(0);
                 cell1.setCellValue(Double.parseDouble(obj[0].toString()));
@@ -6077,7 +6075,7 @@ public class ExcelGenerator {
                 Cell cell4 = row.createCell(3);
                 cell4.setCellValue(obj[3].toString());
                 Cell cell5 = row.createCell(4);
-                if(obj[4]!=null){
+                if (obj[4] != null) {
                     cell5.setCellValue(obj[4].toString());
                 }
                 Cell cell6 = row.createCell(5);
@@ -6096,84 +6094,84 @@ public class ExcelGenerator {
                 cell12.setCellValue(obj[11].toString());
 
                 Cell cell13 = row.createCell(12);
-                if(obj[12]!=null){
+                if (obj[12] != null) {
                     cell13.setCellValue(Double.parseDouble(obj[12].toString()));
                 }
                 Cell cell14 = row.createCell(13);
-                if(obj[13]!=null){
+                if (obj[13] != null) {
                     cell14.setCellValue(Double.parseDouble(obj[13].toString()));
                 }
 
                 Cell cell15 = row.createCell(14);
-                if(obj[14]!=null){
+                if (obj[14] != null) {
                     cell15.setCellValue(obj[14].toString());
                 }
                 Cell cell16 = row.createCell(15);
-                if(obj[15]!=null){
+                if (obj[15] != null) {
                     cell16.setCellValue(Double.parseDouble(obj[15].toString()));
                 }
                 Cell cell17 = row.createCell(16);
-                if(obj[16]!=null){
+                if (obj[16] != null) {
                     cell17.setCellValue(Double.parseDouble(obj[16].toString()));
                 }
                 Cell cell18 = row.createCell(17);
-                if(obj[17]!=null){
+                if (obj[17] != null) {
                     cell18.setCellValue(Double.parseDouble(obj[17].toString()));
                 }
                 Cell cell19 = row.createCell(18);
-                if(obj[18]!=null){
+                if (obj[18] != null) {
                     cell19.setCellValue(Double.parseDouble(obj[18].toString()));
                 }
                 Cell cell20 = row.createCell(19);
-                if(obj[19]!=null){
+                if (obj[19] != null) {
                     cell20.setCellValue(Double.parseDouble(obj[19].toString()));
                 }
                 Cell cell21 = row.createCell(20);
-                if(obj[20]!=null){
+                if (obj[20] != null) {
                     cell21.setCellValue(Double.parseDouble(obj[20].toString()));
                 }
                 Cell cell22 = row.createCell(21);
-                if(obj[21]!=null){
+                if (obj[21] != null) {
                     cell22.setCellValue(Double.parseDouble(obj[21].toString()));
                 }
                 Cell cell23 = row.createCell(22);
-                if(obj[22]!=null){
+                if (obj[22] != null) {
                     cell23.setCellValue(Double.parseDouble(obj[22].toString()));
                 }
                 Cell cell24 = row.createCell(23);
-                if(obj[23]!=null){
+                if (obj[23] != null) {
                     cell24.setCellValue(Double.parseDouble(obj[23].toString()));
                 }
                 Cell cell25 = row.createCell(24);
-                if(obj[24]!=null){
+                if (obj[24] != null) {
                     cell25.setCellValue(Double.parseDouble(obj[24].toString()));
                 }
                 Cell cell26 = row.createCell(25);
-                if(obj[25]!=null){
+                if (obj[25] != null) {
                     cell26.setCellValue(Double.parseDouble(obj[25].toString()));
                 }
                 Cell cell27 = row.createCell(26);
-                if(obj[26]!=null){
+                if (obj[26] != null) {
                     cell27.setCellValue(Double.parseDouble(obj[26].toString()));
                 }
                 Cell cell28 = row.createCell(27);
-                if(obj[27]!=null){
+                if (obj[27] != null) {
                     cell28.setCellValue(Double.parseDouble(obj[27].toString()));
                 }
                 Cell cell29 = row.createCell(28);
-                if(obj[28]!=null){
+                if (obj[28] != null) {
                     cell29.setCellValue(Double.parseDouble(obj[28].toString()));
                 }
                 Cell cell30 = row.createCell(29);
-                if(obj[29]!=null){
+                if (obj[29] != null) {
                     cell30.setCellValue(Double.parseDouble(obj[29].toString()));
                 }
                 Cell cell31 = row.createCell(30);
-                if(obj[30]!=null){
+                if (obj[30] != null) {
                     cell31.setCellValue(Double.parseDouble(obj[30].toString()));
                 }
                 Cell cell32 = row.createCell(31);
-                if(obj[31]!=null){
+                if (obj[31] != null) {
                     cell32.setCellValue(Double.parseDouble(obj[31].toString()));
                 }
 
@@ -6182,17 +6180,17 @@ public class ExcelGenerator {
             }
         }
 
-        if(reportType == 8 && formId == 3){
+        if (reportType == 8 && formId == 4) {
             FileInputStream fis = null;
-            File files = new File(appPath+"/assets/excel/plan/Geo_Report_4.xlsx");
+            File files = new File(appPath + "/assets/excel/plan/Geo_Report_4.xlsx");
             fis = new FileInputStream(files);
             workbook = new XSSFWorkbook(fis);
 
             CellStyle cellStyle = workbook.createCellStyle();
-            cellStyle.setBorderBottom((short)1);
-            cellStyle.setBorderLeft((short)1);
-            cellStyle.setBorderRight((short)1);
-            cellStyle.setBorderTop((short)1);
+            cellStyle.setBorderBottom((short) 1);
+            cellStyle.setBorderLeft((short) 1);
+            cellStyle.setBorderRight((short) 1);
+            cellStyle.setBorderTop((short) 1);
             cellStyle.setWrapText(true);
             cellStyle.setAlignment(cellStyle.ALIGN_CENTER);
             cellStyle.setVerticalAlignment(cellStyle.VERTICAL_CENTER);
@@ -6204,7 +6202,7 @@ public class ExcelGenerator {
             Row row1 = sheet.getRow(2);
             Cell cel2 = row1.createCell(2);
             cel2.setCellValue(DateToStr1);
-            String queryStr="SELECT\n" +
+            String queryStr = "SELECT\n" +
                     "MRAM.ANNUAL_REGISTRATION.LICENSENUM AS Дугаар,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LPNAME AS Эзэмшигч,\n" +
                     "MRAM.ANNUAL_REGISTRATION.LP_REG AS Регистер,\n" +
@@ -6223,38 +6221,26 @@ public class ExcelGenerator {
                     " when 7 then 'Илгээсэн' \n" +
                     " when 0 then 'Хадгалсан' \n" +
                     "end as ТӨлөв,\n" +
-                    "case TYPE \n" +
-                    " when 'TSOONOG' then 'Цооног'\n" +
-                    " when 'SHURF' then 'Шурф'\n" +
-                    " when 'SUVAG' then 'Суваг' \n" +
-                    " \n" +
-                    "end as TYPE,\n" +
                     "DATA1,\n" +
                     "DATA2,\n" +
                     "DATA3,\n" +
                     "DATA4,\n" +
                     "DATA5,\n" +
                     "DATA6,\n" +
-                    "DATA7,\n" +
-                    "DATA8,\n" +
-                    "DATA9,\n" +
-                    "DATA10,\n" +
-                    "DATA11,\n" +
-                    "DATA12,\n" +
-                    "DATA13,MRAM.ANNUAL_REGISTRATION.ISTODOTGOL\n" +
+                    "DATA7,MRAM.ANNUAL_REGISTRATION.ISTODOTGOL\n" +
                     "FROM\n" +
                     "MRAM.ANNUAL_REGISTRATION\n" +
                     "INNER JOIN MRAM.SUB_LICENSES on MRAM.ANNUAL_REGISTRATION.LICENSEXB=MRAM.SUB_LICENSES.LICENSEXM\n" +
                     "INNER JOIN MRAM.LUT_MIN_GROUP on MRAM.ANNUAL_REGISTRATION.GROUPID=MRAM.LUT_MIN_GROUP.GROUPID\n" +
                     "INNER JOIN MRAM.REG_REPORT_REQ on MRAM.REG_REPORT_REQ.\"ID\"=MRAM.ANNUAL_REGISTRATION.REQID \n" +
-                    "INNER JOIN MRAM.DATA_EXCEL_GEOREP3 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_GEOREP3.PLANID\n" +
+                    "INNER JOIN MRAM.DATA_EXCEL_GEOREP4 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_GEOREP4.PLANID\n" +
                     "\tWHERE\n" +
-                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = "+planYr+" \n" +
+                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\t\t\t \n" +
-                    "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_GEOREP3.ID";
-            List<Object[]> objects=dao.getNativeSQLResult(queryStr,"list");
-            int rowCount=7;
-            for(Object[] obj:objects){
+                    "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_GEOREP4.ID";
+            List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
+            int rowCount = 7;
+            for (Object[] obj : objects) {
                 row = sheet.createRow(rowCount);
                 Cell cell1 = row.createCell(0);
                 cell1.setCellValue(Double.parseDouble(obj[0].toString()));
@@ -6265,7 +6251,7 @@ public class ExcelGenerator {
                 Cell cell4 = row.createCell(3);
                 cell4.setCellValue(obj[3].toString());
                 Cell cell5 = row.createCell(4);
-                if(obj[4]!=null){
+                if (obj[4] != null) {
                     cell5.setCellValue(obj[4].toString());
                 }
                 Cell cell6 = row.createCell(5);
@@ -6284,97 +6270,839 @@ public class ExcelGenerator {
                 cell12.setCellValue(obj[11].toString());
 
                 Cell cell13 = row.createCell(12);
-                if(obj[12]!=null){
+                if (obj[12] != null) {
                     cell13.setCellValue(Double.parseDouble(obj[12].toString()));
                 }
                 Cell cell14 = row.createCell(13);
-                if(obj[13]!=null){
-                    cell14.setCellValue(Double.parseDouble(obj[13].toString()));
+                if (obj[13] != null) {
+                    cell14.setCellValue(obj[13].toString());
                 }
 
                 Cell cell15 = row.createCell(14);
-                if(obj[14]!=null){
+                if (obj[14] != null) {
                     cell15.setCellValue(obj[14].toString());
                 }
                 Cell cell16 = row.createCell(15);
-                if(obj[15]!=null){
+                if (obj[15] != null) {
+                    cell16.setCellValue(obj[15].toString());
+                }
+                Cell cell17 = row.createCell(16);
+                if (obj[16] != null) {
+                    cell17.setCellValue(obj[16].toString());
+                }
+                Cell cell18 = row.createCell(17);
+                if (obj[17] != null) {
+                    cell18.setCellValue(obj[17].toString());
+                }
+                Cell cell19 = row.createCell(18);
+                if (obj[18] != null) {
+                    cell19.setCellValue(obj[18].toString());
+                }
+                Cell cell20 = row.createCell(19);
+                if (obj[19] != null) {
+                    cell20.setCellValue(Double.parseDouble(obj[19].toString()));
+                }
+
+                rowCount++;
+            }
+        }
+        if (reportType == 8 && formId == 5) {
+            FileInputStream fis = null;
+            File files = new File(appPath + "/assets/excel/plan/Geo_Report_5.xlsx");
+            fis = new FileInputStream(files);
+            workbook = new XSSFWorkbook(fis);
+
+            CellStyle cellStyle = workbook.createCellStyle();
+            cellStyle.setBorderBottom((short) 1);
+            cellStyle.setBorderLeft((short) 1);
+            cellStyle.setBorderRight((short) 1);
+            cellStyle.setBorderTop((short) 1);
+            cellStyle.setWrapText(true);
+            cellStyle.setAlignment(cellStyle.ALIGN_CENTER);
+            cellStyle.setVerticalAlignment(cellStyle.VERTICAL_CENTER);
+
+            Sheet sheet = workbook.getSheetAt(0);
+            Row row = sheet.getRow(1);
+            Cell cell = row.createCell(2);
+            cell.setCellValue(planYr);
+            Row row1 = sheet.getRow(2);
+            Cell cel2 = row1.createCell(2);
+            cel2.setCellValue(DateToStr1);
+            String queryStr = "SELECT\n" +
+                    "MRAM.ANNUAL_REGISTRATION.LICENSENUM AS Дугаар,\n" +
+                    "MRAM.ANNUAL_REGISTRATION.LPNAME AS Эзэмшигч,\n" +
+                    "MRAM.ANNUAL_REGISTRATION.LP_REG AS Регистер,\n" +
+                    "MRAM.ANNUAL_REGISTRATION.LICENSEXB AS Лиценз_Дугаар,\n" +
+                    "MRAM.REG_REPORT_REQ.ADD_BUNLICENSENUM as НэмэлтТЗ,\n" +
+                    "MRAM.SUB_LICENSES.LOCATIONAIMAG as Аймаг,\n" +
+                    "MRAM.SUB_LICENSES.LOCATIONSOUM as Сум,\n" +
+                    "MRAM.SUB_LICENSES.AREANAMEMON as Орд_нэр,\n" +
+                    "MRAM.SUB_LICENSES.AREASIZE as Талбай,\n" +
+                    "MRAM.LUT_MIN_GROUP.GROUPNAME AS АМ_төрөл,\n" +
+                    "MRAM.ANNUAL_REGISTRATION.REPORTYEAR as Огноо,\n" +
+                    "case MRAM.ANNUAL_REGISTRATION.REPSTATUSID \n" +
+                    " when 1 then 'Баталгаажсан'\n" +
+                    " when 2 then 'Буцаасан'\n" +
+                    " when 3 then 'Татгалзсан' \n" +
+                    " when 7 then 'Илгээсэн' \n" +
+                    " when 0 then 'Хадгалсан' \n" +
+                    "end as ТӨлөв,\n" +
+                    "DATA1,DATA2,DATA3,DATA4,DATA5,DATA6,DATA7,DATA8,DATA9,DATA10,DATA11,DATA12,DATA13,DATA14,DATA15,DATA16,\n" +
+                    "MRAM.ANNUAL_REGISTRATION.ISTODOTGOL\n" +
+                    "FROM\n" +
+                    "MRAM.ANNUAL_REGISTRATION\n" +
+                    "INNER JOIN MRAM.SUB_LICENSES on MRAM.ANNUAL_REGISTRATION.LICENSEXB=MRAM.SUB_LICENSES.LICENSEXM\n" +
+                    "INNER JOIN MRAM.LUT_MIN_GROUP on MRAM.ANNUAL_REGISTRATION.GROUPID=MRAM.LUT_MIN_GROUP.GROUPID\n" +
+                    "INNER JOIN MRAM.REG_REPORT_REQ on MRAM.REG_REPORT_REQ.\"ID\"=MRAM.ANNUAL_REGISTRATION.REQID \n" +
+                    "INNER JOIN MRAM.DATA_EXCEL_GEOREP5 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_GEOREP5.PLANID\n" +
+                    "\tWHERE\n" +
+                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
+                    "\t\t\t \n" +
+                    "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_GEOREP5.ID";
+            List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
+            int rowCount = 7;
+            for (Object[] obj : objects) {
+                row = sheet.createRow(rowCount);
+                Cell cell1 = row.createCell(0);
+                cell1.setCellValue(Double.parseDouble(obj[0].toString()));
+                Cell cell2 = row.createCell(1);
+                cell2.setCellValue(obj[1].toString());
+                Cell cell3 = row.createCell(2);
+                cell3.setCellValue(Double.parseDouble(obj[2].toString()));
+                Cell cell4 = row.createCell(3);
+                cell4.setCellValue(obj[3].toString());
+                Cell cell5 = row.createCell(4);
+                if (obj[4] != null) {
+                    cell5.setCellValue(obj[4].toString());
+                }
+                Cell cell6 = row.createCell(5);
+                cell6.setCellValue(obj[5].toString());
+                Cell cell7 = row.createCell(6);
+                cell7.setCellValue(obj[6].toString());
+                Cell cell8 = row.createCell(7);
+                cell8.setCellValue(obj[7].toString());
+                Cell cell9 = row.createCell(8);
+                cell9.setCellValue(Double.parseDouble(obj[8].toString()));
+                Cell cell10 = row.createCell(9);
+                cell10.setCellValue(obj[9].toString());
+                Cell cell11 = row.createCell(10);
+                cell11.setCellValue(Double.parseDouble(obj[10].toString()));
+                Cell cell12 = row.createCell(11);
+                cell12.setCellValue(obj[11].toString());
+
+                Cell cell13 = row.createCell(12);
+                if (obj[12] != null) {
+                    cell13.setCellValue(Double.parseDouble(obj[12].toString()));
+                }
+                Cell cell14 = row.createCell(13);
+                if (obj[13] != null) {
+                    cell14.setCellValue(obj[13].toString());
+                }
+
+                Cell cell15 = row.createCell(14);
+                if (obj[14] != null) {
+                    cell15.setCellValue(obj[14].toString());
+                }
+                Cell cell16 = row.createCell(15);
+                if (obj[15] != null) {
                     cell16.setCellValue(Double.parseDouble(obj[15].toString()));
                 }
                 Cell cell17 = row.createCell(16);
-                if(obj[16]!=null){
+                if (obj[16] != null) {
                     cell17.setCellValue(Double.parseDouble(obj[16].toString()));
                 }
                 Cell cell18 = row.createCell(17);
-                if(obj[17]!=null){
+                if (obj[17] != null) {
                     cell18.setCellValue(Double.parseDouble(obj[17].toString()));
                 }
                 Cell cell19 = row.createCell(18);
-                if(obj[18]!=null){
+                if (obj[18] != null) {
                     cell19.setCellValue(Double.parseDouble(obj[18].toString()));
                 }
                 Cell cell20 = row.createCell(19);
-                if(obj[19]!=null){
+                if (obj[19] != null) {
                     cell20.setCellValue(Double.parseDouble(obj[19].toString()));
                 }
                 Cell cell21 = row.createCell(20);
-                if(obj[20]!=null){
+                if (obj[20] != null) {
                     cell21.setCellValue(Double.parseDouble(obj[20].toString()));
                 }
                 Cell cell22 = row.createCell(21);
-                if(obj[21]!=null){
+                if (obj[21] != null) {
                     cell22.setCellValue(Double.parseDouble(obj[21].toString()));
                 }
                 Cell cell23 = row.createCell(22);
-                if(obj[22]!=null){
+                if (obj[22] != null) {
                     cell23.setCellValue(Double.parseDouble(obj[22].toString()));
                 }
                 Cell cell24 = row.createCell(23);
-                if(obj[23]!=null){
+                if (obj[23] != null) {
                     cell24.setCellValue(Double.parseDouble(obj[23].toString()));
                 }
                 Cell cell25 = row.createCell(24);
-                if(obj[24]!=null){
+                if (obj[24] != null) {
                     cell25.setCellValue(Double.parseDouble(obj[24].toString()));
                 }
                 Cell cell26 = row.createCell(25);
-                if(obj[25]!=null){
+                if (obj[25] != null) {
                     cell26.setCellValue(Double.parseDouble(obj[25].toString()));
                 }
                 Cell cell27 = row.createCell(26);
-                if(obj[26]!=null){
+                if (obj[26] != null) {
+                    cell27.setCellValue(Double.parseDouble(obj[26].toString()));
+                }
+
+                rowCount++;
+            }
+        }
+        if (reportType == 8 && formId == 6) {
+            FileInputStream fis = null;
+            File files = new File(appPath + "/assets/excel/plan/Geo_Report_6.xlsx");
+            fis = new FileInputStream(files);
+            workbook = new XSSFWorkbook(fis);
+
+            CellStyle cellStyle = workbook.createCellStyle();
+            cellStyle.setBorderBottom((short) 1);
+            cellStyle.setBorderLeft((short) 1);
+            cellStyle.setBorderRight((short) 1);
+            cellStyle.setBorderTop((short) 1);
+            cellStyle.setWrapText(true);
+            cellStyle.setAlignment(cellStyle.ALIGN_CENTER);
+            cellStyle.setVerticalAlignment(cellStyle.VERTICAL_CENTER);
+
+            Sheet sheet = workbook.getSheetAt(0);
+            Row row = sheet.getRow(1);
+            Cell cell = row.createCell(2);
+            cell.setCellValue(planYr);
+            Row row1 = sheet.getRow(2);
+            Cell cel2 = row1.createCell(2);
+            cel2.setCellValue(DateToStr1);
+            String queryStr = "SELECT\n" +
+                    "MRAM.ANNUAL_REGISTRATION.LICENSENUM AS Дугаар,\n" +
+                    "MRAM.ANNUAL_REGISTRATION.LPNAME AS Эзэмшигч,\n" +
+                    "MRAM.ANNUAL_REGISTRATION.LP_REG AS Регистер,\n" +
+                    "MRAM.ANNUAL_REGISTRATION.LICENSEXB AS Лиценз_Дугаар,\n" +
+                    "MRAM.REG_REPORT_REQ.ADD_BUNLICENSENUM as НэмэлтТЗ,\n" +
+                    "MRAM.SUB_LICENSES.LOCATIONAIMAG as Аймаг,\n" +
+                    "MRAM.SUB_LICENSES.LOCATIONSOUM as Сум,\n" +
+                    "MRAM.SUB_LICENSES.AREANAMEMON as Орд_нэр,\n" +
+                    "MRAM.SUB_LICENSES.AREASIZE as Талбай,\n" +
+                    "MRAM.LUT_MIN_GROUP.GROUPNAME AS АМ_төрөл,\n" +
+                    "MRAM.ANNUAL_REGISTRATION.REPORTYEAR as Огноо,\n" +
+                    "case MRAM.ANNUAL_REGISTRATION.REPSTATUSID \n" +
+                    " when 1 then 'Баталгаажсан'\n" +
+                    " when 2 then 'Буцаасан'\n" +
+                    " when 3 then 'Татгалзсан' \n" +
+                    " when 7 then 'Илгээсэн' \n" +
+                    " when 0 then 'Хадгалсан' \n" +
+                    "end as ТӨлөв,\n" +
+                    "DATA1,\n" +
+                    "DATA2,\n" +
+                    "DATA3,\n" +
+                    "DATA4,\n" +
+                    "DATA5,\n" +
+                    "DATA6,\n" +
+                    "DATA7,MRAM.ANNUAL_REGISTRATION.ISTODOTGOL\n" +
+                    "FROM\n" +
+                    "MRAM.ANNUAL_REGISTRATION\n" +
+                    "INNER JOIN MRAM.SUB_LICENSES on MRAM.ANNUAL_REGISTRATION.LICENSEXB=MRAM.SUB_LICENSES.LICENSEXM\n" +
+                    "INNER JOIN MRAM.LUT_MIN_GROUP on MRAM.ANNUAL_REGISTRATION.GROUPID=MRAM.LUT_MIN_GROUP.GROUPID\n" +
+                    "INNER JOIN MRAM.REG_REPORT_REQ on MRAM.REG_REPORT_REQ.\"ID\"=MRAM.ANNUAL_REGISTRATION.REQID \n" +
+                    "INNER JOIN MRAM.DATA_EXCEL_GEOREP6 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_GEOREP6.PLANID\n" +
+                    "\tWHERE\n" +
+                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
+                    "\t\t\t \n" +
+                    "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_GEOREP6.ID";
+            List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
+            int rowCount = 7;
+            for (Object[] obj : objects) {
+                row = sheet.createRow(rowCount);
+                Cell cell1 = row.createCell(0);
+                cell1.setCellValue(Double.parseDouble(obj[0].toString()));
+                Cell cell2 = row.createCell(1);
+                cell2.setCellValue(obj[1].toString());
+                Cell cell3 = row.createCell(2);
+                cell3.setCellValue(Double.parseDouble(obj[2].toString()));
+                Cell cell4 = row.createCell(3);
+                cell4.setCellValue(obj[3].toString());
+                Cell cell5 = row.createCell(4);
+                if (obj[4] != null) {
+                    cell5.setCellValue(obj[4].toString());
+                }
+                Cell cell6 = row.createCell(5);
+                cell6.setCellValue(obj[5].toString());
+                Cell cell7 = row.createCell(6);
+                cell7.setCellValue(obj[6].toString());
+                Cell cell8 = row.createCell(7);
+                cell8.setCellValue(obj[7].toString());
+                Cell cell9 = row.createCell(8);
+                cell9.setCellValue(Double.parseDouble(obj[8].toString()));
+                Cell cell10 = row.createCell(9);
+                cell10.setCellValue(obj[9].toString());
+                Cell cell11 = row.createCell(10);
+                cell11.setCellValue(Double.parseDouble(obj[10].toString()));
+                Cell cell12 = row.createCell(11);
+                cell12.setCellValue(obj[11].toString());
+
+                Cell cell13 = row.createCell(12);
+                if (obj[12] != null) {
+                    cell13.setCellValue(Double.parseDouble(obj[12].toString()));
+                }
+                Cell cell14 = row.createCell(13);
+                if (obj[13] != null) {
+                    cell14.setCellValue(obj[13].toString());
+                }
+
+                Cell cell15 = row.createCell(14);
+                if (obj[14] != null) {
+                    cell15.setCellValue(Double.parseDouble(obj[14].toString()));
+                }
+                Cell cell16 = row.createCell(15);
+                if (obj[15] != null) {
+                    cell16.setCellValue(obj[15].toString());
+                }
+                Cell cell17 = row.createCell(16);
+                if (obj[16] != null) {
+                    cell17.setCellValue(obj[16].toString());
+                }
+                Cell cell18 = row.createCell(17);
+                if (obj[17] != null) {
+                    cell18.setCellValue(obj[17].toString());
+                }
+                Cell cell19 = row.createCell(18);
+                if (obj[18] != null) {
+                    cell19.setCellValue(obj[18].toString());
+                }
+                Cell cell20 = row.createCell(19);
+                if (obj[19] != null) {
+                    cell20.setCellValue(Double.parseDouble(obj[19].toString()));
+                }
+
+                rowCount++;
+            }
+        }
+
+        if (reportType == 8 && formId == 7) {
+            FileInputStream fis = null;
+            File files = new File(appPath + "/assets/excel/plan/Geo_Report_7.xlsx");
+            fis = new FileInputStream(files);
+            workbook = new XSSFWorkbook(fis);
+
+            CellStyle cellStyle = workbook.createCellStyle();
+            cellStyle.setBorderBottom((short) 1);
+            cellStyle.setBorderLeft((short) 1);
+            cellStyle.setBorderRight((short) 1);
+            cellStyle.setBorderTop((short) 1);
+            cellStyle.setWrapText(true);
+            cellStyle.setAlignment(cellStyle.ALIGN_CENTER);
+            cellStyle.setVerticalAlignment(cellStyle.VERTICAL_CENTER);
+
+            Sheet sheet = workbook.getSheetAt(0);
+            Row row = sheet.getRow(1);
+            Cell cell = row.createCell(2);
+            cell.setCellValue(planYr);
+            Row row1 = sheet.getRow(2);
+            Cell cel2 = row1.createCell(2);
+            cel2.setCellValue(DateToStr1);
+            String queryStr = "SELECT\n" +
+                    "MRAM.ANNUAL_REGISTRATION.LICENSENUM AS Дугаар,\n" +
+                    "MRAM.ANNUAL_REGISTRATION.LPNAME AS Эзэмшигч,\n" +
+                    "MRAM.ANNUAL_REGISTRATION.LP_REG AS Регистер,\n" +
+                    "MRAM.ANNUAL_REGISTRATION.LICENSEXB AS Лиценз_Дугаар,\n" +
+                    "MRAM.REG_REPORT_REQ.ADD_BUNLICENSENUM as НэмэлтТЗ,\n" +
+                    "MRAM.SUB_LICENSES.LOCATIONAIMAG as Аймаг,\n" +
+                    "MRAM.SUB_LICENSES.LOCATIONSOUM as Сум,\n" +
+                    "MRAM.SUB_LICENSES.AREANAMEMON as Орд_нэр,\n" +
+                    "MRAM.SUB_LICENSES.AREASIZE as Талбай,\n" +
+                    "MRAM.LUT_MIN_GROUP.GROUPNAME AS АМ_төрөл,\n" +
+                    "MRAM.ANNUAL_REGISTRATION.REPORTYEAR as Огноо,\n" +
+                    "case MRAM.ANNUAL_REGISTRATION.REPSTATUSID \n" +
+                    " when 1 then 'Баталгаажсан'\n" +
+                    " when 2 then 'Буцаасан'\n" +
+                    " when 3 then 'Татгалзсан' \n" +
+                    " when 7 then 'Илгээсэн' \n" +
+                    " when 0 then 'Хадгалсан' \n" +
+                    "end as ТӨлөв,\n" +
+                    "DATA1,DATA2,DATA3,DATA4,DATA5,DATA6,DATA7,DATA8,DATA9,\n" +
+                    "DATA10,DATA11,DATA12,DATA13,DATA14,DATA15,DATA16,MRAM.ANNUAL_REGISTRATION.ISTODOTGOL\n" +
+                    "FROM\n" +
+                    "MRAM.ANNUAL_REGISTRATION\n" +
+                    "INNER JOIN MRAM.SUB_LICENSES on MRAM.ANNUAL_REGISTRATION.LICENSEXB=MRAM.SUB_LICENSES.LICENSEXM\n" +
+                    "INNER JOIN MRAM.LUT_MIN_GROUP on MRAM.ANNUAL_REGISTRATION.GROUPID=MRAM.LUT_MIN_GROUP.GROUPID\n" +
+                    "INNER JOIN MRAM.REG_REPORT_REQ on MRAM.REG_REPORT_REQ.\"ID\"=MRAM.ANNUAL_REGISTRATION.REQID \n" +
+                    "INNER JOIN MRAM.DATA_EXCEL_GEOREP7 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_GEOREP7.PLANID\n" +
+                    "\tWHERE\n" +
+                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
+                    "\t\t\t \n" +
+                    "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_GEOREP7.ID";
+            List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
+            int rowCount = 7;
+            for (Object[] obj : objects) {
+                row = sheet.createRow(rowCount);
+                Cell cell1 = row.createCell(0);
+                cell1.setCellValue(Double.parseDouble(obj[0].toString()));
+                Cell cell2 = row.createCell(1);
+                cell2.setCellValue(obj[1].toString());
+                Cell cell3 = row.createCell(2);
+                cell3.setCellValue(Double.parseDouble(obj[2].toString()));
+                Cell cell4 = row.createCell(3);
+                cell4.setCellValue(obj[3].toString());
+                Cell cell5 = row.createCell(4);
+                if (obj[4] != null) {
+                    cell5.setCellValue(obj[4].toString());
+                }
+                Cell cell6 = row.createCell(5);
+                cell6.setCellValue(obj[5].toString());
+                Cell cell7 = row.createCell(6);
+                cell7.setCellValue(obj[6].toString());
+                Cell cell8 = row.createCell(7);
+                cell8.setCellValue(obj[7].toString());
+                Cell cell9 = row.createCell(8);
+                cell9.setCellValue(Double.parseDouble(obj[8].toString()));
+                Cell cell10 = row.createCell(9);
+                cell10.setCellValue(obj[9].toString());
+                Cell cell11 = row.createCell(10);
+                cell11.setCellValue(Double.parseDouble(obj[10].toString()));
+                Cell cell12 = row.createCell(11);
+                cell12.setCellValue(obj[11].toString());
+
+                Cell cell13 = row.createCell(12);
+                if (obj[12] != null) {
+                    cell13.setCellValue(Double.parseDouble(obj[12].toString()));
+                }
+                Cell cell14 = row.createCell(13);
+                if (obj[13] != null) {
+                    cell14.setCellValue(obj[13].toString());
+                }
+
+                Cell cell15 = row.createCell(14);
+                if (obj[14] != null) {
+                    cell15.setCellValue(Double.parseDouble(obj[14].toString()));
+                }
+                Cell cell16 = row.createCell(15);
+                if (obj[15] != null) {
+                    cell16.setCellValue(Double.parseDouble(obj[15].toString()));
+                }
+                Cell cell17 = row.createCell(16);
+                if (obj[16] != null) {
+                    cell17.setCellValue(Double.parseDouble(obj[16].toString()));
+                }
+                Cell cell18 = row.createCell(17);
+                if (obj[17] != null) {
+                    cell18.setCellValue(Double.parseDouble(obj[17].toString()));
+                }
+                Cell cell19 = row.createCell(18);
+                if (obj[18] != null) {
+                    cell19.setCellValue(Double.parseDouble(obj[18].toString()));
+                }
+                Cell cell20 = row.createCell(19);
+                if (obj[19] != null) {
+                    cell20.setCellValue(Double.parseDouble(obj[19].toString()));
+                }
+                Cell cell21 = row.createCell(20);
+                if (obj[20] != null) {
+                    cell21.setCellValue(Double.parseDouble(obj[20].toString()));
+                }
+                Cell cell22 = row.createCell(21);
+                if (obj[21] != null) {
+                    cell22.setCellValue(Double.parseDouble(obj[21].toString()));
+                }
+                Cell cell23 = row.createCell(22);
+                if (obj[22] != null) {
+                    cell23.setCellValue(Double.parseDouble(obj[22].toString()));
+                }
+                Cell cell24 = row.createCell(23);
+                if (obj[23] != null) {
+                    cell24.setCellValue(obj[23].toString());
+                }
+                Cell cell25 = row.createCell(24);
+                if (obj[24] != null) {
+                    cell25.setCellValue(Double.parseDouble(obj[24].toString()));
+                }
+                Cell cell26 = row.createCell(25);
+                if (obj[25] != null) {
+                    cell26.setCellValue(Double.parseDouble(obj[25].toString()));
+                }
+                Cell cell27 = row.createCell(26);
+                if (obj[26] != null) {
                     cell27.setCellValue(Double.parseDouble(obj[26].toString()));
                 }
                 Cell cell28 = row.createCell(27);
-                if(obj[27]!=null){
+                if (obj[27] != null) {
                     cell28.setCellValue(Double.parseDouble(obj[27].toString()));
                 }
                 Cell cell29 = row.createCell(28);
-                if(obj[28]!=null){
+                if (obj[28] != null) {
                     cell29.setCellValue(Double.parseDouble(obj[28].toString()));
                 }
-                Cell cell30 = row.createCell(29);
-                if(obj[29]!=null){
-                    cell30.setCellValue(Double.parseDouble(obj[29].toString()));
+
+                rowCount++;
+            }
+        }
+        if (reportType == 8 && formId == 8) {
+            FileInputStream fis = null;
+            File files = new File(appPath + "/assets/excel/plan/Geo_Report_8.xlsx");
+            fis = new FileInputStream(files);
+            workbook = new XSSFWorkbook(fis);
+
+            CellStyle cellStyle = workbook.createCellStyle();
+            cellStyle.setBorderBottom((short) 1);
+            cellStyle.setBorderLeft((short) 1);
+            cellStyle.setBorderRight((short) 1);
+            cellStyle.setBorderTop((short) 1);
+            cellStyle.setWrapText(true);
+            cellStyle.setAlignment(cellStyle.ALIGN_CENTER);
+            cellStyle.setVerticalAlignment(cellStyle.VERTICAL_CENTER);
+
+            Sheet sheet = workbook.getSheetAt(0);
+            Row row = sheet.getRow(1);
+            Cell cell = row.createCell(2);
+            cell.setCellValue(planYr);
+            Row row1 = sheet.getRow(2);
+            Cell cel2 = row1.createCell(2);
+            cel2.setCellValue(DateToStr1);
+            String queryStr = "SELECT\n" +
+                    "MRAM.ANNUAL_REGISTRATION.LICENSENUM AS Дугаар,\n" +
+                    "MRAM.ANNUAL_REGISTRATION.LPNAME AS Эзэмшигч,\n" +
+                    "MRAM.ANNUAL_REGISTRATION.LP_REG AS Регистер,\n" +
+                    "MRAM.ANNUAL_REGISTRATION.LICENSEXB AS Лиценз_Дугаар,\n" +
+                    "MRAM.REG_REPORT_REQ.ADD_BUNLICENSENUM as НэмэлтТЗ,\n" +
+                    "MRAM.SUB_LICENSES.LOCATIONAIMAG as Аймаг,\n" +
+                    "MRAM.SUB_LICENSES.LOCATIONSOUM as Сум,\n" +
+                    "MRAM.SUB_LICENSES.AREANAMEMON as Орд_нэр,\n" +
+                    "MRAM.SUB_LICENSES.AREASIZE as Талбай,\n" +
+                    "MRAM.LUT_MIN_GROUP.GROUPNAME AS АМ_төрөл,\n" +
+                    "MRAM.ANNUAL_REGISTRATION.REPORTYEAR as Огноо,\n" +
+                    "case MRAM.ANNUAL_REGISTRATION.REPSTATUSID \n" +
+                    " when 1 then 'Баталгаажсан'\n" +
+                    " when 2 then 'Буцаасан'\n" +
+                    " when 3 then 'Татгалзсан' \n" +
+                    " when 7 then 'Илгээсэн' \n" +
+                    " when 0 then 'Хадгалсан' \n" +
+                    "end as ТӨлөв,\n" +
+                    "DATA1,DATA2,DATA3,DATA4,DATA5,DATA6,DATA7,DATA8,MRAM.ANNUAL_REGISTRATION.ISTODOTGOL\n" +
+                    "FROM\n" +
+                    "MRAM.ANNUAL_REGISTRATION\n" +
+                    "INNER JOIN MRAM.SUB_LICENSES on MRAM.ANNUAL_REGISTRATION.LICENSEXB=MRAM.SUB_LICENSES.LICENSEXM\n" +
+                    "INNER JOIN MRAM.LUT_MIN_GROUP on MRAM.ANNUAL_REGISTRATION.GROUPID=MRAM.LUT_MIN_GROUP.GROUPID\n" +
+                    "INNER JOIN MRAM.REG_REPORT_REQ on MRAM.REG_REPORT_REQ.\"ID\"=MRAM.ANNUAL_REGISTRATION.REQID \n" +
+                    "INNER JOIN MRAM.DATA_EXCEL_GEOREP8 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_GEOREP8.PLANID\n" +
+                    "\tWHERE\n" +
+                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
+                    "\t\t\t \n" +
+                    "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_GEOREP8.ID";
+            List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
+            int rowCount = 7;
+            for (Object[] obj : objects) {
+                row = sheet.createRow(rowCount);
+                Cell cell1 = row.createCell(0);
+                cell1.setCellValue(Double.parseDouble(obj[0].toString()));
+                Cell cell2 = row.createCell(1);
+                cell2.setCellValue(obj[1].toString());
+                Cell cell3 = row.createCell(2);
+                cell3.setCellValue(Double.parseDouble(obj[2].toString()));
+                Cell cell4 = row.createCell(3);
+                cell4.setCellValue(obj[3].toString());
+                Cell cell5 = row.createCell(4);
+                if (obj[4] != null) {
+                    cell5.setCellValue(obj[4].toString());
                 }
-                Cell cell31 = row.createCell(30);
-                if(obj[30]!=null){
-                    cell31.setCellValue(Double.parseDouble(obj[30].toString()));
+                Cell cell6 = row.createCell(5);
+                cell6.setCellValue(obj[5].toString());
+                Cell cell7 = row.createCell(6);
+                cell7.setCellValue(obj[6].toString());
+                Cell cell8 = row.createCell(7);
+                cell8.setCellValue(obj[7].toString());
+                Cell cell9 = row.createCell(8);
+                cell9.setCellValue(Double.parseDouble(obj[8].toString()));
+                Cell cell10 = row.createCell(9);
+                cell10.setCellValue(obj[9].toString());
+                Cell cell11 = row.createCell(10);
+                cell11.setCellValue(Double.parseDouble(obj[10].toString()));
+                Cell cell12 = row.createCell(11);
+                cell12.setCellValue(obj[11].toString());
+
+                Cell cell13 = row.createCell(12);
+                if (obj[12] != null) {
+                    cell13.setCellValue(Double.parseDouble(obj[12].toString()));
                 }
-                Cell cell32 = row.createCell(31);
-                if(obj[31]!=null){
-                    cell32.setCellValue(Double.parseDouble(obj[31].toString()));
+                Cell cell14 = row.createCell(13);
+                if (obj[13] != null) {
+                    cell14.setCellValue(obj[13].toString());
+                }
+
+                Cell cell15 = row.createCell(14);
+                if (obj[14] != null) {
+                    cell15.setCellValue(Double.parseDouble(obj[14].toString()));
+                }
+                Cell cell16 = row.createCell(15);
+                if (obj[15] != null) {
+                    cell16.setCellValue(Double.parseDouble(obj[15].toString()));
+                }
+                Cell cell17 = row.createCell(16);
+                if (obj[16] != null) {
+                    cell17.setCellValue(Double.parseDouble(obj[16].toString()));
+                }
+                Cell cell18 = row.createCell(17);
+                if (obj[17] != null) {
+                    cell18.setCellValue(Double.parseDouble(obj[17].toString()));
+                }
+                Cell cell19 = row.createCell(18);
+                if (obj[18] != null) {
+                    cell19.setCellValue(Double.parseDouble(obj[18].toString()));
+                }
+                Cell cell20 = row.createCell(19);
+                if (obj[19] != null) {
+                    cell20.setCellValue(Double.parseDouble(obj[19].toString()));
+                }
+                Cell cell21 = row.createCell(20);
+                if (obj[20] != null) {
+                    cell21.setCellValue(Double.parseDouble(obj[20].toString()));
+                }
+
+                rowCount++;
+            }
+        }
+        if (reportType == 8 && formId == 9) {
+            FileInputStream fis = null;
+            File files = new File(appPath + "/assets/excel/plan/Geo_Report_9.xlsx");
+            fis = new FileInputStream(files);
+            workbook = new XSSFWorkbook(fis);
+
+            CellStyle cellStyle = workbook.createCellStyle();
+            cellStyle.setBorderBottom((short) 1);
+            cellStyle.setBorderLeft((short) 1);
+            cellStyle.setBorderRight((short) 1);
+            cellStyle.setBorderTop((short) 1);
+            cellStyle.setWrapText(true);
+            cellStyle.setAlignment(cellStyle.ALIGN_CENTER);
+            cellStyle.setVerticalAlignment(cellStyle.VERTICAL_CENTER);
+
+            Sheet sheet = workbook.getSheetAt(0);
+            Row row = sheet.getRow(1);
+            Cell cell = row.createCell(2);
+            cell.setCellValue(planYr);
+            Row row1 = sheet.getRow(2);
+            Cell cel2 = row1.createCell(2);
+            cel2.setCellValue(DateToStr1);
+            String queryStr = "SELECT\n" +
+                    "MRAM.ANNUAL_REGISTRATION.LICENSENUM AS Дугаар,\n" +
+                    "MRAM.ANNUAL_REGISTRATION.LPNAME AS Эзэмшигч,\n" +
+                    "MRAM.ANNUAL_REGISTRATION.LP_REG AS Регистер,\n" +
+                    "MRAM.ANNUAL_REGISTRATION.LICENSEXB AS Лиценз_Дугаар,\n" +
+                    "MRAM.REG_REPORT_REQ.ADD_BUNLICENSENUM as НэмэлтТЗ,\n" +
+                    "MRAM.SUB_LICENSES.LOCATIONAIMAG as Аймаг,\n" +
+                    "MRAM.SUB_LICENSES.LOCATIONSOUM as Сум,\n" +
+                    "MRAM.SUB_LICENSES.AREANAMEMON as Орд_нэр,\n" +
+                    "MRAM.SUB_LICENSES.AREASIZE as Талбай,\n" +
+                    "MRAM.LUT_MIN_GROUP.GROUPNAME AS АМ_төрөл,\n" +
+                    "MRAM.ANNUAL_REGISTRATION.REPORTYEAR as Огноо,\n" +
+                    "case MRAM.ANNUAL_REGISTRATION.REPSTATUSID \n" +
+                    " when 1 then 'Баталгаажсан'\n" +
+                    " when 2 then 'Буцаасан'\n" +
+                    " when 3 then 'Татгалзсан' \n" +
+                    " when 7 then 'Илгээсэн' \n" +
+                    " when 0 then 'Хадгалсан' \n" +
+                    "end as ТӨлөв,\n" +
+                    "DATA1,DATA2,DATA3,DATA4,DATA5,DATA6,DATA7,MRAM.ANNUAL_REGISTRATION.ISTODOTGOL\n" +
+                    "FROM\n" +
+                    "MRAM.ANNUAL_REGISTRATION\n" +
+                    "INNER JOIN MRAM.SUB_LICENSES on MRAM.ANNUAL_REGISTRATION.LICENSEXB=MRAM.SUB_LICENSES.LICENSEXM\n" +
+                    "INNER JOIN MRAM.LUT_MIN_GROUP on MRAM.ANNUAL_REGISTRATION.GROUPID=MRAM.LUT_MIN_GROUP.GROUPID\n" +
+                    "INNER JOIN MRAM.REG_REPORT_REQ on MRAM.REG_REPORT_REQ.\"ID\"=MRAM.ANNUAL_REGISTRATION.REQID \n" +
+                    "INNER JOIN MRAM.DATA_EXCEL_GEOREP9 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_GEOREP9.PLANID\n" +
+                    "\tWHERE\n" +
+                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
+                    "\t\t\t \n" +
+                    "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_GEOREP9.ID";
+            List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
+            int rowCount = 7;
+            for (Object[] obj : objects) {
+                row = sheet.createRow(rowCount);
+                Cell cell1 = row.createCell(0);
+                cell1.setCellValue(Double.parseDouble(obj[0].toString()));
+                Cell cell2 = row.createCell(1);
+                cell2.setCellValue(obj[1].toString());
+                Cell cell3 = row.createCell(2);
+                cell3.setCellValue(Double.parseDouble(obj[2].toString()));
+                Cell cell4 = row.createCell(3);
+                cell4.setCellValue(obj[3].toString());
+                Cell cell5 = row.createCell(4);
+                if (obj[4] != null) {
+                    cell5.setCellValue(obj[4].toString());
+                }
+                Cell cell6 = row.createCell(5);
+                cell6.setCellValue(obj[5].toString());
+                Cell cell7 = row.createCell(6);
+                cell7.setCellValue(obj[6].toString());
+                Cell cell8 = row.createCell(7);
+                cell8.setCellValue(obj[7].toString());
+                Cell cell9 = row.createCell(8);
+                cell9.setCellValue(Double.parseDouble(obj[8].toString()));
+                Cell cell10 = row.createCell(9);
+                cell10.setCellValue(obj[9].toString());
+                Cell cell11 = row.createCell(10);
+                cell11.setCellValue(Double.parseDouble(obj[10].toString()));
+                Cell cell12 = row.createCell(11);
+                cell12.setCellValue(obj[11].toString());
+
+                Cell cell13 = row.createCell(12);
+                if (obj[12] != null) {
+                    cell13.setCellValue(Double.parseDouble(obj[12].toString()));
+                }
+                Cell cell14 = row.createCell(13);
+                if (obj[13] != null) {
+                    cell14.setCellValue(obj[13].toString());
+                }
+
+                Cell cell15 = row.createCell(14);
+                if (obj[14] != null) {
+                    cell15.setCellValue(obj[14].toString());
+                }
+                Cell cell16 = row.createCell(15);
+                if (obj[15] != null) {
+                    cell16.setCellValue(obj[15].toString());
+                }
+                Cell cell17 = row.createCell(16);
+                if (obj[16] != null) {
+                    cell17.setCellValue(obj[16].toString());
+                }
+                Cell cell18 = row.createCell(17);
+                if (obj[17] != null) {
+                    cell18.setCellValue(obj[17].toString());
+                }
+                Cell cell19 = row.createCell(18);
+                if (obj[18] != null) {
+                    cell19.setCellValue(obj[18].toString());
+                }
+                Cell cell20 = row.createCell(19);
+                if (obj[19] != null) {
+                    cell20.setCellValue(Double.parseDouble(obj[19].toString()));
                 }
                 rowCount++;
             }
         }
 
+        //end reportType == 8 && formId == 9 bsn
+        if (reportType == 8 && formId == 10) {
+            FileInputStream fis = null;
+            File files = new File(appPath + "/assets/excel/plan/Geo_Report_10.xlsx");
+            fis = new FileInputStream(files);
+            workbook = new XSSFWorkbook(fis);
 
+            CellStyle cellStyle = workbook.createCellStyle();
+            cellStyle.setBorderBottom((short) 1);
+            cellStyle.setBorderLeft((short) 1);
+            cellStyle.setBorderRight((short) 1);
+            cellStyle.setBorderTop((short) 1);
+            cellStyle.setWrapText(true);
+            cellStyle.setAlignment(cellStyle.ALIGN_CENTER);
+            cellStyle.setVerticalAlignment(cellStyle.VERTICAL_CENTER);
 
+            Sheet sheet = workbook.getSheetAt(0);
+            Row row = sheet.getRow(1);
+            Cell cell = row.createCell(2);
+            cell.setCellValue(planYr);
+            Row row1 = sheet.getRow(2);
+            Cell cel2 = row1.createCell(2);
+            cel2.setCellValue(DateToStr1);
+            String queryStr = "SELECT\n" +
+                    "MRAM.ANNUAL_REGISTRATION.LICENSENUM AS Дугаар,\n" +
+                    "MRAM.ANNUAL_REGISTRATION.LPNAME AS Эзэмшигч,\n" +
+                    "MRAM.ANNUAL_REGISTRATION.LP_REG AS Регистер,\n" +
+                    "MRAM.ANNUAL_REGISTRATION.LICENSEXB AS Лиценз_Дугаар,\n" +
+                    "MRAM.REG_REPORT_REQ.ADD_BUNLICENSENUM as НэмэлтТЗ,\n" +
+                    "MRAM.SUB_LICENSES.LOCATIONAIMAG as Аймаг,\n" +
+                    "MRAM.SUB_LICENSES.LOCATIONSOUM as Сум,\n" +
+                    "MRAM.SUB_LICENSES.AREANAMEMON as Орд_нэр,\n" +
+                    "MRAM.SUB_LICENSES.AREASIZE as Талбай,\n" +
+                    "MRAM.LUT_MIN_GROUP.GROUPNAME AS АМ_төрөл,\n" +
+                    "MRAM.ANNUAL_REGISTRATION.REPORTYEAR as Огноо,\n" +
+                    "case MRAM.ANNUAL_REGISTRATION.REPSTATUSID \n" +
+                    " when 1 then 'Баталгаажсан'\n" +
+                    " when 2 then 'Буцаасан'\n" +
+                    " when 3 then 'Татгалзсан' \n" +
+                    " when 7 then 'Илгээсэн' \n" +
+                    " when 0 then 'Хадгалсан' \n" +
+                    "end as ТӨлөв,\n" +
+                    "DATA1,DATA2,DATA3,DATA4,DATA5,DATA6,MRAM.ANNUAL_REGISTRATION.ISTODOTGOL\n" +
+                    "FROM\n" +
+                    "MRAM.ANNUAL_REGISTRATION\n" +
+                    "INNER JOIN MRAM.SUB_LICENSES on MRAM.ANNUAL_REGISTRATION.LICENSEXB=MRAM.SUB_LICENSES.LICENSEXM\n" +
+                    "INNER JOIN MRAM.LUT_MIN_GROUP on MRAM.ANNUAL_REGISTRATION.GROUPID=MRAM.LUT_MIN_GROUP.GROUPID\n" +
+                    "INNER JOIN MRAM.REG_REPORT_REQ on MRAM.REG_REPORT_REQ.\"ID\"=MRAM.ANNUAL_REGISTRATION.REQID \n" +
+                    "INNER JOIN MRAM.DATA_EXCEL_GEOREP10 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_GEOREP10.PLANID\n" +
+                    "\tWHERE\n" +
+                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
+                    "\t\t\t \n" +
+                    "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_GEOREP10.ID";
+            List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
+            int rowCount = 7;
+            for (Object[] obj : objects) {
+                row = sheet.createRow(rowCount);
+                Cell cell1 = row.createCell(0);
+                cell1.setCellValue(Double.parseDouble(obj[0].toString()));
+                Cell cell2 = row.createCell(1);
+                cell2.setCellValue(obj[1].toString());
+                Cell cell3 = row.createCell(2);
+                cell3.setCellValue(Double.parseDouble(obj[2].toString()));
+                Cell cell4 = row.createCell(3);
+                cell4.setCellValue(obj[3].toString());
+                Cell cell5 = row.createCell(4);
+                if (obj[4] != null) {
+                    cell5.setCellValue(obj[4].toString());
+                }
+                Cell cell6 = row.createCell(5);
+                cell6.setCellValue(obj[5].toString());
+                Cell cell7 = row.createCell(6);
+                cell7.setCellValue(obj[6].toString());
+                Cell cell8 = row.createCell(7);
+                cell8.setCellValue(obj[7].toString());
+                Cell cell9 = row.createCell(8);
+                cell9.setCellValue(Double.parseDouble(obj[8].toString()));
+                Cell cell10 = row.createCell(9);
+                cell10.setCellValue(obj[9].toString());
+                Cell cell11 = row.createCell(10);
+                cell11.setCellValue(Double.parseDouble(obj[10].toString()));
+                Cell cell12 = row.createCell(11);
+                cell12.setCellValue(obj[11].toString());
 
+                Cell cell13 = row.createCell(12);
+                if (obj[12] != null) {
+                    cell13.setCellValue(Double.parseDouble(obj[12].toString()));
+                }
+                Cell cell14 = row.createCell(13);
+                if (obj[13] != null) {
+                    cell14.setCellValue(obj[13].toString());
+                }
+
+                Cell cell15 = row.createCell(14);
+                if (obj[14] != null) {
+                    cell15.setCellValue(Double.parseDouble(obj[14].toString()));
+                }
+                Cell cell16 = row.createCell(15);
+                if (obj[15] != null) {
+                    cell16.setCellValue(Double.parseDouble(obj[15].toString()));
+                }
+                Cell cell17 = row.createCell(16);
+                if (obj[16] != null) {
+                    cell17.setCellValue(Double.parseDouble(obj[16].toString()));
+                }
+                Cell cell18 = row.createCell(17);
+                if (obj[17] != null) {
+                    cell18.setCellValue(Double.parseDouble(obj[17].toString()));
+                }
+                Cell cell19 = row.createCell(18);
+                if (obj[18] != null) {
+                    cell19.setCellValue(Double.parseDouble(obj[18].toString()));
+                }
+
+                rowCount++;
+            }
+        }
 
         workbook.write(out);
         return new ByteArrayInputStream(out.toByteArray());
     }
-
 
 }
