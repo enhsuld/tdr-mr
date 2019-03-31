@@ -42,7 +42,13 @@ angular
    	        $scope.selectize_a_data = {
                    options: []
                };
-   	        $scope.org_data=org_data;
+
+            mainService.withdomain('get','/user/service/lp/detail/'+$stateParams.param)
+                .then(function(data){
+                    $scope.org_data=data;
+
+			});
+
    	        $scope.selectize_a_options= sel_data;    
         	
         	var reasonoption=[
