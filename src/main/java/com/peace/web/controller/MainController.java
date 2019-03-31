@@ -1813,14 +1813,14 @@ public class MainController {
 	}
 	
 	@RequestMapping(value = "/stats/dashboard/{id}", method = RequestMethod.GET)
-	public String getstats(@PathVariable Long id, @RequestBody(required=false) String jsonstr){
+	public String getstats(@PathVariable Long id){
 		JSONObject response = new JSONObject();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		if (!(auth instanceof AnonymousAuthenticationToken)) {
 			UserDetails userDetail = (UserDetails) auth.getPrincipal();
 			LutUsers currentUser = (LutUsers) dao.getHQLResult("from LutUsers t where t.username = '" + userDetail.getUsername() + "'", "current");
 			Calendar cal = Calendar.getInstance();
-			int year = cal.get(Calendar.YEAR);
+			int planYr = cal.get(Calendar.YEAR);
 			if (currentUser != null){
 				if (currentUser.getDivisionid() == 1 || currentUser.getDivisionid() == 2){
 					//id=1 - yavtsaar buleglej statistic avah
@@ -1829,7 +1829,7 @@ public class MainController {
 						for(int reporttype=3;reporttype<=4;reporttype++){
 							JSONArray repstepArray = new JSONArray();
 							for(int repstep=1;repstep<=6;repstep++){
-								List<Long> ars= (List<Long>) dao.getHQLResult("select count(*) from AnnualRegistration t where t.reportyear="+year+" and t.istodotgol = 0 and t.repstatusid = 7 and t.xtype != 0 and t.divisionid = " + currentUser.getDivisionid() + " and t.repstepid =" + repstep + " and t.reporttype = " + reporttype + " and t.lictype!=1 " + ((currentUser.getDivisionid() == 1) ? " and t.minid != 5 " : (currentUser.getDivisionid() == 5) ? " and t.minid = 5" : ""), "list");
+								List<Long> ars= (List<Long>) dao.getHQLResult("select count(*) from AnnualRegistration t where t.reportyear="+planYr+" and t.istodotgol = 0 and t.repstatusid = 7 and t.xtype != 0 and t.divisionid = " + currentUser.getDivisionid() + " and t.repstepid =" + repstep + " and t.reporttype = " + reporttype + " and t.lictype!=1 " + ((currentUser.getDivisionid() == 1) ? " and t.minid != 5 " : (currentUser.getDivisionid() == 5) ? " and t.minid = 5" : ""), "list");
 								if (ars.isEmpty()){
 									repstepArray.put(0);
 								}
@@ -1841,7 +1841,7 @@ public class MainController {
 							
 							JSONArray repstepArrayBack = new JSONArray();
 							for(int repstep=1;repstep<=6;repstep++){
-								List<Long> ars= (List<Long>) dao.getHQLResult("select count(*) from AnnualRegistration t where t.reportyear="+year+" and  t.istodotgol = 0 and t.istodotgol = 0 and t.repstatusid = 2 and t.xtype != 0 and t.divisionid = " + currentUser.getDivisionid() + " and t.rejectstep = "+ repstep +" and t.reporttype = " + reporttype + " and t.lictype!=1 " + ((currentUser.getDivisionid() == 1) ? " and t.minid != 5 " : (currentUser.getDivisionid() == 5) ? " and t.minid = 5" : ""), "list");
+								List<Long> ars= (List<Long>) dao.getHQLResult("select count(*) from AnnualRegistration t where t.reportyear="+planYr+" and  t.istodotgol = 0 and t.istodotgol = 0 and t.repstatusid = 2 and t.xtype != 0 and t.divisionid = " + currentUser.getDivisionid() + " and t.rejectstep = "+ repstep +" and t.reporttype = " + reporttype + " and t.lictype!=1 " + ((currentUser.getDivisionid() == 1) ? " and t.minid != 5 " : (currentUser.getDivisionid() == 5) ? " and t.minid = 5" : ""), "list");
 								if (ars.isEmpty()){
 									repstepArrayBack.put(0);
 								}
@@ -1851,7 +1851,7 @@ public class MainController {
 							}
 							response.put("stat2"+reporttype, repstepArrayBack);
 							
-							List<Long> ars= (List<Long>) dao.getHQLResult("select count(*) from AnnualRegistration t where t.reportyear="+year+" and t.istodotgol = 0 and t.repstatusid = 7 and t.xtype = 0 and t.divisionid = " + currentUser.getDivisionid() + " and t.reporttype = " + reporttype + " and t.lictype!=1 " + ((currentUser.getDivisionid() == 1) ? " and t.minid != 5 " : (currentUser.getDivisionid() == 2) ? " and t.minid = 5" : ""), "list");
+							List<Long> ars= (List<Long>) dao.getHQLResult("select count(*) from AnnualRegistration t where t.reportyear="+planYr+" and t.istodotgol = 0 and t.repstatusid = 7 and t.xtype = 0 and t.divisionid = " + currentUser.getDivisionid() + " and t.reporttype = " + reporttype + " and t.lictype!=1 " + ((currentUser.getDivisionid() == 1) ? " and t.minid != 5 " : (currentUser.getDivisionid() == 2) ? " and t.minid = 5" : ""), "list");
 							if (ars.isEmpty()){
 								xreportsArray.put(0);
 							}
@@ -1861,7 +1861,7 @@ public class MainController {
 							long[] repstatuses = {1,2,7,3};
 							JSONArray repstatusarray = new JSONArray();
 							for(long repstatus : repstatuses){
-								ars= (List<Long>) dao.getHQLResult("select count(*) from AnnualRegistration t where t.reportyear="+year+" and  t.istodotgol = 0 and t.repstatusid = " + repstatus + " and t.xtype != 0 and t.divisionid = " + currentUser.getDivisionid() + " and t.reporttype = " + reporttype + " and t.lictype!=1 " + ((currentUser.getDivisionid() == 1) ? " and t.minid != 5 " : (currentUser.getDivisionid() == 5) ? " and t.minid = 5" : ""), "list");
+								ars= (List<Long>) dao.getHQLResult("select count(*) from AnnualRegistration t where t.reportyear="+planYr+" and  t.istodotgol = 0 and t.repstatusid = " + repstatus + " and t.xtype != 0 and t.divisionid = " + currentUser.getDivisionid() + " and t.reporttype = " + reporttype + " and t.lictype!=1 " + ((currentUser.getDivisionid() == 1) ? " and t.minid != 5 " : (currentUser.getDivisionid() == 5) ? " and t.minid = 5" : ""), "list");
 								if (ars.isEmpty()){
 									repstatusarray.put(new JSONObject().put("value", 0).put("name", (repstatus == 1) ? "Зөвшөөрсөн" : ((repstatus == 2) ? "Засварт буцаасан" : ((repstatus == 7) ? "Илгээсэн" : "Татгалзсан"))));
 								}
@@ -1878,7 +1878,7 @@ public class MainController {
 					else if (id == 2){
 						List<Object[]> deposits = (List<Object[]>) dao.getHQLResult("select d.depositnamemon, d.depositid from LutDeposit d where " + ((currentUser.getDivisionid() == 1) ? "  d.mineralsid != 5 " : (currentUser.getDivisionid() == 2) ? " d.mineralsid = 5" : ""), "list");
 						for(int reporttype=3;reporttype<=4;reporttype++){
-							List<Object[]> ars = (List<Object[]>) dao.getHQLResult("select d.depositnamemon, d.depositid, count(t.depositid) from AnnualRegistration t, LutDeposit d where t.reportyear="+year+" and  t.istodotgol = 0  and t.reporttype = "+reporttype+" and d.depositid=t.depositid and t.repstatusid in (1,2,7) and t.xtype != 0 and t.divisionid = " + currentUser.getDivisionid() + " and t.lictype!=1 " + ((currentUser.getDivisionid() == 1) ? " and t.minid != 5 " : (currentUser.getDivisionid() == 2) ? " and t.minid = 5" : "") + ((currentUser.getDivisionid() == 1) ? " and d.mineralsid != 5 " : (currentUser.getDivisionid() == 2) ? " and d.mineralsid = 5" : "") + " group by d.depositnamemon, d.depositid", "list");
+							List<Object[]> ars = (List<Object[]>) dao.getHQLResult("select d.depositnamemon, d.depositid, count(t.depositid) from AnnualRegistration t, LutDeposit d where t.reportyear="+planYr+" and  t.istodotgol = 0  and t.reporttype = "+reporttype+" and d.depositid=t.depositid and t.repstatusid in (1,2,7) and t.xtype != 0 and t.divisionid = " + currentUser.getDivisionid() + " and t.lictype!=1 " + ((currentUser.getDivisionid() == 1) ? " and t.minid != 5 " : (currentUser.getDivisionid() == 2) ? " and t.minid = 5" : "") + ((currentUser.getDivisionid() == 1) ? " and d.mineralsid != 5 " : (currentUser.getDivisionid() == 2) ? " and d.mineralsid = 5" : "") + " group by d.depositnamemon, d.depositid", "list");
 							JSONArray repsarrayall = new JSONArray();
 							
 							for(Object[] d : deposits){
@@ -1895,7 +1895,7 @@ public class MainController {
 							}
 							response.put("deps"+reporttype+"all", repsarrayall);
 							
-							ars = (List<Object[]>) dao.getHQLResult("select d.depositnamemon, d.depositid, count(t.depositid) from AnnualRegistration t, LutDeposit d where t.reportyear="+year+" and t.istodotgol = 0 and t.reporttype = "+reporttype+" and d.depositid=t.depositid and t.repstatusid in (1) and t.xtype != 0 and t.divisionid = " + currentUser.getDivisionid() + " and t.lictype!=1 " + ((currentUser.getDivisionid() == 1) ? " and t.minid != 5 " : (currentUser.getDivisionid() == 2) ? " and t.minid = 5" : "") + ((currentUser.getDivisionid() == 1) ? " and d.mineralsid != 5 " : (currentUser.getDivisionid() == 2) ? " and d.mineralsid = 5" : "") + " group by d.depositnamemon, d.depositid", "list");
+							ars = (List<Object[]>) dao.getHQLResult("select d.depositnamemon, d.depositid, count(t.depositid) from AnnualRegistration t, LutDeposit d where t.reportyear="+planYr+" and t.istodotgol = 0 and t.reporttype = "+reporttype+" and d.depositid=t.depositid and t.repstatusid in (1) and t.xtype != 0 and t.divisionid = " + currentUser.getDivisionid() + " and t.lictype!=1 " + ((currentUser.getDivisionid() == 1) ? " and t.minid != 5 " : (currentUser.getDivisionid() == 2) ? " and t.minid = 5" : "") + ((currentUser.getDivisionid() == 1) ? " and d.mineralsid != 5 " : (currentUser.getDivisionid() == 2) ? " and d.mineralsid = 5" : "") + " group by d.depositnamemon, d.depositid", "list");
 							JSONArray repsarray = new JSONArray();
 							for(Object[] d : deposits){
 								Boolean isfilled = false;
@@ -1921,10 +1921,10 @@ public class MainController {
                         int reportgeo1 = 0, plangeo1 = 0, plangeo = 0,reportgeo = 0;
                         List<AnnualRegistration> ars = null;
                         if (currentUser.getDivisionid() == 1){
-                            ars= (List<AnnualRegistration>) dao.getHQLResult("from AnnualRegistration where reportyear="+year+" and istodotgol = 0 and repstatusid != 0 and DIVISIONID = 3 and LICENSEXB like '%MV-%' and xtype != 0 and minid != 5","list");
+                            ars= (List<AnnualRegistration>) dao.getHQLResult("from AnnualRegistration where reportyear="+planYr+" and istodotgol = 0 and repstatusid != 0 and DIVISIONID = 3 and LICENSEXB like '%MV-%' and xtype != 0 and minid != 5","list");
                         }
 					    else if (currentUser.getDivisionid() == 2){
-                            ars= (List<AnnualRegistration>) dao.getHQLResult("from AnnualRegistration where reportyear="+year+" and istodotgol = 0 and repstatusid != 0 and DIVISIONID = 3 and LICENSEXB like '%MV-%' and xtype != 0 and minid = 5","list");
+                            ars= (List<AnnualRegistration>) dao.getHQLResult("from AnnualRegistration where reportyear="+planYr+" and istodotgol = 0 and repstatusid != 0 and DIVISIONID = 3 and LICENSEXB like '%MV-%' and xtype != 0 and minid = 5","list");
                         }
                         for(AnnualRegistration a : ars){
                             if (a.getReporttype() == 3){

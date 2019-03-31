@@ -7132,8 +7132,11 @@ public class PlanReportController {
 			content.put(com.getComnote());
 
 			jo1.put("content",content);
-			jo1.put("date", com.getComdate());		
-			jo1.put("des", an.getDecisionNameMon());
+			jo1.put("date", com.getComdate());
+			if(an!=null){
+				jo1.put("des", an.getDecisionNameMon());
+			}
+
 			jo1.put("destext", com.getComnote());
 			jo1.put("desicion", com.getDesicionid());
 			JSONObject jo = new JSONObject();
@@ -7443,34 +7446,45 @@ public class PlanReportController {
 			content.put(com.getComnote());
 
 			jo1.put("content",content);
-			jo1.put("date", com.getComdate());		
-			jo1.put("des", an.getDecisionNameMon());
+			jo1.put("date", com.getComdate());
+			if(an!=null){
+				jo1.put("des", an.getDecisionNameMon());
+			}
+
 			jo1.put("destext", com.getComnote());
 			jo1.put("desicion", com.getDesicionid());
 			JSONObject jo = new JSONObject();
 
 			if(loguser.getPositionid()>0){
 
-				LnkPlanTransition tz=(LnkPlanTransition) dao.getHQLResult("from LnkPlanTransition t where t.noteid="+obj.getInt("id")+" and t.planid="+obj.getInt("planid")+"", "current");		 
+				List<LnkPlanTransition> tzs=(List<LnkPlanTransition>) dao.getHQLResult("from LnkPlanTransition t where t.noteid="+obj.getInt("id")+" and t.planid="+obj.getInt("planid")+"", "list");
 
-				if (tz != null){
-					if(loguser.getStepid()==6){
-						tz.setMdecisionid(obj.getInt("desicion"));
-						tz.setDecisionid(obj.getInt("desicion"));
-					}
-					else{
-						tz.setDecisionid(obj.getInt("desicion"));
+				if (tzs.size()>0){
+					for(LnkPlanTransition tz:tzs){
+						if(loguser.getStepid()==6){
+							tz.setMdecisionid(obj.getInt("desicion"));
+							tz.setDecisionid(obj.getInt("desicion"));
+						}
+						else{
+							tz.setDecisionid(obj.getInt("desicion"));
+						}
+
+						tz.setOffposition(loguser.getPositionid());
+						dao.PeaceCrud(tz, "LnkPlanTransition", "update", (long) tz.getId(), 0, 0, null);
 					}
 
-					tz.setOffposition(loguser.getPositionid());
-					dao.PeaceCrud(tz, "LnkPlanTransition", "update", (long) tz.getId(), 0, 0, null);
 				}
 				else{
-					tz = new LnkPlanTransition();
+					LnkPlanTransition tz = new LnkPlanTransition();
 					tz.setNoteid(obj.getLong("id"));
 					tz.setPlanid(obj.getLong("planid"));
 					tz.setTabid(obj.getInt("tabid"));
-					tz.setDecisionid(obj.getInt("desicion"));
+					if(obj.getInt("desicion")!=5){
+						tz.setDecisionid(obj.getInt("desicion"));
+					}
+					else{
+						tz.setDecisionid(1);
+					}
 					tz.setOffposition(loguser.getPositionid());
 					dao.PeaceCrud(tz, "LnkPlanTransition", "save", (long) 0, 0, 0, null);
 				}

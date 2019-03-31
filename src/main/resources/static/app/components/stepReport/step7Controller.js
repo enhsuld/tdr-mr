@@ -80,6 +80,7 @@ angular
                     {field: "lpName", title: "<span data-translate='Company name'></span>"},
                     {field: "depositid", title: "АМ-ын төрөл", values: p_deposit},
                     {field: "licenseXB", title: "<span data-translate='License number'></span>"},
+                    {field: "regReportReq.addBunLicenseNum",template:"#if(regReportReq!=null){# #=regReportReq.addBunLicenseNum# #}#", title: "Нэмэлт ТЗ"},
                     {field: "reportyear", title: "<span data-translate='Report year'></span>"},
                     {field: "xtype",template:"#if(xtype==0){# <span>Х</span> #}else{# <span>Энгийн</span> #}#",values:[{"text":"X","value":0},{"text":"Энгийн","value":30}], title: "Төрөл"},
                     {

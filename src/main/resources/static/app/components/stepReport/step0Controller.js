@@ -83,6 +83,7 @@ angular
                     {field: "lpName", title: "Аж ахуйн нэгжийн нэр"},
                     {field: "depositid", title: "АМ-ын төрөл", values: p_deposit},
                     {field: "licenseXB", title: "Тусгай зөвшөөрлийн дугаар"},
+                    {field: "regReportReq.addBunLicenseNum",template:"#if(regReportReq!=null){# #=regReportReq.addBunLicenseNum# #}#", title: "Нэмэлт ТЗ"},
                     {field: "reportyear", title: "Он"},
 
                     {field: "submissiondate", title: "Илгээсэн огноо"},

@@ -85,6 +85,7 @@ angular
                     {field: "lpName", title: "<span data-translate='Company name'></span>"},
                     {field: "depositid", title: "АМ-ын төрөл", values: p_deposit},
                     {field: "licenseXB", title: "<span data-translate='License number'></span>"},
+                    {field: "regReportReq.addBunLicenseNum",template:"#if(regReportReq!=null){# #=regReportReq.addBunLicenseNum# #}#", title: "Нэмэлт ТЗ"},
                     {field: "reportyear", title: "<span data-translate='Report year'></span>"},
                     {
                         field: "repstatusid",

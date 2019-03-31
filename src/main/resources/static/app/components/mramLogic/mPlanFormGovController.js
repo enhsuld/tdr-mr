@@ -522,8 +522,8 @@ angular
 		   							$scope.tabid7=false;
 			   						$scope.stdes7=false;
 		   						}
-		   						$scope.selectize_a_data.options=[{text: "Эцэслэх",value: 5}];
-		   						a_data = $scope.selectize_a_options =[{text: "Эцэслэх",value: 5}];
+		   						$scope.selectize_a_data.options=[{text: "Эцэслэх",value: 1}];
+		   						a_data = $scope.selectize_a_options =[{text: "Эцэслэх",value: 1}];
 		   					}
 		   					if(data.repstatusid==5){
 		   						$scope.stdes1=false;
