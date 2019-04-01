@@ -39,4 +39,14 @@ public class ExcelDownloadRestAPI {
         headers.add("Content-Disposition", "attachment; filename="+name+"");
         return ResponseEntity.ok().headers(headers).body(new InputStreamResource(in));
     }
+
+    @GetMapping(value = "/new/download/{reportType}/{formId}/{planYr}/{formName}")
+    public ResponseEntity<InputStreamResource> excelNewReport(@PathVariable int reportType, HttpServletRequest req, @PathVariable int formId, @PathVariable int planYr,@PathVariable String formName) throws IOException {
+        String appPath = req.getServletContext().getRealPath("");
+        ByteArrayInputStream in = ExcelGenerator.formsToExcel(reportType,formId,planYr,formName,appPath,dao);
+        HttpHeaders headers = new HttpHeaders();
+        String name=URLEncoder.encode(formName+".xlsx","UTF-8");
+        headers.add("Content-Disposition", "attachment; filename="+name+"");
+        return ResponseEntity.ok().headers(headers).body(new InputStreamResource(in));
+    }
 }

@@ -31,6 +31,13 @@ angular
                 link.download = "Filename";
                 link.click();
             };
+
+            $scope.downloadNewPlan = function(reportType,id,fname){
+                var link = document.createElement('a');
+                link.href = '/api/excel/new/download/' + reportType+'/'+id+'/'+$scope.yearSelected.value+'/'+fname;
+                link.download = "Filename";
+                link.click();
+            };
         }
     ])
 
