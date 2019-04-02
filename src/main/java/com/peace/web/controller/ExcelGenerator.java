@@ -5614,6 +5614,115 @@ public class ExcelGenerator {
                 rowCount++;
             }
         }
+        if (reportType == 4 && formId == 16) {
+            FileInputStream fis = null;
+            File files = new File(appPath + "assets/reporttemplate/miningRep14.xlsx");
+            fis = new FileInputStream(files);
+            workbook = new XSSFWorkbook(fis);
+
+            CellStyle cellStyle = workbook.createCellStyle();
+            cellStyle.setBorderBottom((short) 1);
+            cellStyle.setBorderLeft((short) 1);
+            cellStyle.setBorderRight((short) 1);
+            cellStyle.setBorderTop((short) 1);
+            cellStyle.setWrapText(true);
+            cellStyle.setAlignment(cellStyle.ALIGN_CENTER);
+            cellStyle.setVerticalAlignment(cellStyle.VERTICAL_CENTER);
+
+            Sheet sheet = workbook.getSheetAt(0);
+            Row row = sheet.getRow(1);
+            Cell cell = row.createCell(2);
+            cell.setCellValue(planYr);
+            //Row row1 = sheet.getRow(2);
+            Cell cel2 = row.createCell(7);
+            cel2.setCellValue(DateToStr1);
+            String sqlQuery = "SELECT A .LPNAME, A .LP_REG, A .LICENSEXB,(SELECT S.STATUSNAMEMON FROM LUT_APPSTATUS S WHERE S.STATUSID = A .REPSTATUSID AND ROWNUM = 1),(SELECT REQ.ADD_BUNLICENSENUM FROM REG_REPORT_REQ REQ WHERE REQ. ID = A .REQID AND ROWNUM = 1),(SELECT M .MINERALNAMEMON FROM LUT_MINERALS M WHERE M .MINERALID = A .MINID AND ROWNUM = 1),(SELECT D .DEPOSITNAMEMON FROM LUT_DEPOSIT D WHERE D .DEPOSITID = A .DEPOSITID AND ROWNUM = 1),(SELECT SUB_LICENSES.LOCATIONAIMAG FROM SUB_LICENSES WHERE SUB_LICENSES.LICENSEXM = A .LICENSEXB AND ROWNUM = 1),(SELECT SUB_LICENSES.LOCATIONSOUM FROM SUB_LICENSES WHERE SUB_LICENSES.LICENSEXM = A .LICENSEXB AND ROWNUM = 1),(SELECT SUB_LICENSES.AREANAMEMON FROM SUB_LICENSES WHERE SUB_LICENSES.LICENSEXM = A .LICENSEXB AND ROWNUM = 1),(SELECT SUB_LICENSES.AREASIZE FROM SUB_LICENSES WHERE SUB_LICENSES.LICENSEXM = A .LICENSEXB AND ROWNUM = 1),";
+
+            for(int i=1;i<=24;i++){
+                sqlQuery = sqlQuery + "(SELECT D.DATA4 FROM DATA_EXCEL_MINREP14 D WHERE D.PLANID = A .ID AND D.ORDERNUMBER = " + i + " AND ROWNUM = 1),";
+                sqlQuery = sqlQuery + "(SELECT D.DATA5 FROM DATA_EXCEL_MINREP14 D WHERE D.PLANID = A .ID AND D.ORDERNUMBER = " + i + " AND ROWNUM = 1),";
+            }
+
+            sqlQuery = sqlQuery.substring(0,sqlQuery.length()-1);
+
+            sqlQuery = sqlQuery + " FROM ANNUAL_REGISTRATION A WHERE A .ISTODOTGOL = 0 AND A .REPSTATUSID IN (1, 2, 7) AND A .REPORTTYPE = 4 AND A .REPORTYEAR = " + planYr + " AND A .DIVISIONID = 1 ORDER BY A .LPNAME ASC";
+
+            List<Object[]> resultObj = dao.getNativeSQLResult(sqlQuery, "list");
+            CellStyle style = workbook.createCellStyle();
+            style.setBorderBottom(HSSFCellStyle.BORDER_THIN);
+            style.setBorderTop(HSSFCellStyle.BORDER_THIN);
+            style.setBorderRight(HSSFCellStyle.BORDER_THIN);
+            style.setBorderLeft(HSSFCellStyle.BORDER_THIN);
+            style.setWrapText(true);
+            if (resultObj != null && resultObj.size() > 0) {
+                for (int iterator = 0; iterator < resultObj.size(); iterator++) {
+                    Object[] o = resultObj.get(iterator);
+                    setCellData(sheet, iterator + 6, 0, iterator + 1, style, "number");
+                    for (int cellIterator = 1; cellIterator < o.length; cellIterator++) {
+                        if (o[cellIterator] instanceof String) {
+                            setCellData(sheet, iterator + 6, cellIterator, o[cellIterator], style, "string");
+                        } else {
+                            setCellData(sheet, iterator + 6, cellIterator, o[cellIterator], style, "float");
+                        }
+                    }
+                }
+            }
+        }
+        if (reportType == 4 && formId == 17) {
+            FileInputStream fis = null;
+            File files = new File(appPath + "assets/reporttemplate/miningRep15.xlsx");
+            fis = new FileInputStream(files);
+            workbook = new XSSFWorkbook(fis);
+
+            CellStyle cellStyle = workbook.createCellStyle();
+            cellStyle.setBorderBottom((short) 1);
+            cellStyle.setBorderLeft((short) 1);
+            cellStyle.setBorderRight((short) 1);
+            cellStyle.setBorderTop((short) 1);
+            cellStyle.setWrapText(true);
+            cellStyle.setAlignment(cellStyle.ALIGN_CENTER);
+            cellStyle.setVerticalAlignment(cellStyle.VERTICAL_CENTER);
+
+            Sheet sheet = workbook.getSheetAt(0);
+            Row row = sheet.getRow(1);
+            Cell cell = row.createCell(2);
+            cell.setCellValue(planYr);
+            //Row row1 = sheet.getRow(2);
+            Cell cel2 = row.createCell(7);
+            cel2.setCellValue(DateToStr1);
+            String sqlQuery = "SELECT A .LPNAME, A .LP_REG, A .LICENSEXB,(SELECT S.STATUSNAMEMON FROM LUT_APPSTATUS S WHERE S.STATUSID = A .REPSTATUSID AND ROWNUM = 1),(SELECT REQ.ADD_BUNLICENSENUM FROM REG_REPORT_REQ REQ WHERE REQ. ID = A .REQID AND ROWNUM = 1),(SELECT M .MINERALNAMEMON FROM LUT_MINERALS M WHERE M .MINERALID = A .MINID AND ROWNUM = 1),(SELECT D .DEPOSITNAMEMON FROM LUT_DEPOSIT D WHERE D .DEPOSITID = A .DEPOSITID AND ROWNUM = 1),(SELECT SUB_LICENSES.LOCATIONAIMAG FROM SUB_LICENSES WHERE SUB_LICENSES.LICENSEXM = A .LICENSEXB AND ROWNUM = 1),(SELECT SUB_LICENSES.LOCATIONSOUM FROM SUB_LICENSES WHERE SUB_LICENSES.LICENSEXM = A .LICENSEXB AND ROWNUM = 1),(SELECT SUB_LICENSES.AREANAMEMON FROM SUB_LICENSES WHERE SUB_LICENSES.LICENSEXM = A .LICENSEXB AND ROWNUM = 1),(SELECT SUB_LICENSES.AREASIZE FROM SUB_LICENSES WHERE SUB_LICENSES.LICENSEXM = A .LICENSEXB AND ROWNUM = 1),";
+
+            for(int i=1;i<=26;i++){
+                sqlQuery = sqlQuery + "(SELECT D.DATA4 FROM DATA_EXCEL_MINREP15 D WHERE D.PLANID = A .ID AND D.ORDERNUMBER = " + i + " AND ROWNUM = 1),";
+                sqlQuery = sqlQuery + "(SELECT D.DATA5 FROM DATA_EXCEL_MINREP15 D WHERE D.PLANID = A .ID AND D.ORDERNUMBER = " + i + " AND ROWNUM = 1),";
+            }
+
+            sqlQuery = sqlQuery.substring(0,sqlQuery.length()-1);
+
+            sqlQuery = sqlQuery + " FROM ANNUAL_REGISTRATION A WHERE A .ISTODOTGOL = 0 AND A .REPSTATUSID IN (1, 2, 7) AND A .REPORTTYPE = 4 AND A .REPORTYEAR = " + planYr + " AND A .DIVISIONID = 1 ORDER BY A .LPNAME ASC";
+
+            List<Object[]> resultObj = dao.getNativeSQLResult(sqlQuery, "list");
+            CellStyle style = workbook.createCellStyle();
+            style.setBorderBottom(HSSFCellStyle.BORDER_THIN);
+            style.setBorderTop(HSSFCellStyle.BORDER_THIN);
+            style.setBorderRight(HSSFCellStyle.BORDER_THIN);
+            style.setBorderLeft(HSSFCellStyle.BORDER_THIN);
+            style.setWrapText(true);
+            if (resultObj != null && resultObj.size() > 0) {
+                for (int iterator = 0; iterator < resultObj.size(); iterator++) {
+                    Object[] o = resultObj.get(iterator);
+                    setCellData(sheet, iterator + 6, 0, iterator + 1, style, "number");
+                    for (int cellIterator = 1; cellIterator < o.length; cellIterator++) {
+                        if (o[cellIterator] instanceof String) {
+                            setCellData(sheet, iterator + 6, cellIterator, o[cellIterator], style, "string");
+                        } else {
+                            setCellData(sheet, iterator + 6, cellIterator, o[cellIterator], style, "float");
+                        }
+                    }
+                }
+            }
+        }
+
         if (reportType == 4 && formId == 18) {
             FileInputStream fis = null;
             File files = new File(appPath + "/assets/excel/plan/Mining_Report_16.xlsx");
