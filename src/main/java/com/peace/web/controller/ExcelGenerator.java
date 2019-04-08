@@ -109,7 +109,7 @@ public class ExcelGenerator {
                     "\n" +
                     "WHERE\n" +
                     "  MRAM.ANNUAL_REGISTRATION.DIVISIONID=1 and MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
-                    "\t and MRAM.LUT_DEPOSIT.MINERALTYPE=1 \n" +
+                    "\t and MRAM.LUT_DEPOSIT.MINERALTYPE=1 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=3 \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_MIN_PLAN_1.\"ID\"";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
             int rowCount = 7;
@@ -242,7 +242,7 @@ public class ExcelGenerator {
                     "\n" +
                     "WHERE\n" +
                     "  MRAM.ANNUAL_REGISTRATION.DIVISIONID=1 and  MRAM.ANNUAL_REGISTRATION.REPORTYEAR  in (" + planYr + ") \n" +
-                    "\t and MRAM.LUT_DEPOSIT.MINERALTYPE=2\n" +
+                    "\t and MRAM.LUT_DEPOSIT.MINERALTYPE=2 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=3 \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_MIN_PLAN_1.\"ID\"";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
             int rowCount = 7;
@@ -366,7 +366,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_MIN_PLAN_2_1 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_MIN_PLAN_2_1.PLANID\n" +
                     "WHERE\n" +
                     "   MRAM.ANNUAL_REGISTRATION.DIVISIONID=1 and MRAM.ANNUAL_REGISTRATION.REPORTYEAR  = " + planYr + " \n" +
-                    "    and TYPE=1 \n" +
+                    "    and TYPE=1 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=3 \n" +
                     "\t\torder by  MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_MIN_PLAN_2_1.\"ID\"";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
             int rowCount = 7;
@@ -559,7 +559,7 @@ public class ExcelGenerator {
                     "\n" +
                     "WHERE\n" +
                     " MRAM.ANNUAL_REGISTRATION.DIVISIONID=1 and  MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
-                    "\t  and TYPE=5\n" +
+                    "\t  and TYPE=5 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=3 \n" +
                     "\t\torder by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_MIN_PLAN_2_1.\"ID\",TYPE";
             List<Object[]> objectSheets = dao.getNativeSQLResult(queryStr2, "list");
             int rowCountSheets = 7;
@@ -727,7 +727,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_MIN_PLAN_2_2 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_MIN_PLAN_2_2.PLANID\n" +
                     "\n" +
                     "WHERE\n" +
-                    "  MRAM.ANNUAL_REGISTRATION.DIVISIONID=1 and MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
+                    "  MRAM.ANNUAL_REGISTRATION.DIVISIONID=1 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=3 and MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_MIN_PLAN_2_2.ID,\n" +
                     "      \t\tMRAM.DATA_MIN_PLAN_2_2.DATAINDEX";
@@ -925,7 +925,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_MIN_PLAN_3 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_MIN_PLAN_3.PLANID\n" +
                     "\n" +
                     "WHERE\n" +
-                    "  MRAM.ANNUAL_REGISTRATION.DIVISIONID=1 and MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
+                    "  MRAM.ANNUAL_REGISTRATION.DIVISIONID=1 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=3 and MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\t \t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_MIN_PLAN_3.\"ID\"";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
@@ -1100,7 +1100,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.REG_REPORT_REQ on MRAM.REG_REPORT_REQ.\"ID\"=MRAM.ANNUAL_REGISTRATION.REQID \n" +
                     "INNER JOIN MRAM.DATA_MIN_PLAN_4_1 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_MIN_PLAN_4_1.PLANID\n" +
                     "where \n" +
-                    " MRAM.ANNUAL_REGISTRATION.DIVISIONID=1 and  MRAM.ANNUAL_REGISTRATION.REPORTYEAR  =" + planYr + "\n" +
+                    " MRAM.ANNUAL_REGISTRATION.DIVISIONID=1 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=3 and  MRAM.ANNUAL_REGISTRATION.REPORTYEAR  =" + planYr + "\n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_MIN_PLAN_4_1.\"ID\"";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
             int rowCount = 7;
@@ -1253,7 +1253,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_MIN_PLAN_4_2 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_MIN_PLAN_4_2.PLANID\n" +
                     "\n" +
                     "WHERE\n" +
-                    "  MRAM.ANNUAL_REGISTRATION.DIVISIONID=1 and MRAM.ANNUAL_REGISTRATION.REPORTYEAR= " + planYr + " \n" +
+                    "  MRAM.ANNUAL_REGISTRATION.DIVISIONID=1 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=3 and MRAM.ANNUAL_REGISTRATION.REPORTYEAR= " + planYr + " \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_MIN_PLAN_4_2.\"ID\"";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
             int rowCount = 7;
@@ -1445,7 +1445,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_MIN_PLAN_5 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_MIN_PLAN_5.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "   MRAM.ANNUAL_REGISTRATION.DIVISIONID=1 and    MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
+                    "   MRAM.ANNUAL_REGISTRATION.DIVISIONID=1 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=3 and    MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_MIN_PLAN_5.ID";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
@@ -1583,7 +1583,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_MIN_PLAN_6_1 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_MIN_PLAN_6_1.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "  MRAM.ANNUAL_REGISTRATION.DIVISIONID=1 and     MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
+                    "  MRAM.ANNUAL_REGISTRATION.DIVISIONID=1 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=3 and     MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_MIN_PLAN_6_1.ID";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
@@ -1713,7 +1713,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_MIN_PLAN_6_2 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_MIN_PLAN_6_2.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "  MRAM.ANNUAL_REGISTRATION.DIVISIONID=1 and     MRAM.ANNUAL_REGISTRATION.REPORTYEAR = "+planYr+" \n" +
+                    "  MRAM.ANNUAL_REGISTRATION.DIVISIONID=1 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=3 and     MRAM.ANNUAL_REGISTRATION.REPORTYEAR = "+planYr+" \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_MIN_PLAN_6_2.ID";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
@@ -1848,7 +1848,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_MIN_PLAN_7 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_MIN_PLAN_7.PLANID\n" +
                     "\n" +
                     "WHERE\n" +
-                    " MRAM.ANNUAL_REGISTRATION.DIVISIONID=1 and  MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
+                    " MRAM.ANNUAL_REGISTRATION.DIVISIONID=1 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=3 and  MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_MIN_PLAN_7.\"ID\"";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
             int rowCount = 7;
@@ -2030,7 +2030,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_MIN_PLAN_8 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_MIN_PLAN_8.PLANID\n" +
                     "\n" +
                     "WHERE\n" +
-                    " MRAM.ANNUAL_REGISTRATION.DIVISIONID=1 and  MRAM.ANNUAL_REGISTRATION.REPORTYEAR=" + planYr + "\n" +
+                    " MRAM.ANNUAL_REGISTRATION.DIVISIONID=1 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=3 and  MRAM.ANNUAL_REGISTRATION.REPORTYEAR=" + planYr + "\n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_MIN_PLAN_8.\"ID\"";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
             int rowCount = 7;
@@ -2191,7 +2191,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_MIN_PLAN_9 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_MIN_PLAN_9.PLANID\n" +
                     "WHERE\n" +
                     " \n" +
-                    "\t\tTYPE=1 and  MRAM.ANNUAL_REGISTRATION.REPORTYEAR="+planYr+" and MRAM.ANNUAL_REGISTRATION.DIVISIONID=1\n" +
+                    "\t\tTYPE=1 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=3 and  MRAM.ANNUAL_REGISTRATION.REPORTYEAR="+planYr+" and MRAM.ANNUAL_REGISTRATION.DIVISIONID=1\n" +
                     "\n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_MIN_PLAN_9.ID";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
@@ -2322,7 +2322,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_MIN_PLAN_9 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_MIN_PLAN_9.PLANID\n" +
                     "WHERE\n" +
                     " \n" +
-                    "\t\tTYPE=2 and  MRAM.ANNUAL_REGISTRATION.REPORTYEAR="+planYr+" and MRAM.ANNUAL_REGISTRATION.DIVISIONID=1\n" +
+                    "\t\tTYPE=2 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=3 and  MRAM.ANNUAL_REGISTRATION.REPORTYEAR="+planYr+" and MRAM.ANNUAL_REGISTRATION.DIVISIONID=1\n" +
                     "\n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_MIN_PLAN_9.ID\n" +
                     "\n" +
@@ -2435,7 +2435,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_MIN_PLAN_9 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_MIN_PLAN_9.PLANID\n" +
                     "WHERE\n" +
                     " \n" +
-                    "\t\tTYPE=3 and  MRAM.ANNUAL_REGISTRATION.REPORTYEAR="+planYr+" and MRAM.ANNUAL_REGISTRATION.DIVISIONID=1\n" +
+                    "\t\tTYPE=3 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=3 and  MRAM.ANNUAL_REGISTRATION.REPORTYEAR="+planYr+" and MRAM.ANNUAL_REGISTRATION.DIVISIONID=1\n" +
                     "\n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_MIN_PLAN_9.ID\n" +
                     "\n" +
@@ -2565,7 +2565,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_MIN_PLAN_10 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_MIN_PLAN_10.PLANID\n" +
                     "\n" +
                     "WHERE\n" +
-                    "  MRAM.ANNUAL_REGISTRATION.DIVISIONID=1 and MRAM.ANNUAL_REGISTRATION.REPORTYEAR  = " + planYr + "  and (DATAINDEX=1)\n" +
+                    "  MRAM.ANNUAL_REGISTRATION.DIVISIONID=1 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=3 and MRAM.ANNUAL_REGISTRATION.REPORTYEAR  = " + planYr + "  and (DATAINDEX=1)\n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_MIN_PLAN_10.\"ID\"";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
             int rowCount = 7;
@@ -2701,7 +2701,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_MIN_PLAN_11 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_MIN_PLAN_11.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "  MRAM.ANNUAL_REGISTRATION.DIVISIONID=1 and     MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " and DATA2<>'Нийт'\n" +
+                    "  MRAM.ANNUAL_REGISTRATION.DIVISIONID=1 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=3 and     MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " and DATA2<>'Нийт'\n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_MIN_PLAN_11.ID";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
@@ -2828,7 +2828,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_MIN_PLAN_12 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_MIN_PLAN_12.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "   MRAM.ANNUAL_REGISTRATION.DIVISIONID=1 and    MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
+                    "   MRAM.ANNUAL_REGISTRATION.DIVISIONID=1 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=3 and    MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_MIN_PLAN_12.ID";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
@@ -2954,7 +2954,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_MIN_PLAN_14 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_MIN_PLAN_14.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "  MRAM.ANNUAL_REGISTRATION.DIVISIONID=1 and  MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
+                    "  MRAM.ANNUAL_REGISTRATION.DIVISIONID=1 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=3 and  MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_MIN_PLAN_14.ID";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
@@ -3072,7 +3072,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_MIN_PLAN_15 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_MIN_PLAN_15.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "   MRAM.ANNUAL_REGISTRATION.DIVISIONID=1 and    MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
+                    "   MRAM.ANNUAL_REGISTRATION.DIVISIONID=1 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=3 and    MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_MIN_PLAN_15.ID";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
@@ -3189,7 +3189,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_MIN_PLAN_16 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_MIN_PLAN_16.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = "+planYr+" and MRAM.ANNUAL_REGISTRATION.DIVISIONID=1\n" +
+                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = "+planYr+" and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=3 and MRAM.ANNUAL_REGISTRATION.DIVISIONID=1\n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_MIN_PLAN_16.ID";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
@@ -3311,7 +3311,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_MIN_PLAN_17 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_MIN_PLAN_17.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "   MRAM.ANNUAL_REGISTRATION.DIVISIONID=1 and    MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
+                    "   MRAM.ANNUAL_REGISTRATION.DIVISIONID=1 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=3 and    MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_MIN_PLAN_17.ID";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
@@ -3442,7 +3442,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_EXCEL_MINREP2 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_MINREP2.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "   MRAM.ANNUAL_REGISTRATION.DIVISIONID=1 and    MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + "\n" +
+                    "   MRAM.ANNUAL_REGISTRATION.DIVISIONID=1 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=4 and    MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + "\n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_MINREP2.ID";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
@@ -3577,7 +3577,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_EXCEL_MINREP3B ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_MINREP3B.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "    MRAM.ANNUAL_REGISTRATION.DIVISIONID=1 and   MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
+                    "    MRAM.ANNUAL_REGISTRATION.DIVISIONID=1 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=4 and   MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_MINREP3B.ID";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
@@ -3872,7 +3872,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_EXCEL_MINREP4_1 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_MINREP4_1.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "   MRAM.ANNUAL_REGISTRATION.DIVISIONID=1 and    MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
+                    "   MRAM.ANNUAL_REGISTRATION.DIVISIONID=1 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=4 and    MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_MINREP4_1.ID";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
@@ -4060,7 +4060,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_EXCEL_MINREP4_2 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_MINREP4_2.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "   MRAM.ANNUAL_REGISTRATION.DIVISIONID=1 and    MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
+                    "   MRAM.ANNUAL_REGISTRATION.DIVISIONID=1 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=4 and    MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_MINREP4_2.ID";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
@@ -4203,7 +4203,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_EXCEL_MINREP5 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_MINREP5.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "   MRAM.ANNUAL_REGISTRATION.DIVISIONID=1    MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
+                    "   MRAM.ANNUAL_REGISTRATION.DIVISIONID=1 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=4  and  MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_MINREP5.ID";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
@@ -4346,7 +4346,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_EXCEL_MINREP6_1 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_MINREP6_1.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "   MRAM.ANNUAL_REGISTRATION.DIVISIONID=1 and    MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
+                    "   MRAM.ANNUAL_REGISTRATION.DIVISIONID=1 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=4 and    MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_MINREP6_1.ID";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
@@ -4468,7 +4468,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_EXCEL_MINREP6_2 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_MINREP6_2.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "   MRAM.ANNUAL_REGISTRATION.DIVISIONID=1 and    MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
+                    "   MRAM.ANNUAL_REGISTRATION.DIVISIONID=1 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=4 and    MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_MINREP6_2.ID";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
@@ -4615,7 +4615,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_EXCEL_MINREP7 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_MINREP7.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "   MRAM.ANNUAL_REGISTRATION.DIVISIONID=1 and    MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
+                    "   MRAM.ANNUAL_REGISTRATION.DIVISIONID=1 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=4 and    MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_MINREP7.ID";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
@@ -4773,7 +4773,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_EXCEL_MINREP8_1 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_MINREP8_1.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "   MRAM.ANNUAL_REGISTRATION.DIVISIONID=1 and    MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
+                    "   MRAM.ANNUAL_REGISTRATION.DIVISIONID=1 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=4 and    MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_MINREP8_1.ID";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
@@ -4959,7 +4959,7 @@ public class ExcelGenerator {
                     "\n" +
                     "INNER JOIN MRAM.DATA_EXCEL_MINREP9 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_MINREP9.PLANID\n" +
                     "WHERE\n" +
-                    "  MRAM.ANNUAL_REGISTRATION.DIVISIONID=1 and  MRAM.ANNUAL_REGISTRATION.REPSTATUSID=1 \n" +
+                    "  MRAM.ANNUAL_REGISTRATION.DIVISIONID=1 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=4 and  MRAM.ANNUAL_REGISTRATION.REPSTATUSID=1 \n" +
                     "    and TYPE=1 and  MRAM.ANNUAL_REGISTRATION.REPORTYEAR=" + planYr + "\n" +
                     "\t  and (DATA1 is not  NULL)\n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_MINREP9.ID";
@@ -5107,7 +5107,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_EXCEL_MINREP9 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_MINREP9.PLANID\n" +
                     " \n" +
                     "WHERE\n" +
-                    "  MRAM.ANNUAL_REGISTRATION.DIVISIONID=1 and MRAM.DATA_EXCEL_MINREP9.TYPE = 2 and MRAM.ANNUAL_REGISTRATION.REPORTYEAR=" + planYr + "\n" +
+                    "  MRAM.ANNUAL_REGISTRATION.DIVISIONID=1 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=4 and MRAM.DATA_EXCEL_MINREP9.TYPE = 2 and MRAM.ANNUAL_REGISTRATION.REPORTYEAR=" + planYr + "\n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_MINREP9.ID\n" +
                     "\n" +
                     "\n";
@@ -5220,7 +5220,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_EXCEL_MINREP9 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_MINREP9.PLANID\n" +
                     " \n" +
                     "WHERE\n" +
-                    "  MRAM.ANNUAL_REGISTRATION.DIVISIONID=1 and MRAM.DATA_EXCEL_MINREP9.TYPE = 3 and MRAM.ANNUAL_REGISTRATION.REPORTYEAR=" + planYr + "\n" +
+                    "  MRAM.ANNUAL_REGISTRATION.DIVISIONID=1 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=4 and MRAM.DATA_EXCEL_MINREP9.TYPE = 3 and MRAM.ANNUAL_REGISTRATION.REPORTYEAR=" + planYr + "\n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_MINREP9.ID\n" +
                     "\n" +
                     "\n" +
@@ -5551,7 +5551,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_EXCEL_MINREP13 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_MINREP13.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "   MRAM.ANNUAL_REGISTRATION.DIVISIONID=1 and    MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
+                    "   MRAM.ANNUAL_REGISTRATION.DIVISIONID=1 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=4  and    MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_MINREP13.ID";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
@@ -5779,7 +5779,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_EXCEL_MINREP16 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_MINREP16.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "  MRAM.ANNUAL_REGISTRATION.DIVISIONID=1 and     MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
+                    "  MRAM.ANNUAL_REGISTRATION.DIVISIONID=1 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=4 and     MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_MINREP16.ID";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
@@ -5907,7 +5907,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_EXCEL_MINREP17 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_MINREP17.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "  MRAM.ANNUAL_REGISTRATION.DIVISIONID=1 and     MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
+                    "  MRAM.ANNUAL_REGISTRATION.DIVISIONID=1 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=4 and     MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_MINREP17.ID";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
@@ -6077,7 +6077,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_EXCEL_MINREP18 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_MINREP18.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "  MRAM.ANNUAL_REGISTRATION.DIVISIONID=1 and     MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
+                    "  MRAM.ANNUAL_REGISTRATION.DIVISIONID=1 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=4 and     MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_MINREP18.ID";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
@@ -6224,7 +6224,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_EXCEL_MINREP19 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_MINREP19.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "   MRAM.ANNUAL_REGISTRATION.DIVISIONID=1 and    MRAM.ANNUAL_REGISTRATION.REPORTYEAR=" + planYr + " \n" +
+                    "   MRAM.ANNUAL_REGISTRATION.DIVISIONID=1 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=4 and    MRAM.ANNUAL_REGISTRATION.REPORTYEAR=" + planYr + " \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_MINREP19.ID";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
@@ -6382,7 +6382,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.REG_REPORT_REQ on MRAM.REG_REPORT_REQ.\"ID\"=MRAM.ANNUAL_REGISTRATION.REQID \n" +
                     "INNER JOIN MRAM.DATA_EXCEL_GEOPLAN1 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_GEOPLAN1.PLANID\n" +
                     "\tWHERE\n" +
-                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
+                    "    MRAM.ANNUAL_REGISTRATION.DIVISIONID=3 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=3 and    MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_GEOPLAN1.ID";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
@@ -6510,7 +6510,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.REG_REPORT_REQ on MRAM.REG_REPORT_REQ.\"ID\"=MRAM.ANNUAL_REGISTRATION.REQID \n" +
                     "INNER JOIN MRAM.DATA_EXCEL_GEOREP1 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_GEOREP1.PLANID\n" +
                     "\tWHERE\n" +
-                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
+                    "    MRAM.ANNUAL_REGISTRATION.DIVISIONID=3 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=4 and MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_GEOREP1.ID";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
@@ -6656,7 +6656,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.REG_REPORT_REQ on MRAM.REG_REPORT_REQ.\"ID\"=MRAM.ANNUAL_REGISTRATION.REQID \n" +
                     "INNER JOIN MRAM.DATA_EXCEL_GEOREP2 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_GEOREP2.PLANID\n" +
                     "\tWHERE\n" +
-                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
+                    "  MRAM.ANNUAL_REGISTRATION.DIVISIONID=3 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=4 and    MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_GEOREP2.ID";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
@@ -6834,7 +6834,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.REG_REPORT_REQ on MRAM.REG_REPORT_REQ.\"ID\"=MRAM.ANNUAL_REGISTRATION.REQID \n" +
                     "INNER JOIN MRAM.DATA_EXCEL_GEOREP4 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_GEOREP4.PLANID\n" +
                     "\tWHERE\n" +
-                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
+                    "   MRAM.ANNUAL_REGISTRATION.DIVISIONID=3 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=4 and    MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_GEOREP4.ID";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
@@ -6955,7 +6955,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.REG_REPORT_REQ on MRAM.REG_REPORT_REQ.\"ID\"=MRAM.ANNUAL_REGISTRATION.REQID \n" +
                     "INNER JOIN MRAM.DATA_EXCEL_GEOREP5 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_GEOREP5.PLANID\n" +
                     "\tWHERE\n" +
-                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
+                    "  MRAM.ANNUAL_REGISTRATION.DIVISIONID=3 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=4 and     MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_GEOREP5.ID";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
@@ -7109,7 +7109,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.REG_REPORT_REQ on MRAM.REG_REPORT_REQ.\"ID\"=MRAM.ANNUAL_REGISTRATION.REQID \n" +
                     "INNER JOIN MRAM.DATA_EXCEL_GEOREP6 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_GEOREP6.PLANID\n" +
                     "\tWHERE\n" +
-                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
+                    "   MRAM.ANNUAL_REGISTRATION.DIVISIONID=3 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=4 and    MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_GEOREP6.ID";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
@@ -7231,7 +7231,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.REG_REPORT_REQ on MRAM.REG_REPORT_REQ.\"ID\"=MRAM.ANNUAL_REGISTRATION.REQID \n" +
                     "INNER JOIN MRAM.DATA_EXCEL_GEOREP7 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_GEOREP7.PLANID\n" +
                     "\tWHERE\n" +
-                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
+                    "   MRAM.ANNUAL_REGISTRATION.DIVISIONID=3 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=4 and    MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_GEOREP7.ID";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
@@ -7387,7 +7387,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.REG_REPORT_REQ on MRAM.REG_REPORT_REQ.\"ID\"=MRAM.ANNUAL_REGISTRATION.REQID \n" +
                     "INNER JOIN MRAM.DATA_EXCEL_GEOREP8 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_GEOREP8.PLANID\n" +
                     "\tWHERE\n" +
-                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
+                    "   MRAM.ANNUAL_REGISTRATION.DIVISIONID=3 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=4 and    MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_GEOREP8.ID";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
@@ -7511,7 +7511,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.REG_REPORT_REQ on MRAM.REG_REPORT_REQ.\"ID\"=MRAM.ANNUAL_REGISTRATION.REQID \n" +
                     "INNER JOIN MRAM.DATA_EXCEL_GEOREP9 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_GEOREP9.PLANID\n" +
                     "\tWHERE\n" +
-                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
+                    "   MRAM.ANNUAL_REGISTRATION.DIVISIONID=3 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=4 and    MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_GEOREP9.ID";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
@@ -7632,7 +7632,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.REG_REPORT_REQ on MRAM.REG_REPORT_REQ.\"ID\"=MRAM.ANNUAL_REGISTRATION.REQID \n" +
                     "INNER JOIN MRAM.DATA_EXCEL_GEOREP10 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_GEOREP10.PLANID\n" +
                     "\tWHERE\n" +
-                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
+                    "    MRAM.ANNUAL_REGISTRATION.DIVISIONID=3 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=4 and   MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_GEOREP10.ID";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
@@ -7769,7 +7769,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_COAL_FORM_1_1 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_COAL_FORM_1_1.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = "+planYr+"  and MRAM.ANNUAL_REGISTRATION.DIVISIONID=2\n" +
+                    "   MRAM.ANNUAL_REGISTRATION.REPORTTYPE=3 and   MRAM.ANNUAL_REGISTRATION.REPORTYEAR = "+planYr+"  and MRAM.ANNUAL_REGISTRATION.DIVISIONID=2\n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_COAL_FORM_1_1.ID";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
@@ -7885,7 +7885,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_COAL_FORM_2 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_COAL_FORM_2.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = "+planYr+"  and MRAM.ANNUAL_REGISTRATION.DIVISIONID=2\n" +
+                    "    MRAM.ANNUAL_REGISTRATION.REPORTTYPE=3 and    MRAM.ANNUAL_REGISTRATION.REPORTYEAR = "+planYr+"  and MRAM.ANNUAL_REGISTRATION.DIVISIONID=2\n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_COAL_FORM_2.ID";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
@@ -8049,7 +8049,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_COAL_FORM_3 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_COAL_FORM_3.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = "+planYr+"  and MRAM.ANNUAL_REGISTRATION.DIVISIONID=2\n" +
+                    "    MRAM.ANNUAL_REGISTRATION.REPORTTYPE=3 and    MRAM.ANNUAL_REGISTRATION.REPORTYEAR = "+planYr+"  and MRAM.ANNUAL_REGISTRATION.DIVISIONID=2\n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_COAL_FORM_3.ID";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
@@ -8220,7 +8220,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_COAL_FORM_4 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_COAL_FORM_4.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = "+planYr+"  and MRAM.ANNUAL_REGISTRATION.DIVISIONID=2\n" +
+                    "    MRAM.ANNUAL_REGISTRATION.REPORTTYPE=3 and    MRAM.ANNUAL_REGISTRATION.REPORTYEAR = "+planYr+"  and MRAM.ANNUAL_REGISTRATION.DIVISIONID=2\n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_COAL_FORM_4.ID";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
@@ -8445,7 +8445,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_MIN_PLAN_5 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_MIN_PLAN_5.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "   MRAM.ANNUAL_REGISTRATION.DIVISIONID=2 and    MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
+                    "  MRAM.ANNUAL_REGISTRATION.REPORTTYPE=3 and  MRAM.ANNUAL_REGISTRATION.DIVISIONID=2 and    MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_MIN_PLAN_5.ID";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
@@ -8583,7 +8583,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_MIN_PLAN_6_1 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_MIN_PLAN_6_1.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "  MRAM.ANNUAL_REGISTRATION.DIVISIONID=2 and     MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
+                    "  MRAM.ANNUAL_REGISTRATION.DIVISIONID=2 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=3 and     MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_MIN_PLAN_6_1.ID";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
@@ -8713,7 +8713,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_MIN_PLAN_6_2 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_MIN_PLAN_6_2.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "  MRAM.ANNUAL_REGISTRATION.DIVISIONID=2 and     MRAM.ANNUAL_REGISTRATION.REPORTYEAR = "+planYr+" \n" +
+                    "  MRAM.ANNUAL_REGISTRATION.DIVISIONID=2 and  MRAM.ANNUAL_REGISTRATION.REPORTTYPE=3 and    MRAM.ANNUAL_REGISTRATION.REPORTYEAR = "+planYr+" \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_MIN_PLAN_6_2.ID";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
@@ -8848,7 +8848,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_MIN_PLAN_7 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_MIN_PLAN_7.PLANID\n" +
                     "\n" +
                     "WHERE\n" +
-                    " MRAM.ANNUAL_REGISTRATION.DIVISIONID=2 and  MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
+                    " MRAM.ANNUAL_REGISTRATION.DIVISIONID=2 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=3 and  MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_MIN_PLAN_7.\"ID\"";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
             int rowCount = 7;
@@ -9031,7 +9031,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_MIN_PLAN_8 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_MIN_PLAN_8.PLANID\n" +
                     "\n" +
                     "WHERE\n" +
-                    " MRAM.ANNUAL_REGISTRATION.DIVISIONID=2 and  MRAM.ANNUAL_REGISTRATION.REPORTYEAR=" + planYr + "\n" +
+                    " MRAM.ANNUAL_REGISTRATION.DIVISIONID=2 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=3 and  MRAM.ANNUAL_REGISTRATION.REPORTYEAR=" + planYr + "\n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_MIN_PLAN_8.\"ID\"";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
             int rowCount = 7;
@@ -9192,7 +9192,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_MIN_PLAN_9 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_MIN_PLAN_9.PLANID\n" +
                     "WHERE\n" +
                     " \n" +
-                    "\t\tTYPE=1 and  MRAM.ANNUAL_REGISTRATION.REPORTYEAR="+planYr+" and MRAM.ANNUAL_REGISTRATION.DIVISIONID=2\n" +
+                    "\t\tTYPE=1 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=3 and  MRAM.ANNUAL_REGISTRATION.REPORTYEAR="+planYr+" and MRAM.ANNUAL_REGISTRATION.DIVISIONID=2\n" +
                     "\n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_MIN_PLAN_9.ID";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
@@ -9323,7 +9323,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_MIN_PLAN_9 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_MIN_PLAN_9.PLANID\n" +
                     "WHERE\n" +
                     " \n" +
-                    "\t\tTYPE=2 and  MRAM.ANNUAL_REGISTRATION.REPORTYEAR="+planYr+" and MRAM.ANNUAL_REGISTRATION.DIVISIONID=2\n" +
+                    "\t\tTYPE=2 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=3 and  MRAM.ANNUAL_REGISTRATION.REPORTYEAR="+planYr+" and MRAM.ANNUAL_REGISTRATION.DIVISIONID=2\n" +
                     "\n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_MIN_PLAN_9.ID\n" +
                     "\n" +
@@ -9436,7 +9436,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_MIN_PLAN_9 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_MIN_PLAN_9.PLANID\n" +
                     "WHERE\n" +
                     " \n" +
-                    "\t\tTYPE=3 and  MRAM.ANNUAL_REGISTRATION.REPORTYEAR="+planYr+" and MRAM.ANNUAL_REGISTRATION.DIVISIONID=2\n" +
+                    "\t\tTYPE=3 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=3 and  MRAM.ANNUAL_REGISTRATION.REPORTYEAR="+planYr+" and MRAM.ANNUAL_REGISTRATION.DIVISIONID=2\n" +
                     "\n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_MIN_PLAN_9.ID\n" +
                     "\n" +
@@ -9566,7 +9566,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_MIN_PLAN_10 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_MIN_PLAN_10.PLANID\n" +
                     "\n" +
                     "WHERE\n" +
-                    "  MRAM.ANNUAL_REGISTRATION.DIVISIONID=2 and MRAM.ANNUAL_REGISTRATION.REPORTYEAR  = " + planYr + "  and (DATAINDEX=1)\n" +
+                    "  MRAM.ANNUAL_REGISTRATION.DIVISIONID=2 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=3 and MRAM.ANNUAL_REGISTRATION.REPORTYEAR  = " + planYr + "  and (DATAINDEX=1)\n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_MIN_PLAN_10.\"ID\"";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
             int rowCount = 7;
@@ -9702,7 +9702,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_MIN_PLAN_11 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_MIN_PLAN_11.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "  MRAM.ANNUAL_REGISTRATION.DIVISIONID=2 and     MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " and DATA2<>'Нийт'\n" +
+                    "  MRAM.ANNUAL_REGISTRATION.DIVISIONID=2 and  MRAM.ANNUAL_REGISTRATION.REPORTTYPE=3 and    MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " and DATA2<>'Нийт'\n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_MIN_PLAN_11.ID";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
@@ -9829,7 +9829,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_MIN_PLAN_12 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_MIN_PLAN_12.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "   MRAM.ANNUAL_REGISTRATION.DIVISIONID=2 and    MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
+                    "   MRAM.ANNUAL_REGISTRATION.DIVISIONID=2 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=3 and    MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_MIN_PLAN_12.ID";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
@@ -9955,7 +9955,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_MIN_PLAN_14 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_MIN_PLAN_14.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "  MRAM.ANNUAL_REGISTRATION.DIVISIONID=2 and  MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
+                    "  MRAM.ANNUAL_REGISTRATION.DIVISIONID=2 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=3 and  MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_MIN_PLAN_14.ID";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
@@ -10073,7 +10073,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_MIN_PLAN_15 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_MIN_PLAN_15.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "   MRAM.ANNUAL_REGISTRATION.DIVISIONID=2 and    MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
+                    "   MRAM.ANNUAL_REGISTRATION.DIVISIONID=2 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=3 and    MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_MIN_PLAN_15.ID";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
@@ -10190,7 +10190,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_MIN_PLAN_16 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_MIN_PLAN_16.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = "+planYr+" and MRAM.ANNUAL_REGISTRATION.DIVISIONID=2\n" +
+                    "    MRAM.ANNUAL_REGISTRATION.REPORTTYPE=3 and    MRAM.ANNUAL_REGISTRATION.REPORTYEAR = "+planYr+" and MRAM.ANNUAL_REGISTRATION.DIVISIONID=2\n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_MIN_PLAN_16.ID";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
@@ -10313,7 +10313,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_MIN_PLAN_17 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_MIN_PLAN_17.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "   MRAM.ANNUAL_REGISTRATION.DIVISIONID=2 and    MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
+                    "   MRAM.ANNUAL_REGISTRATION.DIVISIONID=2 and  MRAM.ANNUAL_REGISTRATION.REPORTTYPE=3 and   MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_MIN_PLAN_17.ID";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
@@ -10443,7 +10443,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_EXCEL_COALREP2 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_COALREP2.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = "+planYr+" and MRAM.ANNUAL_REGISTRATION.DIVISIONID=2\n" +
+                    "    MRAM.ANNUAL_REGISTRATION.REPORTTYPE=4 and    MRAM.ANNUAL_REGISTRATION.REPORTYEAR = "+planYr+" and MRAM.ANNUAL_REGISTRATION.DIVISIONID=2\n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_COALREP2.ID";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
@@ -10541,7 +10541,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_EXCEL_COALREP2_1 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_COALREP2_1.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = "+planYr+" and MRAM.ANNUAL_REGISTRATION.DIVISIONID=2\n" +
+                    "    MRAM.ANNUAL_REGISTRATION.REPORTTYPE=4 and   MRAM.ANNUAL_REGISTRATION.REPORTYEAR = "+planYr+" and MRAM.ANNUAL_REGISTRATION.DIVISIONID=2\n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_COALREP2_1.ID";
             List<Object[]> objectSheets = dao.getNativeSQLResult(queryStr2, "list");
@@ -10661,7 +10661,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_EXCEL_COALREP3 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_COALREP3.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = "+planYr+" and MRAM.ANNUAL_REGISTRATION.DIVISIONID=2 and DATA1 not like 'ЖИЧ:  Тухайн оны нөөцийг ашиглалтын тусгай зөвшөөрөл бүрээр гаргаж ирүүлнэ.'\n" +
+                    "   MRAM.ANNUAL_REGISTRATION.REPORTTYPE=4 and     MRAM.ANNUAL_REGISTRATION.REPORTYEAR = "+planYr+" and MRAM.ANNUAL_REGISTRATION.DIVISIONID=2 and DATA1 not like 'ЖИЧ:  Тухайн оны нөөцийг ашиглалтын тусгай зөвшөөрөл бүрээр гаргаж ирүүлнэ.'\n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_COALREP3.ID";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
@@ -10831,7 +10831,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_EXCEL_COALREP4 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_COALREP4.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = "+planYr+" and MRAM.ANNUAL_REGISTRATION.DIVISIONID=2\n" +
+                    "   MRAM.ANNUAL_REGISTRATION.REPORTTYPE=4 and     MRAM.ANNUAL_REGISTRATION.REPORTYEAR = "+planYr+" and MRAM.ANNUAL_REGISTRATION.DIVISIONID=2\n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_COALREP4.ID";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
@@ -11004,7 +11004,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_EXCEL_COALREP5 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_COALREP5.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "   MRAM.ANNUAL_REGISTRATION.DIVISIONID=2 and    MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
+                    "   MRAM.ANNUAL_REGISTRATION.DIVISIONID=2 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=4 and    MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_COALREP5.ID";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
@@ -11147,7 +11147,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_EXCEL_COALREP6_1 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_COALREP6_1.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "   MRAM.ANNUAL_REGISTRATION.DIVISIONID=2 and    MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
+                    "   MRAM.ANNUAL_REGISTRATION.DIVISIONID=2 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=4 and    MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_COALREP6_1.ID";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
@@ -11269,7 +11269,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_EXCEL_COALREP6_2 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_COALREP6_2.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "   MRAM.ANNUAL_REGISTRATION.DIVISIONID=2 and    MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
+                    "   MRAM.ANNUAL_REGISTRATION.DIVISIONID=2 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=4 and    MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_COALREP6_2.ID";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
@@ -11416,7 +11416,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_EXCEL_COALREP7 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_COALREP7.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "   MRAM.ANNUAL_REGISTRATION.DIVISIONID=2 and    MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
+                    "   MRAM.ANNUAL_REGISTRATION.DIVISIONID=2 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=4 and    MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_COALREP7.ID";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
@@ -11575,7 +11575,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_EXCEL_COALREP8 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_COALREP8.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "       MRAM.ANNUAL_REGISTRATION.REPORTYEAR = "+planYr+" and MRAM.ANNUAL_REGISTRATION.DIVISIONID=2\n" +
+                    "   MRAM.ANNUAL_REGISTRATION.REPORTTYPE=4 and     MRAM.ANNUAL_REGISTRATION.REPORTYEAR = "+planYr+" and MRAM.ANNUAL_REGISTRATION.DIVISIONID=2\n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_COALREP8.ID";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
@@ -11740,7 +11740,7 @@ public class ExcelGenerator {
                     "\n" +
                     "INNER JOIN MRAM.DATA_EXCEL_COALREP9 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_COALREP9.PLANID\n" +
                     "WHERE\n" +
-                    "  MRAM.ANNUAL_REGISTRATION.DIVISIONID=2 and  MRAM.ANNUAL_REGISTRATION.REPSTATUSID=1 \n" +
+                    "  MRAM.ANNUAL_REGISTRATION.DIVISIONID=2 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=4 and  MRAM.ANNUAL_REGISTRATION.REPSTATUSID=1 \n" +
                     "    and TYPE=1 and  MRAM.ANNUAL_REGISTRATION.REPORTYEAR=" + planYr + "\n" +
                     "\t  and (DATA1 is not  NULL)\n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_COALREP9.ID";
@@ -11888,7 +11888,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_EXCEL_COALREP9 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_COALREP9.PLANID\n" +
                     " \n" +
                     "WHERE\n" +
-                    "  MRAM.ANNUAL_REGISTRATION.DIVISIONID=2 and MRAM.DATA_EXCEL_COALREP9.TYPE = 2 and MRAM.ANNUAL_REGISTRATION.REPORTYEAR=" + planYr + "\n" +
+                    "  MRAM.ANNUAL_REGISTRATION.DIVISIONID=2 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=4 and  MRAM.DATA_EXCEL_COALREP9.TYPE = 2 and MRAM.ANNUAL_REGISTRATION.REPORTYEAR=" + planYr + "\n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_COALREP9.ID\n" +
                     "\n" +
                     "\n";
@@ -12001,7 +12001,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_EXCEL_COALREP9 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_COALREP9.PLANID\n" +
                     " \n" +
                     "WHERE\n" +
-                    "  MRAM.ANNUAL_REGISTRATION.DIVISIONID=2 and MRAM.DATA_EXCEL_COALREP9.TYPE = 3 and MRAM.ANNUAL_REGISTRATION.REPORTYEAR=" + planYr + "\n" +
+                    "  MRAM.ANNUAL_REGISTRATION.DIVISIONID=2 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=4 and  MRAM.DATA_EXCEL_COALREP9.TYPE = 3 and MRAM.ANNUAL_REGISTRATION.REPORTYEAR=" + planYr + "\n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_COALREP9.ID\n" +
                     "\n" +
                     "\n" +
@@ -12332,7 +12332,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_EXCEL_COALREP13 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_COALREP13.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "   MRAM.ANNUAL_REGISTRATION.DIVISIONID=2 and    MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
+                    "   MRAM.ANNUAL_REGISTRATION.DIVISIONID=2 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=4 and    MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_COALREP13.ID";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
@@ -12395,6 +12395,115 @@ public class ExcelGenerator {
                 rowCount++;
             }
         }
+        if (reportType == 6 && formId == 14) {
+            FileInputStream fis = null;
+            File files = new File(appPath + "assets/reporttemplate/miningRep14.xlsx");
+            fis = new FileInputStream(files);
+            workbook = new XSSFWorkbook(fis);
+
+            CellStyle cellStyle = workbook.createCellStyle();
+            cellStyle.setBorderBottom((short) 1);
+            cellStyle.setBorderLeft((short) 1);
+            cellStyle.setBorderRight((short) 1);
+            cellStyle.setBorderTop((short) 1);
+            cellStyle.setWrapText(true);
+            cellStyle.setAlignment(cellStyle.ALIGN_CENTER);
+            cellStyle.setVerticalAlignment(cellStyle.VERTICAL_CENTER);
+
+            Sheet sheet = workbook.getSheetAt(0);
+            Row row = sheet.getRow(1);
+            Cell cell = row.createCell(2);
+            cell.setCellValue(planYr);
+            //Row row1 = sheet.getRow(2);
+            Cell cel2 = row.createCell(7);
+            cel2.setCellValue(DateToStr1);
+            String sqlQuery = "SELECT A .LPNAME, A .LP_REG, A .LICENSEXB,(SELECT S.STATUSNAMEMON FROM LUT_APPSTATUS S WHERE S.STATUSID = A .REPSTATUSID AND ROWNUM = 1),(SELECT REQ.ADD_BUNLICENSENUM FROM REG_REPORT_REQ REQ WHERE REQ. ID = A .REQID AND ROWNUM = 1),(SELECT M .MINERALNAMEMON FROM LUT_MINERALS M WHERE M .MINERALID = A .MINID AND ROWNUM = 1),(SELECT D .DEPOSITNAMEMON FROM LUT_DEPOSIT D WHERE D .DEPOSITID = A .DEPOSITID AND ROWNUM = 1),(SELECT SUB_LICENSES.LOCATIONAIMAG FROM SUB_LICENSES WHERE SUB_LICENSES.LICENSEXM = A .LICENSEXB AND ROWNUM = 1),(SELECT SUB_LICENSES.LOCATIONSOUM FROM SUB_LICENSES WHERE SUB_LICENSES.LICENSEXM = A .LICENSEXB AND ROWNUM = 1),(SELECT SUB_LICENSES.AREANAMEMON FROM SUB_LICENSES WHERE SUB_LICENSES.LICENSEXM = A .LICENSEXB AND ROWNUM = 1),(SELECT SUB_LICENSES.AREASIZE FROM SUB_LICENSES WHERE SUB_LICENSES.LICENSEXM = A .LICENSEXB AND ROWNUM = 1),";
+
+            for(int i=1;i<=24;i++){
+                sqlQuery = sqlQuery + "(SELECT D.DATA4 FROM DATA_EXCEL_COALREP14 D WHERE D.PLANID = A .ID AND D.ORDERNUMBER = " + i + " AND ROWNUM = 1),";
+                sqlQuery = sqlQuery + "(SELECT D.DATA5 FROM DATA_EXCEL_COALREP14 D WHERE D.PLANID = A .ID AND D.ORDERNUMBER = " + i + " AND ROWNUM = 1),";
+            }
+
+            sqlQuery = sqlQuery.substring(0,sqlQuery.length()-1);
+
+            sqlQuery = sqlQuery + " FROM ANNUAL_REGISTRATION A WHERE A .ISTODOTGOL = 0 AND A .REPSTATUSID IN (1, 2, 7) AND A .REPORTTYPE = 4 AND A .REPORTYEAR = " + planYr + " AND A .DIVISIONID = 2 ORDER BY A .LPNAME ASC";
+
+            List<Object[]> resultObj = dao.getNativeSQLResult(sqlQuery, "list");
+            CellStyle style = workbook.createCellStyle();
+            style.setBorderBottom(HSSFCellStyle.BORDER_THIN);
+            style.setBorderTop(HSSFCellStyle.BORDER_THIN);
+            style.setBorderRight(HSSFCellStyle.BORDER_THIN);
+            style.setBorderLeft(HSSFCellStyle.BORDER_THIN);
+            style.setWrapText(true);
+            if (resultObj != null && resultObj.size() > 0) {
+                for (int iterator = 0; iterator < resultObj.size(); iterator++) {
+                    Object[] o = resultObj.get(iterator);
+                    setCellData(sheet, iterator + 6, 0, iterator + 1, style, "number");
+                    for (int cellIterator = 1; cellIterator < o.length; cellIterator++) {
+                        if (o[cellIterator] instanceof String) {
+                            setCellData(sheet, iterator + 6, cellIterator, o[cellIterator], style, "string");
+                        } else {
+                            setCellData(sheet, iterator + 6, cellIterator, o[cellIterator], style, "float");
+                        }
+                    }
+                }
+            }
+        }
+        if (reportType == 6 && formId == 15) {
+            FileInputStream fis = null;
+            File files = new File(appPath + "assets/reporttemplate/miningRep15.xlsx");
+            fis = new FileInputStream(files);
+            workbook = new XSSFWorkbook(fis);
+
+            CellStyle cellStyle = workbook.createCellStyle();
+            cellStyle.setBorderBottom((short) 1);
+            cellStyle.setBorderLeft((short) 1);
+            cellStyle.setBorderRight((short) 1);
+            cellStyle.setBorderTop((short) 1);
+            cellStyle.setWrapText(true);
+            cellStyle.setAlignment(cellStyle.ALIGN_CENTER);
+            cellStyle.setVerticalAlignment(cellStyle.VERTICAL_CENTER);
+
+            Sheet sheet = workbook.getSheetAt(0);
+            Row row = sheet.getRow(1);
+            Cell cell = row.createCell(2);
+            cell.setCellValue(planYr);
+            //Row row1 = sheet.getRow(2);
+            Cell cel2 = row.createCell(7);
+            cel2.setCellValue(DateToStr1);
+            String sqlQuery = "SELECT A .LPNAME, A .LP_REG, A .LICENSEXB,(SELECT S.STATUSNAMEMON FROM LUT_APPSTATUS S WHERE S.STATUSID = A .REPSTATUSID AND ROWNUM = 1),(SELECT REQ.ADD_BUNLICENSENUM FROM REG_REPORT_REQ REQ WHERE REQ. ID = A .REQID AND ROWNUM = 1),(SELECT M .MINERALNAMEMON FROM LUT_MINERALS M WHERE M .MINERALID = A .MINID AND ROWNUM = 1),(SELECT D .DEPOSITNAMEMON FROM LUT_DEPOSIT D WHERE D .DEPOSITID = A .DEPOSITID AND ROWNUM = 1),(SELECT SUB_LICENSES.LOCATIONAIMAG FROM SUB_LICENSES WHERE SUB_LICENSES.LICENSEXM = A .LICENSEXB AND ROWNUM = 1),(SELECT SUB_LICENSES.LOCATIONSOUM FROM SUB_LICENSES WHERE SUB_LICENSES.LICENSEXM = A .LICENSEXB AND ROWNUM = 1),(SELECT SUB_LICENSES.AREANAMEMON FROM SUB_LICENSES WHERE SUB_LICENSES.LICENSEXM = A .LICENSEXB AND ROWNUM = 1),(SELECT SUB_LICENSES.AREASIZE FROM SUB_LICENSES WHERE SUB_LICENSES.LICENSEXM = A .LICENSEXB AND ROWNUM = 1),";
+
+            for(int i=1;i<=26;i++){
+                sqlQuery = sqlQuery + "(SELECT D.DATA4 FROM DATA_EXCEL_COALREP15 D WHERE D.PLANID = A .ID AND D.ORDERNUMBER = " + i + " AND ROWNUM = 1),";
+                sqlQuery = sqlQuery + "(SELECT D.DATA5 FROM DATA_EXCEL_COALREP15 D WHERE D.PLANID = A .ID AND D.ORDERNUMBER = " + i + " AND ROWNUM = 1),";
+            }
+
+            sqlQuery = sqlQuery.substring(0,sqlQuery.length()-1);
+
+            sqlQuery = sqlQuery + " FROM ANNUAL_REGISTRATION A WHERE A .ISTODOTGOL = 0 AND A .REPSTATUSID IN (1, 2, 7) AND A .REPORTTYPE = 4 AND A .REPORTYEAR = " + planYr + " AND A .DIVISIONID = 2 ORDER BY A .LPNAME ASC";
+
+            List<Object[]> resultObj = dao.getNativeSQLResult(sqlQuery, "list");
+            CellStyle style = workbook.createCellStyle();
+            style.setBorderBottom(HSSFCellStyle.BORDER_THIN);
+            style.setBorderTop(HSSFCellStyle.BORDER_THIN);
+            style.setBorderRight(HSSFCellStyle.BORDER_THIN);
+            style.setBorderLeft(HSSFCellStyle.BORDER_THIN);
+            style.setWrapText(true);
+            if (resultObj != null && resultObj.size() > 0) {
+                for (int iterator = 0; iterator < resultObj.size(); iterator++) {
+                    Object[] o = resultObj.get(iterator);
+                    setCellData(sheet, iterator + 6, 0, iterator + 1, style, "number");
+                    for (int cellIterator = 1; cellIterator < o.length; cellIterator++) {
+                        if (o[cellIterator] instanceof String) {
+                            setCellData(sheet, iterator + 6, cellIterator, o[cellIterator], style, "string");
+                        } else {
+                            setCellData(sheet, iterator + 6, cellIterator, o[cellIterator], style, "float");
+                        }
+                    }
+                }
+            }
+        }
+
         if (reportType == 6 && formId == 16) {
             FileInputStream fis = null;
             File files = new File(appPath + "/assets/excel/plan/Mining_Report_16.xlsx");
@@ -12451,7 +12560,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_EXCEL_COALREP16 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_COALREP16.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "  MRAM.ANNUAL_REGISTRATION.DIVISIONID=2 and     MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
+                    "  MRAM.ANNUAL_REGISTRATION.DIVISIONID=2 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=4 and     MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_COALREP16.ID";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
@@ -12579,7 +12688,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_EXCEL_COALREP17 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_COALREP17.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "  MRAM.ANNUAL_REGISTRATION.DIVISIONID=2 and     MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
+                    "  MRAM.ANNUAL_REGISTRATION.DIVISIONID=2 and  MRAM.ANNUAL_REGISTRATION.REPORTTYPE=4 and    MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_COALREP17.ID";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
@@ -12729,7 +12838,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_EXCEL_COALREP18 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_COALREP18.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "  MRAM.ANNUAL_REGISTRATION.DIVISIONID=2 and     MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
+                    "  MRAM.ANNUAL_REGISTRATION.DIVISIONID=2 and  MRAM.ANNUAL_REGISTRATION.REPORTTYPE=4 and    MRAM.ANNUAL_REGISTRATION.REPORTYEAR = " + planYr + " \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_COALREP18.ID";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
@@ -12876,7 +12985,7 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.DATA_EXCEL_COALREP19 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_COALREP19.PLANID\n" +
                     "\n" +
                     "\tWHERE\n" +
-                    "   MRAM.ANNUAL_REGISTRATION.DIVISIONID=2 and    MRAM.ANNUAL_REGISTRATION.REPORTYEAR=" + planYr + " \n" +
+                    "   MRAM.ANNUAL_REGISTRATION.DIVISIONID=2 and  MRAM.ANNUAL_REGISTRATION.REPORTTYPE=4 and   MRAM.ANNUAL_REGISTRATION.REPORTYEAR=" + planYr + " \n" +
                     "\t\t\t \n" +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_COALREP19.ID";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
