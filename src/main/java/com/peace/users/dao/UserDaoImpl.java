@@ -54,6 +54,7 @@ public class UserDaoImpl implements UserDao {
     public List<Object[]> getNativeSQLResult(String queryStr, String type) {
         try {
             if ("list".equals(type)) {
+                System.out.println("native query"+queryStr);
                 Query query = sessionFactory.getCurrentSession().createSQLQuery(queryStr);
                 try {
                     return query.list();
