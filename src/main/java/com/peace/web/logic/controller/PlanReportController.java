@@ -6394,7 +6394,7 @@ public class PlanReportController {
 			an.setApproveddate(special);
 			dao.PeaceCrud(an, "AnnualRegistration", "save", (long) obj.getLong("appid"), 0, 0, null);
 
-			if(obj.getInt("appstatus")==2 && an.getSubLegalpersons().getKEYMANEMAIL()!=null){
+		/*	if(obj.getInt("appstatus")==2 && an.getSubLegalpersons().getKEYMANEMAIL()!=null){
 
 				LutUsers res=(LutUsers) dao.getHQLResult("from LutUsers t where t.username='"+an.getSubLegalpersons().getLpReg()+"'", "current");
 
@@ -6419,7 +6419,7 @@ public class PlanReportController {
 				catch(Exception e){
 					e.printStackTrace();
 				}
-			}
+			}*/
 
 
 
