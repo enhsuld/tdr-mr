@@ -1827,6 +1827,9 @@ public class MainController {
 					if (id == 1){
 						JSONArray xreportsArray = new JSONArray();
 						for(int reporttype=3;reporttype<=4;reporttype++){
+							if(reporttype==4){
+								planYr=planYr-1;
+							}
 							JSONArray repstepArray = new JSONArray();
 							for(int repstep=1;repstep<=6;repstep++){
 								List<Long> ars= (List<Long>) dao.getHQLResult("select count(*) from AnnualRegistration t where t.reportyear="+planYr+" and t.istodotgol = 0 and t.repstatusid = 7 and t.xtype != 0 and t.divisionid = " + currentUser.getDivisionid() + " and t.repstepid =" + repstep + " and t.reporttype = " + reporttype + " and t.lictype!=1 " + ((currentUser.getDivisionid() == 1) ? " and t.minid != 5 " : (currentUser.getDivisionid() == 5) ? " and t.minid = 5" : ""), "list");
@@ -1878,6 +1881,9 @@ public class MainController {
 					else if (id == 2){
 						List<Object[]> deposits = (List<Object[]>) dao.getHQLResult("select d.depositnamemon, d.depositid from LutDeposit d where " + ((currentUser.getDivisionid() == 1) ? "  d.mineralsid != 5 " : (currentUser.getDivisionid() == 2) ? " d.mineralsid = 5" : ""), "list");
 						for(int reporttype=3;reporttype<=4;reporttype++){
+							if(reporttype==4){
+								planYr=planYr-1;
+							}
 							List<Object[]> ars = (List<Object[]>) dao.getHQLResult("select d.depositnamemon, d.depositid, count(t.depositid) from AnnualRegistration t, LutDeposit d where t.reportyear="+planYr+" and  t.istodotgol = 0  and t.reporttype = "+reporttype+" and d.depositid=t.depositid and t.repstatusid in (1,2,7) and t.xtype != 0 and t.divisionid = " + currentUser.getDivisionid() + " and t.lictype!=1 " + ((currentUser.getDivisionid() == 1) ? " and t.minid != 5 " : (currentUser.getDivisionid() == 2) ? " and t.minid = 5" : "") + ((currentUser.getDivisionid() == 1) ? " and d.mineralsid != 5 " : (currentUser.getDivisionid() == 2) ? " and d.mineralsid = 5" : "") + " group by d.depositnamemon, d.depositid", "list");
 							JSONArray repsarrayall = new JSONArray();
 							
@@ -1921,10 +1927,10 @@ public class MainController {
                         int reportgeo1 = 0, plangeo1 = 0, plangeo = 0,reportgeo = 0;
                         List<AnnualRegistration> ars = null;
                         if (currentUser.getDivisionid() == 1){
-                            ars= (List<AnnualRegistration>) dao.getHQLResult("from AnnualRegistration where reportyear="+planYr+" and istodotgol = 0 and repstatusid != 0 and DIVISIONID = 3 and LICENSEXB like '%MV-%' and xtype != 0 and minid != 5","list");
+                            ars= (List<AnnualRegistration>) dao.getHQLResult("from AnnualRegistration where istodotgol = 0 and repstatusid != 0 and DIVISIONID = 3 and LICENSEXB like '%MV-%' and xtype != 0 and minid != 5","list");
                         }
 					    else if (currentUser.getDivisionid() == 2){
-                            ars= (List<AnnualRegistration>) dao.getHQLResult("from AnnualRegistration where reportyear="+planYr+" and istodotgol = 0 and repstatusid != 0 and DIVISIONID = 3 and LICENSEXB like '%MV-%' and xtype != 0 and minid = 5","list");
+                            ars= (List<AnnualRegistration>) dao.getHQLResult("from AnnualRegistration where istodotgol = 0 and repstatusid != 0 and DIVISIONID = 3 and LICENSEXB like '%MV-%' and xtype != 0 and minid = 5","list");
                         }
                         for(AnnualRegistration a : ars){
                             if (a.getReporttype() == 3){
@@ -1933,7 +1939,7 @@ public class MainController {
                                 }
                                 plangeo++;
                             }
-                            else if (a.getReporttype() == 4){
+                            else if (a.getReporttype() == 4 && Integer.parseInt(a.getReportyear())==(planYr-1)){
                                 if (a.getRepstatusid() == 1){
                                     reportgeo1++;
                                 }
