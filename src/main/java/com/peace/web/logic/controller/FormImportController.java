@@ -5,10 +5,7 @@ import java.net.URLEncoder;
 import java.sql.Clob;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -674,8 +671,10 @@ public class FormImportController {
 					UserDetails userDetail = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 					LutUsers loguser=(LutUsers) dao.getHQLResult("from LutUsers t where t.username='"+userDetail.getUsername()+"'", "current");
 					AnnualRegistration an=(AnnualRegistration) dao.getHQLResult("from AnnualRegistration t where t.id='"+plan+"'", "current");
-					List<LnkPlanAttachedFiles> rs=(List<LnkPlanAttachedFiles>) dao.getHQLResult("from LnkPlanAttachedFiles t ", "list");;
+				//	List<LnkPlanAttachedFiles> rs=(List<LnkPlanAttachedFiles>) dao.getHQLResult("from LnkPlanAttachedFiles t ", "list");;
 
+					Random rand = new Random();
+					int rs = rand.nextInt(500000);
 
 					String path = appPath + File.separator + SAVE_DIR+ File.separator  +loguser.getLpreg()+ File.separator +special;
 
@@ -685,7 +684,7 @@ public class FormImportController {
 					}
 
 
-					String fpath = path + File.separator +"("+rs.size()+")"+mfile.getOriginalFilename();
+					String fpath = path + File.separator +"("+rs+")"+mfile.getOriginalFilename();
 					File logoorgpath = new File(fpath);
 
 					if(!logoorgpath.exists()){
@@ -695,7 +694,7 @@ public class FormImportController {
 						result.put("status", false);
 					}
 					
-					String path1 = File.separator + SAVE_DIR+ File.separator +loguser.getLpreg()+ File.separator +special+ File.separator +"("+rs.size()+")"+mfile.getOriginalFilename();
+					String path1 = File.separator + SAVE_DIR+ File.separator +loguser.getLpreg()+ File.separator +special+ File.separator +"("+rs+")"+mfile.getOriginalFilename();
 					FileInputStream fis = new FileInputStream(logoorgpath);
 					String ext = FilenameUtils.getExtension(path1);
 					if (ext.equalsIgnoreCase("xlsm") && an != null){
