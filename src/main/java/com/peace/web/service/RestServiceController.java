@@ -1,6 +1,9 @@
 package com.peace.web.service;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -19,7 +22,11 @@ import java.util.Set;
 //import javax.management.relation.Role;
 import javax.servlet.http.HttpServletRequest;
 
+import com.peace.users.model.mram.*;
 import org.apache.log4j.Logger;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -64,16 +71,6 @@ import com.google.gson.JsonSyntaxException;
 import com.peace.users.model.DataSourceResult;
 import com.peace.users.dao.FileBean;
 import com.peace.users.dao.UserDao;
-import com.peace.users.model.mram.DataTezuMail;
-import com.peace.users.model.mram.LutUsers;
-import com.peace.users.model.mram.LutWeeks;
-import com.peace.users.model.mram.RegWeeklyMontly;
-import com.peace.users.model.mram.SubAddLpInfo;
-import com.peace.users.model.mram.SubLegalpersons;
-import com.peace.users.model.mram.SubLicenses;
-import com.peace.users.model.mram.HelpCategory;
-import com.peace.users.model.mram.HelpData;
-import com.peace.users.model.mram.WeeklyRegistration;
 import com.peace.users.service.MyUserDetailsService;
 
 
@@ -137,7 +134,92 @@ public class RestServiceController {
         
         return new ResponseEntity<String>("true",HttpStatus.OK);
     }
-	
+
+
+	@RequestMapping(value = "/source/{typeId}", method = RequestMethod.GET)
+	public ResponseEntity<String> updateSource(@PathVariable("typeId") int typeId, HttpServletRequest req) throws ClassNotFoundException, ParseException, JsonSyntaxException, IOException {
+
+		if(typeId==0){
+			List<AnnualRegistration> objects = (List<AnnualRegistration>) dao.getHQLResult("from AnnualRegistration where divisionid=1 and REPORTTYPE=4 and reportyear=2019", "list");
+			for(AnnualRegistration item :objects){
+				int noteId=0;
+				if (item.getLictype() == 2){
+					noteId = 80;
+				}
+				else if (item.getLictype() == 3){
+					noteId = 556;
+				}
+				LnkPlanAttachedFiles att= (LnkPlanAttachedFiles) dao.getHQLResult("from LnkPlanAttachedFiles where expid="+item.getId()+" and noteid="+noteId+" ", "current");
+				if(att!=null){
+					FileInputStream fis = null;
+					Workbook workbook = null;
+					String appPath = req.getSession().getServletContext().getRealPath("");
+					File files = new File(appPath + att.getAttachfiletype());
+					if(files.exists()){
+						fis = new FileInputStream(files);
+						workbook = new XSSFWorkbook(fis);
+						Sheet sht=workbook.getSheet("Form-6-1");
+
+						String sourceE="";
+						String sourceW="";
+						if(item.getLictype() == 2){
+							sourceE=sht.getRow(9).getCell(2).getStringCellValue();
+						}
+						if(item.getLictype() == 3){
+							sourceW=sht.getRow(9).getCell(2).getStringCellValue();
+						}
+						item.setSourceE(sourceE);
+						item.setSourceW(sourceW);
+
+						dao.PeaceCrud(item, "AnnualRegistration", "update", (long) item.getId(), 0, 0, null);
+					}
+				}
+			}
+		}
+
+		if(typeId==1){
+			List<AnnualRegistration> objects = (List<AnnualRegistration>) dao.getHQLResult("from AnnualRegistration where divisionid=1 and REPORTTYPE=4 and reportyear=2019", "list");
+			for(AnnualRegistration item :objects){
+				int noteId=0;
+				if (item.getLictype() == 2){
+					noteId = 396;
+				}
+				else if (item.getLictype() == 3){
+					noteId = 555;
+				}
+
+				LnkPlanAttachedFiles att= (LnkPlanAttachedFiles) dao.getHQLResult("from LnkPlanAttachedFiles where expid="+item.getId()+" and noteid="+noteId+" ", "current");
+				if(att!=null){
+					FileInputStream fis = null;
+					Workbook workbook = null;
+					String appPath = req.getSession().getServletContext().getRealPath("");
+					File files = new File(appPath + att.getAttachfiletype());
+					if(files.exists()){
+						fis = new FileInputStream(files);
+						workbook = new XSSFWorkbook(fis);
+						Sheet sht=workbook.getSheet("Form-6-2");
+
+						String sourceE="";
+						String sourceW="";
+						if(item.getLictype() == 2){
+							sourceE=sht.getRow(8).getCell(2).getStringCellValue();
+						}
+						if(item.getLictype() == 3){
+							sourceW=sht.getRow(8).getCell(2).getStringCellValue();
+						}
+						item.setSourceE(sourceE);
+						item.setSourceW(sourceW);
+
+						dao.PeaceCrud(item, "AnnualRegistration", "update", (long) item.getId(), 0, 0, null);
+					}
+				}
+			}
+		}
+
+		return new ResponseEntity<String>("true",HttpStatus.OK);
+	}
+
+
 	@RequestMapping(value = "/entity/{domain}/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<String> deleteContent(@PathVariable("domain") String domain, @PathVariable("id") long id) {
         System.out.println("Fetching & Deleting User with id " + id);

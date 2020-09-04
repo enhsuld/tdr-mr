@@ -31,7 +31,7 @@ public class ExcelDownloadRestAPI {
     private UserDao dao;
 
     @GetMapping(value = "/download/{reportType}/{formId}/{planYr}/{formName}")
-    public ResponseEntity<InputStreamResource> excelReport(@PathVariable int reportType, HttpServletRequest req, @PathVariable int formId, @PathVariable int planYr,@PathVariable String formName) throws IOException {
+    public ResponseEntity<InputStreamResource> excelReport(@PathVariable int reportType, @PathVariable int formId, @PathVariable int planYr,@PathVariable String formName, HttpServletRequest req) throws IOException {
         String appPath = req.getServletContext().getRealPath("");
         ByteArrayInputStream in = ExcelGenerator.customersToExcel(reportType,formId,planYr,formName,appPath,dao);
         HttpHeaders headers = new HttpHeaders();

@@ -1573,7 +1573,6 @@ public class MainController {
 				result.put(anobj);
 			}
 		}
-		
 		return result.toString();
 	}
 	

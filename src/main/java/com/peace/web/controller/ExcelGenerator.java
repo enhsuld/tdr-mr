@@ -4741,7 +4741,9 @@ public class ExcelGenerator {
                     " when 0 then 'Хадгалсан' \n" +
                     "end as ТӨлөв,\n" +
                     "DATA1,\n" +
-                    "DATA2,DATA3,DATA4,DATA5,DATA6,MRAM.ANNUAL_REGISTRATION.ISTODOTGOL\n" +
+                    "DATA2,DATA3,DATA4,DATA5,DATA6,MRAM.ANNUAL_REGISTRATION.ISTODOTGOL,\n" +
+                    "MRAM.ANNUAL_REGISTRATION.SOURCE_E AS SOURCE_E,\n" +
+                    "MRAM.ANNUAL_REGISTRATION.SOURCE_W AS SOURCE_W\n" +
                     "\n" +
                     "FROM\n" +
                     "MRAM.ANNUAL_REGISTRATION\n" +
@@ -4817,6 +4819,11 @@ public class ExcelGenerator {
                     cell20.setCellValue(Double.parseDouble(obj[19].toString()));
                 }
 
+                Cell cell21 = row.createCell(20);
+                if (obj[20] != null) {
+                    cell21.setCellValue(obj[20].toString());
+                }
+
                 rowCount++;
             }
         }
@@ -4863,7 +4870,8 @@ public class ExcelGenerator {
                     " when 0 then 'Хадгалсан' \n" +
                     "end as ТӨлөв,\n" +
                     "DATA1,\n" +
-                    "DATA2,DATA3,DATA4,DATA5,DATA6,DATA7,DATA8,DATA9,DATA10,DATA11,DATA12,MRAM.ANNUAL_REGISTRATION.ISTODOTGOL\n" +
+                    "DATA2,DATA3,DATA4,DATA5,DATA6,DATA7,DATA8,DATA9,DATA10,DATA11,DATA12,MRAM.ANNUAL_REGISTRATION.ISTODOTGOL,\n" +
+                    "MRAM.ANNUAL_REGISTRATION.SOURCE_W AS SOURCE_W\n" +
                     "\n" +
                     "FROM\n" +
                     "MRAM.ANNUAL_REGISTRATION\n" +
@@ -4963,6 +4971,10 @@ public class ExcelGenerator {
                     cell26.setCellValue(Double.parseDouble(obj[25].toString()));
                 }
 
+                Cell cell27 = row.createCell(26);
+                if (obj[26] != null) {
+                    cell27.setCellValue(obj[26].toString());
+                }
                 rowCount++;
             }
         }
@@ -12989,12 +13001,12 @@ public class ExcelGenerator {
             String sqlQuery = "SELECT A.ID, A.LPNAME,A.LP_REG,A.LICENSEXB,(SELECT LUT_APPSTATUS.STATUSNAMEMON FROM LUT_APPSTATUS WHERE LUT_APPSTATUS.STATUSID = A.REPSTATUSID AND ROWNUM=1), (SELECT REQ.ADD_BUNLICENSENUM FROM REG_REPORT_REQ REQ WHERE REQ. ID = A .REQID AND ROWNUM = 1),(SELECT M.MINERALNAMEMON FROM LUT_MINERALS M WHERE M.MINERALID = A.MINID AND ROWNUM = 1),(SELECT D.DEPOSITNAMEMON FROM LUT_DEPOSIT D WHERE D.DEPOSITID = A.DEPOSITID AND ROWNUM = 1),(SELECT SUB_LICENSES.LOCATIONAIMAG FROM SUB_LICENSES WHERE SUB_LICENSES.LICENSEXM = A.LICENSEXB AND ROWNUM = 1),(SELECT SUB_LICENSES.LOCATIONSOUM FROM SUB_LICENSES WHERE SUB_LICENSES.LICENSEXM = A.LICENSEXB AND ROWNUM = 1),(SELECT SUB_LICENSES.AREANAMEMON FROM SUB_LICENSES WHERE SUB_LICENSES.LICENSEXM = A.LICENSEXB AND ROWNUM = 1),(SELECT SUB_LICENSES.AREASIZE FROM SUB_LICENSES WHERE SUB_LICENSES.LICENSEXM = A.LICENSEXB AND ROWNUM = 1),";
 
             for (String v : vals) {
-                sqlQuery = sqlQuery + "(SELECT DD.DATA4 FROM DATA_EXCEL_COALREP10 DD WHERE DD.PLANID = A.ID AND DD.DATA2 " + v + " AND ROWNUM = 1),";
-                sqlQuery = sqlQuery + "(SELECT DD.DATA5 FROM DATA_EXCEL_COALREP10 DD WHERE DD.PLANID = A.ID AND DD.DATA2 " + v + " AND ROWNUM = 1),";
-                sqlQuery = sqlQuery + "(SELECT DD.DATA7 FROM DATA_EXCEL_COALREP10 DD WHERE DD.PLANID = A.ID AND DD.DATA2 " + v + " AND ROWNUM = 1),";
-                sqlQuery = sqlQuery + "(SELECT DD.DATA8 FROM DATA_EXCEL_COALREP10 DD WHERE DD.PLANID = A.ID AND DD.DATA2 " + v + " AND ROWNUM = 1),";
-                sqlQuery = sqlQuery + "(SELECT DD.DATA10 FROM DATA_EXCEL_COALREP10 DD WHERE DD.PLANID = A.ID AND DD.DATA2 " + v + " AND ROWNUM = 1),";
-                sqlQuery = sqlQuery + "(SELECT DD.DATA11 FROM DATA_EXCEL_COALREP10 DD WHERE DD.PLANID = A.ID AND DD.DATA2 " + v + " AND ROWNUM = 1)";
+                sqlQuery = sqlQuery + "(SELECT DD.DATA4 FROM DATA_EXCEL_COALREP10 DD WHERE DD.PLANID = A.ID AND DD.DATA2 IS NOT NULL AND DD.DATA2 " + v + " AND ROWNUM = 1),";
+                sqlQuery = sqlQuery + "(SELECT DD.DATA5 FROM DATA_EXCEL_COALREP10 DD WHERE DD.PLANID = A.ID AND DD.DATA2 IS NOT NULL AND DD.DATA2 " + v + " AND ROWNUM = 1),";
+                sqlQuery = sqlQuery + "(SELECT DD.DATA7 FROM DATA_EXCEL_COALREP10 DD WHERE DD.PLANID = A.ID AND DD.DATA2 IS NOT NULL AND DD.DATA2 " + v + " AND ROWNUM = 1),";
+                sqlQuery = sqlQuery + "(SELECT DD.DATA8 FROM DATA_EXCEL_COALREP10 DD WHERE DD.PLANID = A.ID AND DD.DATA2 IS NOT NULL AND DD.DATA2 " + v + " AND ROWNUM = 1),";
+                sqlQuery = sqlQuery + "(SELECT DD.DATA10 FROM DATA_EXCEL_COALREP10 DD WHERE DD.PLANID = A.ID AND DD.DATA2 IS NOT NULL AND DD.DATA2 " + v + " AND ROWNUM = 1),";
+                sqlQuery = sqlQuery + "(SELECT DD.DATA11 FROM DATA_EXCEL_COALREP10 DD WHERE DD.PLANID = A.ID AND DD.DATA2 IS NOT NULL AND DD.DATA2 " + v + " AND ROWNUM = 1)";
                 if (!v.equalsIgnoreCase(vals[vals.length - 1])) {
                     sqlQuery = sqlQuery + ",";
                 }

@@ -57,6 +57,8 @@ public class AnnualRegistration implements java.io.Serializable {
 	private String lastmodified;
 	private String cduration;
 	private String gduration;
+	private String sourceE;
+	private String sourceW;
 	
 	private String fiduration;
 	private String seduration;
@@ -160,8 +162,25 @@ public class AnnualRegistration implements java.io.Serializable {
 	public void setReasonid(Integer reasonid) {
 		this.reasonid = reasonid;
 	}
-	
-	
+
+	@Column(name = "SOURCE_E")
+	public String getSourceE() {
+		return sourceE;
+	}
+
+	public void setSourceE(String sourceE) {
+		this.sourceE = sourceE;
+	}
+
+	@Column(name = "SOURCE_W")
+	public String getSourceW() {
+		return sourceW;
+	}
+
+	public void setSourceW(String sourceW) {
+		this.sourceW = sourceW;
+	}
+
 	@Column(name = "ISHIDDEN")
 	public boolean isIshidden() {
 		return ishidden;
