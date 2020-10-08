@@ -8646,7 +8646,8 @@ public class ExcelGenerator {
                     "INNER JOIN MRAM.LUT_MIN_GROUP on MRAM.ANNUAL_REGISTRATION.GROUPID=MRAM.LUT_MIN_GROUP.GROUPID\n" +
                     "INNER JOIN MRAM.REG_REPORT_REQ on MRAM.REG_REPORT_REQ.\"ID\"=MRAM.ANNUAL_REGISTRATION.REQID \n" +
                     "INNER JOIN MRAM.DATA_EXCEL_GEOREP10 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_GEOREP10.PLANID\n" +
-                    //"WHERE    MRAM.ANNUAL_REGISTRATION.DIVISIONID=3 and MRAM.ANNUAL_REGISTRATION.REPORTTYPE=4 and  MRAM.ANNUAL_REGISTRATION.REPORTYEAR = 2019\n" +
+                    "WHERE MRAM.ANNUAL_REGISTRATION.DIVISIONID= "+formId+"\n"+
+                    ((planYr!=1)?"and MRAM.ANNUAL_REGISTRATION.REPORTYEAR = "+planYr+"\n":"") +
                     "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_GEOREP10.ID";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
             int rowCount = 6;
