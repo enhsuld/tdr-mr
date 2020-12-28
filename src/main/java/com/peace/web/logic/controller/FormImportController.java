@@ -4708,7 +4708,7 @@ public class FormImportController {
 				}
 				
 				if (an != null && divisionid == 1 && an.getReporttype() == 4 && ((noteid > 0 && noteObj != null) || (noteid == 0))){
-					
+
 					if (noteid == 71){
 						sheetname = "Form-3a";
 					}
@@ -5187,9 +5187,9 @@ public class FormImportController {
 				LutFormNotes noteObj=(LutFormNotes) dao.getHQLResult("from LutFormNotes t where t.id="+noteid+"", "current");
 
 				String sheetname = "";
-				
+
 				if (an != null && noteObj!=null){
-					
+
 					if (noteid == 126){
 						sheetname = "geoplan1";
 					}
@@ -5290,7 +5290,7 @@ public class FormImportController {
 					else if (noteid == 119){
 						sheetname = "Form-18";
 					}
-					else if (noteid == 398){
+					else if (noteid == 398 || noteid == 457 || noteid == 550 || noteid == 594){
 						sheetname = "Form-19";
 					}
 					else if (noteid == 70){
@@ -5353,7 +5353,7 @@ public class FormImportController {
 					else if (noteid == 122){
 						sheetname = "CForm-19";
 					}
-					
+
 					List<LnkPlanAttachedFiles> atts = (List<LnkPlanAttachedFiles>) dao.getHQLResult("from LnkPlanAttachedFiles t where t.expid="+plan+" and t.noteid = " + noteid + " order by t.id desc", "list");
 					if (atts != null && atts.size() > 0){
 						FileInputStream fis = null;
@@ -5362,7 +5362,7 @@ public class FormImportController {
 						if (formfile.exists()){
 							fis = new FileInputStream(formfile);
 							Workbook workbook = new XSSFWorkbook(fis);
-							
+
 							for(int i=0;i<workbook.getNumberOfSheets();i++){
 								Sheet sheet = workbook.getSheetAt(i);
 								if (sheet.getSheetName().equalsIgnoreCase(sheetname)){
@@ -5370,7 +5370,7 @@ public class FormImportController {
 									workbook.setSelectedTab(i);
 								}
 							}
-							
+
 							for(int i=0;i<workbook.getNumberOfSheets();i++){
 								Sheet sheet = workbook.getSheetAt(i);
 								if (!sheet.getSheetName().equalsIgnoreCase(sheetname)){
@@ -5380,7 +5380,7 @@ public class FormImportController {
 
 							String xname=an.getLpName().trim();
 							xname = xname + " " + noteObj.getNote().trim();
-							xname = URLEncoder.encode(xname,"UTF-8"); 
+							xname = URLEncoder.encode(xname,"UTF-8");
 							try (ServletOutputStream outputStream = response.getOutputStream()) {
 								response.setContentType("application/ms-excel; charset=UTF-8");
 								response.setCharacterEncoding("UTF-8");
@@ -5394,14 +5394,14 @@ public class FormImportController {
 						}
 					}
 				}
-				
+
 				out.close();
 			} catch (Exception io) {
 				io.printStackTrace();
 			}
-			return null;		
-		}	
-		return "false";	
+			return null;
+		}
+		return "false";
 	}
 	
 	@RequestMapping(value="/generateFormReport/{noteid}", method = RequestMethod.GET)
