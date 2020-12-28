@@ -1,5 +1,7 @@
 package com.peace.web.controller;
 import com.peace.users.dao.UserDao;
+import com.peace.users.model.mram.AnnualRegistration;
+import com.peace.users.model.mram.LnkCommentMain;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
@@ -4741,7 +4743,9 @@ public class ExcelGenerator {
                     " when 0 then 'Хадгалсан' \n" +
                     "end as ТӨлөв,\n" +
                     "DATA1,\n" +
-                    "DATA2,DATA3,DATA4,DATA5,DATA6,MRAM.ANNUAL_REGISTRATION.ISTODOTGOL\n" +
+                    "DATA2,DATA3,DATA4,DATA5,DATA6,MRAM.ANNUAL_REGISTRATION.ISTODOTGOL,\n" +
+                    "MRAM.ANNUAL_REGISTRATION.SOURCE_E AS SOURCE_E,\n" +
+                    "MRAM.ANNUAL_REGISTRATION.SOURCE_W AS SOURCE_W\n" +
                     "\n" +
                     "FROM\n" +
                     "MRAM.ANNUAL_REGISTRATION\n" +
@@ -4817,6 +4821,11 @@ public class ExcelGenerator {
                     cell20.setCellValue(Double.parseDouble(obj[19].toString()));
                 }
 
+                Cell cell21 = row.createCell(20);
+                if (obj[20] != null) {
+                    cell21.setCellValue(obj[20].toString());
+                }
+
                 rowCount++;
             }
         }
@@ -4863,7 +4872,8 @@ public class ExcelGenerator {
                     " when 0 then 'Хадгалсан' \n" +
                     "end as ТӨлөв,\n" +
                     "DATA1,\n" +
-                    "DATA2,DATA3,DATA4,DATA5,DATA6,DATA7,DATA8,DATA9,DATA10,DATA11,DATA12,MRAM.ANNUAL_REGISTRATION.ISTODOTGOL\n" +
+                    "DATA2,DATA3,DATA4,DATA5,DATA6,DATA7,DATA8,DATA9,DATA10,DATA11,DATA12,MRAM.ANNUAL_REGISTRATION.ISTODOTGOL,\n" +
+                    "MRAM.ANNUAL_REGISTRATION.SOURCE_W AS SOURCE_W\n" +
                     "\n" +
                     "FROM\n" +
                     "MRAM.ANNUAL_REGISTRATION\n" +
@@ -4963,6 +4973,10 @@ public class ExcelGenerator {
                     cell26.setCellValue(Double.parseDouble(obj[25].toString()));
                 }
 
+                Cell cell27 = row.createCell(26);
+                if (obj[26] != null) {
+                    cell27.setCellValue(obj[26].toString());
+                }
                 rowCount++;
             }
         }
@@ -8579,6 +8593,109 @@ public class ExcelGenerator {
                 }
 
                 rowCount++;
+            }
+        }
+
+        if (reportType == 9) {
+            System.out.println("ITs WORKING");
+            FileInputStream fis = null;
+            File files = new File(appPath + "/assets/excel/plan/Ognoo_Zagvar.xlsx");
+            fis = new FileInputStream(files);
+            workbook = new XSSFWorkbook(fis);
+
+            CellStyle cellStyle = workbook.createCellStyle();
+            cellStyle.setBorderBottom((short) 1);
+            cellStyle.setBorderLeft((short) 1);
+            cellStyle.setBorderRight((short) 1);
+            cellStyle.setBorderTop((short) 1);
+            cellStyle.setWrapText(true);
+            cellStyle.setAlignment(cellStyle.ALIGN_CENTER);
+            cellStyle.setVerticalAlignment(cellStyle.VERTICAL_CENTER);
+
+            Sheet sheet = workbook.getSheetAt(0);
+            Row row = sheet.getRow(1);
+            Cell cell = row.createCell(2);
+            cell.setCellValue(planYr);
+            Row row1 = sheet.getRow(2);
+            Cell cel2 = row1.createCell(2);
+            cel2.setCellValue(DateToStr1);
+            String queryStr = "SELECT\n" +
+                    "MRAM.ANNUAL_REGISTRATION.LICENSENUM AS Дугаар,\n" +
+                    "MRAM.ANNUAL_REGISTRATION.LPNAME AS Эзэмшигч,\n" +
+                    "MRAM.ANNUAL_REGISTRATION.LP_REG AS Регистер,\n" +
+                    "MRAM.ANNUAL_REGISTRATION.LICENSEXB AS Лиценз_Дугаар,\n" +
+                    "MRAM.REG_REPORT_REQ.ADD_BUNLICENSENUM as НэмэлтТЗ,\n" +
+                    "MRAM.SUB_LICENSES.LOCATIONAIMAG as Аймаг,\n" +
+                    "MRAM.SUB_LICENSES.LOCATIONSOUM as Сум,\n" +
+                    "MRAM.SUB_LICENSES.AREANAMEMON as Орд_нэр,\n" +
+                    "MRAM.SUB_LICENSES.AREASIZE as Талбай,\n" +
+                    "MRAM.LUT_MIN_GROUP.GROUPNAME AS АМ_төрөл,\n" +
+                    "MRAM.ANNUAL_REGISTRATION.REPORTYEAR as Огноо,\n" +
+                    "case MRAM.ANNUAL_REGISTRATION.REPSTATUSID \n" +
+                    " when 1 then 'Баталгаажсан'\n" +
+                    " when 2 then 'Буцаасан'\n" +
+                    " when 3 then 'Татгалзсан' \n" +
+                    " when 7 then 'Илгээсэн' \n" +
+                    " when 0 then 'Хадгалсан' \n" +
+                    "end as ТӨлөв,\n" +
+                    "MRAM.ANNUAL_REGISTRATION.ID AS id,\n" +
+                    "DATA1,DATA2,DATA3,DATA4,DATA5,DATA6,MRAM.ANNUAL_REGISTRATION.ISTODOTGOL\n" +
+                    "FROM\n" +
+                    "MRAM.ANNUAL_REGISTRATION\n" +
+                    "INNER JOIN MRAM.SUB_LICENSES on MRAM.ANNUAL_REGISTRATION.LICENSEXB=MRAM.SUB_LICENSES.LICENSEXM\n" +
+                    "INNER JOIN MRAM.LUT_MIN_GROUP on MRAM.ANNUAL_REGISTRATION.GROUPID=MRAM.LUT_MIN_GROUP.GROUPID\n" +
+                    "INNER JOIN MRAM.REG_REPORT_REQ on MRAM.REG_REPORT_REQ.\"ID\"=MRAM.ANNUAL_REGISTRATION.REQID \n" +
+                    "INNER JOIN MRAM.DATA_EXCEL_GEOREP10 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_GEOREP10.PLANID\n" +
+                    "WHERE MRAM.ANNUAL_REGISTRATION.DIVISIONID= "+formId+"\n"+
+                    ((planYr!=1)?"and MRAM.ANNUAL_REGISTRATION.REPORTYEAR = "+planYr+"\n":"") +
+                    "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_GEOREP10.ID";
+            List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
+            int rowCount = 6;
+            for (Object[] obj : objects) {
+                for (int i=0; i<2; i++) {
+                    row = sheet.createRow(rowCount);
+                    Cell cell1 = row.createCell(0);
+                    cell1.setCellValue(Double.parseDouble(obj[0].toString()));
+                    Cell cell2 = row.createCell(1);
+                    cell2.setCellValue(obj[1].toString());
+                    Cell cell3 = row.createCell(2);
+                    cell3.setCellValue(Double.parseDouble(obj[2].toString()));
+                    Cell cell4 = row.createCell(3);
+                    cell4.setCellValue(obj[3].toString());
+                    Cell cell5 = row.createCell(4);
+                    if (obj[4] != null) {
+                        cell5.setCellValue(obj[4].toString());
+                    }
+                    Cell cell6 = row.createCell(5);
+                    cell6.setCellValue(obj[5].toString());
+                    Cell cell7 = row.createCell(6);
+                    cell7.setCellValue(obj[6].toString());
+                    Cell cell8 = row.createCell(7);
+                    cell8.setCellValue(obj[7].toString());
+                    Cell cell9 = row.createCell(8);
+                    cell9.setCellValue(Double.parseDouble(obj[8].toString()));
+                    Cell cell10 = row.createCell(9);
+                    cell10.setCellValue(obj[9].toString());
+                    Cell cell11 = row.createCell(10);
+                    cell11.setCellValue(Double.parseDouble(obj[10].toString()));
+                    Cell cell12 = row.createCell(11);
+                    cell12.setCellValue(obj[11].toString());
+
+                    String isGov = (i==0)?"1":"0";
+                    String list2 = "SELECT * FROM MRAM.LNK_COMMENT_MAIN WHERE ISGOV = " + isGov + " AND PLANID = " + obj[0].toString();
+                    List<Object[]> commentMains = dao.getNativeSQLResult(list2, "list");
+                    int rowNo = 17;
+                    for (Object[] com : commentMains) {
+                        Cell cellNo = row.createCell(rowNo);
+                        if (com[6] != null) {
+                            String createdDate = com[6].toString();
+                            cellNo.setCellValue(createdDate.substring(0, createdDate.length()-2));
+                        }
+                        rowNo++;
+                    }
+
+                    rowCount++;
+                }
             }
         }
 
@@ -12989,12 +13106,12 @@ public class ExcelGenerator {
             String sqlQuery = "SELECT A.ID, A.LPNAME,A.LP_REG,A.LICENSEXB,(SELECT LUT_APPSTATUS.STATUSNAMEMON FROM LUT_APPSTATUS WHERE LUT_APPSTATUS.STATUSID = A.REPSTATUSID AND ROWNUM=1), (SELECT REQ.ADD_BUNLICENSENUM FROM REG_REPORT_REQ REQ WHERE REQ. ID = A .REQID AND ROWNUM = 1),(SELECT M.MINERALNAMEMON FROM LUT_MINERALS M WHERE M.MINERALID = A.MINID AND ROWNUM = 1),(SELECT D.DEPOSITNAMEMON FROM LUT_DEPOSIT D WHERE D.DEPOSITID = A.DEPOSITID AND ROWNUM = 1),(SELECT SUB_LICENSES.LOCATIONAIMAG FROM SUB_LICENSES WHERE SUB_LICENSES.LICENSEXM = A.LICENSEXB AND ROWNUM = 1),(SELECT SUB_LICENSES.LOCATIONSOUM FROM SUB_LICENSES WHERE SUB_LICENSES.LICENSEXM = A.LICENSEXB AND ROWNUM = 1),(SELECT SUB_LICENSES.AREANAMEMON FROM SUB_LICENSES WHERE SUB_LICENSES.LICENSEXM = A.LICENSEXB AND ROWNUM = 1),(SELECT SUB_LICENSES.AREASIZE FROM SUB_LICENSES WHERE SUB_LICENSES.LICENSEXM = A.LICENSEXB AND ROWNUM = 1),";
 
             for (String v : vals) {
-                sqlQuery = sqlQuery + "(SELECT DD.DATA4 FROM DATA_EXCEL_COALREP10 DD WHERE DD.PLANID = A.ID AND DD.DATA2 " + v + " AND ROWNUM = 1),";
-                sqlQuery = sqlQuery + "(SELECT DD.DATA5 FROM DATA_EXCEL_COALREP10 DD WHERE DD.PLANID = A.ID AND DD.DATA2 " + v + " AND ROWNUM = 1),";
-                sqlQuery = sqlQuery + "(SELECT DD.DATA7 FROM DATA_EXCEL_COALREP10 DD WHERE DD.PLANID = A.ID AND DD.DATA2 " + v + " AND ROWNUM = 1),";
-                sqlQuery = sqlQuery + "(SELECT DD.DATA8 FROM DATA_EXCEL_COALREP10 DD WHERE DD.PLANID = A.ID AND DD.DATA2 " + v + " AND ROWNUM = 1),";
-                sqlQuery = sqlQuery + "(SELECT DD.DATA10 FROM DATA_EXCEL_COALREP10 DD WHERE DD.PLANID = A.ID AND DD.DATA2 " + v + " AND ROWNUM = 1),";
-                sqlQuery = sqlQuery + "(SELECT DD.DATA11 FROM DATA_EXCEL_COALREP10 DD WHERE DD.PLANID = A.ID AND DD.DATA2 " + v + " AND ROWNUM = 1)";
+                sqlQuery = sqlQuery + "(SELECT DD.DATA4 FROM DATA_EXCEL_COALREP10 DD WHERE DD.PLANID = A.ID AND DD.DATA2 IS NOT NULL AND DD.DATA2 " + v + " AND ROWNUM = 1),";
+                sqlQuery = sqlQuery + "(SELECT DD.DATA5 FROM DATA_EXCEL_COALREP10 DD WHERE DD.PLANID = A.ID AND DD.DATA2 IS NOT NULL AND DD.DATA2 " + v + " AND ROWNUM = 1),";
+                sqlQuery = sqlQuery + "(SELECT DD.DATA7 FROM DATA_EXCEL_COALREP10 DD WHERE DD.PLANID = A.ID AND DD.DATA2 IS NOT NULL AND DD.DATA2 " + v + " AND ROWNUM = 1),";
+                sqlQuery = sqlQuery + "(SELECT DD.DATA8 FROM DATA_EXCEL_COALREP10 DD WHERE DD.PLANID = A.ID AND DD.DATA2 IS NOT NULL AND DD.DATA2 " + v + " AND ROWNUM = 1),";
+                sqlQuery = sqlQuery + "(SELECT DD.DATA10 FROM DATA_EXCEL_COALREP10 DD WHERE DD.PLANID = A.ID AND DD.DATA2 IS NOT NULL AND DD.DATA2 " + v + " AND ROWNUM = 1),";
+                sqlQuery = sqlQuery + "(SELECT DD.DATA11 FROM DATA_EXCEL_COALREP10 DD WHERE DD.PLANID = A.ID AND DD.DATA2 IS NOT NULL AND DD.DATA2 " + v + " AND ROWNUM = 1)";
                 if (!v.equalsIgnoreCase(vals[vals.length - 1])) {
                     sqlQuery = sqlQuery + ",";
                 }

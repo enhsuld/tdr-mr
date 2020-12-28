@@ -15,6 +15,14 @@
                                     <option>2016</option>
                                 </select>
                             </span>
+                                <a ng-if="yearSelected.value!=null"
+                                   href="/api/excel/download/9/{{user_data.divisionid}}/{{yearSelected.value}}/1" download
+                                   class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon">
+                                    <i class="uk-icon-cloud-download"></i>Татах</a>
+                                <a ng-if="yearSelected.value==null"
+                                   href="/api/excel/download/9/{{user_data.divisionid}}/1/1" download
+                                   class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon">
+                                    <i class="uk-icon-cloud-download"></i>Татах</a>
                             </h3>
                             <div class="uk-grid" ng-if="user_data.divisionid == 1">
                                 <div class="uk-width-medium-1-2">
@@ -404,8 +412,15 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-
                                         <tr>
+                                            <td>Миний шийдвэрүүд</td>
+                                            <td>
+                                                <a ui-sref="restricted.pages.commentslist"
+                                                   class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon"><i class="uk-icon-eye"></i>Харах</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+
                                             <td>Маягт 1-ын мэдээлэл</td>
                                             <td>
                                                 <button ng-if="yearSelected.value!=null" ng-click="downloadNewPlan(5,1,'Coal_Plan_form1')" class="md-btn  md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon">
