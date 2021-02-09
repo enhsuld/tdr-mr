@@ -73,7 +73,7 @@ public class FormImportController {
 		JSONArray result = new JSONArray();
 		if (loguser != null){
 			if (type.equalsIgnoreCase("LNK_COMMENT")){
-				List<Object[]> resultObj = (List<Object[]>) dao.getNativeSQLResult("SELECT (SELECT LUT_FORM_NOTES.NOTE FROM LUT_FORM_NOTES WHERE LUT_FORM_NOTES. ID = D .NOTEID), D.NOTEID, DBMS_LOB.substr(D.COMNOTE, 4000), D.COMDATE, D.DESICIONID, D.OFFICERNAME, A.LICENSEXB, A.LP_REG, A.REPORTTYPE, A.LICTYPE, A.REPORTYEAR, A.REPSTATUSID, A.DIVISIONID, A.LPNAME, A.GROUPID, A.MINID, A.DEPOSITID, R.ADD_BUNLICENSENUM, R.AREANAME, S.AREASIZE, A.XTYPE, S.LOCATIONAIMAG, S.LOCATIONSOUM FROM LNK_COMMENT D LEFT JOIN ANNUAL_REGISTRATION A ON D.PLANID = A.ID LEFT JOIN REG_REPORT_REQ R ON A.REQID = R.ID LEFT JOIN SUB_LICENSES S ON S.LICENSENUM = A.LICENSENUM WHERE D .OFFICERID ="+loguser.getId()+" ORDER BY D .ID DESC", "list");
+				List<Object[]> resultObj = (List<Object[]>) dao.getNativeSQLResult("SELECT (SELECT LUT_FORM_NOTES.NOTE FROM LUT_FORM_NOTES WHERE LUT_FORM_NOTES. ID = D .NOTEID), D.NOTEID, DBMS_LOB.substr(D.COMNOTE, 3800), D.COMDATE, D.DESICIONID, D.OFFICERNAME, A.LICENSEXB, A.LP_REG, A.REPORTTYPE, A.LICTYPE, A.REPORTYEAR, A.REPSTATUSID, A.DIVISIONID, A.LPNAME, A.GROUPID, A.MINID, A.DEPOSITID, R.ADD_BUNLICENSENUM, R.AREANAME, S.AREASIZE, A.XTYPE, S.LOCATIONAIMAG, S.LOCATIONSOUM FROM LNK_COMMENT D LEFT JOIN ANNUAL_REGISTRATION A ON D.PLANID = A.ID LEFT JOIN REG_REPORT_REQ R ON A.REQID = R.ID LEFT JOIN SUB_LICENSES S ON S.LICENSENUM = A.LICENSENUM WHERE D .OFFICERID ="+loguser.getId()+" ORDER BY D .ID DESC", "list");
 				String[] headers = {"NOTE", "NOTEID", "COMNOTE", "COMDATE", "DESICIONID", "OFFICERNAME", "LICENSEXB", "LP_REG", "REPORTTYPE", "LICTYPE", "REPORTYEAR", "REPSTATUSID", "DIVISIONID", "LPNAME", "GROUPID", "MINID", "DEPOSITID", "ADD_BUNLICENSENUM", "AREANAME", "AREASIZE", "XTYPE", "LOCATIONAIMAG", "LOCATIONSOUM"};
 				if (resultObj != null){
 					for(Object[] o : resultObj){
@@ -4974,49 +4974,50 @@ public class FormImportController {
 					else if (noteid == 76){
 						sheetname = "CForm-5";
 					}
-					else if (noteid == 79){
+					else if (noteid == 79 || noteid == 669){
 						sheetname = "CForm-6-1";
 					}
-					else if (noteid == 406){
+					else if (noteid == 406 || noteid == 670){
 						sheetname = "CForm-6-2";
 					}
-					else if (noteid == 82){
+					else if (noteid == 82 || noteid == 663){
+						System.out.println("eeeeeeeeeeeeeeeeeeeeeeeeeeeee");
 						sheetname = "CForm-7";
 					}
-					else if (noteid == 428){
+					else if (noteid == 428 || noteid == 664){
 						sheetname = "CForm-8";
 					}
 					else if (noteid == 102){
 						sheetname = "CForm-9";
 					}
-					else if (noteid == 106){
+					else if (noteid == 106 || noteid == 665){
 						sheetname = "CForm-10";
 					}
-					else if (noteid == 109){
+					else if (noteid == 109 || noteid == 666){
 						sheetname = "CForm-11";
 					}
-					else if (noteid == 112){
+					else if (noteid == 112  || noteid == 667){
 						sheetname = "CForm-12";
 					}
-					else if (noteid == 115){
+					else if (noteid == 115  || noteid == 668){
 						sheetname = "CForm-13";
 					}
-					else if (noteid == 88){
+					else if (noteid == 88 || noteid == 671){
 						sheetname = "CForm-14";
 					}
-					else if (noteid == 91 || noteid == 460){
+					else if (noteid == 91 || noteid == 460  || noteid == 672){
 						sheetname = "CForm-15";
 					}
-					else if (noteid == 94){
+					else if (noteid == 94 || noteid == 673) {
 						sheetname = "CForm-16";
 					}
-					else if (noteid == 118){
+					else if (noteid == 118 ){
 						sheetname = "CForm-17";
 					}
-					else if (noteid == 120){
+					else if (noteid == 120  || noteid == 674){
 						sheetname = "CForm-18";
 					}
-					else if (noteid == 122 || noteid == 458){
+					else if (noteid == 122 || noteid == 458 || noteid == 675){
 						sheetname = "CForm-19";
 					}
 
@@ -5314,7 +5315,7 @@ public class FormImportController {
 					else if (noteid == 406){
 						sheetname = "CForm-6-2";
 					}
-					else if (noteid == 82){
+					else if (noteid == 82 || noteid == 66){
 						sheetname = "CForm-7";
 					}
 					else if (noteid == 428){
