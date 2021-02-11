@@ -532,6 +532,30 @@ public class MainController {
 								result.setData(rs);
 								result.setTotal(count);
 							}
+							else{
+								System.out.println("oyutnii medeelel alga 1 "+loguser.getGroupid());
+								domain="AnnualRegistration";
+								JSONObject jsonObj = new JSONObject(request);
+								if(loguser.getDivisionid()==3){
+									jsonObj.put("custom", "where repstatusid =7 and groupid=1 and divisionid=3 and  lictype=1 and reporttype="+type+" and repstepid="+step+" and xtype != 0");
+								}
+								else if(loguser.getDivisionid()==2){
+									jsonObj.put("custom", "where repstatusid =7 and groupid=1 and divisionid=2 and  lictype in ('2','3') and reporttype="+type+" and minid in ('5','8')  and repstepid="+step+" and xtype != 0");
+								}
+								else if(loguser.getDivisionid()==1){
+									if(loguser.getStepid()==4 || loguser.getStepid()==5){
+										jsonObj.put("custom", "where repstatusid =7  and divisionid=1  and lictype!=1 and reporttype="+type+" and minid!=5 and repstepid="+step+"  and xtype != 0");
+									}
+									else{
+										jsonObj.put("custom", "where repstatusid =7 and divisionid=1  and groupid=1 and lictype!=1 and reporttype="+type+" and minid!=5 and repstepid="+step+"  and xtype != 0");
+									}
+								}
+								//jsonObj.put("custom", "where repstatusid!=0 ");
+								rs= dao.kendojson(jsonObj.toString(), domain);
+								count=dao.resulsetcount(jsonObj.toString(), domain);
+								result.setData(rs);
+								result.setTotal(count);
+							}
 						}
 					}
 					//jsonObj.put("custom", "where repstatusid!=0 ");	
