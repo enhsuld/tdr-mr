@@ -614,8 +614,8 @@ public class AnnualRegistration implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "REQID", nullable=false,insertable=false,updatable=false)
-	@JsonIgnore
-	//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@JsonManagedReference
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	public RegReportReq getRegReportReq() {
 		return regReportReq;
 	}
