@@ -3375,7 +3375,13 @@ public class ExcelGenerator {
                 }
                 Cell cell20 = row.createCell(19);
                 if (obj[19] != null) {
-                    cell20.setCellValue(Double.parseDouble(obj[19].toString()));
+
+                    if(obj[19].toString().equalsIgnoreCase("-")){
+
+                    }
+                    else{
+                        cell20.setCellValue(Double.parseDouble(obj[19].toString()));
+                    }
                 }
                 Cell cell21 = row.createCell(20);
                 if (obj[20] != null) {
