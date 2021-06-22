@@ -38,18 +38,7 @@ angular
     	                searchField: 'title'
     	            };
     		
-    	            var $formValidate = $('#form_desicion');
 
-    	            $formValidate
-    	                .parsley()
-    	                .on('form:validated',function() {
-    	                    $scope.$apply();
-    	                })
-    	                .on('field:validated',function(parsleyField) {
-    	                    if($(parsleyField.$element).hasClass('md-input')) {
-    	                        $scope.$apply();
-    	                    }
-    	                });
     	            
     	        	$scope.des={
     	        			stepid:0,

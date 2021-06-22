@@ -100,7 +100,10 @@ angular
                     serverSorting: true,
                     serverFiltering: true
                 },
-                toolbar: ["create"],
+                toolbar: ["create","excel"],
+                excel: {
+                    allPages: true
+                },
                 filterable: {
                     mode: 'row'
                 },

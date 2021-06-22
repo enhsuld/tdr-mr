@@ -84,6 +84,12 @@ angular
 	                filterable: {
                         mode: "row"
                     },
+					excel: {
+						fileName: "Export.xlsx",
+						proxyURL: "https://demos.telerik.com/kendo-ui/service/export",
+						filterable: true,
+						allPages: true
+					},
 	                sortable: {
                         mode: "multiple",
                         allowUnsort: true
@@ -95,15 +101,25 @@ angular
 	                    buttonCount: 5
 	                },
 	                columns: [
-	                		  {title: "#",template: "<span class='row-number'></span>", width:"60px"},
-	                          { field:"licenseNum", title: "<span data-translate='License number'></span>" },	 
-	                          { field:"licenseXB", title: "<span data-translate='License number'></span>"},		   
-	                          { field:"areaNameMon", title: "<span data-translate='Area name'></span>" },		
-	                          { field:"lpName", title: "<span data-translate='Holder name'></span>"},	
-	                          { field:"areaSize", title: "<span data-translate='Area size (ha)'></span>" },	
-	                          { field:"locationAimag", title: "<span data-translate='Aimag'></span>" },	
-	                          { field:"locationSoum", title: "<span data-translate='Soum'></span>" }
-	                         
+						  {title: "#",template: "<span class='row-number'></span>", width:"60px"},
+							{ field:"id", title: "id" },
+						  { field:"licenseNum", title: "licenseNum" },
+						  { field:"licenseXB", title: "licenseXB"},
+						  { field:"areaNameMon", title: "areaNameMon" },
+						  { field:"lpName", title: "lpName"},
+						  { field:"areaSize", title: "areaSize" },
+						  { field:"locationAimag", title: "locationAimag" },
+						  { field:"locationSoum", title: "locationSoum" },
+						{ field:"licTypeId", title: "licTypeId" },
+						{ field:"licStatusId", title: "licStatusId" },
+						{ field:"lpReg", title: "lpReg" },
+						{ field:"lpName", title: "lpName" },
+						{ field:"grantDate", title: "grantDate" },
+						{ field:"expDate", title: "expDate" },
+						{ field:"mintype", title: "mintype" },
+						{ field:"divisionId", title: "divisionId" },
+						{ field:"lplan", title: "lplan" },
+						{field:"lreport", title: "lreport" },
 	                ],
 	                dataBound: function () {
 	   		                var rows = this.items();

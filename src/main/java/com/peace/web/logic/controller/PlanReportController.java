@@ -5846,8 +5846,72 @@ public class PlanReportController {
 				an=(List<AnnualRegistration>) dao.getHQLResult("from AnnualRegistration t where t.divisionid=3 and xtype=0 and t.reporttype="+type+" and t.licensenum='"+lr.getBundledLicenseNum()+"' and t.reportyear='"+y+"'", "list");
 			}
 			
-			if(an.size()>0){
-				obj.put("subdate", "false");	
+			if(an.size()==0){
+				//obj.put("subdate", "false");
+				AnnualRegistration pe=new AnnualRegistration();
+				pe.setReportyear(String.valueOf(y));
+				pe.setLpReg(loguser.getSubLegalpersons().getLpReg());
+				pe.setPersonid(loguser.getId());
+				pe.setLicensenum(String.valueOf(lic.getLicenseNum()));
+
+				if (ann==null){
+					pe.setLictype((int) 1);
+					obj.put("mv", "true");
+				}
+				else{
+					pe.setLictype((int) lic.getLicTypeId());
+					obj.put("mv", "false");
+				}
+
+				pe.setDivisionid(lr.getDivisionId());
+				pe.setReporttype(type);
+				pe.setLicenseXB(lic.getLicenseXB());
+				pe.setRepstatusid((long) 0);
+				if(lic.getLicTypeId()==2){
+					if(ann!=null){
+						pe.setMinid(ann.getMineralid());
+					}
+					else{
+						pe.setMinid(lic.getMintype());
+					}
+				}
+				else{
+					pe.setMinid((long) lr.getGroupid());
+				}
+				pe.setXtype(0);
+				pe.setRepstepid((long) 1);
+				pe.setLpName(lic.getLpName());
+				pe.setReqid(lr.getId());
+				pe.setGroupid(lr.getGroupid());
+				if(ann!=null){
+					pe.setDepositid(ann.getDeposidid());
+				}
+
+				dao.PeaceCrud(pe, "PlanExploration", "save",(long) 0 , 0, 0, null);
+
+				if(type==3){
+					lr.setXplan(1);
+				}
+				else{
+					lr.setXreport(1);
+				}
+				lr.setCyear(y);
+				dao.PeaceCrud(lr, "RegReportReq", "update",(long) lr.getId() , 0, 0, null);
+				if(ann!=null){
+					ann.setCyear(y);
+					dao.PeaceCrud(ann, "LnkReqAnn", "update",(long) ann.getId() , 0, 0, null);
+				}
+
+
+				obj.put("id", pe.getId());
+				obj.put("lic", lic.getLicTypeId());
+				obj.put("divisionid", pe.getDivisionid());
+				obj.put("reporttype", pe.getReporttype());
+				obj.put("reqid", lr.getId());
+				obj.put("subdate", "true");
+				if(lic.getFtime()){
+					obj.put("ftime", "true");
+				}
 			}
 			else{
 				AnnualRegistration pe=new AnnualRegistration();
@@ -6114,8 +6178,6 @@ public class PlanReportController {
 
 	}
 
-
-
 	@RequestMapping(value="/removeBundle/{id}", method = RequestMethod.DELETE,produces={"application/json; charset=UTF-8"})
 	public  @ResponseBody String removeBundle(@PathVariable long id, HttpServletRequest req) throws ClassNotFoundException, JSONException{
 
@@ -6209,9 +6271,9 @@ public class PlanReportController {
 			
 			List<WeeklyMainData> wm=(List<WeeklyMainData>) dao.getHQLResult("from WeeklyMainData t where t.planid="+an.getReqid()+"", "list");
 			
-			LutWeeks lw=(LutWeeks) dao.getHQLResult("from LutWeeks t where t.year="+an.getYear()+" and t.week="+an.getWeekid()+"", "current");
+			LutWeeks lw=(LutWeeks) dao.getHQLResult("from LutWeeks t where t.year=2018 and t.week="+an.getWeekid()+"", "current");
 			
-			List<LutWeeks> lws=(List<LutWeeks>) dao.getHQLResult("from LutWeeks t where t.year="+an.getYear()+" and t.month="+lw.getMonth()+"", "list");
+			List<LutWeeks> lws=(List<LutWeeks>) dao.getHQLResult("from LutWeeks t where t.year=2018 and t.month="+lw.getMonth()+"", "list");
 			
 			if(obj.getInt("stepid")==1){
 				for(WeeklyMainData item:wm){
@@ -6615,61 +6677,85 @@ public class PlanReportController {
 				}
 		 
 				List<LnkPlanTransition> des= (List<LnkPlanTransition>) dao.getHQLResult("from LnkPlanTransition t where t.planid="+obj.getInt("planid")+" and t.decisionid=1", "list");
-				List<LnkPlanTransition> mdes= (List<LnkPlanTransition>) dao.getHQLResult("from LnkPlanTransition t where t.planid="+obj.getInt("planid")+" and t.mdecisionid=1", "list");
+				List<LnkPlanTransition> mdes= (List<LnkPlanTransition>) dao.getHQLResult("from LnkPlanTransition t where t.planid="+obj.getInt("planid")+" and t.decisionid in (2,3)", "list");
 
 				
 				System.out.println("notesize"+obj.getLong("notesize"));
 				System.out.println("mdes"+mdes.size());
 				System.out.println("des"+des.size());
+				jo1.put("done",false);
+				if(obj.getLong("notesize")==des.size()+mdes.size()){
+					jo1.put("done",true);
+					if(mdes.size()>0){
+						ar.setOfficerid(loguser.getId());
+						ar.setRejectstep(obj.getLong("tabid"));
+						ar.setReject(2);
+						ar.setRepstatusid((long) 2);
+						dao.PeaceCrud(ar, "AnnualRegistration", "update", (long) ar.getId(), 0, 0, null);
 
-				if(obj.getLong("notesize")==des.size()+mdes.size()){	
-					ar.setOfficerid(loguser.getId());
-					ar.setRejectstep((long) 0);
-					ar.setReject(0);
-					ar.setRepstepid((long) nt.getInptype());
-					ar.setRepstatusid((long) 1);
-					
-					dao.PeaceCrud(ar, "AnnualRegistration", "update", (long) ar.getId(), 0, 0, null);
+						Date d1 = new Date();
+						SimpleDateFormat df = new SimpleDateFormat("MM/dd/YYYY HH:mm a");
+						String formattedDate = df.format(d1);
 
-				
-					List<LnkPlanTab> nz=(List<LnkPlanTab>) dao.getHQLResult("from LnkPlanTab t where t.planid="+obj.getLong("planid")+" and t.tabid="+nt.getInptype()+"", "list");
-					if(nz.size()>0){
-						dao.PeaceCrud(null, "LnkPlanTab", "delete", (long) nz.get(0).getId(), 0, 0, null);
-					}				 
-					jo1.put("tabid",nt.getInptype());
-					LnkPlanTab tb= new LnkPlanTab();
-					tb.setPlanid(obj.getLong("planid"));
-					tb.setTabid(nt.getInptype());
-					dao.PeaceCrud(tb, "LnkPlanTab", "save", (long) 0, 0, 0, null);	
+						LnkCommentMain cm= new LnkCommentMain();
+						cm.setUsername(loguser.getUsername());
+						cm.setUserid(loguser.getId());
+						cm.setPlanid(ar.getId());
+						cm.setMcomment(obj.getString("comment"));
+						cm.setDesid((long) ar.getRejectstep());
+						cm.setCreatedDate(formattedDate);
+						dao.PeaceCrud(cm, "LnkCommentMain", "save", (long) 0, 0, 0, null);
+						jo1.put("step",false);
 
-
-					System.out.println("trans"+nt.getTransid());
-					if(nt.getTransid()!=null){
-						if(nt.getTransid()==2){
-							LnkPlanTab tbc= new LnkPlanTab();
-							tbc.setPlanid(obj.getLong("planid"));
-							tbc.setTabid(4);
-							dao.PeaceCrud(tbc, "LnkPlanTab", "save", (long) 0, 0, 0, null);	
-						}
-						if(nt.getTransid()==0){
-							LnkPlanTab tbc= new LnkPlanTab();
-							tbc.setPlanid(obj.getLong("planid"));
-							tbc.setTabid(3);
-							dao.PeaceCrud(tbc, "LnkPlanTab", "save", (long) 0, 0, 0, null);	
-						}
-						if(nt.getTransid()==3){
-							LnkPlanTab tbc= new LnkPlanTab();
-							tbc.setPlanid(obj.getLong("planid"));
-							tbc.setTabid(4);
-							dao.PeaceCrud(tbc, "LnkPlanTab", "save", (long) 0, 0, 0, null);	
-						}
 					}
+					else{
+						ar.setOfficerid(loguser.getId());
+						ar.setRejectstep((long) 0);
+						ar.setReject(0);
+						ar.setRepstepid((long) nt.getInptype());
+						ar.setRepstatusid((long) 1);
+
+						dao.PeaceCrud(ar, "AnnualRegistration", "update", (long) ar.getId(), 0, 0, null);
 
 
-					jo1.put("step",true);
+						List<LnkPlanTab> nz=(List<LnkPlanTab>) dao.getHQLResult("from LnkPlanTab t where t.planid="+obj.getLong("planid")+" and t.tabid="+nt.getInptype()+"", "list");
+						if(nz.size()>0){
+							dao.PeaceCrud(null, "LnkPlanTab", "delete", (long) nz.get(0).getId(), 0, 0, null);
+						}
+						jo1.put("tabid",nt.getInptype());
+						LnkPlanTab tb= new LnkPlanTab();
+						tb.setPlanid(obj.getLong("planid"));
+						tb.setTabid(nt.getInptype());
+						dao.PeaceCrud(tb, "LnkPlanTab", "save", (long) 0, 0, 0, null);
+
+
+						System.out.println("trans"+nt.getTransid());
+						if(nt.getTransid()!=null){
+							if(nt.getTransid()==2){
+								LnkPlanTab tbc= new LnkPlanTab();
+								tbc.setPlanid(obj.getLong("planid"));
+								tbc.setTabid(4);
+								dao.PeaceCrud(tbc, "LnkPlanTab", "save", (long) 0, 0, 0, null);
+							}
+							if(nt.getTransid()==0){
+								LnkPlanTab tbc= new LnkPlanTab();
+								tbc.setPlanid(obj.getLong("planid"));
+								tbc.setTabid(3);
+								dao.PeaceCrud(tbc, "LnkPlanTab", "save", (long) 0, 0, 0, null);
+							}
+							if(nt.getTransid()==3){
+								LnkPlanTab tbc= new LnkPlanTab();
+								tbc.setPlanid(obj.getLong("planid"));
+								tbc.setTabid(4);
+								dao.PeaceCrud(tbc, "LnkPlanTab", "save", (long) 0, 0, 0, null);
+							}
+						}
+
+
+						jo1.put("step",true);
+					}
 				}
 				else{
-
 					if(obj.getInt("desicion")==2){
 						ar.setOfficerid(loguser.getId());
 						ar.setRejectstep(obj.getLong("tabid"));
@@ -6710,7 +6796,6 @@ public class PlanReportController {
 						cm.setCreatedDate(formattedDate);
 						dao.PeaceCrud(cm, "LnkCommentMain", "save", (long) 0, 0, 0, null);	
 					}
-					
 				}
 			}
 

@@ -3983,10 +3983,10 @@ public class ServiceController {
                 lp.setDivisionId((long) 3);
                 dao.PeaceCrud(lp, "SubLicenses", "save", lp.getId(), 0, 0, "licenseNum");
 
-                List<com.peace.users.model.mram.RegReportReq> rq = (List<com.peace.users.model.mram.RegReportReq>) dao.getHQLResult("from RegReportReq t where t.bundledLicenseNum='" + lp.getLicenseNum() + "'", "list");
+                List<com.peace.users.model.mram.RegReportReq> rq = (List<com.peace.users.model.mram.RegReportReq>) dao.getHQLResult("from RegReportReq t where t.cyear=2020 and t.bundledLicenseNum='" + lp.getLicenseNum() + "'", "list");
 
                 if (rq.size() > 0) {
-                    com.peace.users.model.mram.RegReportReq qqq = rq.get(0);
+                   /* com.peace.users.model.mram.RegReportReq qqq = rq.get(0);
                     qqq.setLictype(lp.getLicTypeId());
                     qqq.setBundledLicenseNum(lp.getLicenseNum());
                     qqq.setAreaName(lp.getAreaNameMon());
@@ -4012,7 +4012,7 @@ public class ServiceController {
                     }
 
 
-                    dao.PeaceCrud(qqq, "RegReportReq", "update", (long) qqq.getId(), 0, 0, null);
+                    dao.PeaceCrud(qqq, "RegReportReq", "update", (long) qqq.getId(), 0, 0, null);*/
                 } else {
                     com.peace.users.model.mram.RegReportReq qqq = new com.peace.users.model.mram.RegReportReq();
                     qqq.setLictype(lp.getLicTypeId());
@@ -4025,6 +4025,7 @@ public class ServiceController {
                     SimpleDateFormat df = new SimpleDateFormat("MM/dd/YYYY HH:mm a");
                     String formattedDate = df.format(d1);
                     qqq.setDivisionId((long) 3);
+                    qqq.setCyear(2020);
                     qqq.setLatestChangeDateTime(formattedDate);
                     qqq.setWk(0);
                     qqq.setGroupid(0);

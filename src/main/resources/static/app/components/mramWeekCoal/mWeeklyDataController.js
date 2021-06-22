@@ -255,7 +255,7 @@ angular
                                 values:groups,
                                 title:' ',
                                 hidden: true
-                            }
+                            },
    	                        {
    	                            field: "data75",
    	                            format: "{0:n}",

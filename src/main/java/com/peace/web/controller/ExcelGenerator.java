@@ -8639,16 +8639,15 @@ public class ExcelGenerator {
                     " when 0 then 'Хадгалсан' \n" +
                     "end as ТӨлөв,\n" +
                     "MRAM.ANNUAL_REGISTRATION.ID AS id,\n" +
-                    "DATA1,DATA2,DATA3,DATA4,DATA5,DATA6,MRAM.ANNUAL_REGISTRATION.ISTODOTGOL\n" +
+                    "MRAM.ANNUAL_REGISTRATION.ISTODOTGOL\n" +
                     "FROM\n" +
                     "MRAM.ANNUAL_REGISTRATION\n" +
                     "INNER JOIN MRAM.SUB_LICENSES on MRAM.ANNUAL_REGISTRATION.LICENSEXB=MRAM.SUB_LICENSES.LICENSEXM\n" +
                     "INNER JOIN MRAM.LUT_MIN_GROUP on MRAM.ANNUAL_REGISTRATION.GROUPID=MRAM.LUT_MIN_GROUP.GROUPID\n" +
                     "INNER JOIN MRAM.REG_REPORT_REQ on MRAM.REG_REPORT_REQ.\"ID\"=MRAM.ANNUAL_REGISTRATION.REQID \n" +
-                    "INNER JOIN MRAM.DATA_EXCEL_GEOREP10 ON MRAM.ANNUAL_REGISTRATION.ID = MRAM.DATA_EXCEL_GEOREP10.PLANID\n" +
                     "WHERE MRAM.ANNUAL_REGISTRATION.DIVISIONID= "+formId+"\n"+
                     ((planYr!=1)?"and MRAM.ANNUAL_REGISTRATION.REPORTYEAR = "+planYr+"\n":"") +
-                    "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB,MRAM.DATA_EXCEL_GEOREP10.ID";
+                    "order by MRAM.ANNUAL_REGISTRATION.LICENSEXB";
             List<Object[]> objects = dao.getNativeSQLResult(queryStr, "list");
             int rowCount = 6;
             for (Object[] obj : objects) {

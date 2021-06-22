@@ -250,7 +250,11 @@ angular
          			   					$state.go($rootScope.previousState.name);
          			   				}
          			   				else{
-         			   					if($scope.note_form.desicion==2 || $scope.note_form.desicion==3){
+         			   					if(!data.comdata[0].step && data.comdata[0].done){
+											sweet.show('Анхаар', 'ААН-рүү засварт буцлаа', 'success');
+											$state.go($rootScope.previousState.name);
+										}
+         			   					else if($scope.note_form.desicion==2 || $scope.note_form.desicion==3){
          			   						sweet.show('Анхаар', 'ААН-рүү засварт буцлаа', 'success');
          			   						$state.go($rootScope.previousState.name);
          			   					}

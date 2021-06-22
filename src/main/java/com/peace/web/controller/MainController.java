@@ -1133,7 +1133,7 @@ public class MainController {
 					domain="WeeklyRegistration";
 					JSONObject jsonObj = new JSONObject(request);	
 					LutUsers loguser=(LutUsers) dao.getHQLResult("from LutUsers t where t.username='"+userDetail.getUsername()+"'", "current");
-					jsonObj.put("custom", "where divisionid='"+loguser.getDivisionid()+"' and repstatusid=7 ");					
+					jsonObj.put("custom", "where 1=1");
 					rs= dao.kendojson(jsonObj.toString(), domain);
 					count=dao.resulsetcount(jsonObj.toString(), domain);
 					
